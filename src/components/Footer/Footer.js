@@ -23,7 +23,10 @@ export class Footer extends Component {
     render() {
         return (
             <footer className='Footer'>
-                <input type="textarea" value={this.state.messageText} onChange={this.handleChange} />
+                <textarea className='Footer__TextArea'
+                onChange={this.handleChange} rows='1'>
+                    {this.state.messageText}
+                </textarea>
                 <input type="submit" value={this.props.submitIcon} onClick={this.handleSubmit} />
             </footer>
         );

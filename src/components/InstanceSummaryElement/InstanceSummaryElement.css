@@ -1,0 +1,44 @@
+.InstanceSummaryElement {
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 100%;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.InstanceSummaryElement__info {
+    text-align: left;
+    max-width: 80%;
+    margin-left: 10px;
+}
+
+.InstanceSummaryElement__info-title {
+    font-weight: bold;
+}
+
+.InstanceSummaryElement__info-desc {
+    color: #3f413e;
+}
+
+.InstanceSummaryElement__info-title, .InstanceSummaryElement__info-desc{
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+.InstanceSummaryElement__info-desc_dark {
+    color: #3f413e;
+}
+
+.InstanceSummaryElement__info-title_light, .InstanceSummaryElement__info-desc_light {
+    color: #dee0dd;
+}
+
+.InstanceSummaryElement__info-author {
+    color:#297cbe;
+}
+
+

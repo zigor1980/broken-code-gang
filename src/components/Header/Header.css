@@ -1,16 +1,17 @@
-.header {
+.Header {
     height: 155px;
     width: 100%;
     display: flex;
 
 }
 
-.header > div {
+.Header__content {
     display: flex;
 }
 
-.header > div > div {
+.Header__content__item{
     display: flex;
     flex-direction: column;
     background-color: aqua;
 }
+

@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { Component } from 'react';
 
+export class Footer extends Component {
 
-export class Footer extends React.Component{
-
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
             messageText:''
@@ -13,21 +12,19 @@ export class Footer extends React.Component{
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    handleChange(e){
+    handleChange(e) {
         this.setState({messageText: e.target.value});
     }
 
-    handleSubmit(e){
+    handleSubmit(e) {
         e.preventDefault();
     }
 
-    render(){
+    render() {
         return (
             <footer className='Footer'>
-                <form className='Footer__form'>
-                    <input type="text" value={this.state.messageText} onChange={this.handleChange} />
-                    <input type="submit" value={this.props.submitIcon} onClick={this.handleSubmit} />
-                </form>
+                <input type="textarea" value={this.state.messageText} onChange={this.handleChange} />
+                <input type="submit" value={this.props.submitIcon} onClick={this.handleSubmit} />
             </footer>
         );
     }

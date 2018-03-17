@@ -12,11 +12,11 @@ export default class Header extends  React.Component {
 
     render() {
         return (
-        	<header className={'header'}  >
-        	<button>{this.props.buttonExit && 'Назад' }</button>
-        	 <HeaderCenterItem groupName={'Telegram'} participants="0 участников"/> 
-        		<button>{this.props.buttonHeaderRight && 'Свойства/поиск' }</button>
-        	</header>
+            <header className={'header'}  >
+            <button>{this.props.buttonExit && 'Назад' }</button>
+             <HeaderCenterItem groupName={'Telegram'} participants={'0 участников'} /> 
+                <button>{this.props.buttonHeaderRight && 'Свойства/поиск' }</button>
+            </header>
         );
     }
 }

@@ -2,16 +2,14 @@
     height: 155px;
     width: 100%;
     display: flex;
-
 }
 
 .Header__content {
     display: flex;
 }
 
-.Header__content__item{
+.Header__content__item {
     display: flex;
     flex-direction: column;
     background-color: aqua;
 }
-

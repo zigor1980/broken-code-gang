@@ -1,19 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './Header.css';
+import { HeaderCenterItems } from './HeaderCenterItems.js';
 
-import HeaderCenterItem from './HeaderCenterItems.js';
-
-
-export default class Header extends  React.Component {
-    render() {
-        return (
-            <header className={'Header'}  >
-            <button>{this.props.buttonExit && 'Назад' }</button>
-             <HeaderCenterItem groupName={'Telegram'} participants={'0 участников'} /> 
-                <button>{this.props.buttonHeaderRight && 'Свойства/поиск' }</button>
-            </header>
-        );
-    }
+export function  Header(props) {
+    return (
+        <header className={'Header'}>
+            <button>{props.buttonExit && 'Назад' }</button>
+            <HeaderCenterItems groupName='Telegram' participants='0 участников' /> 
+            <button>{props.buttonHeaderRight && 'Свойства/поиск' }</button>
+        </header>
+    );
 }
-
-

@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import './Header.css';
 import { HeaderCenterItems } from '../HeaderCenterItems/HeaderCenterItems';
 

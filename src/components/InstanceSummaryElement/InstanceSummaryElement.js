@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {Avatar} from "../Avatar/Avatar";
-import './InstanceSummaryElement.css'
+import './InstanceSummaryElement.css';
 
 export function InstanceSummaryElement(props) {
     if(!props) {
@@ -12,15 +12,14 @@ export function InstanceSummaryElement(props) {
     const author = props.summary.author + ': ';
     const descModifiers = props.summary.descModifiers;
 
-    let titleClasses = "";
-    let descClasses = "";
+    let titleClasses = 'InstanceSummaryElement__title';
+    let descClasses = 'InstanceSummaryElement__desc';
 
-    if (descModifiers && descModifiers === "light"){
-        titleClasses = "InstanceSummaryElement__info-title InstanceSummaryElement__info-title_light";
-        descClasses = "InstanceSummaryElement__info-desc InstanceSummaryElement__info-desc_light";
+    if (descModifiers && descModifiers === 'light') {
+        titleClasses += ' InstanceSummaryElement__title_light';
+        descClasses += ' InstanceSummaryElement__desc_light';
     } else {
-        titleClasses = "InstanceSummaryElement__info-title";
-        descClasses = "InstanceSummaryElement__info-desc InstanceSummaryElement__info-desc_dark";
+        descClasses += ' InstanceSummaryElement__desc_dark';
     }
 
 
@@ -32,10 +31,10 @@ export function InstanceSummaryElement(props) {
             <div className="InstanceSummaryElement__info">
                 <h3 className={titleClasses}>{title}</h3>
                 <p className={descClasses}>
-                    <span className="InstanceSummaryElement__info-author">{author}</span>
+                    <span className="InstanceSummaryElement__author">{author}</span>
                     {description}
                 </p>
             </div>
         </div>
-    )
+    );
 }

@@ -1,0 +1,13 @@
+.ChatField_right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}
+
+.ChatField_left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    margin-bottom: 20px;
+}

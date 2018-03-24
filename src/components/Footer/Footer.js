@@ -1,11 +1,12 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
+import "./Footer.css";
 
 export class Footer extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            messageText:''
+            messageText: ''
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -24,12 +25,12 @@ export class Footer extends Component {
         return (
             <footer className='Footer'>
                 <textarea className='Footer__TextArea'
-                onChange={this.handleChange} rows='1'>
+                          onChange={this.handleChange} rows='1'>
                     {this.state.messageText}
                 </textarea>
-                <input type="submit" value={this.props.submitIcon} onClick={this.handleSubmit} />
+                <input className="Footer__Input" type="submit" value={this.props.submitIcon}
+                       onClick={this.handleSubmit}/>
             </footer>
         );
     }
-
 }

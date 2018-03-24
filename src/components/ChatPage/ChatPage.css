@@ -1,0 +1,25 @@
+.ChatPage {
+    display: grid;
+    grid-template-rows: 155px 1fr 20px;
+}
+
+.ChatPage__MessageField {
+    margin-top: 50px;
+    margin-bottom: 30px;
+    background-color: rgba(62, 92, 234, 0.72);
+    z-index: 1;
+    position: absolute;
+    width: 100%;
+}
+
+.ChatPage__Footer {
+    position: fixed;
+    bottom: 0;
+    z-index: 2;
+}
+
+.ChatPage__Header {
+    position: fixed;
+    top: 0;
+    z-index: 2;
+}

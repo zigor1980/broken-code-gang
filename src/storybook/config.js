@@ -5,6 +5,7 @@ function loadStories() {
     require('./ChatField.js');
     require('./InstanceSummaryElement.js');
     require('./Header.js');
+    require('./ChatList.js');
 }
 
 configure(loadStories, module);

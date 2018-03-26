@@ -1,0 +1,23 @@
+.UserPage__UserInfo {
+    background-color: #419fd9;
+    padding-top: 20px;
+    padding-left: 10%;
+    display: flex;
+    flex-flow: column;
+}
+
+.UserPage__UserName {
+    color: #fff;
+    text-align: start;
+    font-weight: normal;
+    font-size: 2.5rem;
+}
+
+.UserPage__UserControls > * {
+    width: 100%;
+    padding-top: .75rem;
+    padding-bottom: .75rem; 
+    font-size: 1.45rem;
+    background-color: #fff;
+    border: none;
+}

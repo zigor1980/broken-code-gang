@@ -6,6 +6,7 @@ function loadStories() {
     require('./InstanceSummaryElement.js');
     require('./UserPage.js');
     require('./ChatList.js');
+    require('./UserList.js');
 }
 
 configure(loadStories, module);

@@ -9,7 +9,7 @@ export function InstanceSummaryElement(props) {
     const avatar = props.summary.avatar;
     const title = props.summary.title;
     const description = props.summary.description;
-    const author = props.summary.author + ': ';
+    const author = props.summary.author;
     const descModifiers = props.summary.descModifiers;
 
     let titleClasses = 'InstanceSummaryElement__title';
@@ -22,6 +22,17 @@ export function InstanceSummaryElement(props) {
         descClasses += ' InstanceSummaryElement__desc_dark';
     }
 
+    let descView = '';
+    if (author){
+        descView = <p className={descClasses}>
+                        <span className="InstanceSummaryElement__author">{author + ': '}</span>
+                        {description}
+                    </p>;
+    } else {
+        descView = <p className={descClasses}>
+                        {description}
+                    </p>;
+    }
 
     return (
         <div className="InstanceSummaryElement">
@@ -30,10 +41,7 @@ export function InstanceSummaryElement(props) {
             </div>
             <div className="InstanceSummaryElement__info">
                 <h3 className={titleClasses}>{title}</h3>
-                <p className={descClasses}>
-                    <span className="InstanceSummaryElement__author">{author}</span>
-                    {description}
-                </p>
+                {descView}
             </div>
         </div>
     );

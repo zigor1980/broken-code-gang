@@ -1,15 +1,27 @@
 .Header {
-    height: 155px;
+    height: 50px;
     width: 100%;
     display: flex;
+    background-color: #7489f0;
 }
 
 .Header__content {
     display: flex;
+    width: inherit;
+}
+
+.Header__button {
+    width: 80px;
 }
 
 .Header__content__item {
     display: flex;
     flex-direction: column;
     background-color: aqua;
+    width: inherit;
+}
+
+.Header__content__item > * {
+    margin: 0;
+    margin-left: 20px;
 }

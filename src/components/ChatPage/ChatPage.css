@@ -16,10 +16,16 @@
     position: fixed;
     bottom: 0;
     z-index: 2;
+    width: 100%;
 }
 
 .ChatPage__Header {
     position: fixed;
     top: 0;
     z-index: 2;
+    width: 100%;
+}
+
+body{
+    margin: 0;
 }

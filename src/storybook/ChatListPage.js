@@ -1,10 +1,10 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
-import { UserPage } from '../components/ChatListPage/ChatListPage';
+import { ChatListPage } from '../components/ChatListPage/ChatListPage';
 
 storiesOf('ChatListPage', module)
     .add('no modifiers', () => (
-        <UserPage userInfo={userInfo} />
+        <ChatListPage />
     )
 );

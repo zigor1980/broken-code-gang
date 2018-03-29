@@ -1,6 +1,7 @@
 import React from 'react';
 import {UserList} from "../UserList/UserList";
 import {AddUserBtn} from "../Buttons/AddUserBtn/AddUserBtn";
+import {LinkBtn} from "../Buttons/LinkBtn/LinkBtn";
 import './GroupChatSettings.css';
 
 export function GroupChatSettings(props) {
@@ -25,7 +26,7 @@ export function GroupChatSettings(props) {
                 <UserList/>
             </section>
             <section className="GroupChatSettings__section">
-                <button className="GroupChatSettings__exit">Exit</button>
+                <LinkBtn className="GroupChatSettings__exit" btnText="Exit"/>
             </section>
         </div>
     )

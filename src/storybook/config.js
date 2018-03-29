@@ -6,6 +6,7 @@ function loadStories() {
     require('./ChatPage.js');
     require('./InstanceSummaryElement.js');
     require('./Footer.js');
+    require('./FooterNav.js');
     require('./Header.js');
     require('./UserPage.js');
     require('./ChatList.js');

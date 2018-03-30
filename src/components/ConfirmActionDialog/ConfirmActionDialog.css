@@ -1,0 +1,36 @@
+.ConfirmActionDialog__overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.ConfirmActionDialog__popup {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    background-color: #f7f7f7;
+    position: absolute;
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ConfirmActionDialog__title, .ConfirmActionDialog__desc {
+    text-align: justify;
+    padding-left: 10px;
+}
+
+.ConfirmActionDialog__control-wrap {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.ConfirmActionDialog__control {
+    text-transform: uppercase;
+    color: #419fd9;
+}

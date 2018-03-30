@@ -13,6 +13,8 @@ function loadStories() {
     require('./UserList.js');
     require('./ChatListPage');
     require('./GroupChatSettings.js');
+    require('./AddUser.js');
+    require('./ConfirmActionDialog.js');
 }
 
 configure(loadStories, module);

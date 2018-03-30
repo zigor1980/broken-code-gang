@@ -1,0 +1,9 @@
+.LinkBtn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background-color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 10px;
+}

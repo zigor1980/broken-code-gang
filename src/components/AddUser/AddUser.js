@@ -113,10 +113,10 @@ export class AddUser extends Component {
 
         ]
         return (
-            <React.Fragment>
+            <div className="AddUser">
                 <Header buttonExit={true} buttonHeaderRight={true}/>
                 <UserList summary={userConnections}/>
-            </React.Fragment>
+            </div>
         )
     }
 }

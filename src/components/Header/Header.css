@@ -3,6 +3,7 @@
     width: 100%;
     display: flex;
     background-color: #7489f0;
+    font-family: sans-serif;
 }
 
 .Header__content {

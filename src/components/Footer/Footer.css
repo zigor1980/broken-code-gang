@@ -5,6 +5,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: self-start;
+    font-family: sans-serif;
 }
 
 .Footer__TextArea {

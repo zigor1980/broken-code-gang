@@ -1,13 +1,8 @@
-.ChatListPage .ChatList {
+.AddUser .UserList {
     padding-top: 50px;
     padding-bottom: 30px;
 }
 
 .Header {
     position: fixed;
-}
-
-.Footer {
-    position: fixed;
-    bottom: 0;
 }

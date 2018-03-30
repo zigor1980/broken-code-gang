@@ -1,0 +1,53 @@
+.AuthorizationPage{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+}
+
+.AuthorizationPage__Select{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+
+.AuthorizationPage__Select__button{
+    height: 10vh;
+    width: 50%;
+    background: linear-gradient(to bottom, #8c8f8c, #596c7a);
+    border:none;
+    font-size: 5vh;
+    color: #211854;
+    cursor: pointer;
+}
+
+.AuthorizationPage__Select__button_active{
+    background: linear-gradient(to bottom, #15858e, #137fb3);
+}
+
+.AuthorizationPage__Image{
+    height: 100%;
+}
+
+.AuthorizationPage__Input{
+    width: 80%;
+    max-width: 500px;
+    height: 10vh;
+    font-size:5vh;
+    border:none;
+    border-bottom: 1px deepskyblue solid;
+}
+.AuthorizationPage__Input:focus{
+    outline: none;
+}
+
+.AuthorizationPage__submit{
+    margin-top: 20px;
+    width: 80%;
+    max-width: 500px;
+    height: 10vh;
+    font-size:5vh;
+    background-color: #1caeb4;
+    border:none;
+    cursor: pointer;
+}

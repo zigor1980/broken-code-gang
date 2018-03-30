@@ -1,3 +1,7 @@
+.GroupChatSettings {
+    font-family:sans-serif;
+}
+
 .GroupChatSettings__section {
     background-color: #f1f1f1;
     box-shadow: 0 2px 2px rgba(0,0,0,0.20);

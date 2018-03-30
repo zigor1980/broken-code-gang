@@ -1,3 +1,7 @@
+.ConfirmActionDialog {
+    font-family:sans-serif;
+}
+
 .ConfirmActionDialog__overlay {
     position: fixed;
     top: 0;

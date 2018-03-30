@@ -4,6 +4,8 @@
     display: flex;
     background-color: #7489f0;
     font-family: sans-serif;
+    position: fixed;
+    top:0;
 }
 
 .Header__content {

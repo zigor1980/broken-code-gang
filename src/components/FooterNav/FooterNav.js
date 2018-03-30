@@ -1,15 +1,13 @@
 import React from 'react';
-import {ChatBtn} from "../Buttons/ChatBtn/ChatBtn";
-import {UserBtn} from "../Buttons/UserBtn/UserBtn";
-import {SettingsBtn} from "../Buttons/SettingsBtn/SettingsBtn";
+import {Button} from "../Button/Button";
 import "./FooterNav.css";
 
-export function FooterNav (props) {
+export function FooterNav(props) {
     return (
         <footer className='Footer Footer__nav'>
-            <ChatBtn className="Footer__nav_btn" status={props.active === 'chat'}/>
-            <UserBtn className="Footer__nav_btn" status={props.active === 'user'}/>
-            <SettingsBtn className="Footer__nav_btn" status={props.active === 'settings'}/>
+            <Button type='chat' active={props.active === 'chat'} className="Footer__nav_btn"/>
+            <Button type='user' active={props.active === 'user'} className="Footer__nav_btn"/>
+            <Button type='settings' active={props.active === 'settings'} className="Footer__nav_btn"/>
         </footer>
     );
 }

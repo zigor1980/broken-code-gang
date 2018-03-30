@@ -15,6 +15,7 @@ function loadStories() {
     require('./GroupChatSettings.js');
     require('./AddUser.js');
     require('./ConfirmActionDialog.js');
+    require('./ContactsListPage.js');
 }
 
 configure(loadStories, module);

@@ -1,0 +1,23 @@
+.Button {
+    background-color: inherit;
+    border: none;
+}
+
+.Button__image_s {
+    height: 30px;
+    width: 30px;
+}
+
+.Button__image_m {
+    height: 64px;
+    width: 64px;
+}
+
+.Button__image_l {
+    height: 100px;
+    width: 100px;
+}
+
+.Button_circle {
+    border-radius: 50%;
+}

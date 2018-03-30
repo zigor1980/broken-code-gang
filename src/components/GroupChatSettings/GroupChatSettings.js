@@ -1,6 +1,6 @@
 import React from 'react';
 import {UserList} from "../UserList/UserList";
-import {AddUserBtn} from "../Buttons/AddUserBtn/AddUserBtn";
+import {Button} from "../Button/Button";
 import {LinkBtn} from "../Buttons/LinkBtn/LinkBtn";
 import './GroupChatSettings.css';
 
@@ -13,12 +13,12 @@ export function GroupChatSettings(props) {
     const membersQuan = 10;
     const groupName = "BCG";
 
-    return(
+    return (
         <div className="GroupChatSettings">
             <section className="GroupChatSettings__section">
                 <h3 className="GroupChatSettings__title">{groupName}</h3>
                 <div className="GroupChatSettings__add-wrapper">
-                    <AddUserBtn className="GroupChatSettings__add"/>
+                    <Button type="add-user" active={true} modifier="m" circle={true} className="GroupChatSettings__add"/>
                 </div>
             </section>
             <section className="GroupChatSettings__section">

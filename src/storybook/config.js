@@ -11,6 +11,7 @@ function loadStories() {
     require('./UserPage.js');
     require('./ChatList.js');
     require('./UserList.js');
+    require('./AuthorizationPage.js');
     require('./ChatListPage');
     require('./GroupChatSettings.js');
     require('./AddUser.js');

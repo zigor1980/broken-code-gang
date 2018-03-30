@@ -8,6 +8,7 @@
     padding-left: 10%;
     display: flex;
     flex-flow: column;
+    margin-top: 50px;
 }
 
 .UserPage__UserName {

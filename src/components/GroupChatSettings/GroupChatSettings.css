@@ -1,0 +1,45 @@
+.GroupChatSettings__section {
+    background-color: #f1f1f1;
+    box-shadow: 0 2px 2px rgba(0,0,0,0.20);
+    padding: 5px 10px 5px;
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.GroupChatSettings__title {
+   text-align: center;
+}
+
+.GroupChatSettings__add-wrapper {
+    border-radius: 50%;
+    background-color: white;
+    width: 70px;
+    height: 70px;
+    position: relative;
+}
+
+.GroupChatSettings__add{
+    margin: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+.GroupChatSettings__section__title{
+    text-transform: uppercase;
+}
+
+.GroupChatSettings__exit {
+    color: #E05345;
+    font-weight: bold;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    background-color: inherit;
+    font-family: inherit;
+    font-size: inherit;
+    margin: 10px;
+}

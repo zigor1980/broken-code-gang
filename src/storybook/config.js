@@ -12,6 +12,8 @@ function loadStories() {
     require('./ChatList.js');
     require('./UserList.js');
     require('./AuthorizationPage.js');
+    require('./ChatListPage');
+    require('./GroupChatSettings.js');
 }
 
 configure(loadStories, module);

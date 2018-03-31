@@ -45,14 +45,22 @@ module.exports = function (db, io) {
                         message: err.message,
                         stack: err.stack,
                     });
+
+                    throw err;
                 };
 
                 try {
-                    callback(...args).catch(printErr);
+                    return callback(...args).catch(printErr);
                 } catch (err) {
                     printErr(err);
                 }
             };
+        }
+
+        function requestResponse(type, callback) {
+            socket.on(type, wrapCallback(async ({id, payload}) => {
+                socket.emit(type + id, await callback(payload));
+            }));
         }
 
         /**
@@ -120,59 +128,57 @@ module.exports = function (db, io) {
         });
 
         // Receive current user information
-        socket.on(TYPES.CURRENT_USER, wrapCallback(async () => {
-            socket.emit(TYPES.CURRENT_USER, await userPromise);
-        }));
+        requestResponse(TYPES.CURRENT_USER, () => userPromise);
 
         // Return list of all users with
-        socket.on(TYPES.USERS, wrapCallback(async (params) => {
-            socket.emit(TYPES.USERS, fillUsersWithStatus(await getUsers(db, params || {})));
-        }));
+        requestResponse(TYPES.USERS, async (params) => {
+            return fillUsersWithStatus(await getUsers(db, params || {}));
+        });
 
         // Create room
-        socket.on(TYPES.CREATE_ROOM, wrapCallback(async (params) => {
+        requestResponse(TYPES.CREATE_ROOM, async (params) => {
             const currentUser = await userPromise;
 
-            socket.emit(TYPES.CREATE_ROOM, await createRoom(db, currentUser, params));
-        }));
+            return createRoom(db, currentUser, params);
+        });
 
         // Create room
-        socket.on(TYPES.ROOMS, wrapCallback(async (params) => {
-            socket.emit(TYPES.ROOMS, await getRooms(db, params || {}));
-        }));
+        requestResponse(TYPES.ROOMS, (params) => {
+            return getRooms(db, params || {});
+        });
 
         // Rooms of current user
-        socket.on(TYPES.CURRENT_USER_ROOMS, wrapCallback(async (params) => {
+        requestResponse(TYPES.CURRENT_USER_ROOMS, async (params) => {
             const currentUser = await userPromise;
 
-            socket.emit(TYPES.CURRENT_USER_ROOMS, await getUserRooms(db, currentUser._id, params));
-        }));
+            return getUserRooms(db, currentUser._id, params);
+        });
 
         // Join current user to room
-        socket.on(TYPES.CURRENT_USER_JOIN_ROOM, wrapCallback(async ({ roomId }) => {
+        requestResponse(TYPES.CURRENT_USER_JOIN_ROOM, async ({roomId}) => {
             const currentUser = await userPromise;
 
             const payload = {
                 roomId,
                 userId: currentUser._id,
             };
-
-            socket.emit(TYPES.CURRENT_USER_JOIN_ROOM, await joinRoom(db, payload));
 
             joinToRoomChannel(roomId);
             userWasJoinedToRoom(payload);
-        }));
+
+            return joinRoom(db, payload);
+        });
 
         // Join user to room
-        socket.on(TYPES.USER_JOIN_ROOM, wrapCallback(async (payload) => {
-            socket.emit(TYPES.USER_JOIN_ROOM, await joinRoom(db, payload));
-
+        requestResponse(TYPES.USER_JOIN_ROOM, (payload) => {
             joinToRoomChannel(payload.roomId);
             userWasJoinedToRoom(payload);
-        }));
+
+            return joinRoom(db, payload);
+        });
 
         // Leave current user to room
-        socket.on(TYPES.CURRENT_USER_LEAVE_ROOM, wrapCallback(async ({ roomId }) => {
+        requestResponse(TYPES.CURRENT_USER_LEAVE_ROOM, async ({roomId}) => {
             const currentUser = await userPromise;
 
             const payload = {
@@ -180,14 +186,14 @@ module.exports = function (db, io) {
                 userId: currentUser._id,
             };
 
-            socket.emit(TYPES.CURRENT_USER_LEAVE_ROOM, await leaveRoom(db, payload));
-
             leaveRoomChannel(roomId);
             userLeaveRoom(payload);
-        }));
+
+            return leaveRoom(db, payload);
+        });
 
         // Send message
-        socket.on(TYPES.SEND_MESSAGE, wrapCallback(async (payload) => {
+        requestResponse(TYPES.SEND_MESSAGE, async (payload) => {
             const currentUser = await userPromise;
 
             const message = await sendMessage(db, {
@@ -195,15 +201,13 @@ module.exports = function (db, io) {
                 userId: currentUser._id,
             });
 
-            socket.emit(TYPES.SEND_MESSAGE, message);
-
             newMessage(message);
-        }));
+
+            return message;
+        });
 
         // Send message
-        socket.on(TYPES.MESSAGES, wrapCallback(async (payload) => {
-            socket.emit(TYPES.MESSAGES, await getMessages(db, payload));
-        }));
+        requestResponse(TYPES.MESSAGES, (payload) => getMessages(db, payload));
 
         userPromise.then(async (user) => {
             if (!isDisconnected) {

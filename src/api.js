@@ -3,6 +3,8 @@ import * as MESSAGES from './server/messages';
 
 class Api {
     constructor() {
+        this.uniqueId = 0;
+
         this._connectPromise = fetch('/api/auth', { credentials: 'same-origin' })
             .then(() => this._setupSocket())
             .catch((err) => {
@@ -37,9 +39,12 @@ class Api {
     async _requestResponse(type, payload) {
         await this._connectPromise;
 
+        let id = this.uniqueId++,
+            envelop = {payload, id};
+
         return new Promise((resolve) => {
-            this.io.once(type, resolve);
-            this.io.emit(type, payload);
+            this.io.once(type + id, resolve);
+            this.io.emit(type, envelop);
         });
     }
 

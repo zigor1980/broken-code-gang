@@ -1,29 +1,28 @@
-export function fetchMessages({roomId}) {
+import api from '../api';
+
+export default function fetchMessages(roomId) {
     return async function (dispatch, getState) {
         dispatch({
-            type: 'LOADING_MESSAGES',
+            type: 'MESSAGES_LOADING',
             loading: true
         });
 
         try {
-            const messages = await api.getRoomMessages(roomId);
-
+            let messages = await api.getRoomMessages(roomId);
             dispatch({
-                type: 'FEED_APPEND_CARDS',
-                cards: json.results,
-                next: json.next
+                type: 'MESSAGES_LOADED',
+                messages: messages
             });
         } catch (error) {
             dispatch({
-                type: 'FEED_ERROR',
+                type: 'MESSAGES_LOAD_ERROR',
                 error
             });
         } finally {
             dispatch({
-                type: 'FEED_LOADING',
+                type: 'MESSAGES_LOADING',
                 loading: false
             });
         }
-
     };
 }

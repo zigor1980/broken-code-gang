@@ -26,7 +26,11 @@ const stateToProps = (state) => ({
 
 class App extends Component {
     render() {
-        const Page = routeConfig[this.props.route.page].view;
+        let Page = routeConfig[this.props.route.page] && routeConfig[this.props.route.page].view;
+
+        if (!Page) {
+            Page = <div>404 Page Not Found</div>;
+        }
 
         return (
             <Page />

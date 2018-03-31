@@ -16,16 +16,16 @@ export function ConfirmActionDialog(props) {
           <div className="ConfirmActionDialog__popup">
                 <h3 className="ConfirmActionDialog__title">{dialogTitle}</h3>
                     <p className="ConfirmActionDialog__desc">{dialogDesc}</p>
-                    <div className="ConfirmActionDialog__control-wrap">
-                        <LinkBtn
-                      className="ConfirmActionDialog__control ConfirmActionDialog__nav_reject"
-                      btnText="Cancel"
-                    />
+                <div className="ConfirmActionDialog__control-wrap">
+              <LinkBtn
+                            className="ConfirmActionDialog__control ConfirmActionDialog__nav_reject"
+                    btnText="Cancel"
+                  />
                         <LinkBtn
                             className="ConfirmActionDialog__control ConfirmActionDialog__nav_confirm"
-                      btnText="Ok"
-                    />
-                    </div>
+                            btnText="Ok"
+                  />
+            </div>
                 </div>
         </div>
         </div>

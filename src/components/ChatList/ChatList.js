@@ -3,6 +3,8 @@ import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummar
 
 import './ChatList.css';
 
+
+
 export function ChatList(props) {
     /*
     * Get user's latest chats list. Get
@@ -24,7 +26,7 @@ export function ChatList(props) {
             description: 'Да, зафиксирую информацию про завтра.\n' +
             'Ждём всех в 10.00. Не опаздывать!\n' +
             'ШРИкатон продлится до 18.00.\n' +
-            'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
+            'С с    обой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
             author: 'Bibushik',
             id: 1,
         },

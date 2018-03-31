@@ -2,24 +2,18 @@ import React, { Component } from 'react';
 import { Header } from '../Header/Header';
 import { Footer } from '../Footer/Footer';
 import { ChatField } from '../ChatField/ChatField';
+import { connect } from 'react-redux';
 import './ChatPage.css';
 
-export class ChatPage extends React.Component {
-    constructor(props) {
-        super(props);
-        /*
-         * Загрузка с помощью api всех сообщений комнаты */
-        // let messages = getRoomMessages(roomId);
-        const messages = props.roomId;
-        this.state = {
-            messages,
-            userId: props.userId,
-        };
-    }
+const stateToProps = state => ({
+    messages: state.messages,
+});
 
+
+export const ChatPage = connect(stateToProps)(class ChatPage extends Component {
     render() {
-        const messages = this.state.messages,
-            userId = this.state.userId;
+        const messages = this.props.messages,
+            userId = 'bibushik';
 
         return (
           <div className="ChatPage">
@@ -38,4 +32,4 @@ export class ChatPage extends React.Component {
             </div>
         );
     }
-}
+});

@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import './Footer.css';
 
-export class Footer extends Component {
+const stateToProps = state => ({
+});
+
+export const Footer = connect(stateToProps)(class Footer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -16,8 +20,17 @@ export class Footer extends Component {
         this.setState({ messageText: e.target.value });
     }
 
-    handleSubmit(e) {
-        e.preventDefault();
+    handleSubmit() {
+        const currentMessage = {
+            id: 176,
+            userId: 'bibushik',
+            message: this.state.messageText,
+            created_at: new Date().toDateString(),
+        };
+        this.props.dispatch({
+            type: 'ADD_MESSAGE',
+            message: currentMessage,
+        });
     }
 
     render() {
@@ -25,18 +38,17 @@ export class Footer extends Component {
           <footer className="Footer">
               <textarea
                     className="Footer__TextArea"
-                  onChange={this.handleChange}
+                    onChange={this.handleChange}
                     rows="1"
                 >
-                  {this.state.messageText}
+                    {this.state.messageText}
                 </textarea>
               <input
-                  className="Footer__Input"
-                  type="submit"
-                  value={this.props.submitIcon}
+                  className="Footer__Input" type="submit" value={this.props.submitIcon}
                   onClick={this.handleSubmit}
                 />
             </footer>
         );
     }
-}
+});
+

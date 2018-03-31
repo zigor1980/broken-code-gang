@@ -1,6 +1,6 @@
-const Mongod = require("mongod");
-const mongo = require("mongodb");
-const { join } = require("path");
+const Mongod = require('mongod');
+const mongo = require('mongodb');
+const { join } = require('path');
 
 /**
  * @typedef {{
@@ -16,24 +16,24 @@ const { join } = require("path");
  * @param {number} port
  */
 function startLocalDatabase(port) {
-    const server = new Mongod({
-        port,
-        dbpath: join(process.cwd(), "data"),
-    });
+  const server = new Mongod({
+    port,
+    dbpath: join(process.cwd(), 'data'),
+  });
 
-    const close = () => {
-        server.close().catch((err) => {
-            console.error(err);
-        });
-    };
+  const close = () => {
+    server.close().catch((err) => {
+      console.error(err);
+    });
+  };
 
     /**
      * Kill mongo after process close
      */
-    process.on("beforeExit", close);
-    process.on("SIGINT", close);
+  process.on('beforeExit', close);
+  process.on('SIGINT', close);
 
-    return server.open();
+  return server.open();
 }
 
 /**
@@ -44,8 +44,8 @@ function startLocalDatabase(port) {
  * @return {Promise<Db>}
  */
 function createConnection(config) {
-    return mongo.connect(createDatabaseUri(config))
-        .then(client => client.db(config.database));
+  return mongo.connect(createDatabaseUri(config))
+    .then(client => client.db(config.database));
 }
 
 /**
@@ -56,8 +56,8 @@ function createConnection(config) {
  * @return {string}
  */
 function createDatabaseUri(config) {
-    console.log(`mongodb://${config.user}:${config.password}@${config.host}:${config.port}/${config.database}`);
-    return `mongodb://${config.user}:${config.password}@${config.host}:${config.port}/${config.database}`;
+  console.log(`mongodb://${config.user}:${config.password}@${config.host}:${config.port}/${config.database}`);
+  return `mongodb://${config.user}:${config.password}@${config.host}:${config.port}/${config.database}`;
 }
 
 /**
@@ -68,14 +68,14 @@ function createDatabaseUri(config) {
  * @return {Promise<MongoClient>}
  */
 function connect(config) {
-    if (config.local) {
-        return startLocalDatabase(config.port)
-            .then(() => createConnection(config));
-    }
-    return createConnection(config);
+  if (config.local) {
+    return startLocalDatabase(config.port)
+      .then(() => createConnection(config));
+  }
+  return createConnection(config);
 }
 
 module.exports = {
-    connect,
-    createDatabaseUri,
+  connect,
+  createDatabaseUri,
 };

@@ -5,7 +5,8 @@ import './Footer.css';
 const stateToProps = state => ({
 });
 
-export const Footer = connect(stateToProps)(class Footer extends Component {
+
+export class Footer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -50,5 +51,6 @@ export const Footer = connect(stateToProps)(class Footer extends Component {
             </footer>
         );
     }
-});
+}
 
+export const ConnectedFooter = connect(stateToProps)(Footer);

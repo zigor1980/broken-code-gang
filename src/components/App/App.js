@@ -4,8 +4,8 @@ import logo from './logo.svg';
 import './App.css';
 import Header from '../Header/Header.js';
 import { ChatPage } from '../ChatPage/ChatPage';
-import { connect } from 'react-redux'
-
+import { connect } from 'react-redux';
+import { ConnectedChatPage } from '../ChatPage/ChatPage';
 import { AuthorizationPage } from "../AuthorizationPage/AuthorizationPage";
 import { ChatListPage } from "../ChatListPage/ChatListPage";
 
@@ -22,7 +22,6 @@ const routeConfig = {
 const stateToProps = (state) => ({
     route: state.route,
 });
-
 
 class App extends Component {
     render() {

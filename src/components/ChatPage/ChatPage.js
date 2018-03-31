@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Header } from '../Header/Header';
-import { Footer } from '../Footer/Footer';
+import { ConnectedFooter } from '../Footer/Footer';
 import { ChatField } from '../ChatField/ChatField';
 import { connect } from 'react-redux';
 import './ChatPage.css';
@@ -10,10 +10,11 @@ const stateToProps = state => ({
 });
 
 
-export const ChatPage = connect(stateToProps)(class ChatPage extends Component {
-    render() {
+export class ChatPage extends Component {
+        render() {
         const messages = this.props.messages,
             userId = 'bibushik';
+        console.log(messages);
 
         return (
           <div className="ChatPage">
@@ -27,9 +28,11 @@ export const ChatPage = connect(stateToProps)(class ChatPage extends Component {
                         </div>))}
                 </div>
               <div className="ChatPage__Footer">
-                  <Footer submitIcon="send" />
+                  <ConnectedFooter submitIcon="send" />
                 </div>
             </div>
         );
     }
-});
+}
+
+export const ConnectedChatPage = connect(stateToProps)(ChatPage);

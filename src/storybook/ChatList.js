@@ -4,8 +4,8 @@ import { ChatList } from '../components/ChatList/ChatList';
 
 
 storiesOf('ChatList', module)
-  .add('no modifiers', () => (
-    <ChatList summary={
+    .add('no modifiers', () => (
+      <ChatList summary={
             [
                 {
                     avatar: {
@@ -140,5 +140,5 @@ storiesOf('ChatList', module)
 
             ]
         }
-    />
-  ));
+        />
+    ));

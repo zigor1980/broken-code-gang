@@ -5,8 +5,8 @@ import { InstanceSummaryElement } from '../components/InstanceSummaryElement/Ins
 
 
 storiesOf('InstanceSummaryElement', module)
-  .add('with "light" modifier (for chat)', () => (
-    <InstanceSummaryElement summary={{
+    .add('with "light" modifier (for chat)', () => (
+      <InstanceSummaryElement summary={{
             avatar: {
                 src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
                 modifier: 'avatar-s',
@@ -19,10 +19,10 @@ storiesOf('InstanceSummaryElement', module)
             author: 'Bibushik',
             descModifiers: 'light',
         }}
-    />
-  ))
-  .add('without modifier (for chats/contacts lists)', () => (
-    <InstanceSummaryElement summary={{
+        />
+    ))
+    .add('without modifier (for chats/contacts lists)', () => (
+      <InstanceSummaryElement summary={{
             avatar: {
                 src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
                 modifier: 'avatar-s',
@@ -34,5 +34,5 @@ storiesOf('InstanceSummaryElement', module)
             'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
             author: 'Bibushik',
         }}
-    />
-  ));
+        />
+    ));

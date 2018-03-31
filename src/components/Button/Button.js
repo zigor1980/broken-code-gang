@@ -24,17 +24,17 @@ import './Button.css';
  * false - квадратная кнопка
  * */
 export function Button(props) {
-  let { type, active, modifier } = props,
-    btnClass = props.circle ? 'Button_circle' : '',
-    iconSrc = getIcon(type, active);
-  if (!props.modifier) { modifier = 's'; }
-  return (<button className={`Button ${btnClass}`}>
-    <img className={`Button__image Button__image_${modifier}`} src={iconSrc} alt={type} />
-  </button>);
+    let { type, active, modifier } = props,
+        btnClass = props.circle ? 'Button_circle' : '',
+        iconSrc = getIcon(type, active);
+    if (!props.modifier) { modifier = 's'; }
+    return (<button className={`Button ${btnClass}`}>
+      <img className={`Button__image Button__image_${modifier}`} src={iconSrc} alt={type} />
+            </button>);
 }
 
 function getIcon(type, active) {
-  const btnStatus = active ? 'active' : 'inactive',
-    iconSrc = require(`../../assets/icons/${type}-${btnStatus}.png`);
-  return iconSrc || null;
+    const btnStatus = active ? 'active' : 'inactive',
+        iconSrc = require(`../../assets/icons/${type}-${btnStatus}.png`);
+    return iconSrc || null;
 }

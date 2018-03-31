@@ -4,6 +4,6 @@ import { AuthorizationPage } from '../components/AuthorizationPage/Authorization
 
 
 storiesOf('AuthorizationPage', module)
-  .add('Sign in & Sign up', () => (
-    <AuthorizationPage />
-  ));
+    .add('Sign in & Sign up', () => (
+      <AuthorizationPage />
+    ));

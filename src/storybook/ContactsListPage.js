@@ -4,6 +4,6 @@ import { action } from '@storybook/addon-actions';
 import { ContactsListPage } from '../components/ContactsListPage/ContactsListPage';
 
 storiesOf('ContactsListPage', module)
-  .add('no modifiers', () => (
-    <ContactsListPage />
-  ));
+    .add('no modifiers', () => (
+      <ContactsListPage />
+    ));

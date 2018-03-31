@@ -3,4 +3,4 @@ import { storiesOf } from '@storybook/react';
 import { Header } from '../components/Header/Header';
 
 storiesOf('Header', module)
-  .add('ChatHeader', () => <Header buttonExit buttonHeaderRight />);
+    .add('ChatHeader', () => <Header buttonExit buttonHeaderRight />);

@@ -3,8 +3,8 @@ import { storiesOf } from '@storybook/react';
 import { UserList } from '../components/UserList/UserList';
 
 storiesOf('UserList', module)
-  .add('no modifiers', () => (
-    <UserList summary={
+    .add('no modifiers', () => (
+      <UserList summary={
             [
                 {
                     avatar: {
@@ -99,6 +99,6 @@ storiesOf('UserList', module)
 
             ]
         }
-    />
-  ));
+        />
+    ));
 

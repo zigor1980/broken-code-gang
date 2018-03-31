@@ -6,11 +6,11 @@ import { FooterNav } from '../FooterNav/FooterNav';
 import './ContactsListPage.css';
 
 export function ContactsListPage(props) {
-  return (
-    <div className="ContactsListPage">
-      <Header buttonExit="true" buttonHeaderRight="true" />
-      <UserList />
-      <FooterNav active="user" />
-    </div>
-  );
+    return (
+      <div className="ContactsListPage">
+          <Header buttonExit="true" buttonHeaderRight="true" />
+          <UserList />
+          <FooterNav active="user" />
+        </div>
+    );
 }

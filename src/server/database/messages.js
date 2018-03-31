@@ -23,39 +23,39 @@ const TABLE = 'messages';
  * @return {Promise<Message>}
  */
 async function sendMessage(db, { userId, roomId, message }) {
-  if (!userId) {
-    throw new Error('userId required');
-  }
+    if (!userId) {
+        throw new Error('userId required');
+    }
 
-  if (!roomId) {
-    throw new Error('roomId required');
-  }
+    if (!roomId) {
+        throw new Error('roomId required');
+    }
 
-  if (!message) {
-    throw new Error('Cannot send empty message');
-  }
+    if (!message) {
+        throw new Error('Cannot send empty message');
+    }
 
-  const [user, room] = await Promise.all([getUser(db, userId), getRoom(db, roomId)]);
+    const [user, room] = await Promise.all([getUser(db, userId), getRoom(db, roomId)]);
 
-  if (!user) {
-    throw new Error(`Cannot find user with id=${userId}`);
-  }
+    if (!user) {
+        throw new Error(`Cannot find user with id=${userId}`);
+    }
 
-  if (!room) {
-    throw new Error(`Cannot find room with id=${roomId}`);
-  }
+    if (!room) {
+        throw new Error(`Cannot find room with id=${roomId}`);
+    }
 
-  const messageEntity = {
-    userId: user._id,
-    roomId: room._id,
-    message,
-    created_at: Date.now(),
-  };
+    const messageEntity = {
+        userId: user._id,
+        roomId: room._id,
+        message,
+        created_at: Date.now(),
+    };
 
-  const result = await db.collection(TABLE).insertOne(messageEntity);
-  messageEntity._id = result.insertedId;
+    const result = await db.collection(TABLE).insertOne(messageEntity);
+    messageEntity._id = result.insertedId;
 
-  return messageEntity;
+    return messageEntity;
 }
 
 /**
@@ -65,21 +65,21 @@ async function sendMessage(db, { userId, roomId, message }) {
  * @return {Promise<Pagination<Message>>}
  */
 async function getMessages(db, filter) {
-  ['roomId', 'userId'].forEach((key) => {
-    if (filter[key]) {
-      filter[key] = ObjectId(filter[key].toString());
-    }
-  });
+    ['roomId', 'userId'].forEach((key) => {
+        if (filter[key]) {
+            filter[key] = ObjectId(filter[key].toString());
+        }
+    });
 
-  return pageableCollection(db.collection(TABLE), {
-    ...filter,
-    order: {
-      id: -1,
-    },
-  });
+    return pageableCollection(db.collection(TABLE), {
+        ...filter,
+        order: {
+            id: -1,
+        },
+    });
 }
 
 module.exports = {
-  sendMessage,
-  getMessages,
+    sendMessage,
+    getMessages,
 };

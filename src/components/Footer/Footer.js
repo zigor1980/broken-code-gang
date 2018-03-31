@@ -2,41 +2,41 @@ import React, { Component } from 'react';
 import './Footer.css';
 
 export class Footer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      messageText: '',
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            messageText: '',
+        };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-  handleChange(e) {
-    this.setState({ messageText: e.target.value });
-  }
+    handleChange(e) {
+        this.setState({ messageText: e.target.value });
+    }
 
-  handleSubmit(e) {
-    e.preventDefault();
-  }
+    handleSubmit(e) {
+        e.preventDefault();
+    }
 
-  render() {
-    return (
-      <footer className="Footer">
-        <textarea
-          className="Footer__TextArea"
-          onChange={this.handleChange}
-          rows="1"
-        >
-          {this.state.messageText}
-        </textarea>
-        <input
-          className="Footer__Input"
-          type="submit"
-          value={this.props.submitIcon}
-          onClick={this.handleSubmit}
-        />
-      </footer>
-    );
-  }
+    render() {
+        return (
+          <footer className="Footer">
+              <textarea
+                    className="Footer__TextArea"
+                  onChange={this.handleChange}
+                    rows="1"
+                >
+                  {this.state.messageText}
+                </textarea>
+              <input
+                  className="Footer__Input"
+                  type="submit"
+                  value={this.props.submitIcon}
+                  onClick={this.handleSubmit}
+                />
+            </footer>
+        );
+    }
 }

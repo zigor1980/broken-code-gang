@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import './ChatListPage.css';
 
@@ -15,3 +16,5 @@ export function ChatListPage(props) {
         </div>
     );
 }
+
+export default connect()(ChatListPage);

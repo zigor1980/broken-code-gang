@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import './ChatListPage.css';
 
-import { Header } from '../Header/Header';
+import Header from '../Header/Header';
 import { ChatList } from '../ChatList/ChatList';
 import { FooterNav } from '../FooterNav/FooterNav';
 

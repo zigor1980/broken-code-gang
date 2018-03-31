@@ -1,6 +1,6 @@
-const {insertOrUpdateEntity} = require('./helpers');
+const { insertOrUpdateEntity } = require("./helpers");
 
-const TABLE = 'sessions';
+const TABLE = "sessions";
 
 /**
  * @typedef {{_id: string, sid: string}} UserSession
@@ -13,7 +13,7 @@ const TABLE = 'sessions';
  * @return {Promise<UserSession>}
  */
 function getSessionInfo(db, sid) {
-    return db.collection(TABLE).findOne({sid}).then((result) => result || {sid});
+    return db.collection(TABLE).findOne({ sid }).then(result => result || { sid });
 }
 
 /**
@@ -28,5 +28,5 @@ async function saveSessionInfo(db, session) {
 
 module.exports = {
     getSessionInfo,
-    saveSessionInfo
+    saveSessionInfo,
 };

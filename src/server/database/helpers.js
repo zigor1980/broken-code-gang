@@ -1,4 +1,4 @@
-const {ObjectId} = require('mongodb');
+const { ObjectId } = require("mongodb");
 
 /**
  * @typedef {{
@@ -15,16 +15,18 @@ const {ObjectId} = require('mongodb');
  * @param {Collection} collection
  * @param filter
  */
-async function pageableCollection(collection, {lastId, order, limit = 10, ...query} = {}) {
-    let count = await collection.find(query).count();
+async function pageableCollection(collection, {
+    lastId, order, limit = 10, ...query
+} = {}) {
+    const count = await collection.find(query).count();
 
     if (lastId) {
         query._id = {
-            $gt: ObjectId(_id)
+            $gt: ObjectId(_id),
         };
     }
 
-    let queryBuilder = collection.find(query, {limit});
+    let queryBuilder = collection.find(query, { limit });
 
     if (order) {
         queryBuilder = queryBuilder.sort(order);
@@ -50,7 +52,7 @@ async function pageableCollection(collection, {lastId, order, limit = 10, ...que
     return {
         count,
         items,
-        next
+        next,
     };
 }
 
@@ -64,14 +66,14 @@ async function pageableCollection(collection, {lastId, order, limit = 10, ...que
  */
 async function insertOrUpdateEntity(collection, data) {
     if (data._id) {
-        let result = await collection.findOneAndUpdate(
-            {_id: data._id},
-            data
+        const result = await collection.findOneAndUpdate(
+            { _id: data._id },
+            data,
         );
 
         console.log(result);
     } else {
-        let result = await collection.insertOne(data);
+        const result = await collection.insertOne(data);
         data._id = result.insertedId;
 
         return data;
@@ -80,5 +82,5 @@ async function insertOrUpdateEntity(collection, data) {
 
 module.exports = {
     pageableCollection,
-    insertOrUpdateEntity
+    insertOrUpdateEntity,
 };

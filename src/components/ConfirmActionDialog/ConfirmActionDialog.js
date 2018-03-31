@@ -1,6 +1,6 @@
-import React from 'react';
-import {LinkBtn} from "../Buttons/LinkBtn/LinkBtn";
-import './ConfirmActionDialog.css'
+import React from "react";
+import { LinkBtn } from "../Buttons/LinkBtn/LinkBtn";
+import "./ConfirmActionDialog.css";
 
 export function ConfirmActionDialog(props) {
     /*
@@ -12,22 +12,22 @@ export function ConfirmActionDialog(props) {
     const dialogDesc = `Add ${userName} to the channel`;
     return (
         <div className="ConfirmActionDialog">
-            <div className="ConfirmActionDialog__overlay">
-                <div className="ConfirmActionDialog__popup">
-                    <h3 className="ConfirmActionDialog__title">{dialogTitle}</h3>
+        <div className="ConfirmActionDialog__overlay">
+              <div className="ConfirmActionDialog__popup">
+            <h3 className="ConfirmActionDialog__title">{dialogTitle}</h3>
                     <p className="ConfirmActionDialog__desc">{dialogDesc}</p>
                     <div className="ConfirmActionDialog__control-wrap">
-                        <LinkBtn
+                  <LinkBtn
                             className="ConfirmActionDialog__control ConfirmActionDialog__nav_reject"
-                            btnText='Cancel'
+                            btnText="Cancel"
                         />
-                        <LinkBtn
-                            className="ConfirmActionDialog__control ConfirmActionDialog__nav_confirm"
-                            btnText='Ok'
+                  <LinkBtn
+                          className="ConfirmActionDialog__control ConfirmActionDialog__nav_confirm"
+                            btnText="Ok"
                         />
-                    </div>
                 </div>
+          </div>
             </div>
-        </div>
-    )
+      </div>
+    );
 }

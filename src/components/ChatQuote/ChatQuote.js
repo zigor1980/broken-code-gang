@@ -1,8 +1,8 @@
-import React from 'react';
-import './ChatQuote.css';
+import React from "react";
+import "./ChatQuote.css";
 
 export function ChatQuote(props) {
-    const {message: text, created_at: date, userId: authorId} = props.message,
+    const { message: text, created_at: date, userId: authorId } = props.message,
         userId = props.userId;
     let angleDirection = "ChatQuote__angle_right",
         chatDirection = "ChatQuote_right",
@@ -15,11 +15,11 @@ export function ChatQuote(props) {
     }
 
     return (
-        <div className={"ChatQuote " + chatDirection}>
-            <div className={angleDirection}></div>
-            {user}
-            <p className="ChatQuote__text">{text}</p>
-            <p className="ChatQuote__timestamp">{date}</p>
+      <div className={`ChatQuote ${chatDirection}`}>
+            <div className={angleDirection} />
+          {user}
+          <p className="ChatQuote__text">{text}</p>
+          <p className="ChatQuote__timestamp">{date}</p>
         </div>
     );
 }

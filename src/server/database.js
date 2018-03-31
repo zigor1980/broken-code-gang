@@ -1,6 +1,6 @@
-const Mongod = require('mongod');
-const mongo = require('mongodb');
-const {join} = require('path');
+const Mongod = require("mongod");
+const mongo = require("mongodb");
+const { join } = require("path");
 
 /**
  * @typedef {{
@@ -16,12 +16,12 @@ const {join} = require('path');
  * @param {number} port
  */
 function startLocalDatabase(port) {
-    let server = new Mongod({
+    const server = new Mongod({
         port,
-        dbpath: join(process.cwd(), 'data')
+        dbpath: join(process.cwd(), "data"),
     });
 
-    let close = () => {
+    const close = () => {
         server.close().catch((err) => {
             console.error(err);
         });
@@ -30,8 +30,8 @@ function startLocalDatabase(port) {
     /**
      * Kill mongo after process close
      */
-    process.on('beforeExit', close);
-    process.on('SIGINT', close);
+    process.on("beforeExit", close);
+    process.on("SIGINT", close);
 
     return server.open();
 }
@@ -45,9 +45,7 @@ function startLocalDatabase(port) {
  */
 function createConnection(config) {
     return mongo.connect(createDatabaseUri(config))
-        .then((client) => {
-            return client.db(config.database);
-        });
+        .then(client => client.db(config.database));
 }
 
 /**
@@ -73,12 +71,11 @@ function connect(config) {
     if (config.local) {
         return startLocalDatabase(config.port)
             .then(() => createConnection(config));
-    } else {
-        return createConnection(config);
     }
+    return createConnection(config);
 }
 
 module.exports = {
     connect,
-    createDatabaseUri
+    createDatabaseUri,
 };

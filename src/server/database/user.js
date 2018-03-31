@@ -1,10 +1,10 @@
-const {ObjectId} = require('mongodb');
+const { ObjectId } = require("mongodb");
 
-const {getSessionInfo, saveSessionInfo} = require('./session');
-const {pageableCollection, insertOrUpdateEntity} = require('./helpers');
-const faker = require('faker');
+const { getSessionInfo, saveSessionInfo } = require("./session");
+const { pageableCollection, insertOrUpdateEntity } = require("./helpers");
+const faker = require("faker");
 
-const TABLE = 'users';
+const TABLE = "users";
 
 /**
  * @typedef {{
@@ -23,7 +23,7 @@ const TABLE = 'users';
  * @returns {Promise<User>}
  */
 async function findUserBySid(db, sid) {
-    let session = await getSessionInfo(db, sid);
+    const session = await getSessionInfo(db, sid);
 
     if (!session.userId) {
         // Create fake user
@@ -31,7 +31,7 @@ async function findUserBySid(db, sid) {
         let user = {
             name: faker.name.findName(),
             email: faker.internet.email(),
-            phone: faker.phone.phoneNumber()
+            phone: faker.phone.phoneNumber(),
         };
 
         user = await saveUser(db, user);
@@ -41,9 +41,8 @@ async function findUserBySid(db, sid) {
         await saveSessionInfo(db, session);
 
         return user;
-    } else {
-        return db.collection(TABLE).findOne({_id: session.userId});
     }
+    return db.collection(TABLE).findOne({ _id: session.userId });
 }
 
 /**
@@ -53,7 +52,7 @@ async function findUserBySid(db, sid) {
  * @returns {Promise<User>}
  */
 async function getUser(db, userId) {
-    return db.collection(TABLE).findOne({_id: ObjectId(userId.toString())});
+    return db.collection(TABLE).findOne({ _id: ObjectId(userId.toString()) });
 }
 
 /**
@@ -79,5 +78,5 @@ async function getUsers(db, filter) {
 module.exports = {
     findUserBySid,
     getUsers,
-    getUser
+    getUser,
 };

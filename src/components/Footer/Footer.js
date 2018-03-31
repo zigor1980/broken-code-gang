@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { sendMessage } from '../../actions/sendMessage';
 import './Footer.css';
 
 const stateToProps = state => ({
@@ -21,18 +22,14 @@ export class Footer extends Component {
         this.setState({ messageText: e.target.value });
     }
 
-    handleSubmit() {
-        const currentMessage = {
-            id: 176,
-            userId: 'bibushik',
-            message: this.state.messageText,
-            created_at: new Date().toDateString(),
-        };
-        this.props.dispatch({
-            type: 'ADD_MESSAGE',
-            message: currentMessage,
+    handleSubmit = () => {
+        const roomId = "5aacdce7744a767e04c94e17";
+        const currentMessage = this.state.messageText;
+        this.setState({
+            messageText: '',
         });
-    }
+        this.props.dispatch(sendMessage(roomId, currentMessage));
+    };
 
     render() {
         return (
@@ -41,8 +38,8 @@ export class Footer extends Component {
                     className="Footer__TextArea"
                     onChange={this.handleChange}
                     rows="1"
+                    value={this.state.messageText}
                 >
-                    {this.state.messageText}
                 </textarea>
               <input
                   className="Footer__Input" type="submit" value={this.props.submitIcon}

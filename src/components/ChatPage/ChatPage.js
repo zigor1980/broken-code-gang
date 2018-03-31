@@ -14,7 +14,6 @@ export class ChatPage extends Component {
         render() {
         const messages = this.props.messages,
             userId = 'bibushik';
-        console.log(messages);
 
         return (
           <div className="ChatPage">
@@ -23,7 +22,7 @@ export class ChatPage extends Component {
                 </div>
               <div className="ChatPage__MessageField">
               {messages.map(message => (
-                      <div key={message.id}>
+                      <div key={message._id}>
                           <ChatField message={message} userId={userId} />
                         </div>))}
                 </div>

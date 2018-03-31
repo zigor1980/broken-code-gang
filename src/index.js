@@ -32,9 +32,9 @@ const store = createStore(rootReducer,
 // Example of usage API
 //
 (async () => {
-   //
-   // Events
-   //
+    //
+    // Events
+    //
 
    // On status of user is changed
    await api.onUserChangeStatus((result) => {

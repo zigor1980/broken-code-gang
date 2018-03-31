@@ -4,7 +4,7 @@ import {InstanceSummaryElement} from '../InstanceSummaryElement/InstanceSummaryE
 
 import './ChatList.css';
 const stateToProps = (state) => ({
-    chats: state.chats.items,
+    rooms: state.rooms,
     // stateChats: state.stateChats
 });
 
@@ -19,6 +19,18 @@ export const ChatList = connect(stateToProps) (
     *   - chat name
     * for each chat.
     * */
+console.log(props.rooms);
+    const chatList = props.rooms.map((room, index) => {
+        let item = {
+            avatar: {
+                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
+                modifier: 'avatar-s',
+            },
+            title: room.name,
+            description: room.name,
+            author: 'Bibushik',
+            id: room._id,
+        };
 
     const latestChats = [
         {

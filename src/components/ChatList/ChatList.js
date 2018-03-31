@@ -4,7 +4,7 @@ import {InstanceSummaryElement} from '../InstanceSummaryElement/InstanceSummaryE
 
 import './ChatList.css';
 const stateToProps = (state) => ({
-    chats: state.chats,
+    chats: state.chats.items,
     // stateChats: state.stateChats
 });
 

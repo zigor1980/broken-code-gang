@@ -9,7 +9,7 @@ export class AddUser extends Component {
 
     state = {
         confirmActionDialog: false
-    }
+    };
 
     /*
     * TODO add onClick handler to userList (toggle confirmActionDialog)

@@ -1,7 +1,7 @@
-import React from 'react';
-import {ChatQuote} from  '../ChatQuote/ChatQuote';
-import {Avatar} from '../Avatar/Avatar';
-import './ChatField.css';
+import React from "react";
+import { ChatQuote } from "../ChatQuote/ChatQuote";
+import { Avatar } from "../Avatar/Avatar";
+import "./ChatField.css";
 
 export function ChatField(props) {
     const message = props.message,
@@ -19,15 +19,15 @@ export function ChatField(props) {
         /* аватарка по умолчанию */
         const image = {
             src: "https://pp.userapi.com/c637426/v637426871/36cff/tmfGLL9d7ps.jpg",
-            modifier: 'avatar-s'
+            modifier: "avatar-s",
         };
-        avatar = <Avatar image={image}/>;
+        avatar = <Avatar image={image} />;
     }
 
     return (
-        <div className={direction}>
-            {avatar}
-            <ChatQuote message={message} userId={userId}/>
+      <div className={direction}>
+          {avatar}
+          <ChatQuote message={message} userId={userId} />
         </div>
     );
 }

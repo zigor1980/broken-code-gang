@@ -1,7 +1,9 @@
-const {findUserBySid, getUsers} = require('./database/user');
-const {joinRoom, leaveRoom, getRooms, getUserRooms, createRoom} = require('./database/room');
-const {getMessages, sendMessage} = require('./database/messages');
-const TYPES = require('./messages');
+const { findUserBySid, getUsers } = require("./database/user");
+const {
+    joinRoom, leaveRoom, getRooms, getUserRooms, createRoom,
+} = require("./database/room");
+const { getMessages, sendMessage } = require("./database/messages");
+const TYPES = require("./messages");
 
 /**
  * @param {Db} db
@@ -15,7 +17,7 @@ module.exports = function (db, io) {
      * @return {Pagination<User>}
      */
     function fillUsersWithStatus(users) {
-        users.items = users.items.map((user) => ({...user, online: Boolean(ONLINE[user._id])}));
+        users.items = users.items.map(user => ({ ...user, online: Boolean(ONLINE[user._id]) }));
 
         return users;
     }
@@ -23,11 +25,11 @@ module.exports = function (db, io) {
     /**
      * Connection is created
      */
-    io.on('connection', function (socket) {
-        let {sid} = socket.request.cookies,
+    io.on("connection", (socket) => {
+        let { sid } = socket.request.cookies,
             isDisconnected = false;
 
-        socket.join('broadcast');
+        socket.join("broadcast");
 
         /**
          * Invoke callback and handle errors
@@ -36,12 +38,12 @@ module.exports = function (db, io) {
          */
         function wrapCallback(callback) {
             return function (...args) {
-                let printErr = (err) => {
+                const printErr = (err) => {
                     console.error(err);
 
                     socket.emit(TYPES.ERROR, {
                         message: err.message,
-                        stack: err.stack
+                        stack: err.stack,
                     });
                 };
 
@@ -59,9 +61,9 @@ module.exports = function (db, io) {
          * @param {string} userId
          */
         function userChangeOnlineStatus(userId) {
-            let r = socket.broadcast.emit(TYPES.ONLINE, {
+            const r = socket.broadcast.emit(TYPES.ONLINE, {
                 status: ONLINE[userId],
-                userId
+                userId,
             });
         }
 
@@ -71,7 +73,7 @@ module.exports = function (db, io) {
          * @param {string} roomId
          */
         function joinToRoomChannel(roomId) {
-            socket.join('room:' + roomId);
+            socket.join(`room:${roomId}`);
         }
 
         /**
@@ -80,7 +82,7 @@ module.exports = function (db, io) {
          * @param {string} roomId
          */
         function leaveRoomChannel(roomId) {
-            socket.leave('room:' + roomId);
+            socket.leave(`room:${roomId}`);
         }
 
         /**
@@ -89,8 +91,8 @@ module.exports = function (db, io) {
          * @param {string} userId
          * @param {string} roomId
          */
-        function userWasJoinedToRoom({userId, roomId}) {
-            socket.to('room:' + roomId).emit(TYPES.USER_JOINED, {userId, roomId});
+        function userWasJoinedToRoom({ userId, roomId }) {
+            socket.to(`room:${roomId}`).emit(TYPES.USER_JOINED, { userId, roomId });
         }
 
         /**
@@ -99,8 +101,8 @@ module.exports = function (db, io) {
          * @param {string} userId
          * @param {string} roomId
          */
-        function userLeaveRoom({userId, roomId}) {
-            socket.to('room:' + roomId).emit(TYPES.USER_LEAVED, {userId, roomId});
+        function userLeaveRoom({ userId, roomId }) {
+            socket.to(`room:${roomId}`).emit(TYPES.USER_LEAVED, { userId, roomId });
         }
 
         /**
@@ -109,11 +111,11 @@ module.exports = function (db, io) {
          * @param {Message} message
          */
         function newMessage(message) {
-            socket.to('room:' + message.roomId).emit(TYPES.MESSAGE, message);
+            socket.to(`room:${message.roomId}`).emit(TYPES.MESSAGE, message);
         }
 
         // Load user information for next usage
-        let userPromise = findUserBySid(db, sid).catch((error) => {
+        const userPromise = findUserBySid(db, sid).catch((error) => {
             throw new Error(`Cannot load user: ${error}`);
         });
 
@@ -129,7 +131,7 @@ module.exports = function (db, io) {
 
         // Create room
         socket.on(TYPES.CREATE_ROOM, wrapCallback(async (params) => {
-            let currentUser = await userPromise;
+            const currentUser = await userPromise;
 
             socket.emit(TYPES.CREATE_ROOM, await createRoom(db, currentUser, params));
         }));
@@ -141,18 +143,18 @@ module.exports = function (db, io) {
 
         // Rooms of current user
         socket.on(TYPES.CURRENT_USER_ROOMS, wrapCallback(async (params) => {
-            let currentUser = await userPromise;
+            const currentUser = await userPromise;
 
             socket.emit(TYPES.CURRENT_USER_ROOMS, await getUserRooms(db, currentUser._id, params));
         }));
 
         // Join current user to room
-        socket.on(TYPES.CURRENT_USER_JOIN_ROOM, wrapCallback(async ({roomId}) => {
-            let currentUser = await userPromise;
+        socket.on(TYPES.CURRENT_USER_JOIN_ROOM, wrapCallback(async ({ roomId }) => {
+            const currentUser = await userPromise;
 
-            let payload = {
+            const payload = {
                 roomId,
-                userId: currentUser._id
+                userId: currentUser._id,
             };
 
             socket.emit(TYPES.CURRENT_USER_JOIN_ROOM, await joinRoom(db, payload));
@@ -170,12 +172,12 @@ module.exports = function (db, io) {
         }));
 
         // Leave current user to room
-        socket.on(TYPES.CURRENT_USER_LEAVE_ROOM, wrapCallback(async ({roomId}) => {
-            let currentUser = await userPromise;
+        socket.on(TYPES.CURRENT_USER_LEAVE_ROOM, wrapCallback(async ({ roomId }) => {
+            const currentUser = await userPromise;
 
-            let payload = {
+            const payload = {
                 roomId,
-                userId: currentUser._id
+                userId: currentUser._id,
             };
 
             socket.emit(TYPES.CURRENT_USER_LEAVE_ROOM, await leaveRoom(db, payload));
@@ -186,11 +188,11 @@ module.exports = function (db, io) {
 
         // Send message
         socket.on(TYPES.SEND_MESSAGE, wrapCallback(async (payload) => {
-            let currentUser = await userPromise;
+            const currentUser = await userPromise;
 
-            let message = await sendMessage(db, {
+            const message = await sendMessage(db, {
                 ...payload,
-                userId: currentUser._id
+                userId: currentUser._id,
             });
 
             socket.emit(TYPES.SEND_MESSAGE, message);
@@ -211,23 +213,20 @@ module.exports = function (db, io) {
             userChangeOnlineStatus(user._id);
 
             // Get of user groups
-            let rooms = await getUserRooms(db, user._id);
+            const rooms = await getUserRooms(db, user._id);
 
             rooms.items.forEach((room) => {
                 joinToRoomChannel(db, room._id);
             });
         });
 
-        socket.on('disconnect', async () => {
+        socket.on("disconnect", async () => {
             isDisconnected = true;
-            let user = await userPromise;
+            const user = await userPromise;
 
             ONLINE[user._id] = false;
 
             userChangeOnlineStatus(user._id);
         });
-
     });
-
-
 };

@@ -1,13 +1,12 @@
-import io from 'socket.io-client';
-import * as MESSAGES from './server/messages';
+import io from "socket.io-client";
+import * as MESSAGES from "./server/messages";
 
 class Api {
-
     constructor() {
-        this._connectPromise = fetch('/api/auth', {credentials: 'same-origin'})
+        this._connectPromise = fetch("/api/auth", { credentials: "same-origin" })
             .then(() => this._setupSocket())
             .catch((err) => {
-                console.error('Auth problems: ' + err.message);
+                console.error(`Auth problems: ${err.message}`);
 
                 throw err;
             });
@@ -22,7 +21,7 @@ class Api {
         this.io = io();
 
         return new Promise((resolve) => {
-            this.io.on('connect', resolve);
+            this.io.on("connect", resolve);
         });
     }
 
@@ -71,7 +70,7 @@ class Api {
      * @return {Promise<User>}
      */
     async getUser(userId) {
-        return this.getUsers({_id: userId}).then((result) => result.items[0]);
+        return this.getUsers({ _id: userId }).then(result => result.items[0]);
     }
 
     /**
@@ -83,7 +82,7 @@ class Api {
         return this._requestResponse(MESSAGES.CREATE_ROOM, room)
             .then((room) => {
                 if (room.error) {
-                    throw new Error(room.error)
+                    throw new Error(room.error);
                 }
 
                 return room;
@@ -109,7 +108,7 @@ class Api {
      * @return {Promise<Room>}
      */
     async getRoom(roomId) {
-        return this.getRooms({_id: roomId}).then((result) => result.items[0]);
+        return this.getRooms({ _id: roomId }).then(result => result.items[0]);
     }
 
     /**
@@ -131,7 +130,7 @@ class Api {
      * @return {Promise<Room>}
      */
     async currentUserJoinRoom(roomId) {
-        return this._requestResponse(MESSAGES.CURRENT_USER_JOIN_ROOM, {roomId});
+        return this._requestResponse(MESSAGES.CURRENT_USER_JOIN_ROOM, { roomId });
     }
 
     /**
@@ -143,7 +142,7 @@ class Api {
      * @return {Promise<Room>}
      */
     async userJoinRoom(userId, roomId) {
-        return this._requestResponse(MESSAGES.USER_JOIN_ROOM, {userId, roomId});
+        return this._requestResponse(MESSAGES.USER_JOIN_ROOM, { userId, roomId });
     }
 
     /**
@@ -154,7 +153,7 @@ class Api {
      * @return {Promise<Room>}
      */
     async currentUserLeaveRoom(roomId) {
-        return this._requestResponse(MESSAGES.CURRENT_USER_LEAVE_ROOM, {roomId});
+        return this._requestResponse(MESSAGES.CURRENT_USER_LEAVE_ROOM, { roomId });
     }
 
     /**
@@ -166,7 +165,7 @@ class Api {
      * @return {Promise<Message>}
      */
     async sendMessage(roomId, message) {
-        return this._requestResponse(MESSAGES.SEND_MESSAGE, {roomId, message});
+        return this._requestResponse(MESSAGES.SEND_MESSAGE, { roomId, message });
     }
 
     /**
@@ -188,7 +187,7 @@ class Api {
      * @return {Promise<Pagination<Message>>}
      */
     async getRoomMessages(roomId) {
-        return this.getMessages({roomId});
+        return this.getMessages({ roomId });
     }
 
     /**

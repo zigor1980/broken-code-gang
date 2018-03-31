@@ -1,11 +1,15 @@
 import React from 'react';
-import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummaryElement';
+import {connect} from 'react-redux';
+import {InstanceSummaryElement} from '../InstanceSummaryElement/InstanceSummaryElement';
 
 import './ChatList.css';
+const stateToProps = (state) => ({
+    chats: state.chats,
+    // stateChats: state.stateChats
+});
 
-
-
-export function ChatList(props) {
+export const ChatList = connect(stateToProps) (
+         function ChatList(props) {
     /*
     * Get user's latest chats list. Get
     *   - the last message id
@@ -154,8 +158,8 @@ export function ChatList(props) {
       <InstanceSummaryElement key={chat.id} summary={chat} />);
 
     return (
-      <div className="ChatList">
-          {chatList}
+        <div className="ChatList">
+            {chatList}
         </div>
-    );
-}
+    )
+});

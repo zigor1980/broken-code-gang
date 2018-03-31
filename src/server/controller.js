@@ -1,9 +1,9 @@
-const { findUserBySid, getUsers } = require("./database/user");
+const { findUserBySid, getUsers } = require('./database/user');
 const {
     joinRoom, leaveRoom, getRooms, getUserRooms, createRoom,
-} = require("./database/room");
-const { getMessages, sendMessage } = require("./database/messages");
-const TYPES = require("./messages");
+} = require('./database/room');
+const { getMessages, sendMessage } = require('./database/messages');
+const TYPES = require('./messages');
 
 /**
  * @param {Db} db
@@ -25,11 +25,11 @@ module.exports = function (db, io) {
     /**
      * Connection is created
      */
-    io.on("connection", (socket) => {
+    io.on('connection', (socket) => {
         let { sid } = socket.request.cookies,
             isDisconnected = false;
 
-        socket.join("broadcast");
+        socket.join('broadcast');
 
         /**
          * Invoke callback and handle errors
@@ -220,7 +220,7 @@ module.exports = function (db, io) {
             });
         });
 
-        socket.on("disconnect", async () => {
+        socket.on('disconnect', async () => {
             isDisconnected = true;
             const user = await userPromise;
 

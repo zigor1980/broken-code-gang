@@ -1,9 +1,9 @@
-const { ObjectId } = require("mongodb");
-const { insertOrUpdateEntity, pageableCollection } = require("./helpers");
-const { getUser } = require("./user");
-const { getRoom } = require("./room");
+const { ObjectId } = require('mongodb');
+const { insertOrUpdateEntity, pageableCollection } = require('./helpers');
+const { getUser } = require('./user');
+const { getRoom } = require('./room');
 
-const TABLE = "messages";
+const TABLE = 'messages';
 
 /**
  * @typedef {{
@@ -24,15 +24,15 @@ const TABLE = "messages";
  */
 async function sendMessage(db, { userId, roomId, message }) {
     if (!userId) {
-        throw new Error("userId required");
+        throw new Error('userId required');
     }
 
     if (!roomId) {
-        throw new Error("roomId required");
+        throw new Error('roomId required');
     }
 
     if (!message) {
-        throw new Error("Cannot send empty message");
+        throw new Error('Cannot send empty message');
     }
 
     const [user, room] = await Promise.all([getUser(db, userId), getRoom(db, roomId)]);
@@ -65,7 +65,7 @@ async function sendMessage(db, { userId, roomId, message }) {
  * @return {Promise<Pagination<Message>>}
  */
 async function getMessages(db, filter) {
-    ["roomId", "userId"].forEach((key) => {
+    ['roomId', 'userId'].forEach((key) => {
         if (filter[key]) {
             filter[key] = ObjectId(filter[key].toString());
         }

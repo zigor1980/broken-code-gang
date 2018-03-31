@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Avatar } from "../Avatar/Avatar";
-import logo from "./logo.svg";
-import "./App.css";
-import Header from "../Header/Header.js";
+import React, { Component } from 'react';
+import { Avatar } from '../Avatar/Avatar';
+import logo from './logo.svg';
+import './App.css';
+import Header from '../Header/Header.js';
 
 class App extends Component {
     render() {

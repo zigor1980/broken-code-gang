@@ -1,10 +1,10 @@
-const { ObjectId } = require("mongodb");
+const { ObjectId } = require('mongodb');
 
-const { getSessionInfo, saveSessionInfo } = require("./session");
-const { pageableCollection, insertOrUpdateEntity } = require("./helpers");
-const faker = require("faker");
+const { getSessionInfo, saveSessionInfo } = require('./session');
+const { pageableCollection, insertOrUpdateEntity } = require('./helpers');
+const faker = require('faker');
 
-const TABLE = "users";
+const TABLE = 'users';
 
 /**
  * @typedef {{
@@ -26,7 +26,7 @@ async function findUserBySid(db, sid) {
     const session = await getSessionInfo(db, sid);
 
     if (!session.userId) {
-        // Create fake user
+    // Create fake user
 
         let user = {
             name: faker.name.findName(),

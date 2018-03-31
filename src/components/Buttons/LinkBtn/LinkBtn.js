@@ -1,10 +1,10 @@
-import React from "react";
-import "./LinkBtn.css";
+import React from 'react';
+import './LinkBtn.css';
 
 export function LinkBtn(props) {
     return (
-        <button className={`LinkBtn ${(props.className) ? props.className : ""}`}>
-            {props.btnText}
-      </button>
+      <button className={`LinkBtn ${(props.className) ? props.className : ''}`}>
+          {props.btnText}
+        </button>
     );
 }

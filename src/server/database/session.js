@@ -1,6 +1,6 @@
-const { insertOrUpdateEntity } = require("./helpers");
+const { insertOrUpdateEntity } = require('./helpers');
 
-const TABLE = "sessions";
+const TABLE = 'sessions';
 
 /**
  * @typedef {{_id: string, sid: string}} UserSession

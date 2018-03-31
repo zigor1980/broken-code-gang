@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Header } from "../Header/Header";
-import { Footer } from "../Footer/Footer";
-import { ChatField } from "../ChatField/ChatField";
-import "./ChatPage.css";
+import React, { Component } from 'react';
+import { Header } from '../Header/Header';
+import { Footer } from '../Footer/Footer';
+import { ChatField } from '../ChatField/ChatField';
+import './ChatPage.css';
 
 export class ChatPage extends React.Component {
     constructor(props) {
@@ -31,7 +31,7 @@ export class ChatPage extends React.Component {
                       <div key={message.id}>
                           <ChatField message={message} userId={userId} />
                         </div>))}
-            </div>
+                </div>
               <div className="ChatPage__Footer">
                   <Footer submitIcon="send" />
                 </div>

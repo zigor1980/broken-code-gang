@@ -1,6 +1,6 @@
-const Mongod = require("mongod");
-const mongo = require("mongodb");
-const { join } = require("path");
+const Mongod = require('mongod');
+const mongo = require('mongodb');
+const { join } = require('path');
 
 /**
  * @typedef {{
@@ -18,7 +18,7 @@ const { join } = require("path");
 function startLocalDatabase(port) {
     const server = new Mongod({
         port,
-        dbpath: join(process.cwd(), "data"),
+        dbpath: join(process.cwd(), 'data'),
     });
 
     const close = () => {
@@ -30,8 +30,8 @@ function startLocalDatabase(port) {
     /**
      * Kill mongo after process close
      */
-    process.on("beforeExit", close);
-    process.on("SIGINT", close);
+    process.on('beforeExit', close);
+    process.on('SIGINT', close);
 
     return server.open();
 }

@@ -74,7 +74,7 @@ async function getMessages(db, filter) {
     return pageableCollection(db.collection(TABLE), {
         ...filter,
         order: {
-            id: -1,
+            created_at: -1,
         },
     });
 }

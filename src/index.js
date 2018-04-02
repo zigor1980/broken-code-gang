@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
+import {createStore, compose, applyMiddleware} from 'redux';
+import {Provider} from 'react-redux';
 import App from './components/App/App';
 import rootReducer from './reducers'
 import registerServiceWorker from './registerServiceWorker';
@@ -10,7 +10,24 @@ import './components/Header/Header.css';
 
 import api from './api';
 
-const store = createStore(rootReducer);
+function middleware({dispatch, getState}) {
+    return next => action => {
+        if (typeof action === 'function') {
+            return action(dispatch, getState);
+        }
+
+        return next(action);
+    };
+}
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(rootReducer,
+    undefined,
+    composeEnhancers(
+        applyMiddleware(middleware)
+    )
+);
 //
 // Example of usage API
 //

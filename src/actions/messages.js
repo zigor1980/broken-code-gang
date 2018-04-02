@@ -1,12 +1,22 @@
 export const addMessage = message => ({
-    type: 'ADD_MESSAGE',
+    type: 'MESSAGE_ADD',
     message,
 });
 
 export const removeMessage = () => ({
-    type: 'REMOVE_MESSAGE',
+    type: 'MESSAGE_REMOVE',
 });
 
 export const readMessage = () => ({
-    type: 'READ_MESSAGE',
+    type: 'MESSAGE_READ',
+});
+
+export const errorSendMessage = error => ({
+    type: 'MESSAGE_SEND_ERROR',
+    error
+});
+
+export const sendingMessage = sending => ({
+    type: 'MESSAGE_SENDING',
+    sending
 });

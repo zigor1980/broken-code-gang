@@ -14,7 +14,7 @@ echo "Validating Javascript:"
 which eslint &> /dev/null
 if [[ "$?" == 1 ]]; then
   echo "Please install ESlint"
-  exit 1
+  @ exit 1
 fi
 
 for FILE in $STAGED_FILES

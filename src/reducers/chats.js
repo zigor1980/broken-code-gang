@@ -27,7 +27,7 @@ const reducer = (state, action) => {
                 //         "author": "Bibushik",
                 //         "id": 1
                 //     }]
-                    
+
                 }
            }
 

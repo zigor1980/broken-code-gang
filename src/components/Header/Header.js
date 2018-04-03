@@ -16,10 +16,10 @@ const stateToProps = (state) => {
 const Header = connect(stateToProps)((props) => {
     return (
       <header className="Header">
-        <button className="Header__button" onClick={() => props.dispatch(addChat())}>{props.buttonExit && 'Назад' }</button>
-        <HeaderCenterItems groupName="Telegram" participants="0 участников" />
-        <button className="Header__button" onClick={() => props.dispatch(resetChats())}>{props.buttonHeaderRight || 'Свойства/поиск' }</button>
-      </header>
+          <button className="Header__button">{props.buttonExit && 'Назад' }</button>
+          <HeaderCenterItems groupName="Telegram" participants="0 участников" />
+          <button className="Header__button">{props.buttonHeaderRight && 'Свойства/поиск' }</button>
+        </header>
     );
 });
 

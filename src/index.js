@@ -4,9 +4,8 @@ import './index.css';
 import {createStore, compose, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import App from './components/App/App';
-import rootReducer from './reducers'
 import registerServiceWorker from './registerServiceWorker';
-import './components/Header/Header.css';
+import rootReducer from './reducers'
 
 import api from './api';
 //
@@ -16,11 +15,10 @@ import api from './api';
     //
     // Events
     //
-
-   // On status of user is changed
-   await api.onUserChangeStatus((result) => {
-       console.log('Change status: ', result);
-   });
+    // On status of user is changed
+    await api.onUserChangeStatus((result) => {
+        console.log('Change status: ', result);
+    });
 
    // On user is joined to room
    await api.onUserJoinedRoom((result) => {

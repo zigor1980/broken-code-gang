@@ -1,6 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {InstanceSummaryElement} from '../InstanceSummaryElement/InstanceSummaryElement';
+import {connect} from 'react-redux';
 import './ChatList.css';
 const stateToProps = (state) => ({
     rooms: state.rooms,
@@ -8,7 +9,7 @@ const stateToProps = (state) => ({
 });
 
 export const ChatList = connect(stateToProps) (
-         function ChatList(props) {
+     function ChatList(props) {
     /*
     * Get user's latest chats list. Get
     *   - the last message id
@@ -18,7 +19,7 @@ export const ChatList = connect(stateToProps) (
     *   - chat name
     * for each chat.
     * */
-console.log(props.rooms);
+    console.log(props.rooms);
 
     let item = {
         avatar: {
@@ -161,14 +162,14 @@ console.log(props.rooms);
             'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
             author: 'Bibushik',
             id: 10,
-        },
+        }
+     ];
 
-    ];
+     const chatList = latestChats.map((chat, index) =>
+         <InstanceSummaryElement key={chat.id} summary={chat} />);
 
-    const chatList = latestChats.map((chat, index) =>
-      <InstanceSummaryElement key={chat.id} summary={chat} />);
 
-    return (
+     return (
         <div className="ChatList">
             {chatList}
         </div>

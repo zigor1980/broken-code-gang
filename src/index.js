@@ -9,25 +9,6 @@ import registerServiceWorker from './registerServiceWorker';
 import './components/Header/Header.css';
 
 import api from './api';
-
-function middleware({dispatch, getState}) {
-    return next => action => {
-        if (typeof action === 'function') {
-            return action(dispatch, getState);
-        }
-
-        return next(action);
-    };
-}
-
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
-const store = createStore(rootReducer,
-    undefined,
-    composeEnhancers(
-        applyMiddleware(middleware)
-    )
-);
 //
 // Example of usage API
 //
@@ -110,6 +91,24 @@ const store = createStore(rootReducer,
    console.log(api);
 })();
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(
+    rootReducer,
+  undefined,
+  composeEnhancers(
+    applyMiddleware(middleware)
+  )
+);
+
+function middleware({dispatch, getState}) {
+    return next => action => {
+        if (typeof action === 'function') {
+            return action(dispatch, getState);
+        }
+        return next(action);
+    };
+  }
 
 ReactDOM.render(
     <Provider store={store}>

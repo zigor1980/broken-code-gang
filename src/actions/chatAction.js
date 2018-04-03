@@ -1,12 +1,7 @@
-// export function reducer({tag}) {
-//     return async function (dispatch, getState) {
-//   };
-// }
-
 export const CHAT_ADD = 'CHAT_ADD';
 export const CHAT_RESET = 'CHAT_RESET';
 
- export function addChat(chat) {
+export function addChat(chat) {
     return {
         type: CHAT_ADD,
         chat,

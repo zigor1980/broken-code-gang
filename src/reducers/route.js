@@ -1,7 +1,7 @@
 const route = (state, action) => {
     if (!state) {
         return {
-            page: 'authorization'
+            page: 'authorization',
         };
     }
 
@@ -10,7 +10,7 @@ const route = (state, action) => {
         return {
             ...state,
             page: action.page,
-            paylod: action.paylod
+            paylod: action.paylod,
         };
     default:
         return state;

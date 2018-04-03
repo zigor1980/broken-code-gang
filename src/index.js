@@ -5,8 +5,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
 import registerServiceWorker from './registerServiceWorker';
-//import './components/Header/Header.css';
-import {roomReducer } from './reducers/addRoomReducer'
+import rootReducer from './reducers'
 
 import api from './api';
 //
@@ -16,7 +15,6 @@ import api from './api';
     //
     // Events
     //
-
     // On status of user is changed
     await api.onUserChangeStatus((result) => {
         console.log('Change status: ', result);
@@ -94,7 +92,7 @@ import api from './api';
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-    roomReducer,
+    rootReducer,
   undefined,
   composeEnhancers(
     applyMiddleware(middleware)

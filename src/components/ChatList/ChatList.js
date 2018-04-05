@@ -1,11 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummaryElement';
-
 import './ChatList.css';
 
+const stateToProps = state => ({
+    rooms: state.rooms,
+    // stateChats: state.stateChats
+});
 
-
-export function ChatList(props) {
+function ChatList() {
     /*
     * Get user's latest chats list. Get
     *   - the last message id
@@ -15,6 +18,18 @@ export function ChatList(props) {
     *   - chat name
     * for each chat.
     * */
+    /*
+    let item = {
+        avatar: {
+            src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
+            modifier: 'avatar-s',
+        },
+        title: props.rooms[0].name,
+        description: rooms[0].name,
+        author: 'Bibushik',
+        id: rooms[0]._id,
+    };
+    */
 
     const latestChats = [
         {
@@ -147,15 +162,13 @@ export function ChatList(props) {
             author: 'Bibushik',
             id: 10,
         },
-
     ];
-
-    const chatList = latestChats.map((chat, index) =>
-      <InstanceSummaryElement key={chat.id} summary={chat} />);
-
+    const chatList = latestChats.map(chat =>
+        <InstanceSummaryElement key={chat.id} summary={chat} />);
     return (
-      <div className="ChatList">
-          {chatList}
-        </div>
+        <div className="ChatList">{chatList}</div>
     );
 }
+
+export default connect(stateToProps)(ChatList);
+

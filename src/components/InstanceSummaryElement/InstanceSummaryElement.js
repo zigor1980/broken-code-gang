@@ -6,6 +6,8 @@ export function InstanceSummaryElement(props) {
     if (!props) {
         return null;
     }
+
+    let {onclick} = props;
     const avatar = props.summary.avatar;
     const title = props.summary.title;
     const description = props.summary.description;
@@ -35,7 +37,7 @@ export function InstanceSummaryElement(props) {
     }
 
     return (
-      <div className="InstanceSummaryElement">
+      <div className="InstanceSummaryElement" onClick={onclick}>
           <div className="InstanceSummaryElement__avatar">
               <Avatar image={avatar} />
             </div>

@@ -13,7 +13,8 @@ export function UserList(props) {
     * for each contact.
     * */
 
-    const userContacts = [
+    const userContacts = {
+        items: [
         {
             avatar: {
                 src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
@@ -106,6 +107,7 @@ export function UserList(props) {
         },
 
     ];
+};
 
     const userList = userContacts.map((contact, index) =>
       <InstanceSummaryElement key={contact.id} summary={contact} />);

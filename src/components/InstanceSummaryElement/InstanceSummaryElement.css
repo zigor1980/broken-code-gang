@@ -6,16 +6,21 @@
     margin-left: 5px;
     margin-right: 5px;
     font-family: sans-serif;
+    box-shadow: 0 13px 25px 0 rgba(0,0,0,0.12);
+    border-radius: 100px;
+    padding-left:0.3rem;
 }
 
 .InstanceSummaryElement__info {
     text-align: left;
     max-width: 80%;
     margin-left: 10px;
+
 }
 
 .InstanceSummaryElement__title {
     font-weight: bold;
+    color: #46454C;
 }
 
 .InstanceSummaryElement__desc {
@@ -39,5 +44,5 @@
 }
 
 .InstanceSummaryElement__author {
-    color:#297cbe;
+    color:#F13564;
 }

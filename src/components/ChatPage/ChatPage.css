@@ -6,7 +6,7 @@
 .ChatPage__MessageField {
     margin-top: 50px;
     margin-bottom: 30px;
-    background-color: rgba(62, 92, 234, 0.72);
+    background-color: #fff;
     z-index: 1;
     position: absolute;
     width: 100%;

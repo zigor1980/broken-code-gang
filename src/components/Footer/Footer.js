@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { sendMessage } from '../../actions/sendMessage';
+import sendMessage from '../../actions/sendMessage';
 import './Footer.css';
 
 const stateToProps = state => ({

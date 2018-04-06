@@ -1,8 +1,21 @@
 import * as React from 'react';
+import './InfiniteScroll.css';
 
-const THRESHOLD = 500;
+const THRESHOLD = 300;
 
-export class Infinite extends React.Component {
+
+/*
+ * Принимает следующие аттрибуты:
+ *
+ * fetchNext - функция которая подгружает содержимое,
+ * в качестве примера для загрузки сообщений
+ * this.fetchNext = this.props.dispatch.bind(this,fetchMessages(roomId));
+ *
+ * scrollDirection - аттрибут отвечающий в какую сторону происходит скролл:
+ * 'down' - вниз
+ * 'up' - вверх
+ * */
+export class InfiniteScroll extends React.Component {
 
     state = {
         loading: false
@@ -10,12 +23,12 @@ export class Infinite extends React.Component {
 
     constructor(props) {
         super(props);
-
         this.onScroll = this.onScroll.bind(this);
     }
 
     componentDidMount() {
         document.addEventListener('scroll', this.onScroll, {passive: true});
+        this.onScroll();
     }
 
     componentWillUnmount() {
@@ -31,21 +44,30 @@ export class Infinite extends React.Component {
             return;
         }
 
-        let scrollTop = document.body.scrollTop || document.documentElement.scrollTop,
-            containerHeight = this.container.clientHeight,
-            windowHeight = window.innerHeight;
+        let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
 
-        if (scrollTop + windowHeight >= containerHeight - THRESHOLD) {
+        //Если мы скроллим вверх
+        if (this.props.scrollDirection === 'up' && scrollTop < THRESHOLD) {
+            document.documentElement.scrollTop = 1.01 * THRESHOLD;
             this.nextPage();
+        }
+
+        //Если мы скроллим вниз
+        else if (this.props.scrollDirection === 'down') {
+            let containerHeight = this.container.children && this.container.children[0] && this.container.children[0].clientHeight,
+                windowHeight = window.innerHeight;
+            if (scrollTop + windowHeight > containerHeight - THRESHOLD) {
+                document.documentElement.scrollTop = 0.99 * (containerHeight - THRESHOLD - windowHeight);
+                this.nextPage();
+            }
         }
     }
 
     async nextPage() {
         this.setState({loading: true});
-
         try {
             await this.props.fetchNext();
-        } catch(err) {
+        } catch (err) {
             console.error(err);
         } finally {
             this.setState({loading: false});
@@ -54,16 +76,9 @@ export class Infinite extends React.Component {
 
     render() {
         return (
-            <div className="infinite" ref={(container) => this.container = container}>
+            <div className="InfiniteScroll" ref={(container) => this.container = container}>
                 {this.props.children}
-
-                {this.state.loading && (
-                    <div className="infinite__spinner">
-                        <div className="spinner"/>
-                    </div>
-                )}
             </div>
         );
     }
-
 }

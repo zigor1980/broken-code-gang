@@ -25,7 +25,7 @@ export class ChatPage extends Component {
         return (
             <div className="ChatPage">
                 <div className="ChatPage__Header">
-                    <Header buttonExit="true" buttonHeaderRight="true" />
+                    <Header buttonBack buttonSearch={false} buttonSettings contentType="chat" />
                 </div>
 
                 <div className="ChatPage__MessageField">

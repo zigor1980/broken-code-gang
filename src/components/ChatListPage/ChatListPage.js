@@ -19,7 +19,7 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     render() {
         return (
             <div className="ChatListPage">
-                <Header buttonExit="true" buttonHeaderRight="true" />
+                <Header buttonBack buttonSearch buttonSettings={false} contentType="chats" />
                 <ChatList />
                 <FooterNav active="chat" />
             </div>

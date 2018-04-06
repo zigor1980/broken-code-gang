@@ -1,174 +1,53 @@
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummaryElement';
 import './ChatList.css';
+import fetchRooms from '../../actions/fetchRooms';
+import addRoom from '../../actions/rooms';
 
 const stateToProps = state => ({
     rooms: state.rooms,
-    // stateChats: state.stateChats
 });
 
-function ChatList() {
-    /*
-    * Get user's latest chats list. Get
-    *   - the last message id
-    *   - the last message author
-    *   - the last message content
-    *   - avatar
-    *   - chat name
-    * for each chat.
-    * */
-    /*
-    let item = {
-        avatar: {
-            src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-            modifier: 'avatar-s',
-        },
-        title: props.rooms[0].name,
-        description: rooms[0].name,
-        author: 'Bibushik',
-        id: rooms[0]._id,
-    };
-    */
-
-    const latestChats = [
-        {
-            avatar: {
-                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                modifier: 'avatar-s',
-            },
-            title: 'BrokenCodeGang',
-            description: 'Да, зафиксирую информацию про завтра.\n' +
-            'Ждём всех в 10.00. Не опаздывать!\n' +
-            'ШРИкатон продлится до 18.00.\n' +
-            'С с    обой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
-            author: 'Bibushik',
-            id: 1,
-        },
-        {
-            avatar: {
-                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                modifier: 'avatar-s',
-            },
-            title: 'BrokenCodeGang',
-            description: 'Да, зафиксирую информацию про завтра.\n' +
-            'Ждём всех в 10.00. Не опаздывать!\n' +
-            'ШРИкатон продлится до 18.00.\n' +
-            'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
-            author: 'Bibushik',
-            id: 2,
-        },
-        {
-            avatar: {
-                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                modifier: 'avatar-s',
-            },
-            title: 'BrokenCodeGang',
-            description: 'Да, зафиксирую информацию про завтра.\n' +
-            'Ждём всех в 10.00. Не опаздывать!\n' +
-            'ШРИкатон продлится до 18.00.\n' +
-            'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
-            author: 'Bibushik',
-            id: 3,
-        },
-        {
-            avatar: {
-                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                modifier: 'avatar-s',
-            },
-            title: 'BrokenCodeGang',
-            description: 'Да, зафиксирую информацию про завтра.\n' +
-            'Ждём всех в 10.00. Не опаздывать!\n' +
-            'ШРИкатон продлится до 18.00.\n' +
-            'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
-            author: 'Bibushik',
-            id: 4,
-        },
-        {
-            avatar: {
-                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                modifier: 'avatar-s',
-            },
-            title: 'BrokenCodeGang',
-            description: 'Да, зафиксирую информацию про завтра.\n' +
-            'Ждём всех в 10.00. Не опаздывать!\n' +
-            'ШРИкатон продлится до 18.00.\n' +
-            'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
-            author: 'Bibushik',
-            id: 5,
-        },
-        {
-            avatar: {
-                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                modifier: 'avatar-s',
-            },
-            title: 'BrokenCodeGang',
-            description: 'Да, зафиксирую информацию про завтра.\n' +
-            'Ждём всех в 10.00. Не опаздывать!\n' +
-            'ШРИкатон продлится до 18.00.\n' +
-            'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
-            author: 'Bibushik',
-            id: 6,
-        },
-        {
-            avatar: {
-                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                modifier: 'avatar-s',
-            },
-            title: 'BrokenCodeGang',
-            description: 'Да, зафиксирую информацию про завтра.\n' +
-            'Ждём всех в 10.00. Не опаздывать!\n' +
-            'ШРИкатон продлится до 18.00.\n' +
-            'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
-            author: 'Bibushik',
-            id: 7,
-        },
-        {
-            avatar: {
-                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                modifier: 'avatar-s',
-            },
-            title: 'BrokenCodeGang',
-            description: 'Да, зафиксирую информацию про завтра.\n' +
-            'Ждём всех в 10.00. Не опаздывать!\n' +
-            'ШРИкатон продлится до 18.00.\n' +
-            'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
-            author: 'Bibushik',
-            id: 8,
-        },
-        {
-            avatar: {
-                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                modifier: 'avatar-s',
-            },
-            title: 'BrokenCodeGang',
-            description: 'Да, зафиксирую информацию про завтра.\n' +
-            'Ждём всех в 10.00. Не опаздывать!\n' +
-            'ШРИкатон продлится до 18.00.\n' +
-            'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
-            author: 'Bibushik',
-            id: 9,
-        },
-        {
-            avatar: {
-                src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                modifier: 'avatar-s',
-            },
-            title: 'BrokenCodeGang',
-            description: 'Да, зафиксирую информацию про завтра.\n' +
-            'Ждём всех в 10.00. Не опаздывать!\n' +
-            'ШРИкатон продлится до 18.00.\n' +
-            'С собой: ноутбуки. Лучше подготовиться и установить на них nodejs и mongodb',
-            author: 'Bibushik',
-            id: 10,
-        },
-    ];
-    const chatList = latestChats.map(chat =>
-        <InstanceSummaryElement key={chat.id} summary={chat} />);
-    return (
-        <div className="ChatList">{chatList}</div>
-    );
-}
-
-export default connect(stateToProps)(ChatList);
-
+export const ChatList = connect(stateToProps)(
+    class ChatList extends React.Component {
+        constructor(props) {
+            super(props);
+            this.fetch = this.fetch.bind(this);
+            this.addRoom = this.addRoom.bind(this);
+        }
+        componentDidMount() {
+            this.fetch()
+                .then(() => {
+                })
+                .catch(() => {
+                });
+        }
+        fetch() {
+            return this.props.dispatch(fetchRooms());
+        }
+        addRoom() {
+            return this.props.dispatch(addRoom(null));
+        }
+        render() {
+            const { rooms } = this.props;
+            let chatlist;
+            chatlist = rooms.items.map(el =>
+                <InstanceSummaryElement
+                    key={el._id}
+                    summary={{
+                        avatar: {
+                            src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
+                            modifier: 'avatar-s',
+                        },
+                        title: `${el.name}`,
+                    }}
+                />);
+            return (
+                <div className="ChatList">
+                    { chatlist }
+                    <button onClick={this.addRoom}>Добавить чат</button>
+                </div>
+            );
+        }
+    });

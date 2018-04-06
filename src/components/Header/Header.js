@@ -7,9 +7,8 @@ import { Button } from '../Button/Button';
 
 
 const stateToProps = (state) => {
-    console.log(state);
-    return {
-        chats: state.chats,
+  return {
+    chats: state.chats,
     // stateChats: state.stateChats
     };
 };

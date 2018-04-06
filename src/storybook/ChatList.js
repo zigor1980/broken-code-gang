@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ChatList } from '../components/ChatList/ChatList';
+import ChatList from '../components/ChatList/ChatList';
 
 
 storiesOf('ChatList', module)

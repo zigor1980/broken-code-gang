@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
-import { Avatar } from '../Avatar/Avatar';
-import logo from './logo.svg';
-import './App.css';
-import Header from '../Header/Header.js';
-import { ChatPage } from '../ChatPage/ChatPage';
 import { connect } from 'react-redux';
-import { ConnectedChatPage } from '../ChatPage/ChatPage';
+import './App.css';
 import { AuthorizationPage } from '../AuthorizationPage/AuthorizationPage';
 import { ChatListPage } from '../ChatListPage/ChatListPage';
 

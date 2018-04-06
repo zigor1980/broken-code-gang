@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import './UserPage.css';
 
-import { Header } from '../Header/Header';
+import Header from '../Header/Header';
 import { Avatar } from '../Avatar/Avatar';
 
 export function UserPage(props) {
@@ -24,19 +24,19 @@ export function UserPage(props) {
     const { userLogin, userAvatar } = userInfo;
 
     return (
-      <div className="UserPage">
-          <Header />
-          <div className="UserPage__UserInfo">
-          <Avatar image={userAvatar} />
+        <div className="UserPage">
+            <Header buttonBack contentType="profile" />
+            <div className="UserPage__UserInfo">
+                <Avatar image={userAvatar} />
                 <h1 className="UserPage__UserName">
-              {userLogin}
-            </h1>
+                    {userLogin}
+                </h1>
             </div>
-          <div className="UserPage__UserControls">
-              <button key="StarChar">
+            <div className="UserPage__UserControls">
+                <button key="StarChar">
                     Начать чат
                 </button>
-              <button key="BlockUser">
+                <button key="BlockUser">
                     Заблокировать пользователя
                 </button>
             </div>

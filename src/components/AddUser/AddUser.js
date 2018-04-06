@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Header} from "../Header/Header";
+import Header from "../Header/Header";
 import {UserList} from "../UserList/UserList";
 import {ConfirmActionDialog} from "../ConfirmActionDialog/ConfirmActionDialog";
 
@@ -116,7 +116,7 @@ export class AddUser extends Component {
         ]
         return (
             <div className="AddUser">
-                <Header buttonExit={true} buttonHeaderRight={true}/>
+                <Header buttonBack buttonSearch buttonSettings={false} contentType="add-user"/>
                 <UserList summary={userConnections}/>
             </div>
         )

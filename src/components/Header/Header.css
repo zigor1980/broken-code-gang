@@ -2,7 +2,7 @@
     height: 50px;
     width: 100%;
     display: flex;
-    background-color: #7489f0;
+    background-color: #fff;
     font-family: sans-serif;
     position: fixed;
     top:0;
@@ -20,7 +20,7 @@
 .Header__content__item {
     display: flex;
     flex-direction: column;
-    background-color: aqua;
+    background-color: #fff;
     width: inherit;
 }
 

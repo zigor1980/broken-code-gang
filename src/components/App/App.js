@@ -6,20 +6,20 @@ import Header from '../Header/Header.js';
 import { ChatPage } from '../ChatPage/ChatPage';
 import { connect } from 'react-redux';
 import { ConnectedChatPage } from '../ChatPage/ChatPage';
-import { AuthorizationPage } from "../AuthorizationPage/AuthorizationPage";
-import { ChatListPage } from "../ChatListPage/ChatListPage";
+import { AuthorizationPage } from '../AuthorizationPage/AuthorizationPage';
+import { ChatListPage } from '../ChatListPage/ChatListPage';
 
 
 const routeConfig = {
     authorization: {
-        view: AuthorizationPage
+        view: AuthorizationPage,
     },
-    'chat_list': {
-        view: ChatListPage
-    }
+    chat_list: {
+        view: ChatListPage,
+    },
 };
 
-const stateToProps = (state) => ({
+const stateToProps = state => ({
     route: state.route,
 });
 

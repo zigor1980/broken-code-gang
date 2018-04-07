@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './App.css';
 import { AuthorizationPage } from '../AuthorizationPage/AuthorizationPage';
 import { ChatListPage } from '../ChatListPage/ChatListPage';
+import { ConnectedChatPage } from '../ChatPage/ChatPage';
 
 
 const routeConfig = {
@@ -11,6 +12,9 @@ const routeConfig = {
     },
     chat_list: {
         view: ChatListPage,
+    },
+    chat_page: {
+        view: ConnectedChatPage,
     },
 };
 

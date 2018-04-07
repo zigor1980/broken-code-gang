@@ -26,6 +26,14 @@
     width: 100%;
 }
 
+.ChatPage__empty {
+    height: calc(100vh - 50px - 32px);
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+}
+
 body{
     margin: 0;
 }

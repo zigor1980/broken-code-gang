@@ -4,6 +4,7 @@ import sendMessage from '../../actions/sendMessage';
 import './Footer.css';
 
 const stateToProps = state => ({
+    payload: state.route.payload
 });
 
 
@@ -23,7 +24,7 @@ export class Footer extends Component {
     }
 
     handleSubmit = () => {
-        const roomId = "5aacdce7744a767e04c94e17";
+        const roomId = this.props.payload.currentRoom;
         const currentMessage = this.state.messageText;
         this.setState({
             messageText: '',

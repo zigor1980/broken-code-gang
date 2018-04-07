@@ -6,8 +6,8 @@ export default function addRoom(user, name) {
             // Loading
             let room = null;
             if (user === null) {
-                room = await api.createRoom({ name: '2' });
-                room = await api.currentUserJoinRoom(room._id);
+                room = await api.createRoom(name);
+                await api.currentUserJoinRoom(room._id);
                 dispatch({
                     type: 'ROOM_ADD',
                     room,

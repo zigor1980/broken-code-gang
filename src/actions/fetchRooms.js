@@ -3,14 +3,15 @@ import api from '../api';
 export default function fetchRooms() {
     return async function (dispatch, getState) {
         try {
-            if (getState().rooms.next === null) {
-                let room = await api.getCurrentUserRooms();
-                room = room.items;
-                dispatch({
-                    type: 'FETCH_ROOMS',
-                    room,
-                });
-            }
+            let room = [];
+            room = await api.getCurrentUserRooms(getState().rooms.next);
+            const { items } = room;
+            const { next } = room;
+            dispatch({
+                type: 'FETCH_ROOMS',
+                items,
+                next,
+            });
         } catch (error) {
             dispatch({
                 type: 'ROOM_ERROR',

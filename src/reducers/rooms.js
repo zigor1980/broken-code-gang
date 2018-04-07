@@ -7,7 +7,6 @@ export default function rooms(state, action) {
     }
     switch (action.type) {
     case 'ROOM_ADD':
-        console.log('qweasdzxc');
         return {
             ...state,
             items: [...state.items, action.room],
@@ -15,7 +14,8 @@ export default function rooms(state, action) {
     case 'FETCH_ROOMS':
         return {
             ...state,
-            items: action.room,
+            items: [...state.items, ...action.items],
+            next: action.next,
         };
     default:
         return state;

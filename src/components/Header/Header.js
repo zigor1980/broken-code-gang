@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './Header.css';
 import { HeaderCenterItems } from '../HeaderCenterItems/HeaderCenterItems';
-import { addChat, resetChats } from '../../actions/chatAction';
 import { Button } from '../Button/Button';
 
-
 const stateToProps = (state) => {
-  return {
-    chats: state.chats,
-    // stateChats: state.stateChats
+    return {
+        chats: state.chats,
+        // stateChats: state.stateChats
     };
 };
 
@@ -18,7 +16,7 @@ export default class Header extends Component {
         const {
             buttonBack, buttonSearch, buttonSettings, contentType,
         } = this.props;
-        const leftControl = buttonBack ? <Button type="back" active modifier="s" circle /> : '';
+        const leftControl = buttonBack ? <Button type="back" active modifier="s" circle >''</Button> : '';
         let rightControl = '';
         if (buttonSearch) {
             rightControl = <Button type="search" active modifier="s" circle />;

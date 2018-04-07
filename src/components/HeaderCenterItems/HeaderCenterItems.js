@@ -5,7 +5,12 @@ export function HeaderCenterItems(props) {
     const desc = props.desc ? props.desc : '';
     return (
         <div className="Header__content">
-            <img src="http://localhost:3000/static/media/logo.5d5d9eef.svg" style={{ width: '85px' }} />
+            <div>
+                <img
+                    src=""
+                    alt=""
+                />
+            </div>
             <div className="Header__content__item">
                 <h2 >{title}</h2>
                 <p>{desc}</p>

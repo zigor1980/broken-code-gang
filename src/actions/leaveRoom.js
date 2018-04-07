@@ -6,7 +6,7 @@ export default function leaveRoom(room) {
             // Loading
             await api.currentUserLeaveRoom(room);
             dispatch({
-                type: 'LEAVE_ROOM',
+                type: 'ROOM_LEAVE',
             });
         } catch (error) {
             dispatch({

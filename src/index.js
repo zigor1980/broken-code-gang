@@ -40,8 +40,8 @@ import api from './api';
 //     //
 //
     // Fetch current user
-    const user = await api.getCurrentUser();
-    console.log('Current user', user);
+    // const user = await api.getCurrentUser();
+    // console.log('Current user', user);
 //
 //     // Fetch user information
 //     console.log('User information', await api.getUser(user._id));
@@ -63,10 +63,10 @@ import api from './api';
 //     }
 //
     // Get list of all rooms
-    let rooms = await api.getRooms();
-    console.log('All rooms', rooms);
-    rooms = await api.getRooms(rooms.next);
-    console.log('All rooms', rooms);
+    // let rooms = await api.getRooms();
+    // console.log('All rooms', rooms);
+    // rooms = await api.getRooms(rooms.next);
+    // console.log('All rooms', rooms);
 //     console.log('Get room info', await api.getRoom(rooms.items[0]._id));
 //
 //     // Try to join to first room in list

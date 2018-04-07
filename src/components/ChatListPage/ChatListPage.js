@@ -8,7 +8,7 @@ import fetchRooms from '../../actions/fetchRooms';
 import addRoom from '../../actions/rooms';
 
 const stateToProps = state => ({
-    items: [...state.rooms.items],
+    items: state.rooms.items,
     next: state.rooms.next,
 });
 

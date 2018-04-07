@@ -2,7 +2,7 @@ export default function rooms(state, action) {
     if (!state) {
         return {
             items: [],
-            next: null,
+            next: undefined,
         };
     }
     switch (action.type) {
@@ -11,7 +11,7 @@ export default function rooms(state, action) {
             ...state,
             items: [...state.items, action.room],
         };
-    case 'FETCH_ROOMS':
+    case 'ROOMS_FETCH':
         return {
             ...state,
             items: [...state.items, ...action.items],

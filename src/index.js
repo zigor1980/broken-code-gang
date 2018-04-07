@@ -11,7 +11,7 @@ import api from './api';
 //
 // Example of usage API
 //
-// (async () => {
+(async () => {
 //     //
 //     // Events
 //     //
@@ -39,9 +39,9 @@ import api from './api';
 //     // Actions
 //     //
 //
-//     // Fetch current user
-//     const user = await api.getCurrentUser();
-//     console.log('Current user', user);
+    // Fetch current user
+    // const user = await api.getCurrentUser();
+    // console.log('Current user', user);
 //
 //     // Fetch user information
 //     console.log('User information', await api.getUser(user._id));
@@ -62,10 +62,11 @@ import api from './api';
 //         console.log(err.message);
 //     }
 //
-//     // Get list of all rooms
-//     const rooms = await api.getRooms();
-//     console.log('All rooms', rooms);
-//
+    // Get list of all rooms
+    // let rooms = await api.getRooms();
+    // console.log('All rooms', rooms);
+    // rooms = await api.getRooms(rooms.next);
+    // console.log('All rooms', rooms);
 //     console.log('Get room info', await api.getRoom(rooms.items[0]._id));
 //
 //     // Try to join to first room in list
@@ -86,8 +87,8 @@ import api from './api';
 //     // Leave room
 //     console.log('Leave current user to room', await api.currentUserLeaveRoom(rooms.items[0]._id));
 //
-//     console.log(api);
-// })();
+// //     console.log(api);
+})();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 

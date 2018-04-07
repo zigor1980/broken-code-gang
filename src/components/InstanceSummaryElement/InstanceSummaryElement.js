@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Avatar } from '../Avatar/Avatar';
 import './InstanceSummaryElement.css';
 
@@ -7,12 +7,8 @@ export function InstanceSummaryElement(props) {
         return null;
     }
 
-    let {onclick} = props;
-    const avatar = props.summary.avatar;
-    const title = props.summary.title;
-    const description = props.summary.description;
-    const author = props.summary.author;
-    const descModifiers = props.summary.descModifiers;
+    let { onclick, summary } = props;
+    const { avatar, title, description, author, descModifiers } = summary;
 
     let titleClasses = 'InstanceSummaryElement__title';
     let descClasses = 'InstanceSummaryElement__desc';

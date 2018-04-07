@@ -1,15 +1,21 @@
 export default function rooms(state, action) {
     if (!state) {
         return {
-            rooms: [{
-            }],
+            items: [],
+            next: undefined,
         };
     }
     switch (action.type) {
     case 'ROOM_ADD':
         return {
             ...state,
-            rooms: [...state.rooms, action.rooms],
+            items: [...state.items, action.room],
+        };
+    case 'ROOMS_FETCH':
+        return {
+            ...state,
+            items: [...state.items, ...action.items],
+            next: action.next,
         };
     default:
         return state;

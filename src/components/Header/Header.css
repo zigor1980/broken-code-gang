@@ -2,29 +2,29 @@
     height: 50px;
     width: 100%;
     display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
     background-color: #fff;
     font-family: sans-serif;
-    position: fixed;
-    top:0;
+    justify-content: space-between;
+    align-content: center;
 }
 
 .Header__content {
     display: flex;
-    width: inherit;
+    flex-direction: row;
+    align-items: stretch;
 }
 
 .Header__button {
-    width: 80px;
+    overflow: hidden;
+    width: 50px;
 }
 
 .Header__content__item {
-    display: flex;
-    flex-direction: column;
-    background-color: #fff;
-    width: inherit;
+
 }
 
 .Header__content__item > * {
     margin: 0;
-    margin-left: 20px;
 }

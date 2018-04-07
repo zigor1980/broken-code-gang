@@ -13,10 +13,10 @@ export const readMessage = () => ({
 
 export const errorSendMessage = error => ({
     type: 'MESSAGE_SEND_ERROR',
-    error
+    error,
 });
 
 export const sendingMessage = sending => ({
     type: 'MESSAGE_SENDING',
-    sending
+    sending,
 });

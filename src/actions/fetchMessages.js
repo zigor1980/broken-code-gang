@@ -11,7 +11,7 @@ export default function fetchMessages(roomId) {
             const messages = await api.getRoomMessages(roomId);
             dispatch({
                 type: 'MESSAGES_LOADED',
-                messages: messages,
+                messages,
             });
         } catch (error) {
             dispatch({

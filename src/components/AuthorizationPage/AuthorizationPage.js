@@ -24,6 +24,11 @@ export const AuthorizationPage = connect()(
         submitHandler() {
             this.props.dispatch(routeNavigation({
                 page: 'chat_list',
+                payload: {
+                    footerNav: {
+                        active: 'chat'
+                    }
+                }
             }));
         }
 

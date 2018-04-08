@@ -75,8 +75,35 @@ async function getUsers(db, filter) {
     return pageableCollection(db.collection(TABLE), filter);
 }
 
+/**
+ * @param {Db} db
+ * @param {string} email
+ * @param {string} password
+ *
+ * @return {Promise<Message>}
+ */
+async function addUser(db, {email, password}) {
+    if (!email) {
+        throw new Error('User email required');
+    }
+
+    if (!password) {
+        throw new Error('User password required');
+    }
+
+    const userEntity = {
+        email: email,
+        password: password,
+    };
+    const result = await db.collection(TABLE).insertOne(userEntity);
+    userEntity._id = result.insertedId;
+
+    return userEntity;
+}
+
 module.exports = {
     findUserBySid,
     getUsers,
     getUser,
+    addUser,
 };

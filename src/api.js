@@ -69,6 +69,19 @@ class Api {
     }
 
     /**
+     * Return user by login and password*/
+
+    async getUserByLogin(login, password) {
+        return this.getUsers({email: login, password: password}).then(result => result.items[0]);
+    }
+
+    /**
+     * Add new user to database*/
+    async addUser(login, password) {
+        return this._requestResponse(MESSAGES.ADD_USER, {email: login, password: password});
+    }
+
+    /**
      * Get information about user
      *
      * @param {string} userId

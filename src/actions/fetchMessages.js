@@ -4,14 +4,19 @@ export default function fetchMessages(roomId) {
     return async function (dispatch, getState) {
         dispatch({
             type: 'MESSAGES_LOADING',
-            loading: true,
+            loading: true
         });
 
         try {
-            const messages = await api.getRoomMessages(roomId);
+            let state = getState();
+            let messages;
+            if (state && state.messages && state.messages.next && state.messages.next.lastId)
+                messages = await api.getMessages(state.messages.next);
+            else
+                messages = await api.getRoomMessages(roomId);
             dispatch({
                 type: 'MESSAGES_LOADED',
-                messages,
+                messages
             });
         } catch (error) {
             dispatch({

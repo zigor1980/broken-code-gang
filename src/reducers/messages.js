@@ -1,22 +1,20 @@
-const DEFAULT_MESSAGES = { items: [] };
+const DEFAULT_MESSAGES = [];
 
 const messages = (state, action) => {
     if (!state) {
         return {
-            messages: DEFAULT_MESSAGES,
-            loading: true,
+            items: DEFAULT_MESSAGES,
+            next:null,
+            loading: true
         };
     }
 
     switch (action.type) {
-    case 'MESSAGE_ADD':
-        return {
-            ...state,
-            messages: {
-                ...state.messages,
-                items: [...state.messages.items, action.message],
-            },
-        };
+        case 'MESSAGE_ADD':
+            return {
+                ...state,
+                items: [...state.items,action.message]
+            };
 
     case 'MESSAGE_REMOVE':
         return false;
@@ -30,23 +28,24 @@ const messages = (state, action) => {
     case 'MESSAGE_SENDING':
         return state;
 
-    case 'MESSAGES_LOADING':
-        return {
-            ...state,
-            loading: action.type,
-        };
-    case 'MESSAGES_LOADED':
-        return {
-            ...state,
-            messages: action.messages,
-        };
-    case 'MESSAGE_LOAD_ERROR':
-        return {
-            ...state,
-            error: action.error,
-        };
-    default:
-        return state;
+        case 'MESSAGES_LOADING':
+            return {
+                ...state,
+                loading: action.loading
+            };
+        case 'MESSAGES_LOADED':
+            return {
+                ...state,
+                ...action.messages,
+                items: action.messages.items.reverse().slice(0).concat(state.items)
+            };
+        case 'MESSAGE_LOAD_ERROR':
+            return {
+                ...state,
+                error: action.error
+            };
+        default:
+            return state;
     }
 };
 

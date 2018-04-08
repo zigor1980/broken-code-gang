@@ -54,7 +54,6 @@ async function sendMessage(db, { userId, roomId, message }) {
 
     const result = await db.collection(TABLE).insertOne(messageEntity);
     messageEntity._id = result.insertedId;
-
     return messageEntity;
 }
 
@@ -70,13 +69,15 @@ async function getMessages(db, filter) {
             filter[key] = ObjectId(filter[key].toString());
         }
     });
+    const selectModifier = filter['lastId']?'$lt':null;
 
     return pageableCollection(db.collection(TABLE), {
         ...filter,
         order: {
             created_at: -1,
         },
-    });
+    },
+    selectModifier);
 }
 
 module.exports = {

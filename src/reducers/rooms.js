@@ -16,6 +16,7 @@ export default function rooms(state, action) {
             ...state,
             items: [...state.items, ...action.items],
             next: action.next,
+            end: action.end,
         };
     default:
         return state;

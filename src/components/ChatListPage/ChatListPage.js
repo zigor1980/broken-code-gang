@@ -10,6 +10,7 @@ import addRoom from '../../actions/rooms';
 const stateToProps = state => ({
     items: state.rooms.items,
     next: state.rooms.next,
+    end: state.rooms.end,
 });
 
 export const ChatListPage = connect(stateToProps)(
@@ -70,7 +71,7 @@ export const ChatListPage = connect(stateToProps)(
                 <div className="ChatListPage">
                     { addRoomForm }
                     <Header buttonBack buttonSearch buttonSettings={false} contentType="chats" />
-                    <ChatList rooms={this.props.items} fetchNext={this.fetch} />
+                    <ChatList rooms={this.props.items} fetchNext={this.fetch} next={this.props.next}/>
                     <FooterNav active="chat" />
                     <button className="ChatList_AddButton" onClick={ this.visibilityForm } >+</button>
                 </div>

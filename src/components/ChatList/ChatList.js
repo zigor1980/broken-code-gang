@@ -3,9 +3,9 @@ import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummar
 import './ChatList.css';
 import { InfiniteRooms } from '../InfiniteRooms/InfiniteRooms';
 
-function ChatList({ rooms, fetchNext }) {
+function ChatList({ rooms, fetchNext, next }) {
     return (
-        <InfiniteRooms fetchNext={fetchNext}>
+        <InfiniteRooms fetchNext={fetchNext} next={next}>
             {rooms.map(room => (
                 <InstanceSummaryElement
                     key={room._id}

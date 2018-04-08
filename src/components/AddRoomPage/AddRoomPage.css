@@ -1,0 +1,77 @@
+.AddRoomPage {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px auto 1fr ;
+    justify-items: stretch;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.AddForm_InputField {
+    background: #ffffff;
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #1abc9c;
+}
+.InputField_Name {
+    border-radius: 5px;
+    padding: 3px;
+    font-size: 20px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.InputField_Name:focus, .InputField_Accept:focus {
+    outline: none;
+}
+
+.InputField_Name:focus {
+    border: 1px solid #1abc9c;;
+}
+
+.InputField_Accept:active {
+    border: 1px solid #1abc9c;
+}
+
+.InputField_Accept {
+    color: #1abc9c;
+    display: block;
+    width: 100%;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 20px;
+    border: 1px solid #cccccc;
+    background: #ffffff;
+    box-sizing: border-box;
+    margin-top: 10px;
+}
+.AddRoomPage__Users {
+    padding: 20px;
+    box-sizing: border-box;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.UsersList__ListElement {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items:center;
+    justify-content: flex-start;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #cccccc;
+}
+.ListElement__Photo {
+    margin: 10px;
+}
+.ListElement__Photo img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+.Desc__Status {
+    color: #1abc9c;
+}

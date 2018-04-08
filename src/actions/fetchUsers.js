@@ -1,15 +1,14 @@
 import api from '../api';
 
-export default function fetchRooms() {
+export default function fetchUsers() {
     return async function (dispatch, getState) {
         try {
-            const room = await api.getCurrentUserRooms(getState().rooms.next);
-            console.log(room);
-            const { items } = room;
-            const { next } = room;
+            const users = await api.getUsers(getState().users.next);
+            const { items } = users;
+            const { next } = users;
             const end = !!(next);
             dispatch({
-                type: 'ROOMS_FETCH',
+                type: 'USERS_FETCH',
                 items,
                 next,
                 end,

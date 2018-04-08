@@ -49,8 +49,8 @@ import api from './api';
 //     console.log('User information', await api.getUser(user._id));
 //
 //     // Get users
-//     const users = await api.getUsers({ limit: 100 });
-//     console.log('List of all users', users);
+    const users = await api.getUsers({ limit: 100 });
+    console.log('List of all users', users);
 //
 //     // We have more users
 //     if (users.next) {

@@ -7,14 +7,14 @@
     width: 70px;
     border-radius: 50%;
     background: #ffffff;
-    color: #1abc9c;
+    color: #F13564;
     line-height: 50px;
     font-size: 40px;
     position: fixed;
     right: 10px;
     bottom: 70px;
     text-align: center;
-    border: 2px solid rgba(26,188,156,1);
+    border: 2px solid rgb(241, 53, 100);
 }
 
 .ChatList_AddButton:focus {

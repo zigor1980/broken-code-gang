@@ -48,7 +48,7 @@ export const AddRoomPage = connect(stateToProps)(
         render() {
 
             const listUses = this.props.items.map(el => (
-                <div className="UsersList__ListElement">
+                <div className="UsersList__ListElement" key={el._id}>
                     <div className="ListElement__Photo">
                         <img
                             src="https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200"

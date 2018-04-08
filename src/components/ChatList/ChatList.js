@@ -2,6 +2,7 @@ import * as React from 'react';
 import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummaryElement';
 import './ChatList.css';
 import { InfiniteRooms } from '../InfiniteRooms/InfiniteRooms';
+import MemberCount from '../../helpers/MemberCount';
 
 function ChatList({ rooms, fetchNext, next }) {
     return (
@@ -15,6 +16,7 @@ function ChatList({ rooms, fetchNext, next }) {
                             modifier: 'avatar-s',
                         },
                         title: `${room.name}`,
+                        author: `${room.users.length} ${MemberCount(room.users.length)}`,
                     }}
                 />))}
         </InfiniteRooms>

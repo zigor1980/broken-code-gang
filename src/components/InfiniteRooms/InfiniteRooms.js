@@ -29,22 +29,23 @@ export class InfiniteRooms extends React.Component {
         }
         const { scrollTop } = page;
         const containerHeight = this.container.clientHeight;
-        if (scrollTop === containerHeight - 500) {
-            this.nextPage()
-                .then(() => {
-                    this.setState({ loading: false });
-                });
+        let visiblePat = page.clientHeight;
+        visiblePat -= 40;
+        if (scrollTop === containerHeight - visiblePat) {
+            this.nextPage();
         }
     }
 
     async nextPage() {
-        this.setState({ loading: true });
-        try {
-            await this.props.fetchNext();
-        } catch (err) {
-            // console.error(err);
-        } finally {
-            this.setState({ loading: false });
+        if (this.props.next) {
+            this.setState({ loading: true });
+            try {
+                await this.props.fetchNext();
+            } catch (err) {
+                // console.error(err);
+            } finally {
+                this.setState({ loading: false });
+            }
         }
     }
 

@@ -8,7 +8,13 @@ export function InstanceSummaryElement(props) {
     }
 
     let { onclick, summary } = props;
-    const { avatar, title, description, author, descModifiers } = summary;
+    const {
+        avatar,
+        title,
+        description,
+        author,
+        descModifiers
+    } = summary;
 
     let titleClasses = 'InstanceSummaryElement__title';
     let descClasses = 'InstanceSummaryElement__desc';

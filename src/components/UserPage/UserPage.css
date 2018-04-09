@@ -1,17 +1,5 @@
 .UserPage {
     font-family: sans-serif;
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 50px auto 1fr 50px;
-    justify-items: stretch;
-    -ms-flex-align: stretch;
-    align-items: stretch;
-    -ms-flex-line-pack: stretch;
-    align-content: stretch;
-    
 }
 
 .UserPage__UserInfo {
@@ -36,8 +24,4 @@
     font-size: 1.45rem;
     background-color: #fff;
     border: none;
-}
-
-.UserPage__UserControls {
-    overflow-y: auto;
 }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import './ChatListPage.css';
 import Header from '../Header/Header';
-import ChatList from '../ChatList/ChatList';
+import {ChatList} from '../ChatList/ChatList';
 import { FooterNav } from '../FooterNav/FooterNav';
 import fetchRooms from '../../actions/fetchRooms';
 import addRoom from '../../actions/rooms';

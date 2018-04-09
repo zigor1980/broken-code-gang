@@ -1,5 +1,5 @@
-export const routeNavigation = ({ page, paylod = {} }) => ({
+export const routeNavigation = ({ page, payload = {} }) => ({
     type: 'ROUTE_NAVIGATE',
     page,
-    paylod
+    payload,
 });

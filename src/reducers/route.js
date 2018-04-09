@@ -10,7 +10,7 @@ const route = (state, action) => {
         return {
             ...state,
             page: action.page,
-            paylod: action.paylod,
+            payload: action.payload,
         };
     default:
         return state;

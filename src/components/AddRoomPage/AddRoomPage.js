@@ -52,7 +52,7 @@ export const AddRoomPage = connect(stateToProps)(
                     <div className="ListElement__Photo">
                         <img
                             src="https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200"
-                            alt="Photo"
+                            alt={el.name}
                         />
                     </div>
                     <div className="ListElement__Desc">
@@ -97,6 +97,15 @@ export const AddRoomPage = connect(stateToProps)(
                         </p>
                     </div>
                     <InfiniteRooms fetchNext={this.fetch} next={this.props.next}>
+                        {this.state.loading && (
+                            <div className="spinner">
+                                <div className="rect1" />
+                                <div className="rect2" />
+                                <div className="rect3" />
+                                <div className="rect4" />
+                                <div className="rect5" />
+                            </div>
+                        )}
                         {listUses}
                     </InfiniteRooms>
                 </div>

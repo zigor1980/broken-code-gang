@@ -7,36 +7,16 @@
     font-family: sans-serif;
     background: #FFFFFF;
     box-shadow: 0 13px 25px 0 rgba(0,0,0,0.12);
-    border-radius: 16px;
+    border-radius: 20px;
 }
 
 .ChatQuote_left {
-    border-radius: 10px 10px 10px 0;
     margin-left: 20px;
 }
 
 .ChatQuote_right {
-    border-radius: 10px 10px 0 10px;
     margin-right: 20px;
     background-color: #F13564;
-}
-
-.ChatQuote__angle_right {
-    right: -20px;
-    position: absolute;
-    bottom: 0;
-    border: 10px solid transparent;
-    border-bottom: 10px solid #00008B;
-    border-left: 10px solid #00008B;
-}
-
-.ChatQuote__angle_left {
-    left: -20px;
-    position: absolute;
-    bottom: 0;
-    border: 10px solid transparent;
-    border-right: 10px solid #00008B;
-    border-bottom: 10px solid #00008B;
 }
 
 .ChatQuote__text {

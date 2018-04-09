@@ -44,7 +44,7 @@ export const ChatListPage = connect(stateToProps)(
 
         submitHandler() {
             this.props.dispatch(routeNavigation({
-                page: 'AddRoomPage',
+                page: 'add_room_page',
             }));
         }
 

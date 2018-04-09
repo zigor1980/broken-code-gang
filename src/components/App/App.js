@@ -14,7 +14,7 @@ const routeConfig = {
     chat_list: {
         view: ChatListPage,
     },
-    AddRoomPage: {
+    add_room_page: {
         view: AddRoomPage,
     },
     chat_page: {

@@ -4,8 +4,7 @@ export default function fetchUsers() {
     return async function (dispatch, getState) {
         try {
             const users = await api.getUsers(getState().users.next);
-            const { items } = users;
-            const { next } = users;
+            const { items, next } = users;
             const end = !!(next);
             dispatch({
                 type: 'USERS_FETCH',

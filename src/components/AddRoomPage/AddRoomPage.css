@@ -14,7 +14,7 @@
     background: #ffffff;
     padding: 10px;
     text-align: center;
-    border-bottom: 1px solid #1abc9c;
+    border-bottom: 1px solid #F13564;
 }
 .InputField_Name {
     border-radius: 5px;
@@ -30,15 +30,15 @@
 }
 
 .InputField_Name:focus {
-    border: 1px solid #1abc9c;;
+    border: 1px solid #F13564;;
 }
 
 .InputField_Accept:active {
-    border: 1px solid #1abc9c;
+    border: 1px solid #F13564;
 }
 
 .InputField_Accept {
-    color: #1abc9c;
+    color: #F13564;
     display: block;
     width: 100%;
     border-radius: 5px;
@@ -73,5 +73,5 @@
     border-radius: 50%;
 }
 .Desc__Status {
-    color: #1abc9c;
+    color: #F13564;
 }

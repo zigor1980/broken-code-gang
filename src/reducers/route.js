@@ -2,6 +2,7 @@ const route = (state, action) => {
     if (!state) {
         return {
             page: 'authorization',
+            payload: {}
         };
     }
 

@@ -28,7 +28,14 @@ export function Button(props) {
         btnClass = props.circle ? 'Button_circle' : '',
         iconSrc = getIcon(type, active);
     if (!props.modifier) { modifier = 's'; }
-    return (<button className={`Button ${btnClass}`}>
+
+    let onClick;
+
+    if (typeof props.onClick === 'function') {
+        onClick = e => props.onClick(props.type, e);
+    }
+
+    return (<button onClick={onClick} className={`Button ${btnClass}`}>
       <img className={`Button__image Button__image_${modifier}`} src={iconSrc} alt={type} />
             </button>);
 }

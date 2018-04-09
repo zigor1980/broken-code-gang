@@ -11,6 +11,7 @@ const stateToProps = state => ({
     items: state.rooms.items,
     next: state.rooms.next,
     end: state.rooms.end,
+    payload: state.route.payload
 });
 
 export const ChatListPage = connect(stateToProps)(
@@ -62,7 +63,7 @@ export const ChatListPage = connect(stateToProps)(
                         fetchNext={this.fetch}
                         next={this.props.next}
                     />
-                    <FooterNav active="chat" />
+                    <FooterNav active={this.props.payload.footerNav.active} />
                     <button className="ChatList_AddButton" onClick={this.submitHandler} >+</button>
                 </div>
             );

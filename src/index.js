@@ -12,6 +12,8 @@ import api from './api';
 // Example of usage API
 //
 (async () => {
+    // // Add user to our cool messenger
+    // console.log('Add user', await api.addUser("Arturik", "123"));
 //     //
 //     // Events
 //     //

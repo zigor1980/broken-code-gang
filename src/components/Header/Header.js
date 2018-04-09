@@ -14,7 +14,10 @@ const stateToProps = (state) => {
 export default class Header extends Component {
     render() {
         const {
-            buttonBack, buttonSearch, buttonSettings, contentType,
+            buttonBack,
+            buttonSearch,
+            buttonSettings,
+            contentType,
         } = this.props;
         const leftControl = buttonBack ? <Button type="back" active modifier="s" circle >''</Button> : '';
         let rightControl = '';
@@ -28,6 +31,9 @@ export default class Header extends Component {
         switch (contentType) {
         case 'chats':
             contentTitle = 'BCG';
+            break;
+        case 'add-room':
+            contentTitle = 'Создать kомнату';
             break;
         case 'contacts':
             contentTitle = 'Contacts';

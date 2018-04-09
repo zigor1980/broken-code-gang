@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './InfiniteScroll.css';
+//import './InfiniteScroll.css';
 
 const THRESHOLD = 300;
 

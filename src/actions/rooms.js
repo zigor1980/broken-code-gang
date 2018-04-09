@@ -1,19 +1,21 @@
 import api from '../api';
 
-export default function addRoom(user, name) {
+export default function addRoom(name, user = []) {
     return async function (dispatch) {
         try {
             // Loading
             let room = null;
-            if (user === null) {
+            if (user) {
                 room = await api.createRoom(name);
-                await api.currentUserJoinRoom(room._id);
+                room = await api.currentUserJoinRoom(room._id);
+                user.forEach(async (el) => {
+                    room = await api.userJoinRoom(el, room._id);
+                });
                 dispatch({
                     type: 'ROOM_ADD',
                     room,
                 });
             } else {
-                console.log('1');
                 const rooms = await api.getCurrentUserRooms();
                 const roomExist = user && rooms.find((el) => {
                     if (el.users.length === 2) {
@@ -33,7 +35,6 @@ export default function addRoom(user, name) {
                     });
                 }
             }
-
         } catch (error) {
             dispatch({
                 type: 'FEED_ERROR',

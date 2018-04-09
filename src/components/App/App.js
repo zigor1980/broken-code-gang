@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './App.css';
 import { AuthorizationPage } from '../AuthorizationPage/AuthorizationPage';
 import { ChatListPage } from '../ChatListPage/ChatListPage';
+import { AddRoomPage } from  '../AddRoomPage/AddRoomPage';
 import { ConnectedChatPage } from '../ChatPage/ChatPage';
 
 
@@ -12,6 +13,9 @@ const routeConfig = {
     },
     chat_list: {
         view: ChatListPage,
+    },
+    add_room_page: {
+        view: AddRoomPage,
     },
     chat_page: {
         view: ConnectedChatPage,
@@ -29,7 +33,6 @@ class App extends Component {
         if (!Page) {
             Page = <div>404 Page Not Found</div>;
         }
-
         return (
             <Page />
         );

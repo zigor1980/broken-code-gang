@@ -85,8 +85,7 @@ export const AuthorizationPage = connect()(
 
         async singUp(login, password) {
             try{
-                const user = await api.getUserByLogin(login, password);
-                console.log(user);
+                const user = await api.getUserByLogin(login);
 
                 if (user) {
                     this.setState({message: 'Такой логин уже занят.'});
@@ -111,8 +110,6 @@ export const AuthorizationPage = connect()(
                 this.setState({message: 'Пользователя с таким логином и паролем не найдено.'});
                 return;
             }
-
-            console.log('user: ', user);
 
             if (user) {
                 this.props.dispatch(routeNavigation({

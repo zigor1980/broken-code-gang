@@ -65,12 +65,12 @@ export const AuthorizationPage = connect()(
 
             if (this.state.active === 'Sign up') {
                 console.log('sing up');
-                this.singUp(login, password);
+                await this.singUp(login, password);
             }
 
             if (this.state.active === 'Sign in') {
                 console.log('sing in');
-                this.singIn(login, password);
+                await this.singIn(login, password);
             }
         }
 
@@ -81,17 +81,21 @@ export const AuthorizationPage = connect()(
         }
 
         async singUp(login, password) {
-            const user = await api.getUserByLogin(login, password);
-            console.log(user);
-
-            if (!user) {
-                await api.addUser(login, password);
+            try{
+                const user = await api.getUserByLogin(login, password);
+                console.log(user);
+    
+                if (!user) {
+                    await api.addUser(login, password);
+                }
+    
+                this.setState({
+                    active: 'Sign in',
+                    inputs: inputsInitial
+                });
+            } catch(error) {
+                console.log(error);
             }
-
-            this.setState({
-                active: 'Sign in',
-                inputs: inputsInitial
-            });
         }
 
         async singIn(login, password) {

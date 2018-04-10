@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 
 import {routeNavigation} from '../../actions/route';
 import api from '../../api';
+import signInUser from '../../actions/signInUser';
 
 const updateInputField = (inputsState, input, field, value) => {
     return {
@@ -64,13 +65,11 @@ export const AuthorizationPage = connect()(
             }
 
             if (this.state.active === 'Sign up') {
-                console.log('sing up');
-                await this.singUp(login, password);
+                this.singUp(login, password);
             }
 
             if (this.state.active === 'Sign in') {
-                console.log('sing in');
-                await this.singIn(login, password);
+                this.singIn(login, password);
             }
         }
 
@@ -99,16 +98,19 @@ export const AuthorizationPage = connect()(
         }
 
         async singIn(login, password) {
+            const user = await this.props.dispatch(signInUser(login, password));
+            console.log('user: ', user);
 
-
-            this.props.dispatch(routeNavigation({
-                page: 'chat_list',
-                payload: {
-                    footerNav: {
-                        active: 'chat'
+            if (user) {
+                this.props.dispatch(routeNavigation({
+                    page: 'chat_list',
+                    payload: {
+                        footerNav: {
+                            active: 'chat'
+                        }
                     }
-                }
-            }));
+                }));
+            }
         }
 
         render() {

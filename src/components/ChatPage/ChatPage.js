@@ -38,6 +38,7 @@ export class ChatPage extends Component {
 
     render() {
         const messages = this.props.messages.items,
+            next = this.props.messages.next,
             userId = 'bibushik';
 
         let chatPageContent = '';
@@ -56,7 +57,7 @@ export class ChatPage extends Component {
                     <Header buttonBack buttonSearch={false} buttonSettings contentType="chat"/>
                 </div>
 
-                <InfiniteScroll fetchNext={this.fetchNext} scrollDirection='up'>
+                <InfiniteScroll fetchNext={this.fetchNext} scrollDirection='up' next={next}>
                     <div className="ChatPage__MessageField">
                         {chatPageContent}
                     </div>

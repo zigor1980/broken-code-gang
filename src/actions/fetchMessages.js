@@ -10,7 +10,10 @@ export default function fetchMessages(roomId) {
         try {
             let state = getState();
             let messages;
-            if (state && state.messages && state.messages.next && state.messages.next.lastId)
+            debugger;
+            if(state && state.messages && !state.messages.next)
+                return;
+            else if (state && state.messages && state.messages.next && state.messages.next.lastId)
                 messages = await api.getMessages(state.messages.next);
             else
                 messages = await api.getRoomMessages(roomId);

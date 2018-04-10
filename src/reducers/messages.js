@@ -4,7 +4,7 @@ const messages = (state, action) => {
     if (!state) {
         return {
             items: DEFAULT_MESSAGES,
-            next:null,
+            next:true,
             loading: true
         };
     }

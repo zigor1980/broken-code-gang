@@ -1,3 +1,17 @@
+@keyframes input-error {
+    0% {
+        background-color: #F13564;
+    }
+
+    30% {
+        background-color: #F13564;
+    }
+
+    100% {
+        background-color: #FFFFFF;
+    }
+}
+
 .AuthorizationPage {
     display: flex;
     justify-content: space-between;
@@ -42,6 +56,7 @@
     margin-top: 20px;
     margin-bottom: 20px;
     padding-left: 50px;
+    animation-duration: 2s;
 }
 
 .AuthorizationPage__Input:focus {

@@ -11,7 +11,8 @@ const stateToProps = state => ({
     items: state.rooms.items,
     next: state.rooms.next,
     end: state.rooms.end,
-    payload: state.route.payload
+    payload: state.route.payload,
+    user: state.user
 });
 
 export const ChatListPage = connect(stateToProps)(

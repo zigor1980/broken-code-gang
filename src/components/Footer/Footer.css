@@ -1,27 +1,40 @@
 .Footer {
     width: 100%;
-    height: 32px;
+    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: self-start;
     font-family: sans-serif;
+    background-color: #ffffff;
+    box-shadow: none;
 }
 
 .Footer__TextArea {
     resize: none;
-    width: 100%;
-    padding: 0;
-    height: 30px;
+    width: 70%;
+    margin: auto;
+    height: 32px;
     bottom: 0;
-    border: 1px solid skyblue;
+    background: #F13564;
+    border-radius: 16px;
+    color: #FFFFFF;
+    padding-left: 50px;
+    padding-top: 5px;
+    padding-right: 50px;
 }
 
-.Footer__Input {
-    margin: 0;
-    padding: 0;
-    width: 70px;
-    height: 32px;
-    border: 0;
-    background-color: blue;
+.Footer__TextArea:focus {
+    outline: none;
+}
+
+.Footer__TextArea::placeholder {
+    color: #FFFFFF;
+}
+
+.Footer__SubmitButton{
+    background-color: #F13564;
+    position: fixed;
+    margin-left: 85%;
+    margin-top: 5px;
 }

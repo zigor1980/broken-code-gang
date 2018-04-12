@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import sendMessage from '../../actions/sendMessage';
+import { Button } from '../Button/Button';
 import './Footer.css';
 
 const stateToProps = state => ({
@@ -40,12 +41,17 @@ export class Footer extends Component {
                     onChange={this.handleChange}
                     rows="1"
                     value={this.state.messageText}
+                    placeholder="Type message..."
                 >
                 </textarea>
-              <input
+              <div className="Footer__SubmitButton">
+              <Button type="send" modifier="s" circle={true} active={true}
+                      onClick={this.handleSubmit}/>
+              </div>
+             {/* <input
                   className="Footer__Input" type="submit" value={this.props.submitIcon}
                   onClick={this.handleSubmit}
-                />
+                />*/}
             </footer>
         );
     }

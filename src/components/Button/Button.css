@@ -1,6 +1,11 @@
 .Button {
     background-color: inherit;
     border: none;
+    padding: 0;
+}
+
+.Button:focus {
+    outline: none;
 }
 
 .Button__image_s {

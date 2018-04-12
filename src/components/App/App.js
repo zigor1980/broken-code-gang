@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 import './App.css';
 import { AuthorizationPage } from '../AuthorizationPage/AuthorizationPage';
 import { ChatListPage } from '../ChatListPage/ChatListPage';
-import { AddRoomPage } from  '../AddRoomPage/AddRoomPage';
+import { AddRoomPage } from '../AddRoomPage/AddRoomPage';
 import { ConnectedChatPage } from '../ChatPage/ChatPage';
-import { UserPage } from "../UserPage/UserPage";
+import { UserPage } from '../UserPage/UserPage';
+import { ConnectedContactsListPage } from '../ContactsListPage/ContactsListPage';
 
 
-//TODO: create page for the settings 
+// TODO: create page for the settings
 
 const routeConfig = {
     authorization: {
@@ -18,14 +19,14 @@ const routeConfig = {
     'chat_list': {
         view: ChatListPage
     },
+    'contacts_list': {
+        view: ConnectedContactsListPage
+    },
     add_room_page: {
         view: AddRoomPage,
     },
     chat_page: {
         view: ConnectedChatPage,
-    },
-    'user': {
-        view: UserPage
     },
     'settings': {
         view: UserPage

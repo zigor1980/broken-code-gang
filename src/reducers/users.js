@@ -2,7 +2,7 @@ export default function users(state, action) {
     if (!state) {
         return {
             items: [],
-            next: undefined,
+            next: true,
         };
     }
     switch (action.type) {

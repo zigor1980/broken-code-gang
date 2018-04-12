@@ -4,11 +4,11 @@ export default function signInUser(login, password) {
     return async function (dispatch, getState) {
         try {
             const user = await api.getUserByLogin(login, password);
-
+            await api.setCurrentUser(user._id);
             dispatch({
                 type: 'USER_SIGN_IN',
                 _id: user._id
-            })
+            });
 
             return user;
         } catch (error) {

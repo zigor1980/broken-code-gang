@@ -1,4 +1,4 @@
-const { findUserBySid, getUsers, addUser } = require('./database/user');
+const { findUserBySid, getUsers, addUser, setCurrentUser } = require('./database/user');
 const {
     joinRoom, leaveRoom, getRooms, getUserRooms, createRoom,
 } = require('./database/room');
@@ -154,6 +154,15 @@ module.exports = function (db, io) {
             return getRooms(db, params || {});
         });
 
+        // Set a current user
+        requestResponse(TYPES.SET_CURRENT_USER, async (payload) => {
+            payload={
+                ...payload,
+                sid:sid,
+            };
+            return await setCurrentUser(db,payload);
+        });
+
         // Rooms of current user
         requestResponse(TYPES.CURRENT_USER_ROOMS, async (params) => {
             const currentUser = await userPromise;
@@ -213,7 +222,7 @@ module.exports = function (db, io) {
             return message;
         });
 
-        // Send message
+        // Get messages
         requestResponse(TYPES.MESSAGES, (payload) => getMessages(db, payload));
 
         userPromise.then(async (user) => {

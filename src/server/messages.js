@@ -5,6 +5,11 @@ module.exports = {
     CURRENT_USER: 'CURRENT_USER',
 
     /**
+     * Get current user information
+     */
+    SET_CURRENT_USER: 'SET_CURRENT_USER',
+
+    /**
      * Return list of all users
      */
     USERS: 'USERS',

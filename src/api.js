@@ -69,6 +69,17 @@ class Api {
     }
 
     /**
+     * Set current user
+     * @param {string} userId
+     * @return {Promise<User>}
+     * */
+
+    async setCurrentUser(userId) {
+        console.log("api: " + userId);
+        return this._requestResponse(MESSAGES.SET_CURRENT_USER, {userId: userId});
+    }
+
+    /**
      * Return user by login and password*/
 
     async getUserByLogin(login, password) {

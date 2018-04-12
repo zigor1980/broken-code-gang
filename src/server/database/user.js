@@ -24,25 +24,7 @@ const TABLE = 'users';
  */
 async function findUserBySid(db, sid) {
     const session = await getSessionInfo(db, sid);
-
-    if (!session.userId) {
-    // Create fake user
-
-        let user = {
-            name: faker.name.findName(),
-            email: faker.internet.email(),
-            phone: faker.phone.phoneNumber(),
-        };
-
-        user = await saveUser(db, user);
-
-        session.userId = user._id;
-
-        await saveSessionInfo(db, session);
-
-        return user;
-    }
-    return db.collection(TABLE).findOne({ _id: session.userId });
+    return getUser(db,session.userId);
 }
 
 /**
@@ -63,6 +45,29 @@ async function getUser(db, userId) {
  */
 async function saveUser(db, user) {
     return insertOrUpdateEntity(db.collection(TABLE), user);
+}
+
+/**
+ * @param {Db} db
+ * @param {String} userId
+ * @param {String} sid
+ *
+ * @returns {Promise<User>}
+ */
+async function setCurrentUser(db, {userId,sid}) {
+    if(!userId){
+        throw new Error('User id required');
+    }
+
+    if(!sid){
+        throw new Error('Session id required');
+    }
+
+    const session = {
+        userId:userId,
+        sid:sid,
+    };
+    await saveSessionInfo(db, session);
 }
 
 /**
@@ -106,4 +111,5 @@ module.exports = {
     getUsers,
     getUser,
     addUser,
+    setCurrentUser,
 };

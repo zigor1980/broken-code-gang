@@ -90,6 +90,13 @@ import api from './api';
 //     console.log('Leave current user to room', await api.currentUserLeaveRoom(rooms.items[0]._id));
 //
 // //     console.log(api);
+//     const login="artur",password="123";
+//     let user = await api.getUserByLogin(login, password);
+//     debugger;
+//     await api.setCurrentUser(user._id);
+//     user =  await api.getUser(user._id);
+//     const curUser = await api.getCurrentUser();
+//     console.log(curUser);
 })();
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

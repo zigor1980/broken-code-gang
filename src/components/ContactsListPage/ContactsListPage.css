@@ -3,11 +3,11 @@
     padding-bottom: 30px;
 }
 
-.Header {
+.ContactsListPage .Header {
     position: fixed;
 }
 
-.Footer {
+.ContactsListPage .Footer {
     position: fixed;
     bottom: 0;
 }

@@ -1,119 +1,44 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummaryElement';
+import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 
 import './UserList.css';
 
-export function UserList(props) {
-    /*
-    * Get user's contacts list. Get
-    *   - avatar
-    *   - username
-    *   - online/last seen date
-    *   - contact id
-    * for each contact.
-    * */
+export class UserList extends Component {
+    clickHandler(contactId) {
+        this.props.handleClick(contactId);
+    }
+    render() {
+        const { users, fetchNext, next } = this.props;
+        const imgSrc = 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200';
 
-    const userContacts = {
-        items: [
-            {
-                avatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-                title: 'Darya Nadolskaya',
-                description: 'online',
-                id: 1,
-            },
-            {
-                avatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-                title: 'Darya Nadolskaya',
-                description: 'online',
-                id: 2,
-            },
-            {
-                avatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-                title: 'Darya Nadolskaya',
-                description: 'online',
-                id: 3,
-            },
-            {
-                avatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-                title: 'Darya Nadolskaya',
-                description: 'online',
-                id: 4,
-            },
-            {
-                avatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-                title: 'Darya Nadolskaya',
-                description: 'online',
-                id: 5,
-            },
-            {
-                avatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-                title: 'Darya Nadolskaya',
-                description: 'online',
-                id: 6,
-            },
-            {
-                avatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-                title: 'Darya Nadolskaya',
-                description: 'online',
-                id: 7,
-            },
-            {
-                avatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-                title: 'Darya Nadolskaya',
-                description: 'online',
-                id: 8,
-            },
-            {
-                avatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-                title: 'Darya Nadolskaya',
-                description: 'online',
-                id: 9,
-            },
-            {
-                avatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-                title: 'Darya Nadolskaya',
-                description: 'online',
-                id: 10,
-            },
-        ],
-    };
+        let userListContent = '';
+        if (users && users.length) {
+            userListContent = users.map(contact => (
+                <InstanceSummaryElement
+                    key={contact._id}
+                    summary={{
+                        avatar: {
+                            src: imgSrc,
+                            modifier: 'avatar-s',
+                        },
+                        title: `${contact.name}`,
+                        author: `${contact.online ? 'online' : ''}`,
+                        id: `${contact._id}`,
+                    }}
+                    onclick={this.clickHandler.bind(this)}
+                />));
+        } else {
+            userListContent = <div className="UserList__empty"><p>No contacts here yet...</p></div>;
+        }
 
-    const userList = userContacts.items.map((contact, index) =>
-        <InstanceSummaryElement key={contact.id} summary={contact} />);
+        return (
+            <InfiniteScroll fetchNest={this.fetchNext} scrollDirection="down" next={next}>
+                <div className="UserList">
+                    {userListContent}
+                </div>
+            </InfiniteScroll>
 
-    return (
-        <div className="UserList">
-            {userList}
-        </div>
-    );
+        );
+    }
 }

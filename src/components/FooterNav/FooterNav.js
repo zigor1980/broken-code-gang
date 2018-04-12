@@ -23,6 +23,8 @@ export const FooterNav = connect()(
 
         if (page === 'chat') {
             page = 'chat_list';
+        } else if (page === 'user') {
+            page = 'contacts_list';
         }
 
         this.props.dispatch(routeNavigation({

@@ -52,10 +52,7 @@ export class InfiniteScroll extends React.Component {
         if (this.props.scrollDirection === 'up' && scrollTop < THRESHOLD && this.props.next) {
             document.documentElement.scrollTop = 1.01 * THRESHOLD;
             this.nextPage();
-        }
-
-        //Если мы скроллим вниз
-        else if (this.props.scrollDirection === 'down' && scrollTop + windowHeight > containerHeight - THRESHOLD && this.props.next) {
+        } else if (this.props.scrollDirection === 'down' && scrollTop + windowHeight > containerHeight - THRESHOLD && this.props.next) {
                 document.documentElement.scrollTop = 0.99 * (containerHeight - THRESHOLD - windowHeight);
                 this.nextPage();
         }

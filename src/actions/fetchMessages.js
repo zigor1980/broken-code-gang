@@ -10,7 +10,6 @@ export default function fetchMessages(roomId) {
         try {
             let state = getState();
             let messages;
-            debugger;
             if(state && state.messages && !state.messages.next)
                 return;
             else if (state && state.messages && state.messages.next && state.messages.next.lastId)

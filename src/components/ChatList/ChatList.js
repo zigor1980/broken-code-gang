@@ -17,6 +17,7 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
             payload: {
                 ...this.props.payload,
                 currentRoom: roomId,
+                prevPage: 'chat_list',
             },
         }));
     }

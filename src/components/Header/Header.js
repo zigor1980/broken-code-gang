@@ -3,15 +3,30 @@ import { connect } from 'react-redux';
 import './Header.css';
 import { HeaderCenterItems } from '../HeaderCenterItems/HeaderCenterItems';
 import { Button } from '../Button/Button';
+import { routeNavigation } from '../../actions/route';
 
-const stateToProps = (state) => {
-    return {
-        chats: state.chats,
-        // stateChats: state.stateChats
-    };
-};
+const stateToProps = state => ({
+    payload: state.route.payload,
+    page: state.route.page,
+});
 
 export default class Header extends Component {
+    goBack() {
+        const payload = this.props.payload;
+        if (!payload || !payload.prevPage || payload.prevPage === 'authorization') {
+            return null;
+        }
+        const curPage = this.props.page;
+        const prevPage = this.props.payload.prevPage;
+        this.props.dispatch(routeNavigation({
+            page: prevPage,
+            payload: {
+                ...this.props.payload,
+                prevPage: '',
+            },
+        }));
+    }
+
     render() {
         const {
             buttonBack,
@@ -19,7 +34,9 @@ export default class Header extends Component {
             buttonSettings,
             contentType,
         } = this.props;
-        const leftControl = buttonBack ? <Button type="back" active modifier="s" circle >''</Button> : '';
+        const btnFillerStyle = { width: '30px', height: '30px' };
+        const btnFiller = <div style={btnFillerStyle}>&nbsp;</div>;
+        const leftControl = buttonBack ? <Button type="back" active modifier="s" circle onClick={this.goBack.bind(this)} >''</Button> : btnFiller;
         let rightControl = '';
         if (buttonSearch) {
             rightControl = <Button type="search" active modifier="s" circle />;

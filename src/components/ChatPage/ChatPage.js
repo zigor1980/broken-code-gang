@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
-import Header from '../Header/Header';
-import {ConnectedFooter} from '../Footer/Footer';
-import {ChatField} from '../ChatField/ChatField';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { ConnectedHeader } from '../Header/Header';
+import { ConnectedFooter } from '../Footer/Footer';
+import { ChatField } from '../ChatField/ChatField';
+import { connect } from 'react-redux';
 import './ChatPage.css';
 import fetchMessages from '../../actions/fetchMessages';
-import {InfiniteScroll} from '../InfiniteScroll/InfiniteScroll';
+import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 import api from '../../api';
-import {addMessage}  from '../../actions/messages';
+import { addMessage } from '../../actions/messages';
 
 const stateToProps = state => ({
     messages: state.messages,
@@ -16,7 +16,6 @@ const stateToProps = state => ({
 
 
 export class ChatPage extends Component {
-
     constructor(props) {
         super(props);
         this.fetchNext = this.props.dispatch.bind(this, fetchMessages(this.props.payload.currentRoom));
@@ -45,7 +44,7 @@ export class ChatPage extends Component {
         if (messages && messages.length) {
             chatPageContent = messages.map(message => (
                 <div key={message._id}>
-                    <ChatField message={message} userId={userId}/>
+                    <ChatField message={message} userId={userId} />
                 </div>));
         } else {
             chatPageContent = <div className="ChatPage__empty"><p>No messages here yet...</p></div>;
@@ -54,16 +53,16 @@ export class ChatPage extends Component {
         return (
             <div className="ChatPage">
                 <div className="ChatPage__Header">
-                    <Header buttonBack buttonSearch={false} buttonSettings contentType="chat"/>
+                    <ConnectedHeader buttonBack buttonSearch={false} buttonSettings contentType="chat" />
                 </div>
 
-                <InfiniteScroll fetchNext={this.fetchNext} scrollDirection='up' next={next}>
+                <InfiniteScroll fetchNext={this.fetchNext} scrollDirection="up" next={next}>
                     <div className="ChatPage__MessageField">
                         {chatPageContent}
                     </div>
                 </InfiniteScroll>
                 <div className="ChatPage__Footer">
-                    <ConnectedFooter submitIcon="send"/>
+                    <ConnectedFooter submitIcon="send" />
                 </div>
             </div>
         );

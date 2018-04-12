@@ -60,7 +60,8 @@ export class ContactsListPage extends Component {
         let createRoom = this.createRoom;
         let enterRoom = this.enterRoom;
         function searchCommonRoom(currentUserRooms) {
-            const commonRoom = currentUserRooms.items.filter((room) => {
+            const userRooms = currentUserRooms.items || currentUserRooms;
+            const commonRoom = userRooms.filter((room) => {
                 const { users } = room;
                 return (users.length === 2 && users.includes(contactId));
             });
@@ -72,7 +73,7 @@ export class ContactsListPage extends Component {
             if(!commonRoom.length){
                 createRoom(contactId);
             } else if (commonRoom.length === 1) {
-                enterRoom(commonRoom._id);
+                enterRoom(commonRoom[0]._id);
             }
 
         }
@@ -84,7 +85,7 @@ export class ContactsListPage extends Component {
             if(!commonRoom.length){
                 createRoom(contactId);
             } else if (commonRoom.length === 1) {
-                enterRoom(commonRoom._id);
+                enterRoom(commonRoom[0]._id);
             }
         } else {
             let commonRooms = decideAsync(createRoom, enterRoom);

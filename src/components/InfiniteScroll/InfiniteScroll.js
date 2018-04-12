@@ -14,6 +14,8 @@ const THRESHOLD = 300;
  * scrollDirection - аттрибут отвечающий в какую сторону происходит скролл:
  * 'down' - вниз
  * 'up' - вверх
+ *
+ * next - аттрибут показывающий есть ли еще элементы
  * */
 export class InfiniteScroll extends React.Component {
 
@@ -43,23 +45,19 @@ export class InfiniteScroll extends React.Component {
         if (!this.container || this.state.loading) {
             return;
         }
-
-        let scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
-
+        let containerHeight = this.container.children && this.container.children[0] && this.container.children[0].clientHeight,
+            scrollTop = document.body.scrollTop || document.documentElement.scrollTop,
+            windowHeight = window.innerHeight;
         //Если мы скроллим вверх
-        if (this.props.scrollDirection === 'up' && scrollTop < THRESHOLD) {
+        if (this.props.scrollDirection === 'up' && scrollTop < THRESHOLD && this.props.next) {
             document.documentElement.scrollTop = 1.01 * THRESHOLD;
             this.nextPage();
         }
 
         //Если мы скроллим вниз
-        else if (this.props.scrollDirection === 'down') {
-            let containerHeight = this.container.children && this.container.children[0] && this.container.children[0].clientHeight,
-                windowHeight = window.innerHeight;
-            if (scrollTop + windowHeight > containerHeight - THRESHOLD) {
+        else if (this.props.scrollDirection === 'down' && scrollTop + windowHeight > containerHeight - THRESHOLD && this.props.next) {
                 document.documentElement.scrollTop = 0.99 * (containerHeight - THRESHOLD - windowHeight);
                 this.nextPage();
-            }
         }
     }
 

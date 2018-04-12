@@ -33,7 +33,7 @@ export class UserList extends Component {
         }
 
         return (
-            <InfiniteScroll fetchNest={this.fetchNext} scrollDirection="down" next={next}>
+            <InfiniteScroll fetchNext={fetchNext} scrollDirection="down" next={next}>
                 <div className="UserList">
                     {userListContent}
                 </div>

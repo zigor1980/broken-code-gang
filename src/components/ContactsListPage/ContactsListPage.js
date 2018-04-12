@@ -30,19 +30,6 @@ export class ContactsListPage extends Component {
         this.handleClick = this.handleClick.bind(this);
     }
 
-    componentDidMount() {
-        this.fetch()
-            .then(() => {
-                this.setState({ loading: false });
-            })
-            .catch((error) => {
-                this.setState({
-                    loading: false,
-                    error,
-                });
-            });
-    }
-
     fetch() {
         return this.props.dispatch(fetchUsers());
     }

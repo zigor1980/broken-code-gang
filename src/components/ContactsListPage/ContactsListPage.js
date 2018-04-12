@@ -4,7 +4,7 @@ import { UserList } from '../UserList/UserList';
 import { FooterNav } from '../FooterNav/FooterNav';
 import { connect } from 'react-redux';
 import fetchUsers from '../../actions/fetchUsers';
-import addRoom from '../../actions/rooms';
+import addRoom from '../../actions/addRoom';
 import { routeNavigation } from '../../actions/route';
 import api from '../../api';
 
@@ -93,7 +93,7 @@ export class ContactsListPage extends Component {
     render() {
         return (
             <div className="ContactsListPage">
-                <Header buttonBack buttonSearch buttonSettings={false} contentType="contacts" />
+                <Header buttonBack={false} buttonSearch buttonSettings={false} contentType="contacts" />
                 <UserList
                     users={this.props.users}
                     fetchNext={this.fetch}

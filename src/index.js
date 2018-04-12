@@ -42,15 +42,15 @@ import api from './api';
 //     //
 //
     // Fetch current user
-    // const user = await api.getCurrentUser();
-    // console.log('Current user', user);
+    const user = await api.getCurrentUser();
+    console.log('Current user', user);
 //
 //     // Fetch user information
 //     console.log('User information', await api.getUser(user._id));
 //
 //     // Get users
-    const users = await api.getUsers({ limit: 100 });
-    console.log('List of all users', users);
+//     const users = await api.getUsers({ limit: 100 });
+//     console.log('List of all users', users);
 //
 //     // We have more users
 //     if (users.next) {
@@ -65,10 +65,10 @@ import api from './api';
 //     }
 //
     // Get list of all rooms
-    // let rooms = await api.getRooms();
-    // console.log('All rooms', rooms);
-    // rooms = await api.getRooms(rooms.next);
-    // console.log('All rooms', rooms);
+    let rooms = await api.getRooms();
+    console.log('All rooms', rooms);
+    rooms = await api.getRooms(rooms.next);
+    console.log('All rooms', rooms);
 //     console.log('Get room info', await api.getRoom(rooms.items[0]._id));
 //
 //     // Try to join to first room in list
@@ -77,8 +77,8 @@ import api from './api';
 //     // Try to join to first room in list
 //     console.log('Join some user to room', await api.userJoinRoom(users.items[0]._id, rooms.items[0]._id));
 //
-//     // Get current user list of rooms
-//     console.log('Current user rooms: ', await api.getCurrentUserRooms());
+    // Get current user list of rooms
+    console.log('Current user rooms: ', await api.getCurrentUserRooms());
 //
 //     // Send message to room
 //     console.log('Send message', await api.sendMessage(rooms.items[0]._id, `Test message ${Date.now()}`));

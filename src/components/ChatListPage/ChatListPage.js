@@ -11,6 +11,7 @@ const stateToProps = state => ({
     items: state.rooms.items,
     next: state.rooms.next,
     end: state.rooms.end,
+    error: state.rooms.error,
     payload: state.route.payload,
     user: state.user,
 });
@@ -27,6 +28,10 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     }
 
     componentDidMount() {
+        this.props.dispatch(
+            {
+                type: 'ROOMS_RESET',
+            });
         this.fetch()
             .then(() => {
                 this.setState({ loading: false });
@@ -57,6 +62,21 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
         return (
             <div className="ChatListPage">
                 <ConnectedHeader buttonBack={false} buttonSearch buttonSettings={false} contentType="chats" />
+                {this.state.loading && (
+                    <div className="spinner">
+                        <div className="rect1" />
+                        <div className="rect2" />
+                        <div className="rect3" />
+                        <div className="rect4" />
+                        <div className="rect5" />
+                    </div>
+                )}
+                {this.state.error && (
+                    <div>
+                        Something is BROKEN!!!
+                        <p>{this.state.error.message}</p>
+                    </div>
+                )}
                 <ChatList
                     rooms={this.props.items}
                     fetchNext={this.fetch}

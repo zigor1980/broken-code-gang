@@ -14,7 +14,7 @@ export default function fetchRooms() {
             });
         } catch (error) {
             dispatch({
-                type: 'ROOM_ERROR',
+                type: 'ROOMS_ERROR',
                 error,
             });
         }

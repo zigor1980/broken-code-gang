@@ -26,7 +26,19 @@ async function saveSessionInfo(db, session) {
     return insertOrUpdateEntity(db.collection(TABLE), session);
 }
 
+/**
+ * @param {Db} db
+ * @param {sid} sid
+ *
+ * @returns {Promise}
+ */
+async function deleteSessionInfo(db, sid) {
+    return db.collection(TABLE).deleteMany({ sid: sid }).then(result => result || false);
+}
+
+
 module.exports = {
     getSessionInfo,
     saveSessionInfo,
+    deleteSessionInfo,
 };

@@ -40,7 +40,7 @@ class Api {
         await this._connectPromise;
 
         let id = this.uniqueId++,
-            envelop = {payload, id};
+            envelop = { payload, id };
 
         return new Promise((resolve) => {
             this.io.once(type + id, resolve);
@@ -73,23 +73,29 @@ class Api {
      * @param {string} userId
      * @return {Promise<User>}
      * */
-
     async setCurrentUser(userId) {
-        console.log("api: " + userId);
-        return this._requestResponse(MESSAGES.SET_CURRENT_USER, {userId: userId});
+        return this._requestResponse(MESSAGES.SET_CURRENT_USER, { userId: userId });
+    }
+
+    /**
+     * logout current user
+     * @param {string} userId
+     * @return {Promise<User>}
+     * */
+    async logoutCurrentUser() {
+        return this._requestResponse(MESSAGES.LOGOUT_CURRENT_USER);
     }
 
     /**
      * Return user by login and password*/
-
     async getUserByLogin(login, password) {
-        return this.getUsers({email: login, password: password}).then(result => result.items[0]);
+        return this.getUsers({ email: login, password: password }).then(result => result.items[0]);
     }
 
     /**
      * Add new user to database*/
     async addUser(login, password) {
-        return this._requestResponse(MESSAGES.ADD_USER, {email: login, password: password});
+        return this._requestResponse(MESSAGES.ADD_USER, { email: login, password: password });
     }
 
     /**

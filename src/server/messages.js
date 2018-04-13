@@ -45,6 +45,16 @@ module.exports = {
     CURRENT_USER_ROOMS: 'CURRENT_USER_ROOMS',
 
     /**
+     * Current user join to room channel
+     * */
+    CURRENT_USER_JOIN_CHANNEL: 'CURRENT_USER_JOIN_CHANNEL',
+
+    /**
+     * Current user leave room channel
+     * */
+    CURRENT_USER_LEAVE_CHANNEL: 'CURRENT_USER_LEAVE_CHANNEL',
+
+    /**
      * Join current user to the room
      */
     CURRENT_USER_JOIN_ROOM: 'CURRENT_USER_JOIN_ROOM',

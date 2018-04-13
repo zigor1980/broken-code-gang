@@ -55,7 +55,7 @@ export class ChatPage extends Component {
     }
     
     componentWillUnmount(){
-        api.currentUserLeaveRoom(this.props.payload.currentRoom);
+        api.currentUserLeaveChannel(this.props.payload.currentRoom);
     }
 
     render() {

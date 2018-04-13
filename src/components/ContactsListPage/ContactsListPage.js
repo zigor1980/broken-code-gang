@@ -4,7 +4,7 @@ import { UserList } from '../UserList/UserList';
 import { FooterNav } from '../FooterNav/FooterNav';
 import { connect } from 'react-redux';
 import fetchUsers from '../../actions/fetchUsers';
-import addRoom from '../../actions/addRoom';
+import addRoom from '../../actions/rooms';
 import { routeNavigation } from '../../actions/route';
 import api from '../../api';
 

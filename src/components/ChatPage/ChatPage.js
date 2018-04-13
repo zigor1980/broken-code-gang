@@ -8,6 +8,7 @@ import fetchMessages from '../../actions/fetchMessages';
 import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 import api from '../../api';
 import { addMessage } from '../../actions/messages';
+import MemberCount from '../../helpers/MemberCount';
 
 const stateToProps = state => ({
     messages: state.messages,
@@ -19,9 +20,23 @@ const stateToProps = state => ({
 export class ChatPage extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+
+        };
         this.fetchNext = this.props.dispatch.bind(this, fetchMessages(this.props.payload.currentRoom));
         this.lastMessage = null;
     }
+
+    componentWillMount = () => {
+        let chatInfo = this.getChatInfo(this.props.payload.currentRoom);
+    };
+
+    getChatInfo = async (chatId) => {
+        let chatInfo = await api.getRoom(chatId);
+        this.setState({
+            chatInfo: chatInfo
+        });
+    };
 
     componentDidMount() {
         api.onMessage((message) => {
@@ -51,10 +66,22 @@ export class ChatPage extends Component {
             chatPageContent = <div className="ChatPage__empty"><p>No messages here yet...</p></div>;
         }
 
+        let contentTitle = '';
+        let contentDesc = '';
+        let chatInfo = this.state.chatInfo;
+        if (chatInfo) {
+            contentTitle = chatInfo.name;
+            if (chatInfo.users.length === 1){
+                contentDesc = '';
+            } else {
+                contentDesc = `${chatInfo.users.length} ${MemberCount(chatInfo.users.length)}`
+            }
+        }
+
         return (
             <div className="ChatPage">
                 <div className="ChatPage__Header">
-                    <ConnectedHeader buttonBack buttonSearch={false} buttonSettings contentType="chat" />
+                    <ConnectedHeader contentTitle={contentTitle} contentDesc={contentDesc} buttonBack  buttonSearch={false} buttonSettings contentType="chat" />
                 </div>
 
                 <InfiniteScroll fetchNext={this.fetchNext} scrollDirection="up" next={next}>

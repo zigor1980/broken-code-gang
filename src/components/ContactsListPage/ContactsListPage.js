@@ -50,6 +50,7 @@ export class ContactsListPage extends Component {
             payload: {
                 ...this.props.payload,
                 currentRoom: roomId,
+                prevPage: 'contacts_list'
             },
         }));
     };

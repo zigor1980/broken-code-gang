@@ -23,6 +23,10 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
         this.mas = [];
     }
     componentDidMount() {
+        this.props.dispatch(
+            {
+                type: 'USERS_RESET',
+            });
         this.fetch()
             .then(() => {
                 this.setState({ loading: false });

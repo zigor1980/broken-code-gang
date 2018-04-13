@@ -13,10 +13,16 @@ export default function users(state, action) {
             next: action.next,
             end: action.end,
         };
-        case 'USER_SIGN_OUT':
+    case 'USER_SIGN_OUT':
         return {
             items: [],
             next: true,
+        };
+    case 'USERS_RESET':
+        return {
+            ...state,
+            items: [],
+            next: null,
         };
     default:
         return state;

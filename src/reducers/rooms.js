@@ -3,6 +3,7 @@ export default function rooms(state, action) {
         return {
             items: [],
             next: true,
+            error: null,
         };
     }
     switch (action.type) {
@@ -19,10 +20,21 @@ export default function rooms(state, action) {
             next: action.next,
             end: action.end,
         };
-        case 'USER_SIGN_OUT':
+    case 'USER_SIGN_OUT':
         return {
             items: [],
             next: true,
+        };
+    case 'ROOMS_RESET':
+        return {
+            ...state,
+            items: [],
+            next: null,
+        };
+    case 'ROOMS_ERROR':
+        return {
+            ...state,
+            error: action.error,
         };
     default:
         return state;

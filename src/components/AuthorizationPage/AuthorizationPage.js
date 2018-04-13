@@ -70,8 +70,6 @@ export const AuthorizationPage = connect()(
             fieldError = login === '' || password === '';
 
             if (this.state.active === 'Sign up') {
-                const { name: { value: name} } = inputs;
-
                 if (name === '') {
                     inputs = updateInputField(inputs, 'name', 'error', true);
                 }

@@ -15,7 +15,7 @@ export class InstanceSummaryElement extends Component {
 
         const { summary } = this.props;
         const {
-            avatar, title, description, author, descModifiers,
+            title, description, author, descModifiers,
         } = summary;
 
         let titleClasses = 'InstanceSummaryElement__title';
@@ -27,6 +27,16 @@ export class InstanceSummaryElement extends Component {
         } else {
             descClasses += ' InstanceSummaryElement__desc_dark';
         }
+
+        let destrTitle = title.split(' ');
+        let avaTitle = '';
+        if (destrTitle.length === 1){
+            avaTitle = title.substring(0, 2);
+        } else if (destrTitle.length > 1){
+            avaTitle = `${destrTitle[0].substring(0, 1)}${destrTitle[1].substring(0, 1)}`;
+        }
+
+        let avatar = avaTitle ? <div className="InstanceSummaryElement__avatar_acronim_wrapper"><span className="InstanceSummaryElement__avatar_acronim">{avaTitle}</span></div> : <Avatar image={this.props.avatar} />
 
         let descView = '';
         if (author) {
@@ -43,7 +53,7 @@ export class InstanceSummaryElement extends Component {
         return (
             <div className="InstanceSummaryElement" onClick={this.handleClick}>
                 <div className="InstanceSummaryElement__avatar">
-                    <Avatar image={avatar} />
+                    {avatar}
                 </div>
                 <div className="InstanceSummaryElement__info">
                     <h3 className={titleClasses}>{title}</h3>

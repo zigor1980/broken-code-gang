@@ -46,3 +46,18 @@
 .InstanceSummaryElement__author {
     color:#F13564;
 }
+
+.InstanceSummaryElement__avatar_acronim_wrapper {
+    width: 36px;
+    height: 36px;
+    color: #F13564;
+    border-radius: 50%;
+    border: 2px solid #F13564;
+    display: flex;
+}
+
+.InstanceSummaryElement__avatar_acronim {
+    margin: auto;
+    text-transform: uppercase;
+    font-weight: 700;
+}

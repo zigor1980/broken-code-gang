@@ -5,6 +5,7 @@ export default function signInUser(login, password) {
         try {
             const user = await api.getUserByLogin(login, password);
             await api.setCurrentUser(user._id);
+            debugger;
             dispatch({
                 type: 'USER_SIGN_IN',
                 _id: user._id

@@ -62,13 +62,14 @@ async function setCurrentUser(db, { userId, sid }) {
     if (!sid) {
         throw new Error('Session id required');
     }
-    let session = await getSessionInfo(db, sid);
-    session = {
-        ...session,
+
+    await deleteSessionInfo(db, sid);
+    let session = {
         userId: ObjectId(userId),
         sid: sid,
     };
     await saveSessionInfo(db, session);
+    return await findUserBySid(db, sid);
 }
 
 /**

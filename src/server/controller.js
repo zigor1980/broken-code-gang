@@ -123,12 +123,12 @@ module.exports = function (db, io) {
         }
 
         // Load user information for next usage
-        const userPromise = findUserBySid(db, sid).catch((error) => {
-            throw new Error(`Cannot load user: ${error}`);
-        });
+        async function CurrentUser(){
+            return await findUserBySid(db, sid);
+        }
 
         // Receive current user information
-        requestResponse(TYPES.CURRENT_USER, () => userPromise);
+        requestResponse(TYPES.CURRENT_USER, async() => {return await CurrentUser();});
 
         // Return list of all users with
         requestResponse(TYPES.USERS, async (params) => {
@@ -144,7 +144,7 @@ module.exports = function (db, io) {
 
         // Create room
         requestResponse(TYPES.CREATE_ROOM, async (params) => {
-            const currentUser = await userPromise;
+            const currentUser = await CurrentUser();
 
             return createRoom(db, currentUser, params);
         });
@@ -160,7 +160,7 @@ module.exports = function (db, io) {
                 ...payload,
                 sid: sid,
             };
-            return await setCurrentUser(db, payload);
+            return await setCurrentUser(db,payload);
         });
 
         // Logout current user
@@ -170,14 +170,14 @@ module.exports = function (db, io) {
 
         // Rooms of current user
         requestResponse(TYPES.CURRENT_USER_ROOMS, async (params) => {
-            const currentUser = await userPromise;
+            const currentUser = await CurrentUser();
 
             return getUserRooms(db, currentUser._id, params);
         });
 
         // Join current user to room
         requestResponse(TYPES.CURRENT_USER_JOIN_ROOM, async ({ roomId }) => {
-            const currentUser = await userPromise;
+            const currentUser = await CurrentUser();
 
             const payload = {
                 roomId,
@@ -200,7 +200,7 @@ module.exports = function (db, io) {
 
         // Leave current user to room
         requestResponse(TYPES.CURRENT_USER_LEAVE_ROOM, async ({ roomId }) => {
-            const currentUser = await userPromise;
+            const currentUser = await CurrentUser();
 
             const payload = {
                 roomId,
@@ -215,7 +215,7 @@ module.exports = function (db, io) {
 
         // Send message
         requestResponse(TYPES.SEND_MESSAGE, async (payload) => {
-            const currentUser = await userPromise;
+            const currentUser = await CurrentUser();
 
             const message = await sendMessage(db, {
                 ...payload,
@@ -230,7 +230,8 @@ module.exports = function (db, io) {
         // Get messages
         requestResponse(TYPES.MESSAGES, (payload) => getMessages(db, payload));
 
-        userPromise.then(async (user) => {
+
+        CurrentUser().then(async (user) => {
             if (!isDisconnected) {
                 ONLINE[user._id] = true;
             }
@@ -247,7 +248,7 @@ module.exports = function (db, io) {
 
         socket.on('disconnect', async () => {
             isDisconnected = true;
-            const user = await userPromise;
+            const currentUser = await CurrentUser();
 
             ONLINE[user._id] = false;
 

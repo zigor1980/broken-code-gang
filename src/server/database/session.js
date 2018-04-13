@@ -12,7 +12,7 @@ const TABLE = 'sessions';
  *
  * @return {Promise<UserSession>}
  */
-function getSessionInfo(db, sid) {
+async function getSessionInfo(db, sid) {
     return db.collection(TABLE).findOne({ sid }).then(result => result || { sid });
 }
 

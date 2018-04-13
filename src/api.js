@@ -164,6 +164,28 @@ class Api {
      *
      * @return {Promise<Room>}
      */
+    async currentUserJoinChannel(roomId) {
+        return this._requestResponse(MESSAGES.CURRENT_USER_JOIN_CHANNEL, roomId);
+    }
+
+    /**
+     * Join current user to the room
+     *
+     * @param {string} roomId
+     *
+     * @return {Promise<Room>}
+     */
+    async currentUserLeaveChannel(roomId) {
+        return this._requestResponse(MESSAGES.CURRENT_USER_LEAVE_CHANNEL, roomId);
+    }
+
+    /**
+     * Join current user to the room
+     *
+     * @param {string} roomId
+     *
+     * @return {Promise<Room>}
+     */
     async currentUserJoinRoom(roomId) {
         return this._requestResponse(MESSAGES.CURRENT_USER_JOIN_ROOM, { roomId });
     }

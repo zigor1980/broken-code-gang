@@ -93,6 +93,12 @@ module.exports = function (db, io) {
             socket.leave(`room:${roomId}`);
         }
 
+        // Join current user to room channel
+        requestResponse(TYPES.CURRENT_USER_JOIN_CHANNEL, (roomId) => joinToRoomChannel(roomId));
+
+        // Leave current user from room channel
+        requestResponse(TYPES.CURRENT_USER_LEAVE_CHANNEL, (roomId) => leaveRoomChannel(roomId));
+
         /**
          * Broadcast messages inside Room about user joined
          *

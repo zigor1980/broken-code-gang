@@ -16,7 +16,7 @@ export default function fetchMessages(roomId) {
                 messages = await api.getMessages(state.messages.next);
             else
                 messages = await api.getRoomMessages(roomId);
-            await api.currentUserJoinRoom(roomId);
+            await api.currentUserJoinChannel(roomId);
             dispatch({
                 type: 'MESSAGES_LOADED',
                 messages

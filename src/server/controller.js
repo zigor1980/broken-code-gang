@@ -1,4 +1,4 @@
-const { findUserBySid, getUsers, addUser, setCurrentUser } = require('./database/user');
+const { findUserBySid, getUsers, addUser, setCurrentUser, logoutUser } = require('./database/user');
 const {
     joinRoom, leaveRoom, getRooms, getUserRooms, createRoom,
 } = require('./database/room');
@@ -58,7 +58,7 @@ module.exports = function (db, io) {
         }
 
         function requestResponse(type, callback) {
-            socket.on(type, wrapCallback(async ({id, payload}) => {
+            socket.on(type, wrapCallback(async ({ id, payload }) => {
                 socket.emit(type + id, await callback(payload));
             }));
         }
@@ -156,11 +156,16 @@ module.exports = function (db, io) {
 
         // Set a current user
         requestResponse(TYPES.SET_CURRENT_USER, async (payload) => {
-            payload={
+            payload = {
                 ...payload,
-                sid:sid,
+                sid: sid,
             };
-            return await setCurrentUser(db,payload);
+            return await setCurrentUser(db, payload);
+        });
+
+        // Logout current user
+        requestResponse(TYPES.LOGOUT_CURRENT_USER, async () => {
+            return await logoutUser(db, sid);
         });
 
         // Rooms of current user
@@ -171,7 +176,7 @@ module.exports = function (db, io) {
         });
 
         // Join current user to room
-        requestResponse(TYPES.CURRENT_USER_JOIN_ROOM, async ({roomId}) => {
+        requestResponse(TYPES.CURRENT_USER_JOIN_ROOM, async ({ roomId }) => {
             const currentUser = await userPromise;
 
             const payload = {
@@ -194,7 +199,7 @@ module.exports = function (db, io) {
         });
 
         // Leave current user to room
-        requestResponse(TYPES.CURRENT_USER_LEAVE_ROOM, async ({roomId}) => {
+        requestResponse(TYPES.CURRENT_USER_LEAVE_ROOM, async ({ roomId }) => {
             const currentUser = await userPromise;
 
             const payload = {

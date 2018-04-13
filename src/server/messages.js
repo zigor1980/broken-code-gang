@@ -10,6 +10,11 @@ module.exports = {
     SET_CURRENT_USER: 'SET_CURRENT_USER',
 
     /**
+     * Logout current user
+     */
+    LOGOUT_CURRENT_USER: 'LOGOUT_CURRENT_USER',
+
+    /**
      * Return list of all users
      */
     USERS: 'USERS',

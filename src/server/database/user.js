@@ -1,6 +1,6 @@
 const { ObjectId } = require('mongodb');
 
-const { getSessionInfo, saveSessionInfo } = require('./session');
+const { getSessionInfo, saveSessionInfo, deleteSessionInfo } = require('./session');
 const { pageableCollection, insertOrUpdateEntity } = require('./helpers');
 const faker = require('faker');
 
@@ -24,7 +24,7 @@ const TABLE = 'users';
  */
 async function findUserBySid(db, sid) {
     const session = await getSessionInfo(db, sid);
-    return getUser(db,session.userId);
+    return getUser(db, session.userId);
 }
 
 /**
@@ -54,20 +54,35 @@ async function saveUser(db, user) {
  *
  * @returns {Promise<User>}
  */
-async function setCurrentUser(db, {userId,sid}) {
-    if(!userId){
+async function setCurrentUser(db, { userId, sid }) {
+    if (!userId) {
         throw new Error('User id required');
     }
 
-    if(!sid){
+    if (!sid) {
+        throw new Error('Session id required');
+    }
+    let session = await getSessionInfo(db, sid);
+    session = {
+        ...session,
+        userId: ObjectId(userId),
+        sid: sid,
+    };
+    await saveSessionInfo(db, session);
+}
+
+/**
+ * @param {Db} db
+ * @param {String} sid
+ *
+ * @returns {Promise<User>}
+ */
+async function logoutUser(db, sid) {
+    if (!sid) {
         throw new Error('Session id required');
     }
 
-    const session = {
-        userId:userId,
-        sid:sid,
-    };
-    await saveSessionInfo(db, session);
+    return await deleteSessionInfo(db, sid);
 }
 
 /**
@@ -87,7 +102,7 @@ async function getUsers(db, filter) {
  *
  * @return {Promise<Message>}
  */
-async function addUser(db, {email, password}) {
+async function addUser(db, { email, password }) {
     if (!email) {
         throw new Error('User email required');
     }
@@ -112,4 +127,5 @@ module.exports = {
     getUser,
     addUser,
     setCurrentUser,
+    logoutUser,
 };

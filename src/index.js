@@ -118,13 +118,11 @@ const store = createStore(
     composeEnhancers(applyMiddleware(middleware)),
 );
 
-(async () => {
-    const { email, password } = await api.getCurrentUser();
+api.getCurrentUser().then(user => {
+    const { email, password } = user;
 
     if (email && password) {
-        const user = await store.dispatch(signInUser(email, password));
-        
-        if (user) {
+        store.dispatch(signInUser(email, password)).then(() => {
             store.dispatch(routeNavigation({
                 page: 'chat_list',
                 payload: {
@@ -133,16 +131,16 @@ const store = createStore(
                     }
                 }
             }));
-        }
+        });
     }
+});
 
-    ReactDOM.render(
-        <Provider store={store}>
-            <App />
-        </Provider>,
-        document.getElementById('root'),
-    );
-})();
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root'),
+);
 
 
 registerServiceWorker();

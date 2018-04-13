@@ -16,7 +16,8 @@ const stateToProps = state => ({
     end: state.users.end,
     error: state.users.error,
     currentUserRooms: state.rooms.items,
-    newRoom: state.rooms.newRoom
+    newRoom: state.rooms.newRoom,
+    curUserInfo: state.user.curUserInfo
 });
 
 
@@ -57,7 +58,8 @@ export class ContactsListPage extends Component {
 
     createRoom = async (contactId) => {
         const UserName = await api.getUser(contactId);
-        this.props.dispatch(addRoom({ name: `Chat with ${UserName.name}` }, [contactId]));
+        const curUserName =  this.props.curUserInfo.name;
+        this.props.dispatch(addRoom({ name: `${UserName.name} ${curUserName}` }, [contactId]));
     };
 
     handleClick(contactId) {

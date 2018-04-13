@@ -7,7 +7,8 @@ export default function signInUser(login, password) {
             await api.setCurrentUser(user._id);
             dispatch({
                 type: 'USER_SIGN_IN',
-                _id: user._id
+                _id: user._id,
+                curUserInfo: user,
             });
 
             return user;

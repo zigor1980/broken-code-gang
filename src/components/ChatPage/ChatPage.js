@@ -14,6 +14,7 @@ const stateToProps = state => ({
     messages: state.messages,
     payload: state.route.payload,
     userId:state.user._id,
+    curUserInfo:state.user.curUserInfo
 });
 
 
@@ -78,6 +79,9 @@ export class ChatPage extends Component {
         let chatInfo = this.state.chatInfo;
         if (chatInfo) {
             contentTitle = chatInfo.name;
+            if (contentTitle.split(' ').includes(this.props.curUserInfo.name)) {
+                contentTitle = contentTitle.replace(this.props.curUserInfo.name, '');
+            }
             if (chatInfo.users.length === 1){
                 contentDesc = '';
             } else {
@@ -88,7 +92,7 @@ export class ChatPage extends Component {
         return (
             <div className="ChatPage">
                 <div className="ChatPage__Header">
-                    <ConnectedHeader buttonBack buttonSearch={false} buttonSettings={false} contentType="chat" />
+                    <ConnectedHeader contentTitle={contentTitle} contentDesc={contentDesc} buttonBack buttonSearch={false} buttonSettings={false} contentType="chat" />
                 </div>
 
                 <InfiniteScroll fetchNext={this.fetchNext} scrollDirection="up" next={next}>

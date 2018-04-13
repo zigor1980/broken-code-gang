@@ -12,6 +12,7 @@ import { addMessage } from '../../actions/messages';
 const stateToProps = state => ({
     messages: state.messages,
     payload: state.route.payload,
+    userId:state.user._id,
 });
 
 
@@ -38,7 +39,7 @@ export class ChatPage extends Component {
     render() {
         const messages = this.props.messages.items,
             next = this.props.messages.next,
-            userId = 'bibushik';
+            userId = this.props.userId;
 
         let chatPageContent = '';
         if (messages && messages.length) {

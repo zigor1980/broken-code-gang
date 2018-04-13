@@ -21,6 +21,9 @@ export class ChatPage extends Component {
         super(props);
         this.fetchNext = this.props.dispatch.bind(this, fetchMessages(this.props.payload.currentRoom));
         this.lastMessage = null;
+        this.props.dispatch({
+            type:'MESSAGES_RELOAD',
+        })
     }
 
     componentDidMount() {
@@ -34,6 +37,10 @@ export class ChatPage extends Component {
             this.lastMessage = this.props.messages.items[this.props.messages.items.length - 1];
             document.documentElement.scrollTop = document.documentElement.scrollHeight;
         }
+    }
+    
+    componentWillUnmount(){
+        api.currentUserLeaveRoom(this.props.payload.currentRoom);
     }
 
     render() {

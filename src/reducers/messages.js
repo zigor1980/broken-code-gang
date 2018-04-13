@@ -39,6 +39,12 @@ const messages = (state, action) => {
                 ...action.messages,
                 items: action.messages.items.reverse().slice(0).concat(state.items)
             };
+        case 'MESSAGES_RELOAD':
+            return {
+                ...state,
+                next:true,
+                items:[]
+            };
         case 'MESSAGE_LOAD_ERROR':
             return {
                 ...state,

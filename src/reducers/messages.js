@@ -44,6 +44,12 @@ const messages = (state, action) => {
                 ...state,
                 error: action.error
             };
+            case 'USER_SIGN_OUT':
+            return {
+                items: DEFAULT_MESSAGES,
+                next:true,
+                loading: true
+            };
         default:
             return state;
     }

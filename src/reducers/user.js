@@ -15,6 +15,10 @@ export default function user(state, action) {
             ...state,
             curUserInfo: action.curUserInfo,
         };
+    case 'USER_SIGN_OUT':
+        return {
+            _id: -1,
+        };
     default:
         return state;
     }

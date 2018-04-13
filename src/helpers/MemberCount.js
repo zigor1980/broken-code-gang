@@ -6,7 +6,7 @@ function MemderCount(count) {
     if (caseCount === 1) {
         return 'пользователь';
     } else if ((caseCount > 1) && (caseCount < 5)) {
-        return 'пользователь';
+        return 'пользователя';
     }
     return 'пользователей';
 }

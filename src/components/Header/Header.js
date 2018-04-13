@@ -88,8 +88,8 @@ export default class Header extends Component {
             contentTitle = 'Settings';
             break;
         case 'chat':
-            contentTitle = 'SHRI/ Anon';
-            contentDesc = '9 members / last seen at';
+            contentTitle = this.props.contentTitle || 'Chat';
+            contentDesc = this.props.contentDesc || '';
             break;
         default:
             contentTitle = 'BCG';

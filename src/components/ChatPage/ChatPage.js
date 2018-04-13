@@ -8,6 +8,7 @@ import fetchMessages from '../../actions/fetchMessages';
 import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 import api from '../../api';
 import { addMessage } from '../../actions/messages';
+import MemberCount from '../../helpers/MemberCount';
 
 const stateToProps = state => ({
     messages: state.messages,
@@ -19,12 +20,26 @@ const stateToProps = state => ({
 export class ChatPage extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+
+        };
         this.fetchNext = this.props.dispatch.bind(this, fetchMessages(this.props.payload.currentRoom));
         this.lastMessage = null;
         this.props.dispatch({
             type:'MESSAGES_RELOAD',
         })
     }
+
+    componentWillMount = () => {
+        let chatInfo = this.getChatInfo(this.props.payload.currentRoom);
+    };
+
+    getChatInfo = async (chatId) => {
+        let chatInfo = await api.getRoom(chatId);
+        this.setState({
+            chatInfo: chatInfo
+        });
+    };
 
     componentDidMount() {
         api.onMessage((message) => {
@@ -56,6 +71,18 @@ export class ChatPage extends Component {
                 </div>));
         } else {
             chatPageContent = <div className="ChatPage__empty"><p>No messages here yet...</p></div>;
+        }
+
+        let contentTitle = '';
+        let contentDesc = '';
+        let chatInfo = this.state.chatInfo;
+        if (chatInfo) {
+            contentTitle = chatInfo.name;
+            if (chatInfo.users.length === 1){
+                contentDesc = '';
+            } else {
+                contentDesc = `${chatInfo.users.length} ${MemberCount(chatInfo.users.length)}`
+            }
         }
 
         return (

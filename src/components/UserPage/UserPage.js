@@ -4,6 +4,8 @@ import { ConnectedHeader } from '../Header/Header';
 import { Avatar } from '../Avatar/Avatar';
 import { FooterNav } from '../FooterNav/FooterNav';
 import getCurUserInfo from '../../actions/getCurUserInfo';
+import { routeNavigation } from '../../actions/route';
+import api from '../../api';
 
 import './UserPage.css';
 
@@ -13,8 +15,22 @@ const stateToProps = state => ({
 });
 
 export class UserPage extends Component {
+    constructor(props) {
+        super(props)
+
+        this.exitHandle = this.exitHandle.bind(this);
+    }
+
     componentDidMount() {
         this.props.dispatch(getCurUserInfo());
+    }
+
+    exitHandle() {
+        api.logoutCurrentUser().then(() => {
+            this.props.dispatch({ type: 'USER_SIGN_OUT' });
+
+            this.props.dispatch(routeNavigation({ page: 'authorization' }));
+        });
     }
 
     render() {
@@ -48,6 +64,9 @@ export class UserPage extends Component {
                     </button>
                     <button key="BlockUser">
                         Заблокировать пользователя
+                    </button>
+                    <button key="Exit" onClick={this.exitHandle}>
+                        Выйти
                     </button>
                 </div>
                 <FooterNav active={this.props.payload.footerNav.active} />

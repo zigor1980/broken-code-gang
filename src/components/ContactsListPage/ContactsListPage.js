@@ -39,7 +39,7 @@ export class ContactsListPage extends Component {
     }
 
     componentWillReceiveProps(props) {
-        if(props.newRoom && (!this.props.newRoom || props.newRoom._id !== this.props.newRoom._id)){
+        if (props.newRoom && (!this.props.newRoom || props.newRoom._id !== this.props.newRoom._id)) {
             this.enterRoom(props.newRoom._id);
         }
     }
@@ -52,17 +52,20 @@ export class ContactsListPage extends Component {
                 currentRoom: roomId,
             },
         }));
-    }
+    };
 
-    createRoom = (contactId) => {
-        this.props.dispatch(addRoom({name: `Chat with ${contactId}`}, [contactId]));
-    }
+    createRoom = async (contactId) => {
+        const UserName = await api.getUser(contactId);
+        this.props.dispatch(addRoom({ name: `Chat with ${UserName.name}` }, [contactId]));
+    };
+
     handleClick(contactId) {
         /*
-        * if !next all currentUserRooms has been fetched
+         * if !next all currentUserRooms has been fetched
          */
         let createRoom = this.createRoom;
         let enterRoom = this.enterRoom;
+
         function searchCommonRoom(currentUserRooms) {
             const userRooms = currentUserRooms.items || currentUserRooms;
             const commonRoom = userRooms.filter((room) => {
@@ -71,10 +74,11 @@ export class ContactsListPage extends Component {
             });
             return commonRoom;
         }
+
         async function decideAsync(createRoom, enterRoom) {
             let currentUserRooms = await api.getCurrentUserRooms();
             let commonRoom = searchCommonRoom(currentUserRooms);
-            if(!commonRoom.length){
+            if (!commonRoom.length) {
                 createRoom(contactId);
             } else if (commonRoom.length === 1) {
                 enterRoom(commonRoom[0]._id);
@@ -86,7 +90,7 @@ export class ContactsListPage extends Component {
         if (!this.props.next) {
             currentUserRooms = this.props.currentUserRooms;
             let commonRoom = searchCommonRoom(currentUserRooms);
-            if(!commonRoom.length){
+            if (!commonRoom.length) {
                 createRoom(contactId);
             } else if (commonRoom.length === 1) {
                 enterRoom(commonRoom[0]._id);
@@ -129,7 +133,7 @@ export class ContactsListPage extends Component {
                     next={this.props.next}
                     handleClick={this.handleClick}
                 />
-                <FooterNav active="user" />
+                <FooterNav active="user"/>
             </div>
         );
     }

@@ -79,7 +79,7 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
         ));
         return (
             <div className="AddRoomPage">
-                <ConnectedHeader buttonBack buttonSearch buttonSettings={false} contentType="add-room" />
+                <ConnectedHeader buttonBack buttonSearch={false} buttonSettings={false} contentType="add-room" />
                 <div
                     className="AddForm_InputField"
                 >

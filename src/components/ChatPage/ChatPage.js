@@ -54,7 +54,7 @@ export class ChatPage extends Component {
         return (
             <div className="ChatPage">
                 <div className="ChatPage__Header">
-                    <ConnectedHeader buttonBack buttonSearch={false} buttonSettings contentType="chat" />
+                    <ConnectedHeader buttonBack buttonSearch={false} buttonSettings={false} contentType="chat" />
                 </div>
 
                 <InfiniteScroll fetchNext={this.fetchNext} scrollDirection="up" next={next}>

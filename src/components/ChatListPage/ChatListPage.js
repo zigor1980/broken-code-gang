@@ -61,7 +61,7 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     render() {
         return (
             <div className="ChatListPage">
-                <ConnectedHeader buttonBack={false} buttonSearch buttonSettings={false} contentType="chats" />
+                <ConnectedHeader buttonBack={false} buttonSearch={false} buttonSettings={false} contentType="chats" />
                 {this.state.loading && (
                     <div className="spinner">
                         <div className="rect1" />

@@ -26,6 +26,10 @@ const inputsInitial = {
         value: '',
         error: false
     },
+    name: {
+        value: '',
+        error: false
+    },
 };
 
 export const AuthorizationPage = connect()(
@@ -50,9 +54,10 @@ export const AuthorizationPage = connect()(
         }
 
         submitHandler() {
-            const { login: { value: login }, password: { value: password} } = this.state.inputs;
+            const { login: { value: login }, password: { value: password} , name: { value: name} } = this.state.inputs;
 
             let inputs = this.state.inputs;
+            let fieldError;
 
             if (login === '') {
                 inputs = updateInputField(inputs, 'login', 'error', true);
@@ -62,13 +67,23 @@ export const AuthorizationPage = connect()(
                 inputs = updateInputField(inputs, 'password', 'error', true);
             }
 
-            if (login === '' || password === '') {
-                this.setState({inputs});
+            fieldError = login === '' || password === '';
+
+            if (this.state.active === 'Sign up') {
+                if (name === '') {
+                    inputs = updateInputField(inputs, 'name', 'error', true);
+                }
+
+                fieldError = fieldError || name === '';
+            }
+
+            if (fieldError) {
+                this.setState({ inputs });
                 return;
             }
 
             if (this.state.active === 'Sign up') {
-                this.singUp(login, password);
+                this.singUp(login, password, name);
             }
 
             if (this.state.active === 'Sign in') {
@@ -83,7 +98,7 @@ export const AuthorizationPage = connect()(
                 })
         }
 
-        async singUp(login, password) {
+        async singUp(login, password, name) {
             try{
                 const user = await api.getUserByLogin(login);
 
@@ -92,7 +107,7 @@ export const AuthorizationPage = connect()(
                     return;
                 }
     
-                await api.addUser(login, password);
+                await api.addUser(login, password, name);
     
                 this.setState({
                     active: 'Sign in',
@@ -126,7 +141,7 @@ export const AuthorizationPage = connect()(
         render() {
             const swapButton = 'Sign up' === this.state.active ? 'Sign in' : 'Sign up';
 
-            const { login: { value: login }, password: { value: password }, login: { error: loginError }, password: { error: passwordError } } = this.state.inputs;
+            const { login: { value: login, error: loginError }, password: { value: password, error: passwordError }, name: { value: name, error: nameError } } = this.state.inputs;
             return (
                 <div className="AuthorizationPage">
 
@@ -134,6 +149,9 @@ export const AuthorizationPage = connect()(
 
                     <img className="AuthorizationPage__Image" src={require('../../assets/icons/logo.png')} alt="logo"/>
                     <input value={login} className="AuthorizationPage__Input" style={{animationName: loginError ? 'input-error' : ''}} onChange={this.fieldChangedHandler} onAnimationEnd={() => {this.setState({inputs: updateInputField(this.state.inputs, 'login', 'error', false)})}} type="email" name="login" placeholder="Email" required/>
+                    {swapButton === 'Sign in' &&
+                    <input value={name} className="AuthorizationPage__Input" style={{animationName: nameError ? 'input-error' : ''}} onChange={this.fieldChangedHandler} onAnimationEnd={() => {this.setState({inputs: updateInputField(this.state.inputs, 'name', 'error', false)})}} type="text" name="name" placeholder="Name"
+                           required/>}
                     <input value={password} className="AuthorizationPage__Input" style={{animationName: passwordError ? 'input-error' : ''}} onChange={this.fieldChangedHandler} onAnimationEnd={() => {this.setState({inputs: updateInputField(this.state.inputs, 'password', 'error', false)})}} type="password" name="password" placeholder="Password"
                            required/>
                     <button className="AuthorizationPage__submit"

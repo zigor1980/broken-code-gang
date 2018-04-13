@@ -94,8 +94,8 @@ class Api {
 
     /**
      * Add new user to database*/
-    async addUser(login, password) {
-        return this._requestResponse(MESSAGES.ADD_USER, { email: login, password: password });
+    async addUser(login, password, name) {
+        return this._requestResponse(MESSAGES.ADD_USER, { email: login, password: password, name: name });
     }
 
     /**

@@ -103,7 +103,7 @@ async function getUsers(db, filter) {
  *
  * @return {Promise<Message>}
  */
-async function addUser(db, { email, password }) {
+async function addUser(db, { email, password, name }) {
     if (!email) {
         throw new Error('User email required');
     }
@@ -112,9 +112,14 @@ async function addUser(db, { email, password }) {
         throw new Error('User password required');
     }
 
+    if (!name) {
+        throw new Error('User name required');
+    }
+
     const userEntity = {
         email: email,
         password: password,
+        name: name
     };
     const result = await db.collection(TABLE).insertOne(userEntity);
     userEntity._id = result.insertedId;

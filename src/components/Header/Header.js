@@ -11,6 +11,12 @@ const stateToProps = state => ({
 });
 
 export default class Header extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            search: false,
+        };
+    }
     goBack() {
         const payload = this.props.payload;
         if (!payload || !payload.prevPage || payload.prevPage === 'authorization') {
@@ -27,6 +33,26 @@ export default class Header extends Component {
         }));
     }
 
+    startSearch() {
+        this.setState({
+            search: true,
+        });
+    }
+
+    handleSearch(event) {
+        this.props.handleSearch(event);
+    }
+
+    resetSearch(event) {
+        this.props.resetSearch(event);
+    }
+
+    cancelSearch() {
+        this.setState({
+            search: false,
+        });
+    }
+
     render() {
         const {
             buttonBack,
@@ -39,7 +65,7 @@ export default class Header extends Component {
         const leftControl = buttonBack ? <Button type="back" active modifier="s" circle onClick={this.goBack.bind(this)} >''</Button> : btnFiller;
         let rightControl = btnFiller;
         if (buttonSearch) {
-            rightControl = <Button type="search" active modifier="s" circle />;
+            rightControl = <Button type="search" active modifier="s" circle onClick={this.startSearch.bind(this)} />;
         } else if (buttonSettings) {
             rightControl = <Button type="settings" active modifier="s" circle />;
         }
@@ -70,10 +96,22 @@ export default class Header extends Component {
             break;
         }
 
+        let headerContent = '';
+        if (this.state.search || this.props.searchIsOn) {
+            headerContent = (<div className="Header__search_wrapper">
+                <Button type="back" active modifier="s" circle onClick={this.cancelSearch.bind(this)} />
+                <input autoFocus type="text" className="Header__search_input" onChange={this.handleSearch.bind(this)} value={this.props.searchIsOn} />
+                <Button type="delete" active modifier="s" circle onClick={this.resetSearch.bind(this)} />
+                             </div>);
+        } else {
+            headerContent = <HeaderCenterItems title={contentTitle} desc={contentDesc} />;
+        }
+
+
         return (
             <header className="Header">
                 {leftControl}
-                <HeaderCenterItems title={contentTitle} desc={contentDesc} />
+                {headerContent}
                 {rightControl}
             </header>
         );

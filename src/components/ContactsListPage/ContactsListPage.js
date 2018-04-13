@@ -25,9 +25,13 @@ export class ContactsListPage extends Component {
         super(props);
         this.state = {
             loading: true,
+            searchTerm: '',
+            displayedContacts: this.props.users
         };
         this.fetch = this.fetch.bind(this);
         this.handleClick = this.handleClick.bind(this);
+        this.handleSearch = this.handleSearch.bind(this);
+        this.resetSearch = this.resetSearch.bind(this);
     }
 
     fetch() {
@@ -96,12 +100,35 @@ export class ContactsListPage extends Component {
         }
     }
 
+    handleSearch(event){
+        const searchQuery = event.target.value.toLowerCase();
+
+        this.setState({
+            searchTerm: searchQuery,
+        });
+    }
+
+    resetSearch(){
+        this.setState({
+            searchTerm: '',
+        });
+    }
+
     render() {
+        let displayedContacts = [];
+        let searchQuery = this.state.searchTerm;
+        if(searchQuery && this.props.users){
+            displayedContacts = this.props.users.filter( (user) => {
+                return (user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase()));
+            })
+        } else {
+            displayedContacts = this.props.users;
+        }
         return (
             <div className="ContactsListPage">
-                <Header buttonBack={false} buttonSearch buttonSettings={false} contentType="contacts"/>
+                <Header buttonBack={false} buttonSearch searchIsOn={searchQuery} resetSearch={this.resetSearch} handleSearch={this.handleSearch}  buttonSettings={false} contentType="contacts" />
                 <UserList
-                    users={this.props.users}
+                    users={displayedContacts}
                     fetchNext={this.fetch}
                     next={this.props.next}
                     handleClick={this.handleClick}

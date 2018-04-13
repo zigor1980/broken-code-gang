@@ -1,45 +1,58 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { ConnectedHeader } from '../Header/Header';
+import { Avatar } from '../Avatar/Avatar';
+import { FooterNav } from '../FooterNav/FooterNav';
+import getCurUserInfo from '../../actions/getCurUserInfo';
 
 import './UserPage.css';
 
-import Header from '../Header/Header';
-import { Avatar } from '../Avatar/Avatar';
+const stateToProps = state => ({
+    payload: state.route.payload,
+    curUserInfo: state.user.curUserInfo,
+});
 
-export function UserPage(props) {
-    let userInfo;
-
-    if (!props.userInfo) {
-        userInfo =
-            {
-                userLogin: 'UserLogin',
-                userAvatar: {
-                    src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-                    modifier: 'avatar-s',
-                },
-            };
-    } else {
-        userInfo = props.userInfo;
+export class UserPage extends Component {
+    componentDidMount() {
+        this.props.dispatch(getCurUserInfo());
     }
 
-    const { userLogin, userAvatar } = userInfo;
+    render() {
+        const userAvatar = {
+            src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
+            modifier: 'avatar-m',
+        };
 
-    return (
-        <div className="UserPage">
-            <Header buttonBack contentType="profile" />
-            <div className="UserPage__UserInfo">
-                <Avatar image={userAvatar} />
-                <h1 className="UserPage__UserName">
-                    {userLogin}
-                </h1>
+        let name,
+            email,
+            phone = '';
+        if (this.props.curUserInfo) {
+            ({ name, email, phone } = this.props.curUserInfo);
+        }
+
+        return (
+            <div className="UserPage">
+                <ConnectedHeader buttonBack={false} contentType="settings" />
+                <div className="UserPage__UserInfo">
+                    <Avatar image={userAvatar} />
+                    <h1 className="UserPage__UserName">
+                        {name}
+                    </h1>
+                    <h4 className="UserPage__UserPhone">
+                        {phone}
+                    </h4>
+                </div>
+                <div className="UserPage__UserControls">
+                    <button key="StarChar">
+                        Начать чат
+                    </button>
+                    <button key="BlockUser">
+                        Заблокировать пользователя
+                    </button>
+                </div>
+                <FooterNav active={this.props.payload.footerNav.active} />
             </div>
-            <div className="UserPage__UserControls">
-                <button key="StarChar">
-                    Начать чат
-                </button>
-                <button key="BlockUser">
-                    Заблокировать пользователя
-                </button>
-            </div>
-        </div>
-    );
+        );
+    }
 }
+export const ConnectedUserPage = connect(stateToProps)(UserPage);

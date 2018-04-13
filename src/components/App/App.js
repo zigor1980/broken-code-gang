@@ -6,7 +6,7 @@ import { AuthorizationPage } from '../AuthorizationPage/AuthorizationPage';
 import { ChatListPage } from '../ChatListPage/ChatListPage';
 import { AddRoomPage } from '../AddRoomPage/AddRoomPage';
 import { ConnectedChatPage } from '../ChatPage/ChatPage';
-import { UserPage } from '../UserPage/UserPage';
+import { ConnectedUserPage } from '../UserPage/UserPage';
 import { ConnectedContactsListPage } from '../ContactsListPage/ContactsListPage';
 
 
@@ -29,8 +29,8 @@ const routeConfig = {
         view: ConnectedChatPage,
     },
     'settings': {
-        view: UserPage
-    }
+        view: ConnectedUserPage,
+    },
 };
 
 const stateToProps = state => ({
@@ -39,7 +39,7 @@ const stateToProps = state => ({
 
 class App extends Component {
     render() {
-        let Page = routeConfig[this.props.route.page] && routeConfig[this.props.route.page].view;
+        const Page = routeConfig[this.props.route.page] && routeConfig[this.props.route.page].view;
 
         if (!Page) {
             return <div>404 Page Not Found</div>;

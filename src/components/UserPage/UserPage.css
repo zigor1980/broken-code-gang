@@ -2,12 +2,27 @@
     font-family: sans-serif;
 }
 
+.UserPage .Header {
+    position: fixed;
+}
+
+.UserPage .Footer {
+    position: fixed;
+    bottom: 0;
+}
+
+
 .UserPage__UserInfo {
-    background-color: #419fd9;
-    padding-top: 20px;
-    padding-left: 10%;
+    background-color: #F1B0C3;
     display: flex;
     flex-flow: column;
+    align-items: center;
+    padding-top: 50px;
+    padding-bottom: 30px;
+}
+
+.UserPage__UserInfo .avatar {
+    margin-top: 1rem;
 }
 
 .UserPage__UserName {
@@ -15,6 +30,10 @@
     text-align: start;
     font-weight: normal;
     font-size: 2.5rem;
+}
+
+.UserPage__UserPhone{
+    color:#fff;
 }
 
 .UserPage__UserControls > * {

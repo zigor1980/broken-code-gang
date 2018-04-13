@@ -37,7 +37,7 @@ export default class Header extends Component {
         const btnFillerStyle = { width: '30px', height: '30px' };
         const btnFiller = <div style={btnFillerStyle}>&nbsp;</div>;
         const leftControl = buttonBack ? <Button type="back" active modifier="s" circle onClick={this.goBack.bind(this)} >''</Button> : btnFiller;
-        let rightControl = '';
+        let rightControl = btnFiller;
         if (buttonSearch) {
             rightControl = <Button type="search" active modifier="s" circle />;
         } else if (buttonSettings) {
@@ -58,8 +58,8 @@ export default class Header extends Component {
         case 'add-user':
             contentTitle = 'Select contact';
             break;
-        case 'profile':
-            contentTitle = 'User name';
+        case 'settings':
+            contentTitle = 'Settings';
             break;
         case 'chat':
             contentTitle = 'SHRI/ Anon';

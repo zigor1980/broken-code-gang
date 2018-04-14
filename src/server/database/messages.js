@@ -1,5 +1,5 @@
 const { ObjectId } = require('mongodb');
-const { insertOrUpdateEntity, pageableCollection } = require('./helpers');
+const { pageableCollection } = require('./helpers');
 const { getUser } = require('./user');
 const { getRoom } = require('./room');
 

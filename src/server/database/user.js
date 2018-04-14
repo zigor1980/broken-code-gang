@@ -1,8 +1,7 @@
 const { ObjectId } = require('mongodb');
 
 const { getSessionInfo, saveSessionInfo, deleteSessionInfo } = require('./session');
-const { pageableCollection, insertOrUpdateEntity } = require('./helpers');
-const faker = require('faker');
+const { pageableCollection } = require('./helpers');
 
 const TABLE = 'users';
 
@@ -35,16 +34,6 @@ async function findUserBySid(db, sid) {
  */
 async function getUser(db, userId) {
     return db.collection(TABLE).findOne({ _id: ObjectId(userId.toString()) });
-}
-
-/**
- * @param {Db} db
- * @param {User} user
- *
- * @returns {Promise<User>}
- */
-async function saveUser(db, user) {
-    return insertOrUpdateEntity(db.collection(TABLE), user);
 }
 
 /**

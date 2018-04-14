@@ -18,7 +18,7 @@ export class ChatQuote extends React.Component {
     }
 
     render() {
-        const { message: text, created_at: created_at, userId: authorId } = this.props.message,
+        const { message: text, userId: authorId, created_at } = this.props.message,
             userId = this.props.userId;
         let chatDirection = 'ChatQuote_right',
             user = '',

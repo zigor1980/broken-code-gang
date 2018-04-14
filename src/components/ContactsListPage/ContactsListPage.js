@@ -99,7 +99,7 @@ export class ContactsListPage extends Component {
                 enterRoom(commonRoom[0]._id);
             }
         } else {
-            let commonRooms = decideAsync(createRoom, enterRoom);
+            decideAsync(createRoom, enterRoom);
         }
     }
 

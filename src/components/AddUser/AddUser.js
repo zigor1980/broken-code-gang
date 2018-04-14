@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Header from "../Header/Header";
 import {UserList} from "../UserList/UserList";
-import {ConfirmActionDialog} from "../ConfirmActionDialog/ConfirmActionDialog";
 
 import './AddUser.css';
 

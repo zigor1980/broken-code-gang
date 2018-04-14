@@ -69,7 +69,7 @@ module.exports = function (db, io) {
          * @param {string} userId
          */
         function userChangeOnlineStatus(userId) {
-            const r = socket.broadcast.emit(TYPES.ONLINE, {
+            socket.broadcast.emit(TYPES.ONLINE, {
                 status: ONLINE[userId],
                 userId,
             });
@@ -254,7 +254,7 @@ module.exports = function (db, io) {
 
         socket.on('disconnect', async () => {
             isDisconnected = true;
-            const currentUser = await CurrentUser();
+            const user = await CurrentUser();
 
             ONLINE[user._id] = false;
 

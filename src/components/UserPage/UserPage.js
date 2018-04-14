@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { ConnectedHeader } from '../Header/Header';
 import { Avatar } from '../Avatar/Avatar';
 import { FooterNav } from '../FooterNav/FooterNav';
-import getCurUserInfo from '../../actions/getCurUserInfo';
 import { routeNavigation } from '../../actions/route';
 import api from '../../api';
 
@@ -21,10 +20,6 @@ export class UserPage extends Component {
         this.exitHandle = this.exitHandle.bind(this);
     }
 
-    // componentDidMount() {
-    //     this.props.dispatch(getCurUserInfo());
-    // }
-
     exitHandle() {
         api.logoutCurrentUser().then(() => {
             this.props.dispatch({ type: 'USER_SIGN_OUT' });
@@ -40,10 +35,9 @@ export class UserPage extends Component {
         };
 
         let name,
-            email,
             phone = '';
         if (this.props.curUserInfo) {
-            ({ name, email, phone } = this.props.curUserInfo);
+            ({ name, phone } = this.props.curUserInfo);
         }
 
         return (

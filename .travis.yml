@@ -6,5 +6,8 @@ cache:
   - node_modules
 script:
   - npm run eslint src
+  - npm test
   - npm run build
+env:
+  - NODE_ENV=production
   

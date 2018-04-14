@@ -48,10 +48,6 @@ export class Footer extends Component {
               <Button type="send" modifier="s" circle={true} active={true}
                       onClick={this.handleSubmit}/>
               </div>
-             {/* <input
-                  className="Footer__Input" type="submit" value={this.props.submitIcon}
-                  onClick={this.handleSubmit}
-                />*/}
             </footer>
         );
     }

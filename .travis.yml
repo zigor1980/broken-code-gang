@@ -1,14 +1,12 @@
 language: node_js
-node_js:
+node_js: 
   - "iojs"
-  - "9"
-  sudo: false
-  deploy:
-    provider: heroku
-    api_key:
-      secure: "YOUR ENCRYPTED API KEY"
-  app: bcg
+  - "stable"
+cache:
+  directories:
+  - node_modules
 script:
-  - npm run test
+  - npm eslint
+  - npm test
   - npm run build
   

@@ -1,0 +1,14 @@
+language: node_js
+node_js:
+  - "iojs"
+  - "9"
+  sudo: false
+  deploy:
+    provider: heroku
+    api_key:
+      secure: "YOUR ENCRYPTED API KEY"
+  app: bcg
+script:
+  - npm run test
+  - npm run build
+  

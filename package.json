@@ -29,6 +29,7 @@
     "client": "react-scripts start",
     "server": "nodemon -w server.js -w src/server server.js",
     "storybook": "start-storybook -p 9999 -c src/storybook",
+    "postinstall": "git config core.hooksPath hooks",
     "eslint": "./node_modules/.bin/eslint"
   },
   "devDependencies": {

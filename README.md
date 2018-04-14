@@ -6,10 +6,17 @@
 2. [yarn](https://yarnpkg.com/en/docs/install)
 3. [Mongo Community Server](https://www.mongodb.com/download-center?jmp=nav#community)
 
+
+Установка проекта:
+
+```bash
+npm install && npm run githooks
+```
+
 Запус проекта в dev режиме:
 
 ```bash
-yarn start
+npm start
 ```
 
 Переменные окружения для конфигурации, перечисленные значения являются дефолтными:
@@ -35,7 +42,7 @@ export SERVER_PORT=3001;
 Продакшен сборка:
 
 ```bash
-yarn build
+npm build
 ```
 
 Продакшен сервер:

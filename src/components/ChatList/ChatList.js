@@ -16,7 +16,7 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
         this.props.dispatch(routeNavigation({
             page: 'chat_page',
             payload: {
-                ...this.props.payload,
+                /*...this.props.payload,*/
                 currentRoom: roomId,
                 prevPage: 'chat_list',
             },

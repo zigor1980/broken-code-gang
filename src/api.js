@@ -136,6 +136,17 @@ class Api {
     }
 
     /**
+     * Return list of ALL rooms
+     *
+     * @param {String} [roomId]
+     *
+     * @return {Promise<Pagination<Room>>}
+     */
+    async getUsersOfRoom(roomId) {
+        return this._requestResponse(MESSAGES.GET_USERS_OF_ROOM, roomId);
+    }
+
+    /**
      * Return room by id
      *
      * @param {string} roomId
@@ -203,6 +214,17 @@ class Api {
     }
 
     /**
+     * Drop room
+     *
+     * @param {string} roomId
+     *
+     * @return {Promise<Room>}
+     */
+    async dropRoom(roomId) {
+        return this._requestResponse(MESSAGES.DROP_ROOM, roomId);
+    }
+
+    /**
      * Current user leave the room
      *
      * @param {string} roomId
@@ -211,6 +233,18 @@ class Api {
      */
     async currentUserLeaveRoom(roomId) {
         return this._requestResponse(MESSAGES.CURRENT_USER_LEAVE_ROOM, { roomId });
+    }
+
+    /**
+     * Remove user from room
+     *
+     * @param {string} roomId
+     * @param {string} userId
+     *
+     * @return {Promise<Room>}
+     */
+    async removeUserFromRoom(userId,roomId) {
+        return this._requestResponse(MESSAGES.REMOVE_USER_FROM_ROOM, {userId, roomId });
     }
 
     /**

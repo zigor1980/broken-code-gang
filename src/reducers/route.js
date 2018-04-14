@@ -7,11 +7,16 @@ const route = (state, action) => {
     }
 
     switch (action.type) {
-    case 'ROUTE_NAVIGATE':
+        case 'ROUTE_NAVIGATE':
+            console.log("=====",state);
+            console.log("-----",action);
         return {
             ...state,
             page: action.page,
-            payload: action.payload,
+            payload: {
+                ...state.payload,
+                ...action.payload,
+            }
         };
     default:
         return state;

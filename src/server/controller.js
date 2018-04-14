@@ -1,6 +1,6 @@
 const { findUserBySid, getUsers, addUser, setCurrentUser, logoutUser } = require('./database/user');
 const {
-    joinRoom, leaveRoom, getRooms, getUserRooms, createRoom,
+    joinRoom, leaveRoom, getRooms, getUserRooms, createRoom, getRoom, dropRoom
 } = require('./database/room');
 const { getMessages, sendMessage } = require('./database/messages');
 const TYPES = require('./messages');
@@ -160,6 +160,12 @@ module.exports = function (db, io) {
             return getRooms(db, params || {});
         });
 
+        // Get Users Of room
+        requestResponse(TYPES.GET_USERS_OF_ROOM, async (roomId) => {
+            const room = await getRoom(db, roomId);
+            return await getUsers(db,{_id:{"$in":room.users}});
+        });
+
         // Set a current user
         requestResponse(TYPES.SET_CURRENT_USER, async (payload) => {
             payload = {
@@ -179,6 +185,11 @@ module.exports = function (db, io) {
             const currentUser = await CurrentUser();
 
             return getUserRooms(db, currentUser._id, params);
+        });
+
+        // Join current user to room
+        requestResponse(TYPES.DROP_ROOM, async (roomId) => {
+            return await dropRoom(db, roomId);
         });
 
         // Join current user to room
@@ -211,6 +222,19 @@ module.exports = function (db, io) {
             const payload = {
                 roomId,
                 userId: currentUser._id,
+            };
+
+            leaveRoomChannel(roomId);
+            userLeaveRoom(payload);
+
+            return leaveRoom(db, payload);
+        });
+
+        // Leave current user to room
+        requestResponse(TYPES.REMOVE_USER_FROM_ROOM, async ({ userId, roomId }) => {
+            const payload = {
+                roomId,
+                userId
             };
 
             leaveRoomChannel(roomId);

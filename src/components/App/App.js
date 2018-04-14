@@ -8,6 +8,8 @@ import { AddRoomPage } from '../AddRoomPage/AddRoomPage';
 import { ConnectedChatPage } from '../ChatPage/ChatPage';
 import { ConnectedUserPage } from '../UserPage/UserPage';
 import { ConnectedContactsListPage } from '../ContactsListPage/ContactsListPage';
+import { GroupChatSettings } from '../GroupChatSettings/GroupChatSettings';
+import { ConnectedUserList } from '../UserList/UserList';
 
 
 // TODO: create page for the settings
@@ -28,8 +30,14 @@ const routeConfig = {
     chat_page: {
         view: ConnectedChatPage,
     },
+    'user_list':{
+        view: ConnectedUserList,
+    },
     'settings': {
         view: ConnectedUserPage,
+    },
+    'chat_settings': {
+        view: GroupChatSettings,
     },
 };
 

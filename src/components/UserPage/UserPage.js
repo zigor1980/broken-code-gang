@@ -21,9 +21,9 @@ export class UserPage extends Component {
         this.exitHandle = this.exitHandle.bind(this);
     }
 
-    componentDidMount() {
-        this.props.dispatch(getCurUserInfo());
-    }
+    // componentDidMount() {
+    //     this.props.dispatch(getCurUserInfo());
+    // }
 
     exitHandle() {
         api.logoutCurrentUser().then(() => {

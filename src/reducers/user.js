@@ -9,6 +9,7 @@ export default function user(state, action) {
         return {
             ...state,
             _id: action._id,
+            curUserInfo: action.curUserInfo,
         };
     case 'USER_GET_INFO':
         return {

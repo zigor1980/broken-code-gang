@@ -32,7 +32,7 @@
     "server": "nodemon -w server.js -w src/server server.js",
     "storybook": "start-storybook -p 9999 -c src/storybook",
     "githooks": "git config core.hooksPath hooks",
-    "eslint": "./node_modules/.bin/eslint"
+    "eslint": "./node_modules/.bin/eslint",
     "test": "mocha --compilers js:babel-core/register src/**/*.spec.js",
     "test:watch": "npm test -- -w"
   },

@@ -5,11 +5,13 @@ import { ConnectedHeader } from '../Header/Header';
 import fetchUsers from '../../actions/fetchUsers';
 import { InfiniteRooms } from '../InfiniteRooms/InfiniteRooms';
 import addRoom from '../../actions/rooms';
+import { routeNavigation } from '../../actions/route';
 
 const stateToProps = state => ({
     items: state.users.items,
     next: state.users.next,
     end: state.users.end,
+    newRoom: state.rooms.newRoom,
 });
 
 export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React.Component {
@@ -43,6 +45,24 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
         const namePoom = document.getElementById('Room-name').value;
         return this.props.dispatch(addRoom({ name: namePoom }, this.mas));
     }
+
+    componentWillReceiveProps(props) {
+        if (props.newRoom && (!this.props.newRoom || props.newRoom._id !== this.props.newRoom._id)) {
+            this.enterRoom(props.newRoom._id);
+        }
+    }
+
+    enterRoom = (roomId) => {
+        this.props.dispatch(routeNavigation({
+            page: 'chat_page',
+            payload: {
+                ...this.props.payload,
+                currentRoom: roomId,
+                prevPage: 'contacts_list'
+            },
+        }));
+    };
+
 
     fetch() {
         return this.props.dispatch(fetchUsers());

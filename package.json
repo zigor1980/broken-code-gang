@@ -22,14 +22,13 @@
     "uuid": "^3.2.1"
   },
   "scripts": {
-    "start": "concurrently \"yarn client\" \"yarn server\"",
+    "start": "concurrently \"npm run client\" \"npm run server\"",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "client": "react-scripts start",
     "server": "nodemon -w server.js -w src/server server.js",
     "storybook": "start-storybook -p 9999 -c src/storybook",
-    "postinstall": "git config core.hooksPath hooks",
     "eslint": "./node_modules/.bin/eslint"
   },
   "devDependencies": {

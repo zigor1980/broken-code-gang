@@ -22,7 +22,7 @@ export default class Header extends Component {
         if (!payload || !payload.prevPage || payload.prevPage === 'authorization') {
             return null;
         }
-        const curPage = this.props.page;
+        
         const prevPage = this.props.payload.prevPage;
         this.props.dispatch(routeNavigation({
             page: prevPage,

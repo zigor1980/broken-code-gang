@@ -32,7 +32,7 @@ export class ChatPage extends Component {
     }
 
     componentWillMount = () => {
-        let chatInfo = this.getChatInfo(this.props.payload.currentRoom);
+        this.getChatInfo(this.props.payload.currentRoom);
     };
 
     getChatInfo = async (chatId) => {

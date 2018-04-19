@@ -37,8 +37,8 @@
     "test": "mocha --compilers js:babel-core/register src/**/*.spec.js",
     "test:watch": "npm test -- -w",
     "postinstall": "git config core.hooksPath hooks",
-    "gemini:gui": "concurrently \"selenium-standalone start\" \"yarn run storybook\" \"gemini-gui -c ./.gemini.js\"",
-    "gemini": "concurrently \"selenium-standalone start\" \"yarn run storybook\" \"gemini test -c ./.gemini.js\""
+    "gemini:gui": "concurrently \"selenium-standalone start\"",
+    "gemini": "concurrently \"./node_modules/.bin selenium-standalone start\" \"npm run storybook\" \"./node_modules/.bin gemini test -c ./.gemini.js\""
   },
   "devDependencies": {
     "@storybook/react": "^3.3.15",

@@ -83,11 +83,13 @@ export const AuthorizationPage = connect()(
             }
 
             if (this.state.active === 'Sign up') {
-                this.singUp(login, password, name);
+                this.singUp(login, password, name)
+                    .then(()=>{});
             }
 
             if (this.state.active === 'Sign in') {
-                this.singIn(login, password);
+                this.singIn(login, password)
+                    .then(()=>{});
             }
         }
 

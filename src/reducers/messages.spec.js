@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import messages from './messages';
 import * as ActionType from '../actions/messages';
 
+
 describe('Reducer::Messages', () => {
     it('returns items (empty array), next (true), loading(true) if state is undefined', () => {
         // setup

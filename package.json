@@ -32,17 +32,20 @@
     "server": "nodemon -w server.js -w src/server server.js",
     "storybook": "start-storybook -p 9999 -c src/storybook",
     "githooks": "git config core.hooksPath hooks",
-    "eslint": "eslint src",
-    "eslint:fix": "eslint --fix src",
-    "test": "mocha --compilers js:babel-core/register src/**/*.spec.js",
+    "lint": "eslint ./src",
+    "lint:fix": "eslint --fix ./src",
+    "test": "cross-env NODE_ENV=test  mocha --compilers js:babel-core/register src/**/*.spec.js",
     "test:watch": "npm test -- -w",
     "postinstall": "git config core.hooksPath hooks",
-    "gemini:gui": "concurrently \"selenium-standalone start\"",
-    "gemini": "concurrently \"./node_modules/.bin selenium-standalone start\" \"npm run storybook\" \"./node_modules/.bin gemini test -c ./.gemini.js\""
+    "gemini:gui": "gemini-gui -c ./.gemini.js",
+    "gemini": "gemini test -c ./.gemini.js"
   },
   "devDependencies": {
     "@storybook/react": "^3.3.15",
+    "babel-core": "^6.26.0",
+    "babel-preset-react-app": "^3.1.1",
     "chai-enzyme": "^0.8.0",
+    "cross-env": "^5.1.4",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.19.1",
@@ -52,9 +55,9 @@
     "eslint-plugin-import": "^2.11.0",
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.7.0",
-    "mocha": "^5.1.0",
     "gemini": "^5.6.2",
     "gemini-gui": "^6.0.0",
+    "mocha": "^5.1.0",
     "selenium-standalone": "^6.14.0"
   }
 }

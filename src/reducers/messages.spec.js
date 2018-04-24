@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import {sinon} from 'sinon';
 import messages from './messages';
 import * as ActionType from '../actions/messages';
 

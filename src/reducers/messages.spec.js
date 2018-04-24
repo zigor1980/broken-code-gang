@@ -4,6 +4,7 @@ import messages from './messages';
 import * as ActionType from '../actions/messages';
 
 describe.only('Reducer::Messages', () => {
+
     it('returns items (empty array), next (true), loading(true) if state is undefined', () => {
         // setup
         const state = null;

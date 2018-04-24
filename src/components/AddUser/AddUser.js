@@ -112,7 +112,7 @@ export class AddUser extends Component {
                 "id": 10
             },
 
-        ]
+        ];
         return (
             <div className="AddUser">
                 <Header buttonBack buttonSearch buttonSettings={false} contentType="add-user"/>

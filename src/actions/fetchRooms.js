@@ -7,14 +7,10 @@ export default function fetchRooms() {
             const room = await api.getCurrentUserRooms(getState().rooms.next);
             console.log(room);
             const { items, next } = room;
-            const end = !!(next);
-            console.log(items);
-            console.log(next);
             dispatch({
                 type: 'ROOMS_FETCH',
                 items,
                 next,
-                end,
             });
         } catch (error) {
             dispatch({

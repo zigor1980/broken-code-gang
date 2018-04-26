@@ -53,6 +53,7 @@ export class ChatPage extends Component {
             page: 'chat_settings',
             payload: {
                 ...this.props.payload,
+                prevPrevPage:'chat_list',
                 prevPage: 'chat_page',
                 chatUsers:users.items,
             }

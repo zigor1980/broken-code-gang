@@ -17,11 +17,8 @@ export class UserList extends Component {
         this.props.handleClick(contactId);
     }
     render() {
-        debugger;
-        const props = this.props;
         const { users, fetchNext, next } = this.props;
         const imgSrc = 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200';
-        debugger;
         let userListContent = '';
         if (users && users.length) {
             userListContent = users.map(contact => (

@@ -1,9 +1,8 @@
 import React from 'react';
 import { UserList } from '../UserList/UserList';
-import { Button } from '../Button/Button';
 import { LinkBtn } from '../Buttons/LinkBtn/LinkBtn';
 import './GroupChatSettings.css';
-import ConnectedHeader from '../Header/Header';
+import { ConnectedHeader } from '../Header/Header';
 import { connect } from 'react-redux';
 import leaveRoom from '../../actions/leaveRoom';
 import { routeNavigation } from '../../actions/route';
@@ -17,15 +16,12 @@ const stateToProps = state => ({
 
 export const GroupChatSettings = connect(stateToProps)(
     (props, dispatch) => {
-        /**
-         * Pass group chat members to UserList
-         * props - group chat info
-         */
-
-        const membersQuan = 10,
+        const membersQuan = props.payload.chatUsers.length,
             groupName = 'BCG',
             onClickExit = removeUserFromChat.bind(props),
-            onClickAddNewUser = addNewUserToChat.bind(props);
+            fetchNext = props.dispatch.bind(props, fetchUsers()),
+            onClickAddNewUser = addNewUserToChat.bind(props, fetchNext),
+            handleClick = openUserMenu.bind(props);
         return (
             <div className="GroupChatSettings">
                 <section className="GroupChatSettings__section">
@@ -43,7 +39,7 @@ export const GroupChatSettings = connect(stateToProps)(
                     <LinkBtn className="GroupChatSettings__exit" btnText="Добавить участника"
                              onclick={onClickAddNewUser}/>
                     <UserList
-                        users={props.payload.chatUsers}
+                        users={props.payload.chatUsers} handleClick={handleClick}
                     />
                 </section>
                 <section className="GroupChatSettings__section">
@@ -58,13 +54,16 @@ function removeUserFromChat() {
 }
 
 function addNewUserToChat() {
-    console.log('!!!', this);
     this.dispatch(routeNavigation({
-        page: 'user_list',
+        page: 'add_new_user_to_chat_page',
         payload: {
-            fetchNext: this.dispatch(fetchUsers),
-            next: true,
-            users: this.users,
+            prevPage: 'chat_settings',
+            prevPrevPage: this.payload.prevPage,
+            prevPrevPrevPage:this.payload.prevPrevPage,
         }
     }));
+}
+
+function openUserMenu(contactId){
+    /*Здесь меню действий над пользователем в групповом чате*/
 }

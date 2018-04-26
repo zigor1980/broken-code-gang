@@ -129,12 +129,14 @@ module.exports = function (db, io) {
         }
 
         // Load user information for next usage
-        async function CurrentUser(){
+        async function CurrentUser() {
             return await findUserBySid(db, sid);
         }
 
         // Receive current user information
-        requestResponse(TYPES.CURRENT_USER, async() => {return await CurrentUser();});
+        requestResponse(TYPES.CURRENT_USER, async () => {
+            return await CurrentUser();
+        });
 
         // Return list of all users with
         requestResponse(TYPES.USERS, async (params) => {
@@ -163,7 +165,10 @@ module.exports = function (db, io) {
         // Get Users Of room
         requestResponse(TYPES.GET_USERS_OF_ROOM, async (roomId) => {
             const room = await getRoom(db, roomId);
-            return await getUsers(db,{_id:{"$in":room.users}});
+            return await getUsers(db, {
+                _id: { '$in': room.users },
+                limit: 100
+            });
         });
 
         // Set a current user
@@ -172,7 +177,7 @@ module.exports = function (db, io) {
                 ...payload,
                 sid: sid,
             };
-            return await setCurrentUser(db,payload);
+            return await setCurrentUser(db, payload);
         });
 
         // Logout current user
@@ -230,7 +235,7 @@ module.exports = function (db, io) {
             return leaveRoom(db, payload);
         });
 
-        // Leave current user to room
+        // Remove user from room
         requestResponse(TYPES.REMOVE_USER_FROM_ROOM, async ({ userId, roomId }) => {
             const payload = {
                 roomId,

@@ -93,7 +93,7 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
                             }}
                         />
                     </p>
-                    <p className="Desc__Status">{el.online ? 'online' : 'offline'}</p>
+                    <p className="Desc__Status">{el.online && 'online'}</p>
                 </div>
             </div>
         ));

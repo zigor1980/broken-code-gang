@@ -51,8 +51,8 @@ async function getRooms(db, filter) {
  */
 async function getUserRooms(db, userId, filter) {
     return pageableCollection(db.collection(TABLE), {
-        users: ObjectId(userId.toString()),
         ...filter,
+        users: ObjectId(userId.toString()),
     });
 }
 
@@ -105,7 +105,8 @@ async function joinRoom(db, { roomId, userId }) {
     }
 
     let collection = db.collection(TABLE),
-        [room, user] = await Promise.all([getRoom(db, roomId), getUser(db, userId)]);
+     [ room, user ] = await Promise.all([getRoom(db, roomId), getUser(db, userId)]);
+
 
     if (!room) {
         throw new Error(`Cannot find room with id=${roomId}`);

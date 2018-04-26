@@ -44,10 +44,11 @@ export class Footer extends Component {
                     placeholder="Type message..."
                 >
                 </textarea>
-              <div className="Footer__SubmitButton">
-              <Button type="send" modifier="s" circle={true} active={true}
-                      onClick={this.handleSubmit}/>
-              </div>
+              <button
+                className='Footer__SubmitButton'
+                onClick={this.handleSubmit}
+              >
+              </button>
             </footer>
         );
     }

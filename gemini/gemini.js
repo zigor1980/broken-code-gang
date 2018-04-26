@@ -1,6 +1,10 @@
 const config = [{
     kind:'Avatar',
     stories:['size S','size M'],
+},
+{
+    kind:'ChatField',
+    stories:['User message','Other people message'],
 }];
 
 for (const {kind, stories} of config) {

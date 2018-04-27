@@ -79,8 +79,8 @@ import api from './api';
 //     // Try to join to first room in list
 //     console.log('Join some user to room', await api.userJoinRoom(users.items[0]._id, rooms.items[0]._id));
 //
-//     // Get current user list of rooms
-//     console.log('Current user rooms: ', await api.getCurrentUserRooms());
+    // // Get current user list of rooms
+    // console.log('Current user rooms: ', await api.getCurrentUserRooms());
 //
 //     // Send message to room
 //     console.log('Send message', await api.sendMessage(rooms.items[0]._id, `Test message ${Date.now()}`));

@@ -1,12 +1,5 @@
-.Footer {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    background: #F13564;
-    border-radius: 16px;
-    box-shadow: 0 -1px 2px rgba(0,0,0,0.23);
+.Footer__nav {
+padding: 5px;
 }
 
 .Footer__nav_btn{

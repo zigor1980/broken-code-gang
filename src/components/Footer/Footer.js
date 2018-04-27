@@ -34,7 +34,7 @@ export class Footer extends Component {
 
     render() {
         return (
-          <footer className="Footer">
+          <footer className="Footer Footer_TextField">
               <textarea
                     className="Footer__TextArea"
                     onChange={this.handleChange}

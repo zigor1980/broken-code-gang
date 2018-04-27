@@ -2,7 +2,10 @@
   "name": "shri-boilerplate",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "https://localhost:3001/",
+  "engines": {
+    "node": "9.11.1"
+  },
   "dependencies": {
     "chai": "^4.1.2",
     "concurrently": "^3.5.1",
@@ -36,7 +39,6 @@
     "lint:fix": "eslint --fix ./src",
     "test": "cross-env NODE_ENV=test  mocha --compilers js:babel-core/register src/**/*.spec.js",
     "test:watch": "npm test -- -w",
-    "postinstall": "git config core.hooksPath hooks",
     "gemini:gui": "gemini-gui -c ./.gemini.js",
     "gemini": "gemini test -c ./.gemini.js"
   },

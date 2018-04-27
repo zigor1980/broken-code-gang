@@ -15,7 +15,7 @@ export class InstanceSummaryElement extends Component {
 
         const { summary } = this.props;
         const {
-            title, description, author, descModifiers,
+            title, description, author, descModifiers,timestamp
         } = summary;
 
         let titleClasses = 'InstanceSummaryElement__title';
@@ -50,13 +50,22 @@ export class InstanceSummaryElement extends Component {
             </p>);
         }
 
+        let timestampView='';
+        if(timestamp){
+            timestampView = <p className="InstanceSummaryElement__info_timestamp">{timestamp}</p>;
+        }
+
+
         return (
             <div className="InstanceSummaryElement" onClick={this.handleClick}>
                 <div className="InstanceSummaryElement__avatar">
                     {avatar}
                 </div>
                 <div className="InstanceSummaryElement__info">
-                    <h3 className={titleClasses}>{title}</h3>
+                    <div className="InstanceSummaryElement__info_header">
+                        <h3 className={titleClasses}>{title}</h3>
+                        {timestampView}
+                    </div>
                     {descView}
                 </div>
             </div>

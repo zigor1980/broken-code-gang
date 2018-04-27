@@ -8,20 +8,19 @@
     font-family: sans-serif;
     background-color: #ffffff;
     box-shadow: none;
+    box-sizing: border-box
 }
 
 .Footer__TextArea {
+    flex-grow: 1;
+    margin-left: 5px;
     resize: none;
-    width: 70%;
-    margin: auto;
     height: 32px;
-    bottom: 0;
-    background: #F13564;
-    border-radius: 16px;
-    color: #FFFFFF;
-    padding-left: 50px;
-    padding-top: 5px;
-    padding-right: 50px;
+    padding: 5px;
+    color: #333;
+    padding-left: 10px;
+    border-radius: 12px 0 0 12px;
+    box-sizing: border-box;
 }
 
 .Footer__TextArea:focus {
@@ -29,12 +28,26 @@
 }
 
 .Footer__TextArea::placeholder {
-    color: #FFFFFF;
+    color: #333;
 }
 
 .Footer__SubmitButton{
+    border: none;
+    border: 1px solid #fff;
+    margin: 5px;
     background-color: #F13564;
-    position: fixed;
-    margin-left: 85%;
-    margin-top: 5px;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    background: url('../../assets/icons/send-active.png') no-repeat;
+    background-size:70% 70%;
+    background-position: center
+
+}
+.Footer__SubmitButton:focus{
+    outline: none;
+}
+.Footer__SubmitButton > img{
+
 }

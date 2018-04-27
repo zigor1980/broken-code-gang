@@ -136,6 +136,24 @@ async function joinRoom(db, { roomId, userId }) {
 /**
  * @param {Db} db
  * @param {string} roomId
+ *
+ * @return {Promise<Room>}
+ */
+async function dropRoom(db, roomId) {
+    if (!roomId) {
+        throw new Error('You must specify roomId to drop');
+    }
+
+    const query = {
+        _id:ObjectId(roomId.toString()),
+    };
+
+    return await db.collection(TABLE).deleteOne();
+}
+
+/**
+ * @param {Db} db
+ * @param {string} roomId
  * @param {string} userId
  *
  * @return {Promise<Room>}
@@ -177,4 +195,5 @@ module.exports = {
     getRoom,
     joinRoom,
     leaveRoom,
+    dropRoom
 };

@@ -6,6 +6,7 @@ import './ChatField.css';
 export function ChatField(props) {
     const message = props.message,
         authorId = props.message.userId,
+        name = props.name,
         userId = props.userId;
     let direction = 'ChatField_right',
         avatar = '';
@@ -23,11 +24,10 @@ export function ChatField(props) {
         };
         avatar = <Avatar image={image} />;
     }
-
     return (
       <div className={direction}>
           {avatar}
-          <ChatQuote message={message} userId={userId} />
+          <ChatQuote message={message} userId={userId} name={name}/>
         </div>
     );
 }

@@ -1,21 +1,29 @@
 import api from '../api';
+import { routeNavigation } from './route';
 
-export default function leaveRoom(room) {
+export default function leaveRoom(roomId) {
     return async function (dispatch) {
         try {
             // Loading
-            await api.currentUserLeaveRoom(room);
-            dispatch({
-                type: 'ROOM_LEAVE',
-            });
+            const room = await api.currentUserLeaveRoom(roomId);
+
+            if (room.users.length > 0 && room.users.length < 2) {
+                let r = await api.dropRoom(roomId);
+                console.log(r);
+            }
+
+            dispatch(routeNavigation({
+                page: 'chat_list',
+                payload: {
+                    footerNav: {
+                        active: 'chat'
+                    }
+                }
+            }));
         } catch (error) {
             dispatch({
-                type: 'FEED_ERROR',
+                type: 'ROOMS_ERROR',
                 error,
-            });
-        } finally {
-            dispatch({
-                type: 'FEED_LOADING',
             });
         }
     };

@@ -7,12 +7,27 @@ const route = (state, action) => {
     }
 
     switch (action.type) {
-    case 'ROUTE_NAVIGATE':
+        case 'ROUTE_NAVIGATE':
         return {
             ...state,
             page: action.page,
-            payload: action.payload,
+            payload: {
+                ...state.payload,
+                ...action.payload,
+            }
         };
+
+        case 'USER_ADDED_TO_CHAT':
+            return{
+                ...state,
+                page:'chat_settings',
+                payload:{
+                    ...state.payload,
+                    chatUsers:action.chatUsers.items,
+                    prevPage: state.payload.prevPrevPage ? state.payload.prevPrevPage : '',
+                    prevPrevPage: state.payload.prevPrevPrevPage ? state.payload.prevPrevPrevPage : '',
+                }
+            };
     default:
         return state;
     }

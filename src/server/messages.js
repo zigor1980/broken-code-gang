@@ -50,6 +50,11 @@ module.exports = {
     CURRENT_USER_JOIN_CHANNEL: 'CURRENT_USER_JOIN_CHANNEL',
 
     /**
+     * Current user join to room channel
+     * */
+    GET_USERS_OF_ROOM: 'GET_USERS_OF_ROOM',
+
+    /**
      * Current user leave room channel
      * */
     CURRENT_USER_LEAVE_CHANNEL: 'CURRENT_USER_LEAVE_CHANNEL',
@@ -63,6 +68,16 @@ module.exports = {
      * Leave room
      */
     CURRENT_USER_LEAVE_ROOM: 'CURRENT_USER_LEAVE_ROOM',
+
+    /**
+     * Remove user from room
+     */
+    REMOVE_USER_FROM_ROOM: 'REMOVE_USER_FROM_ROOM',
+
+    /**
+     * Remove user from room
+     */
+    DROP_ROOM:'DROP_ROOM',
 
     /**
      * Join user to the room

@@ -5,6 +5,7 @@ import { InfiniteRooms } from '../InfiniteRooms/InfiniteRooms';
 import { connect } from 'react-redux';
 import { routeNavigation } from '../../actions/route';
 import MemberCount from '../../helpers/MemberCount';
+import api from '../../api';
 
 const stateToProps = state => ({
     payload: state.route.payload,
@@ -12,11 +13,17 @@ const stateToProps = state => ({
 });
 
 export const ChatList = connect(stateToProps)(class ChatList extends React.Component {
-    enterRoom(roomId) {
+    async enterRoom(roomId) {
+        const users = await api.getUsersOfRoom(roomId),
+            usersName = {};
+        users.items.forEach(user => {
+            usersName[user._id]=user.name;
+        });
         this.props.dispatch(routeNavigation({
             page: 'chat_page',
             payload: {
-                ...this.props.payload,
+                /*...this.props.payload,*/
+                usersName: usersName,
                 currentRoom: roomId,
                 prevPage: 'chat_list',
             },

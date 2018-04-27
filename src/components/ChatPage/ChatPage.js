@@ -9,6 +9,7 @@ import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 import api from '../../api';
 import { addMessage } from '../../actions/messages';
 import MemberCount from '../../helpers/MemberCount';
+import {routeNavigation} from  '../../actions/route';
 
 const stateToProps = state => ({
     messages: state.messages,
@@ -28,7 +29,9 @@ export class ChatPage extends Component {
         this.lastMessage = null;
         this.props.dispatch({
             type:'MESSAGES_RELOAD',
-        })
+        });
+        this.dispatch=this.props.dispatch.bind(this);
+        this.openChatSettings = this.openChatSettings.bind(this);
     }
 
     componentWillMount = () => {
@@ -41,6 +44,21 @@ export class ChatPage extends Component {
             chatInfo: chatInfo
         });
     };
+
+    async openChatSettings() {
+        const room = await api.getRoom(this.props.payload.currentRoom);
+        const users = await api.getUsersOfRoom(room._id);
+
+        this.dispatch(routeNavigation({
+            page: 'chat_settings',
+            payload: {
+                ...this.props.payload,
+                prevPrevPage:'chat_list',
+                prevPage: 'chat_page',
+                chatUsers:users.items,
+            }
+        }));
+    }
 
     componentDidMount() {
         api.onMessage((message) => {
@@ -62,13 +80,14 @@ export class ChatPage extends Component {
     render() {
         const messages = this.props.messages.items,
             next = this.props.messages.next,
-            userId = this.props.userId;
+            userId = this.props.userId,
+            usersName = this.props.payload.usersName;
 
         let chatPageContent = '';
         if (messages && messages.length) {
             chatPageContent = messages.map(message => (
                 <div key={message._id}>
-                    <ChatField message={message} userId={userId} />
+                    <ChatField message={message} userId={userId} name={usersName[message.userId]}/>
                 </div>));
         } else {
             chatPageContent = <div className="ChatPage__empty"><p>No messages here yet...</p></div>;
@@ -92,7 +111,7 @@ export class ChatPage extends Component {
         return (
             <div className="ChatPage">
                 <div className="ChatPage__Header">
-                    <ConnectedHeader contentTitle={contentTitle} contentDesc={contentDesc} buttonBack buttonSearch={false} buttonSettings={false} contentType="chat" />
+                    <ConnectedHeader contentTitle={contentTitle} openChatSettings={this.openChatSettings} contentDesc={contentDesc} buttonBack buttonSearch={false} buttonSettings={true} contentType="chat" />
                 </div>
 
                 <InfiniteScroll fetchNext={this.fetchNext} scrollDirection="up" next={next}>

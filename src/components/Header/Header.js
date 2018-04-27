@@ -22,13 +22,13 @@ export default class Header extends Component {
         if (!payload || !payload.prevPage || payload.prevPage === 'authorization') {
             return null;
         }
-        
         const prevPage = this.props.payload.prevPage;
         this.props.dispatch(routeNavigation({
             page: prevPage,
             payload: {
                 ...this.props.payload,
-                prevPage: '',
+                prevPage: this.props.payload.prevPrevPage ? this.props.payload.prevPrevPage : '',
+                prevPrevPage: this.props.payload.prevPrevPrevPage ? this.props.payload.prevPrevPrevPage : '',
             },
         }));
     }
@@ -37,6 +37,10 @@ export default class Header extends Component {
         this.setState({
             search: true,
         });
+    }
+
+    openChatSettings(){
+        this.props.openChatSettings();
     }
 
     handleSearch(event) {
@@ -67,7 +71,7 @@ export default class Header extends Component {
         if (buttonSearch) {
             rightControl = <Button type="search" active modifier="s" circle onClick={this.startSearch.bind(this)} />;
         } else if (buttonSettings) {
-            rightControl = <Button type="settings" active modifier="s" circle />;
+            rightControl = <Button type="settings" active modifier="s" circle onClick={this.openChatSettings.bind(this)}/>;
         }
         let contentTitle = '';
         let contentDesc = '';

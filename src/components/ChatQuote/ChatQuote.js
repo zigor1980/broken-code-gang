@@ -1,5 +1,4 @@
 import React from 'react';
-import api from '../../api';
 import './ChatQuote.css';
 
 export class ChatQuote extends React.Component {
@@ -8,13 +7,6 @@ export class ChatQuote extends React.Component {
         this.state = {
             authorName: null
         }
-    }
-
-    async getAuthorName(id) {
-        const authorName = await api.getUser(id);
-        this.setState({
-            authorName: authorName.name,
-        });
     }
 
     render() {
@@ -27,10 +19,8 @@ export class ChatQuote extends React.Component {
         date.setTime(created_at);
 
         if (userId !== authorId) {
-            if (!this.state.authorName)
-                this.getAuthorName(authorId);
             chatDirection = 'ChatQuote_left';
-            user = <p className="ChatQuote__user">{this.state.authorName}</p>
+            user = <p className="ChatQuote__user">{this.props.name}</p>
         }
         return (
             <div className={`ChatQuote ${chatDirection}`}>

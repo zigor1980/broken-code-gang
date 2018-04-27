@@ -1,4 +1,4 @@
-function MemderCount(count) {
+function MemberCount(count) {
     if ((count > 10) && (count < 15)) {
         return 'пользователей';
     }
@@ -11,4 +11,4 @@ function MemderCount(count) {
     return 'пользователей';
 }
 
-export default MemderCount;
+export default MemberCount;

@@ -4,8 +4,8 @@ import './ChatList.css';
 import { InfiniteRooms } from '../InfiniteRooms/InfiniteRooms';
 import { connect } from 'react-redux';
 import { routeNavigation } from '../../actions/route';
-import MemberCount from '../../helpers/MemberCount';
 import api from '../../api';
+import { createDateStamp } from '../../helpers/createDateStamp';
 
 const stateToProps = state => ({
     payload: state.route.payload,
@@ -35,7 +35,9 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
         return (
             <InfiniteRooms fetchNext={fetchNext} next={next}>
                 {rooms.map((room) => {
-                    let roomName = room.name;
+                    let roomName = room.name,
+                        date = new Date();
+                    date.setTime(room.lastMessage.created_at);
                     if (roomName.split(' ').includes(this.props.curUserInfo.name)) {
                         roomName = roomName.replace(this.props.curUserInfo.name, '');
                     }
@@ -48,7 +50,9 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
                                 modifier: 'avatar-s',
                             },
                             title: `${roomName}`,
-                            author: `${room.users.length} ${MemberCount(room.users.length)}`,
+                            timestamp: `${createDateStamp(date)}`,
+                            author: `${room.lastMessage.userName}`,
+                            description: `${room.lastMessage.message}`,
                             id: `${room._id}`,
                         }}
                         onclick={this.enterRoom.bind(this)}

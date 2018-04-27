@@ -282,6 +282,17 @@ class Api {
     }
 
     /**
+     * Return list of messages in room
+     *
+     * @param {{}} roomId
+     *
+     * @return {Promise<Pagination<Message>>}
+     */
+    async getLastRoomMessages(roomId) {
+        return this.getMessages({ roomId ,limit:1});
+    }
+
+    /**
      * Invoke callback, when someone change his status
      *
      * @param {function({userId: string, status: boolean})} callback

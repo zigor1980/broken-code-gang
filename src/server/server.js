@@ -55,7 +55,7 @@ exports.createServer = function (serverConfig, databaseConfig) {
         });
 
         http.listen(serverConfig.port, () => {
-            console.log(`API server listen at http://${serverConfig.host}:${serverConfig.port}`);
+            console.log(`API server listen at https://${serverConfig.host}:${serverConfig.port}`);
 
             resolve();
         });

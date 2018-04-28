@@ -206,7 +206,6 @@ module.exports = function (db, io) {
                 userId: currentUser._id,
             };
 
-            joinToRoomChannel(roomId);
             userWasJoinedToRoom(payload);
 
             return joinRoom(db, payload);
@@ -214,7 +213,6 @@ module.exports = function (db, io) {
 
         // Join user to room
         requestResponse(TYPES.USER_JOIN_ROOM, (payload) => {
-            joinToRoomChannel(payload.roomId);
             userWasJoinedToRoom(payload);
 
             return joinRoom(db, payload);

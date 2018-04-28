@@ -62,7 +62,9 @@ export class ChatPage extends Component {
 
     componentDidMount() {
         api.onMessage((message) => {
-            this.props.dispatch(addMessage(message));
+            if(this.props.payload.currentRoom === message.roomId){
+                this.props.dispatch(addMessage(message));
+            }
         });
     }
 

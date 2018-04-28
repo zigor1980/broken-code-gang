@@ -65,16 +65,18 @@ export class ChatPage extends Component {
             api.onMessage((message) => {
                 this.props.dispatch(addMessage(message));
 
-                const { roomId, userId, message: messageText } = message;
+                if ((Notification.permission === "granted")) {
+                    const { roomId, userId, message: messageText } = message;
 
-                Promise.all([ api.getUser(userId), api.getRoom(roomId)]).then((result) => {
-                    const [{ name: userName }, { name: roomName }] = result;
+                    Promise.all([ api.getUser(userId), api.getRoom(roomId)]).then((result) => {
+                        const [{ name: userName }, { name: roomName }] = result;
 
-                    createBrowserNotification(
-                        roomName,
-                        `${userName}: ${messageText}`,
-                    );
-                });
+                        createBrowserNotification(
+                            roomName,
+                            `${userName}: ${messageText}`,
+                        );
+                    });
+                }
             }); 
     }
 

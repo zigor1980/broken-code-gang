@@ -21,6 +21,7 @@ export default function fetchRooms() {
                     lastMessage.created_at = 0;
                 }
             }
+
             items.sort(compareMessages);
             dispatch({
                 type: 'ROOMS_FETCH',

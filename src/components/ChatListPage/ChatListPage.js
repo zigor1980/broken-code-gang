@@ -28,7 +28,38 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
             addRoomVisible: false,
         };
         this.fetch = this.fetch.bind(this);
-        this.submitHandler = this.submitHandler.bind(this);
+        this.submitHandler = this.submitHandler.bind(this); 
+        this.nott = this.nott.bind(this);
+    }
+
+     nott(message) {
+        if (this.destroy) {
+            return;
+        }
+    
+        if(this.props.payload.currentRoom === message.roomId){
+            this.props.dispatch(addMessage(message));
+        }
+    
+        this.props.dispatch(updateLastMessage(message));
+        this.props.dispatch(addMessage(message));
+    
+        if ((Notification.permission === "granted")) {
+            const { roomId, userId, message: messageText } = message;
+    
+            Promise.all([ api.getUser(userId), api.getRoom(roomId)]).then((result) => {
+                const [{ name: userName }, { name: roomName }] = result;
+    
+                createBrowserNotification(
+                    roomName,
+                    `${userName}: ${messageText}`,
+                );
+            });
+        }
+    }
+
+    componentWillUnmount() {
+        this.destroy = true;
     }
 
     componentDidMount() {
@@ -46,25 +77,9 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
                     error,
                 });
             });
-        this.props.items.forEach((item)=>api.currentUserJoinRoom(item._id));
 
-        api.onMessage((message) => {
-            this.props.dispatch(updateLastMessage(message));
-            this.props.dispatch(addMessage(message));
 
-            if ((Notification.permission === "granted")) {
-                const { roomId, userId, message: messageText } = message;
-
-                Promise.all([ api.getUser(userId), api.getRoom(roomId)]).then((result) => {
-                    const [{ name: userName }, { name: roomName }] = result;
-
-                    createBrowserNotification(
-                        roomName,
-                        `${userName}: ${messageText}`,
-                    );
-                });
-            }
-        });
+        // api.onMessage(this.nott);
     }
 
     componentWillUpdate(){
@@ -72,7 +87,7 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     }
 
     componentWillUnmount(){
-        this.props.items.forEach((item)=>api.currentUserJoinRoom(item._id));
+        // this.props.items.forEach((item)=>api.currentUserLeaveChannel(item._id));
     }
 
     fetch() {

@@ -61,9 +61,11 @@ export class ChatPage extends Component {
     }
 
     componentDidMount() {
-        api.onMessage((message) => {
-            this.props.dispatch(addMessage(message));
-        });
+        // api.onMessage((message) => {
+        //     this.props.dispatch(addMessage(message));
+        // });
+
+        
     }
 
     componentDidUpdate() {

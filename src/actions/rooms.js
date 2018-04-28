@@ -26,3 +26,20 @@ export default function addRoom(name, user) {
         }
     };
 }
+
+export function updateLastMessage(message) {
+    return async function (dispatch) {
+        try {
+            message.userName = (await api.getUser(message.userId)).name;
+            dispatch({
+                type: 'ROOMS_UPDATE_LAST_MESSAGE',
+                newMessage: message
+            });
+        }catch (error){
+            return {
+                type: 'ROOM_ERROR',
+                error,
+            }
+        }
+    };
+}

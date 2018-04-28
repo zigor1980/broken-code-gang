@@ -148,7 +148,7 @@ async function dropRoom(db, roomId) {
         _id:ObjectId(roomId.toString()),
     };
 
-    return await db.collection(TABLE).deleteOne();
+    return await db.collection(TABLE).deleteOne(query);
 }
 
 /**

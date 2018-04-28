@@ -9,8 +9,7 @@ import { routeNavigation } from '../../actions/route';
 import { addMessage } from '../../actions/messages';
 import { updateLastMessage } from '../../actions/rooms';
 import api from '../../api';
-import findSmile from '../../helpers/rulesToObject';
-import findSmile from '../../helpers/formatSmiles';
+import createBrowserNotification from '../../helpers/createBrowserNotification';
 
 const stateToProps = state => ({
     items: state.rooms.items,
@@ -52,6 +51,19 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
         api.onMessage((message) => {
             this.props.dispatch(updateLastMessage(message));
             this.props.dispatch(addMessage(message));
+
+            if ((Notification.permission === "granted")) {
+                const { roomId, userId, message: messageText } = message;
+
+                Promise.all([ api.getUser(userId), api.getRoom(roomId)]).then((result) => {
+                    const [{ name: userName }, { name: roomName }] = result;
+
+                    createBrowserNotification(
+                        roomName,
+                        `${userName}: ${messageText}`,
+                    );
+                });
+            }
         });
     }
 
@@ -64,7 +76,6 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     }
 
     fetch() {
-        console.log('4534');
         return this.props.dispatch(fetchRooms());
     }
 

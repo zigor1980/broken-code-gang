@@ -6,6 +6,7 @@ import { ChatList } from '../ChatList/ChatList';
 import { FooterNav } from '../FooterNav/FooterNav';
 import fetchRooms from '../../actions/fetchRooms';
 import { routeNavigation } from '../../actions/route';
+import findSmile from '../../helpers/rulesToObject';
 
 const stateToProps = state => ({
     items: state.rooms.items,
@@ -28,6 +29,10 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     }
 
     componentDidMount() {
+        console.log(findSmile('=)'));
+        console.log(findSmile('=('));
+        console.log(findSmile('<3'));
+        console.log(findSmile('=*'));
         this.props.dispatch(
             {
                 type: 'ROOMS_RESET',

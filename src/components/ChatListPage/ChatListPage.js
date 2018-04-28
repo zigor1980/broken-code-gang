@@ -6,7 +6,7 @@ import { ChatList } from '../ChatList/ChatList';
 import { FooterNav } from '../FooterNav/FooterNav';
 import fetchRooms from '../../actions/fetchRooms';
 import { routeNavigation } from '../../actions/route';
-import findSmile from '../../helpers/rulesToObject';
+import findSmile from '../../helpers/formatSmiles';
 
 const stateToProps = state => ({
     items: state.rooms.items,

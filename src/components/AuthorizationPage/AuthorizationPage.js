@@ -100,6 +100,20 @@ export const AuthorizationPage = connect()(
                 })
         }
 
+        componentDidMount() {
+            Notification.requestPermission().then(function(result) {
+                if (result === 'denied') {
+
+                  return;
+                }
+                if (result === 'default') {
+
+                  return;
+                }
+
+              });
+        }
+
         async singUp(login, password, name) {
             try{
                 const user = await api.getUserByLogin(login);

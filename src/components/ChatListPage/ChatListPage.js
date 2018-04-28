@@ -27,7 +27,7 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
         this.fetch = this.fetch.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
     }
-
+    
     componentDidMount() {
         console.log(findSmile('=)'));
         console.log(findSmile('=('));
@@ -50,7 +50,6 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     }
 
     fetch() {
-        console.log('4534');
         return this.props.dispatch(fetchRooms());
     }
 

@@ -7,7 +7,6 @@ import './ChatPage.css';
 import fetchMessages from '../../actions/fetchMessages';
 import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 import api from '../../api';
-import { addMessage } from '../../actions/messages';
 import MemberCount from '../../helpers/MemberCount';
 import {routeNavigation} from  '../../actions/route';
 

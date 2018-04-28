@@ -1,4 +1,5 @@
 import api from '../api';
+import { compareMessages } from '../helpers/compareMessages';
 
 export default function fetchRooms() {
     return async function (dispatch, getState) {
@@ -7,6 +8,7 @@ export default function fetchRooms() {
             const { items, next } = room;
             const end = !!(next);
             for(let item of items){
+                await  api.currentUserJoinChannel(item._id);
                 const messages = await api.getLastRoomMessages(item._id);
                 let lastMessage = {};
                 if(messages.items.length>0){
@@ -33,13 +35,4 @@ export default function fetchRooms() {
             });
         }
     };
-}
-
-function compareMessages(a, b) {
-    a = a && a.lastMessage && a.lastMessage.created_at;
-    b = b && b.lastMessage && b.lastMessage.created_at;
-    if (a > b)
-        return -1;
-    else
-        return 1;
 }

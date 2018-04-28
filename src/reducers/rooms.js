@@ -1,3 +1,5 @@
+import { compareMessages } from '../helpers/compareMessages';
+
 export default function rooms(state, action) {
     if (!state) {
         return {
@@ -31,6 +33,20 @@ export default function rooms(state, action) {
                 items: [],
                 next: null,
             };
+        case 'ROOMS_UPDATE_LAST_MESSAGE':
+            console.log(state);
+            let newItems = [...state.items],
+                newState = {
+                    ...state,
+                };
+            newItems.forEach((item) => {
+                if (item._id === (action && action.newMessage.roomId)) {
+                    item.lastMessage = action.newMessage;
+                    newState.items =  newItems;
+                }
+            });
+            newState.items.sort(compareMessages);
+            return newState;
         case 'ROOMS_ERROR':
             return {
                 ...state,

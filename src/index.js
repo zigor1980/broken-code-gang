@@ -119,6 +119,9 @@ const store = createStore(
 );
 
 api.getCurrentUser().then(user => {
+    if(!user){
+        return;
+    }
     const { email, password } = user;
 
     if (email && password) {

@@ -53,12 +53,12 @@ export class ChatQuote extends React.Component {
                                 case 'smile':
                                     return <img className="ChatQuote__text__smile" src={require(`../../assets/icons/${token.src}`)} alt="" />;
                                 case 'link':
-                                    return <a className="ChatQuote__text__link" href={token.src}>{token.src + " "}</a>;
+                                    return <a className="ChatQuote__text__link" href={token.src} target="_blank">{token.src + " "}</a>;
                                 case 'image':
                                     if (partsQuan === 1) {
                                         return <img className="ChatQuote__text__img" src={token.src} alt="" />;
                                     } else {
-                                        return <a className="ChatQuote__text__link" href={token.src}>{token.src + " "}</a>;
+                                        return <a className="ChatQuote__text__link" href={token.src} target="_blank">{token.src + " "}</a>;
                                     }
 
                                 default:

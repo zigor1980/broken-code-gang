@@ -265,6 +265,9 @@ module.exports = function (db, io) {
 
 
         CurrentUser().then(async (user) => {
+            if (!user){
+                return
+            }
             if (!isDisconnected) {
                 ONLINE[user._id] = true;
             }

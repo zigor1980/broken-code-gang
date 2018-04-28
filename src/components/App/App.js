@@ -11,7 +11,8 @@ import { ConnectedContactsListPage } from '../ContactsListPage/ContactsListPage'
 import { GroupChatSettings } from '../GroupChatSettings/GroupChatSettings';
 import { ConnectedUserList } from '../UserList/UserList';
 import { ConnectedAddUserToChatPage } from '../AddUserToChatPage/AddUserToChatPage';
-
+import {routeNavigation} from '../../actions/route';
+import api from '../../api';
 
 // TODO: create page for the settings
 
@@ -50,11 +51,61 @@ const stateToProps = state => ({
 });
 
 class App extends Component {
+
+    constructor(props) {
+        super(props);
+        this.loadApp = this.loadApp.bind(this);
+    }
+
+    componentWillMount(){
+        console.log(this.props);
+        this.loadApp()
+        .catch ((e)=>{
+            console.log(e);
+        })
+            
+        
+            .then((user) => {
+                console.log(user);
+               if (user){
+                this.props.dispatch(routeNavigation({
+                    page: 'chat_list',
+                    payload: {
+                        footerNav: {
+                            active: 'chat'
+                        }
+                    }
+                }));
+               }
+               else {
+                this.props.dispatch(routeNavigation({
+                    page: 'authorization',
+                    payload: {
+                    }
+                }));
+               }
+            });
+    }
+
+    loadApp(){
+        return api.getCurrentUser();
+    }
+
+
+
     render() {
         const Page = routeConfig[this.props.route.page] && routeConfig[this.props.route.page].view;
 
         if (!Page) {
-            return <div>404 Page Not Found</div>;
+            return  (
+                <div className="spinner">
+                    <div className="rect1" />
+                    <div className="rect2" />
+                    <div className="rect3" />
+                    <div className="rect4" />
+                    <div className="rect5" />
+                </div>
+            );
         }
         return (
             <Page />

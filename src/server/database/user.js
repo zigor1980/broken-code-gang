@@ -23,6 +23,7 @@ const TABLE = 'users';
  */
 async function findUserBySid(db, sid) {
     const session = await getSessionInfo(db, sid);
+    console.log(session);
     return getUser(db, session.userId);
 }
 
@@ -33,6 +34,9 @@ async function findUserBySid(db, sid) {
  * @returns {Promise<User>}
  */
 async function getUser(db, userId) {
+    if (!userId){
+        return null;
+    }
     return db.collection(TABLE).findOne({ _id: ObjectId(userId.toString()) });
 }
 

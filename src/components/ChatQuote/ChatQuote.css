@@ -53,4 +53,22 @@
     color: #F13564;
 }
 
+.ChatQuote__text__smile {
+    width: 20px;
+    height: 20px;
+}
+.ChatQuote__text__img {
+    width: 100px;
+    height: 100px;
+}
 
+.ChatQuote__text__link {
+    color: inherit;
+}
+.ChatQuote__extra {
+    text-align: right;
+}
+.ChatQuote__extra__img {
+    width: 100px;
+    height: 100px;
+}

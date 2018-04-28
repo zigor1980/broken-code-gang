@@ -1,9 +1,8 @@
-export default function createBrowserNotification(title, body, icon = '') {
+export default function createBrowserNotification(title, body) {
     const options = {
         body,
-        icon,
     };
 
-    const n = new Notification(title,options);
+    const n = new Notification(title, options);
     setTimeout(n.close.bind(n), 5000); 
 }

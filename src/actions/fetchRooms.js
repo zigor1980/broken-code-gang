@@ -14,9 +14,12 @@ export default function fetchRooms() {
                     lastMessage.userName = (await api.getUser(lastMessage.userId)).name;
                     item.lastMessage = lastMessage;
                 }
-                else
+                else {
                     lastMessage.message = 'нет сообщений';
+                    lastMessage.created_at = 0;
+                }
             }
+            items.sort(compareMessages);
             dispatch({
                 type: 'ROOMS_FETCH',
                 items,
@@ -30,4 +33,13 @@ export default function fetchRooms() {
             });
         }
     };
+}
+
+function compareMessages(a, b) {
+    a = a && a.lastMessage && a.lastMessage.created_at;
+    b = b && b.lastMessage && b.lastMessage.created_at;
+    if (a > b)
+        return -1;
+    else
+        return 1;
 }

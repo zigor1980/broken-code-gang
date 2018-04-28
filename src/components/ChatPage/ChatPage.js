@@ -7,10 +7,8 @@ import './ChatPage.css';
 import fetchMessages from '../../actions/fetchMessages';
 import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 import api from '../../api';
-import { addMessage } from '../../actions/messages';
 import MemberCount from '../../helpers/MemberCount';
 import {routeNavigation} from  '../../actions/route';
-import createBrowserNotification from '../../helpers/createBrowserNotification';
 
 const stateToProps = state => ({
     messages: state.messages,
@@ -59,25 +57,6 @@ export class ChatPage extends Component {
                 chatUsers:users.items,
             }
         }));
-    }
-
-    componentDidMount() {
-            api.onMessage((message) => {
-                this.props.dispatch(addMessage(message));
-
-                if ((Notification.permission === "granted")) {
-                    const { roomId, userId, message: messageText } = message;
-
-                    Promise.all([ api.getUser(userId), api.getRoom(roomId)]).then((result) => {
-                        const [{ name: userName }, { name: roomName }] = result;
-
-                        createBrowserNotification(
-                            roomName,
-                            `${userName}: ${messageText}`,
-                        );
-                    });
-                }
-            }); 
     }
 
     componentDidUpdate() {

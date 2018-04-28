@@ -6,7 +6,10 @@ import { ChatList } from '../ChatList/ChatList';
 import { FooterNav } from '../FooterNav/FooterNav';
 import fetchRooms from '../../actions/fetchRooms';
 import { routeNavigation } from '../../actions/route';
-import findSmile from '../../helpers/formatSmiles';
+import { addMessage } from '../../actions/messages';
+import { updateLastMessage } from '../../actions/rooms';
+import api from '../../api';
+import createBrowserNotification from '../../helpers/createBrowserNotification';
 
 const stateToProps = state => ({
     items: state.rooms.items,
@@ -27,12 +30,8 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
         this.fetch = this.fetch.bind(this);
         this.submitHandler = this.submitHandler.bind(this);
     }
-    
+
     componentDidMount() {
-        console.log(findSmile('=)'));
-        console.log(findSmile('=('));
-        console.log(findSmile('<3'));
-        console.log(findSmile('=*'));
         this.props.dispatch(
             {
                 type: 'ROOMS_RESET',
@@ -47,6 +46,33 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
                     error,
                 });
             });
+        this.props.items.forEach((item)=>api.currentUserJoinRoom(item._id));
+
+        api.onMessage((message) => {
+            this.props.dispatch(updateLastMessage(message));
+            this.props.dispatch(addMessage(message));
+
+            if ((Notification.permission === "granted")) {
+                const { roomId, userId, message: messageText } = message;
+
+                Promise.all([ api.getUser(userId), api.getRoom(roomId)]).then((result) => {
+                    const [{ name: userName }, { name: roomName }] = result;
+
+                    createBrowserNotification(
+                        roomName,
+                        `${userName}: ${messageText}`,
+                    );
+                });
+            }
+        });
+    }
+
+    componentWillUpdate(){
+
+    }
+
+    componentWillUnmount(){
+        this.props.items.forEach((item)=>api.currentUserJoinRoom(item._id));
     }
 
     fetch() {

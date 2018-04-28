@@ -45,11 +45,17 @@ export class ContactsListPage extends Component {
         }
     }
 
-    enterRoom = (roomId) => {
+    enterRoom = async(roomId) => {
+        const users = await api.getUsersOfRoom(roomId),
+            usersName = {};
+        users.items.forEach(user => {
+            usersName[user._id]=user.name;
+        });
         this.props.dispatch(routeNavigation({
             page: 'chat_page',
             payload: {
                 ...this.props.payload,
+                usersName: usersName,
                 currentRoom: roomId,
                 prevPage: 'contacts_list'
             },

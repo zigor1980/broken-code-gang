@@ -36,8 +36,16 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
             <InfiniteRooms fetchNext={fetchNext} next={next}>
                 {rooms.map((room) => {
                     let roomName = room.name,
-                        date = new Date();
-                    date.setTime(room.lastMessage.created_at);
+                        date = new Date(),
+                        author='',
+                        description='',
+                        timestamp='';
+                    if (room && room.lastMessage && room.lastMessage.userName) {
+                        date.setTime(room.lastMessage.created_at);
+                        author = room.lastMessage.userName;
+                        description = room.lastMessage.message;
+                        timestamp = createDateStamp(date);
+                    }
                     if (roomName.split(' ').includes(this.props.curUserInfo.name)) {
                         roomName = roomName.replace(this.props.curUserInfo.name, '');
                     }
@@ -50,9 +58,9 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
                                 modifier: 'avatar-s',
                             },
                             title: `${roomName}`,
-                            timestamp: `${createDateStamp(date)}`,
-                            author: `${room.lastMessage.userName}`,
-                            description: `${room.lastMessage.message}`,
+                            timestamp: `${timestamp}`,
+                            author: `${author}`,
+                            description: `${description}`,
                             id: `${room._id}`,
                         }}
                         onclick={this.enterRoom.bind(this)}

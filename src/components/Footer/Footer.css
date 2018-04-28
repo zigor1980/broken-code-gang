@@ -38,6 +38,30 @@
 }
 
 .Footer__SubmitButton{
+    background: url('../../assets/icons/send-active.png') no-repeat;
+    background-size:70% 70%;
+    background-position: center
+}
+
+.Footer__Emodgy{
+    position: relative;
+    background: url('../../assets/icons/smile.png') no-repeat;
+    background-size:70% 70%;
+    background-position: center
+}
+
+.Emodgy__Container{
+    background: #ffffff;
+    position: absolute;
+    bottom: 45px;
+    right: 0;
+    width: 200px;
+    height: 200px;
+    border: 1px solid #F13564;
+    border-radius: 10px;
+}
+
+.Footer__Button{
     border: none;
     border: 1px solid #fff;
     margin: 5px;
@@ -46,11 +70,8 @@
     width: 30px;
     height: 30px;
     padding: 5px;
-    background: url('../../assets/icons/send-active.png') no-repeat;
-    background-size:70% 70%;
-    background-position: center
-
 }
+
 .Footer__SubmitButton:focus{
     outline: none;
 }

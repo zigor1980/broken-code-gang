@@ -23,6 +23,10 @@ export class Footer extends Component {
         this.setState({ messageText: e.target.value });
     }
 
+    handleEmodgy(){
+
+    }
+
     handleSubmit = () => {
         const roomId = this.props.payload.currentRoom;
         const currentMessage = this.state.messageText;
@@ -43,8 +47,16 @@ export class Footer extends Component {
                     placeholder="Type message..."
                 >
                 </textarea>
+                <div className='Emodgy__Container'>
+                
+                </div>
+            <button
+                className='Footer__Button Footer__Emodgy'
+                onClick={this.handleSubmit}
+              >
+              </button>
               <button
-                className='Footer__SubmitButton'
+                className='Footer__Button Footer__SubmitButton'
                 onClick={this.handleSubmit}
               >
               </button>

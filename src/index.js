@@ -35,9 +35,9 @@ import api from './api';
 //     });
 //
 //     // On user is joined to room
-//     await api.onMessage((result) => {
-//         console.log('New message: ', result);
-//     });
+    await api.onMessage((result) => {
+        console.log('New message: ', result);
+    });
 //
 //     //
 //     // Actions

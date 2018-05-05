@@ -3,19 +3,16 @@
     align-items: center;
     box-sizing: border-box;
     max-width: 100%;
-    margin-left: 5px;
-    margin-right: 5px;
+    margin: 0 7px;
     font-family: sans-serif;
-    box-shadow: 0 13px 25px 0 rgba(0,0,0,0.12);
-    border-radius: 100px;
-    padding-left:0.3rem;
 }
 
 .InstanceSummaryElement__info {
+    flex-grow: 1;
     text-align: left;
     width: 80%;
     margin-left: 10px;
-
+    border-bottom: 1px solid #ccc; 
 }
 .InstanceSummaryElement__info_header{
     display: flex;
@@ -56,20 +53,11 @@
 }
 
 .InstanceSummaryElement__author {
-    color:#F13564;
-}
-
-.InstanceSummaryElement__avatar_acronim_wrapper {
-    width: 36px;
-    height: 36px;
-    color: #F13564;
-    border-radius: 50%;
-    border: 2px solid #F13564;
-    display: flex;
-}
-
-.InstanceSummaryElement__avatar_acronim {
-    margin: auto;
-    text-transform: uppercase;
-    font-weight: 700;
+    font-weight: bold;
+    display: inline-block;
+    border-radius: 5px;
+    padding: 0 5px;
+    background: #ffbb00;
+    color:#333;
+    margin-right: 5px;
 }

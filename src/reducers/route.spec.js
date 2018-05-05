@@ -7,7 +7,7 @@ describe('Reducer::Route', function() {
         // setup
         const state = null;
         const expectedNewState = {
-            page: 'authorization',
+            page: null,
             payload: {}
         };
 
@@ -39,6 +39,7 @@ describe('Reducer::Route', function() {
     const expectedNewState = { 
         page: 'chat_list',
         payload: {
+            FooterNav: 'active',
             _id: '123asd'
         }
     };

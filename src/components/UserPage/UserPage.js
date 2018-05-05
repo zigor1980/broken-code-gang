@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ConnectedHeader } from '../Header/Header';
-import { Avatar } from '../Avatar/Avatar';
+import Avatar from '../Avatar/Avatar';
 import { FooterNav } from '../FooterNav/FooterNav';
 import { routeNavigation } from '../../actions/route';
 import api from '../../api';

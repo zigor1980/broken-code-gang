@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChatQuote } from '../ChatQuote/ChatQuote';
-import { Avatar } from '../Avatar/Avatar';
+import Avatar from '../Avatar/Avatar';
 import './ChatField.css';
 
 export function ChatField(props) {

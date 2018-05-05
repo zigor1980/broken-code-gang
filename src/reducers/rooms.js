@@ -20,7 +20,6 @@ export default function rooms(state, action) {
                 ...state,
                 items: [...state.items, ...action.items],
                 next: action.next,
-                end: action.end,
             };
         case 'USER_SIGN_OUT':
             return {
@@ -31,7 +30,7 @@ export default function rooms(state, action) {
             return {
                 ...state,
                 items: [],
-                next: null,
+                next: true,
             };
         case 'ROOMS_UPDATE_LAST_MESSAGE':
             console.log(state);

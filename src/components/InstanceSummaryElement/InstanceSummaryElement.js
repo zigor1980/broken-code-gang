@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Avatar } from '../Avatar/Avatar';
+import Avatar from '../Avatar/Avatar';
 import './InstanceSummaryElement.css';
 
 export class InstanceSummaryElement extends Component {
@@ -28,15 +28,7 @@ export class InstanceSummaryElement extends Component {
             descClasses += ' InstanceSummaryElement__desc_dark';
         }
 
-        let destrTitle = title.split(' ');
-        let avaTitle = '';
-        if (destrTitle.length === 1){
-            avaTitle = title.substring(0, 2);
-        } else if (destrTitle.length > 1){
-            avaTitle = `${destrTitle[0].substring(0, 1)}${destrTitle[1].substring(0, 1)}`;
-        }
-
-        let avatar = avaTitle ? <div className="InstanceSummaryElement__avatar_acronim_wrapper"><span className="InstanceSummaryElement__avatar_acronim">{avaTitle}</span></div> : <Avatar image={this.props.avatar} />
+        let avatar = <Avatar caption={title} modifier={'m'}/>
 
         let descView = '';
         if (author) {
@@ -58,9 +50,7 @@ export class InstanceSummaryElement extends Component {
 
         return (
             <div className="InstanceSummaryElement" onClick={this.handleClick}>
-                <div className="InstanceSummaryElement__avatar">
-                    {avatar}
-                </div>
+                {avatar}
                 <div className="InstanceSummaryElement__info">
                     <div className="InstanceSummaryElement__info_header">
                         <h3 className={titleClasses}>{title}</h3>
@@ -72,4 +62,3 @@ export class InstanceSummaryElement extends Component {
         );
     }
 }
-

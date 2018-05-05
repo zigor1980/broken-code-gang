@@ -37,7 +37,7 @@
     "githooks": "git config core.hooksPath hooks",
     "lint": "eslint ./src",
     "lint:fix": "eslint --fix ./src",
-    "test": "cross-env NODE_ENV=test  mocha --compilers js:babel-core/register src/**/*.spec.js",
+    "test": "cross-env NODE_ENV=test  mocha --compilers js:babel-core/register \"src/**/*.spec.js\"",
     "test:watch": "npm test -- -w",
     "gemini:gui": "gemini-gui -c ./.gemini.js",
     "gemini": "gemini test -c ./.gemini.js"

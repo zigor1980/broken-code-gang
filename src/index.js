@@ -20,14 +20,14 @@ import api from './api';
 //     // Events
 //     //
 //     // On status of user is changed
-//     await api.onUserChangeStatus((result) => {
-//         console.log('Change status: ', result);
-//     });
+    await api.onUserChangeStatus((result) => {
+        console.log('Change status: ', result);
+    });
 //
-//     // On user is joined to room
-//     await api.onUserJoinedRoom((result) => {
-//         console.log('User joined room: ', result);
-//     });
+    // On user is joined to room
+    // await api.onUserJoinedRoom((result) => {
+    //     console.log('User joined room: ', result);
+    // });
 //
 //     // On user is joined to room
 //     await api.onUserLeavedRoom((result) => {
@@ -117,26 +117,6 @@ const store = createStore(
     undefined,
     composeEnhancers(applyMiddleware(middleware)),
 );
-
-api.getCurrentUser().then(user => {
-    if(!user){
-        return;
-    }
-    const { email, password } = user;
-
-    if (email && password) {
-        store.dispatch(signInUser(email, password)).then(() => {
-            store.dispatch(routeNavigation({
-                page: 'chat_list',
-                payload: {
-                    footerNav: {
-                        active: 'chat'
-                    }
-                }
-            }));
-        });
-    }
-});
 
 ReactDOM.render(
     <Provider store={store}>

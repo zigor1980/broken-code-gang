@@ -42,29 +42,32 @@ export class ChatQuote extends React.Component {
         const messageImages = imagesUrls.map((url)=>{
             return <img className="ChatQuote__extra__img" src={url} alt="" />;
         });
+        let id = -1;
+        const content = editedMessageParts.map((token)=> {  
+            id++;                       
+            switch (token.type){
+                case 'smile':
+                    return <img key={id} className="ChatQuote__text__smile" src={require(`../../assets/icons/${token.src}`)} alt="" />;
+                case 'link':
+                    return <a key={id} className="ChatQuote__text__link" href={token.src} target="_blank">{token.src + " "}</a>;
+                case 'image':
+                    if (partsQuan === 1) {
+                        return <img key={id} className="ChatQuote__text__img" src={token.src} alt="" />;
+                    } else {
+                        return <a key={id} className="ChatQuote__text__link" href={token.src} target="_blank">{token.src + " "}</a>;
+                    }
+
+                default:
+                    return <span key={id}>{token.text + " "}</span>;
+            }
+        })
 
 
         return (
             <div className={`ChatQuote ${chatDirection}`}>
                 {user}
                 <p className="ChatQuote__text">
-                    {editedMessageParts.map((token)=> {
-                            switch (token.type){
-                                case 'smile':
-                                    return <img className="ChatQuote__text__smile" src={require(`../../assets/icons/${token.src}`)} alt="" />;
-                                case 'link':
-                                    return <a className="ChatQuote__text__link" href={token.src} target="_blank">{token.src + " "}</a>;
-                                case 'image':
-                                    if (partsQuan === 1) {
-                                        return <img className="ChatQuote__text__img" src={token.src} alt="" />;
-                                    } else {
-                                        return <a className="ChatQuote__text__link" href={token.src} target="_blank">{token.src + " "}</a>;
-                                    }
-
-                                default:
-                                    return <span>{token.text + " "}</span>;
-                            }
-                        })}
+                    {content}
                 </p>
                 <div className="ChatQuote__extra">{messageImages}</div>
                 <p className="ChatQuote__timestamp">{date.toLocaleString()}</p>

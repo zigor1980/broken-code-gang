@@ -4,16 +4,44 @@
     display: flex;
     flex-direction: row;
     flex-wrap: nowrap;
-    background-color: #fff;
+    background-color: #333;
     font-family: sans-serif;
     justify-content: space-between;
-    align-content: center;
+    align-items: center;
+    color: #fff;
+}
+
+.Button_Add{
+    border: none;
+    border: 1ps solid #fff;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    background: #ffbb00;
+    color: #333;
+    font-weight: bold;
+    font-size: 25px;
+    margin: 5px;
+}
+
+.Header__content__TextField{
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 0 5px;
+    color: #fff;
+    border: none;
+    border: 1px solid #ccc;
+    background: #333;
+    box-sizing: border-box;
+    width: 100%;
+    height: 45px;
 }
 
 .Header__content {
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-grow: 1;
 }
 
 .Header__button {
@@ -22,11 +50,18 @@
 }
 
 .Header__content__item {
-
+    flex-grow: 1;
+    margin-left: 5px;
 }
 
 .Header__content__item > * {
+    width: 65vw;
     margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+    word-wrap: break-word;
 }
 
 .Header__search_wrapper {

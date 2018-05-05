@@ -1,12 +1,11 @@
 import api from '../api';
-import { compareMessages } from '../helpers/compareMessages';
 
 export default function fetchRooms() {
     return async function (dispatch, getState) {
         try {
             const room = await api.getCurrentUserRooms(getState().rooms.next);
+            console.log(room);
             const { items, next } = room;
-            console.log(items);
             dispatch({
                 type: 'ROOMS_FETCH',
                 items,

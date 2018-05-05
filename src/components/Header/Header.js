@@ -62,6 +62,7 @@ export default class Header extends Component {
             buttonBack,
             buttonSearch,
             buttonSettings,
+            buttonAdd,
             contentType,
         } = this.props;
         const btnFillerStyle = { width: '30px', height: '30px' };
@@ -72,31 +73,44 @@ export default class Header extends Component {
             rightControl = <Button type="search" active modifier="s" circle onClick={this.startSearch.bind(this)} />;
         } else if (buttonSettings) {
             rightControl = <Button type="settings" active modifier="s" circle onClick={this.openChatSettings.bind(this)}/>;
+        } else if (buttonAdd){
+            rightControl = (
+                <button className='Button_Add' onClick={buttonAdd}>+</button>
+            )
         }
         let contentTitle = '';
         let contentDesc = '';
+        let anotation = '';
+        let type = '';
         switch (contentType) {
         case 'chats':
-            contentTitle = 'BCG';
+            contentTitle = 'BCM';
+            type = 'caption';
             break;
         case 'add-room':
-            contentTitle = 'Создать kомнату';
+            anotation = 'Enter room name...';
+            type = 'input';
             break;
         case 'contacts':
             contentTitle = 'Contacts';
+            type = 'caption';
             break;
         case 'add-user':
             contentTitle = 'Select contact';
+            type = 'caption';
             break;
         case 'settings':
             contentTitle = 'Settings';
+            type = 'caption';
             break;
         case 'chat':
             contentTitle = this.props.contentTitle || 'Chat';
             contentDesc = this.props.contentDesc || '';
+            type = 'chat';
             break;
         default:
-            contentTitle = 'BCG';
+            contentTitle = 'BCM';
+            type = 'caption';
             break;
         }
 
@@ -108,7 +122,14 @@ export default class Header extends Component {
                 <Button type="delete" active modifier="s" circle onClick={this.resetSearch.bind(this)} />
                              </div>);
         } else {
-            headerContent = <HeaderCenterItems title={contentTitle} desc={contentDesc} />;
+            headerContent = (
+                <HeaderCenterItems
+                    title={contentTitle}
+                    desc={contentDesc}
+                    type={type}
+                    anotation={anotation}
+                />
+            );
         }
 
 

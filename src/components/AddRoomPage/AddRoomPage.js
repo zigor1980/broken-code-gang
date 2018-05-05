@@ -63,7 +63,6 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
         }));
     };
 
-
     fetch() {
         return this.props.dispatch(fetchUsers());
     }
@@ -99,25 +98,7 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
         ));
         return (
             <div className="AddRoomPage">
-                <ConnectedHeader buttonBack buttonSearch={false} buttonSettings={false} contentType="add-room" />
-                <div
-                    className="AddForm_InputField"
-                >
-                    <input
-                        type="text"
-                        id="Room-name"
-                        className="InputField_Name"
-                        placeholder="Введите название беседы"
-                    />
-                    <p>
-                        <button
-                            className="InputField_Accept"
-                            onClick={this.addRoomHandle}
-                        >
-                                OK
-                        </button>
-                    </p>
-                </div>
+                <ConnectedHeader buttonBack buttonAdd={this.addRoomHandle} contentType='add-room' />
                 <InfiniteRooms fetchNext={this.fetch} next={this.props.next}>
                     {this.state.loading && (
                         <div className="spinner">

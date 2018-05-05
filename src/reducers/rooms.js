@@ -16,36 +16,18 @@ export default function rooms(state, action) {
                 newRoom: action.room,
             };
         case 'ROOMS_FETCH':
+        console.log(state);
             return {
                 ...state,
                 items: [...state.items, ...action.items],
                 next: action.next,
             };
-        case 'USER_SIGN_OUT':
-            return {
-                items: [],
-                next: true,
-            };
         case 'ROOMS_RESET':
             return {
                 ...state,
                 items: [],
-                next: true,
+                next: undefined,
             };
-        case 'ROOMS_UPDATE_LAST_MESSAGE':
-            console.log(state);
-            let newItems = [...state.items],
-                newState = {
-                    ...state,
-                };
-            newItems.forEach((item) => {
-                if (item._id === (action && action.newMessage.roomId)) {
-                    item.lastMessage = action.newMessage;
-                    newState.items =  newItems;
-                }
-            });
-            newState.items.sort(compareMessages);
-            return newState;
         case 'ROOMS_ERROR':
             return {
                 ...state,

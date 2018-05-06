@@ -9,11 +9,12 @@ import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 import api from '../../api';
 import MemberCount from '../../helpers/MemberCount';
 import {routeNavigation} from  '../../actions/route';
+import replaceUserName from '../../helpers/replaceUserName';
 
 const stateToProps = state => ({
     messages: state.messages,
     payload: state.route.payload,
-    userId:state.user._id,
+    userId:state.user.curUserInfo._id,
     curUserInfo:state.user.curUserInfo
 });
 
@@ -90,10 +91,7 @@ export class ChatPage extends Component {
         let contentDesc = '';
         let chatInfo = this.state.chatInfo;
         if (chatInfo) {
-            contentTitle = chatInfo.name;
-            if (contentTitle.split(' ').includes(this.props.curUserInfo.name)) {
-                contentTitle = contentTitle.replace(this.props.curUserInfo.name, '');
-            }
+            contentTitle = replaceUserName(this.props.curUserInfo.name,chatInfo.name);
             if (chatInfo.users.length === 1){
                 contentDesc = '';
             } else {

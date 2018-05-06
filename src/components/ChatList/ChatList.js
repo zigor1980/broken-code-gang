@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { routeNavigation } from '../../actions/route';
 import api from '../../api';
 import { createDateStamp } from '../../helpers/createDateStamp';
+import replaceUserName from '../../helpers/replaceUserName';
 
 const stateToProps = state => ({
     payload: state.route.payload,
@@ -22,7 +23,6 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
         this.props.dispatch(routeNavigation({
             page: 'chat_page',
             payload: {
-                /*...this.props.payload,*/
                 usersName: usersName,
                 currentRoom: roomId,
                 prevPage: 'chat_list',
@@ -31,11 +31,10 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
     }
     render() {
         const { rooms, fetchNext, next } = this.props;
-
         return (
             <InfiniteRooms fetchNext={fetchNext} next={next}>
                 {rooms.map((room) => {
-                    let roomName = room.name,
+                    let roomName = replaceUserName(this.props.curUserInfo.name, room.name),
                         date = new Date(),
                         author='',
                         description='',

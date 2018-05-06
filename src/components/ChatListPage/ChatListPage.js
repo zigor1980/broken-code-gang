@@ -77,20 +77,14 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
                     error,
                 });
             });
-
-
-        // api.onMessage(this.nott);
     }
 
     componentWillUpdate(){
 
     }
 
-    componentWillUnmount(){
-        // this.props.items.forEach((item)=>api.currentUserLeaveChannel(item._id));
-    }
-
     fetch() {
+        console.log('Вызоа при отрисовке');
         return this.props.dispatch(fetchRooms());
     }
 
@@ -129,7 +123,6 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
                     next={this.props.next}
                 />
                 <FooterNav active={this.props.payload.footerNav.active} />
-                <button className="ChatList_AddButton" onClick={this.submitHandler} >+</button>
             </div>
         );
     }

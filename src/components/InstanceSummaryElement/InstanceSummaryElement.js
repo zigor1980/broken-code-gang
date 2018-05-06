@@ -4,10 +4,6 @@ import './InstanceSummaryElement.css';
 
 export class InstanceSummaryElement extends Component {
 
-    handleClick = () => {
-        this.props.onclick(this.props.summary.id);
-    }
-
     render() {
         if (!this.props) {
             return null;
@@ -33,7 +29,7 @@ export class InstanceSummaryElement extends Component {
         let descView = '';
         if (author) {
             descView = (<p className={descClasses}>
-                <span className="InstanceSummaryElement__author">{`${author}: `}</span>
+                <span className="InstanceSummaryElement__author">{`${author}`}</span>
                 {description}
             </p>);
         } else {
@@ -47,9 +43,8 @@ export class InstanceSummaryElement extends Component {
             timestampView = <p className="InstanceSummaryElement__info_timestamp">{timestamp}</p>;
         }
 
-
         return (
-            <div className="InstanceSummaryElement" onClick={this.handleClick}>
+            <div className="InstanceSummaryElement" onClick={this.props.handle}>
                 {avatar}
                 <div className="InstanceSummaryElement__info">
                     <div className="InstanceSummaryElement__info_header">

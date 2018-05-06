@@ -15,8 +15,9 @@ const { ObjectId } = require('mongodb');
  * @param {Collection} collection
  * @param filter
  */
+
 async function pageableCollection(collection, {
-    lastId, order, limit = 10, ...query
+    lastId, order, limit = 10 , ...query
 } = {},selectModifier) {
     const count = await collection.find(query).count();
     if(lastId && selectModifier){
@@ -59,6 +60,7 @@ async function pageableCollection(collection, {
         next,
     };
 }
+
 
 /**
  * Create pagination

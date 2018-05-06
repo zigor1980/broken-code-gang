@@ -30,16 +30,16 @@ export class InfiniteRooms extends React.Component {
         const { scrollTop } = page;
         const containerHeight = this.container.clientHeight;
         let visiblePat = page.clientHeight;
-        visiblePat -= 40;
+        visiblePat -= 14;
         if (scrollTop === containerHeight - visiblePat) {
             this.nextPage();
         }
     }
 
     async nextPage() {
-        if (this.props.next) {
-            this.setState({ loading: true });
+        if (this.props.next ) {
             try {
+                this.setState({ loading: true });
                 await this.props.fetchNext();
             } catch (err) {
                 // console.error(err);

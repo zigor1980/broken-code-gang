@@ -3,8 +3,14 @@
     align-items: center;
     box-sizing: border-box;
     max-width: 100%;
-    margin: 0 7px;
+    padding: 0 7px;
+    margin: 7px 0;
     font-family: sans-serif;
+}
+
+.InstanceSummaryElement_Capture {
+    background: #ffbb00;
+    border-radius: 5px;
 }
 
 .InstanceSummaryElement__info {

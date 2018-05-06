@@ -6,8 +6,6 @@ import './index.css';
 import App from './components/App/App';
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './reducers';
-import signInUser from './actions/signInUser';
-import {routeNavigation} from './actions/route';
 
 import api from './api';
 //
@@ -20,9 +18,9 @@ import api from './api';
 //     // Events
 //     //
 //     // On status of user is changed
-    await api.onUserChangeStatus((result) => {
-        console.log('Change status: ', result);
-    });
+    // await api.onUserChangeStatus((result) => {
+    //     console.log('Change status: ', result);
+    // });
 //
     // On user is joined to room
     // await api.onUserJoinedRoom((result) => {
@@ -35,9 +33,9 @@ import api from './api';
 //     });
 //
 //     // On user is joined to room
-    await api.onMessage((result) => {
-        console.log('New message: ', result);
-    });
+    // await api.onMessage((result) => {
+    //     console.log('New message: ', result);
+    // });
 //
 //     //
 //     // Actions
@@ -67,8 +65,8 @@ import api from './api';
 //     }
 //
     // Get list of all rooms
-    // let rooms = await api.getRooms();
-    // console.log('All rooms', rooms);
+    let rooms = await api.getCurrentUserRooms({limit:200});
+    console.log('All rooms', rooms);
     // rooms = await api.getRooms(rooms.next);
     // console.log('All rooms', rooms);
 //     console.log('Get room info', await api.getRoom(rooms.items[0]._id));

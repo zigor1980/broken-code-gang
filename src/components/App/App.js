@@ -57,17 +57,19 @@ class App extends Component {
         this.loadApp = this.loadApp.bind(this);
     }
 
-    componentWillMount(){
+    componentDidMount(){
         console.log(this.props);
         this.loadApp()
         .catch ((e)=>{
             console.log(e);
         })
-            
-        
             .then((user) => {
                 console.log(user);
                if (user){
+                this.props.dispatch({
+                    type: 'USER_GET_INFO',
+                    curUserInfo:user
+                });
                 this.props.dispatch(routeNavigation({
                     page: 'chat_list',
                     payload: {

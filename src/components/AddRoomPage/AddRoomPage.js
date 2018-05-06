@@ -6,6 +6,7 @@ import fetchUsers from '../../actions/fetchUsers';
 import { InfiniteRooms } from '../InfiniteRooms/InfiniteRooms';
 import addRoom from '../../actions/rooms';
 import { routeNavigation } from '../../actions/route';
+import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummaryElement';
 
 const stateToProps = state => ({
     items: state.users.items,
@@ -22,8 +23,14 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
         };
         this.fetch = this.fetch.bind(this);
         this.addRoomHandle = this.addRoomHandle.bind(this);
+        this.addUser = this.addUser.bind(this);
         this.mas = [];
     }
+
+    addUser(id){
+
+    }
+
     componentDidMount() {
         this.props.dispatch(
             {
@@ -68,34 +75,29 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
     }
 
     render() {
-        const listUses = this.props.items.map(el => (
-            <div className="UsersList__ListElement" key={el._id}>
-                <div className="ListElement__Photo">
-                    <img
-                        src="https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200"
-                        alt={el.name}
-                    />
-                </div>
-                <div className="ListElement__Desc">
-                    <p
-                        className="Desc__Name"
-                    >
-                        {el.name}
-                        <input
-                            type="checkbox"
-                            onClick={(e) => {
-                                if (e.target.checked) {
-                                    this.mas.push(el._id);
-                                } else {
-                                    this.mas.splice(this.mas.indexOf(el.id), 1);
-                                }
-                            }}
-                        />
-                    </p>
-                    <p className="Desc__Status">{el.online && 'online'}</p>
-                </div>
-            </div>
-        ));
+        const listUses = this.props.items.map(el => {
+            const status = el.online ? 'online':'';
+            return <InstanceSummaryElement
+                key={el._id}
+                summary={{
+                    title: `${el.name}`,
+                    author: `${status}`,
+                }}
+                handle={(e) => {
+                    e.currentTarget.querySelector('.avatar')
+                    .classList.toggle('avatar_choice');
+                    if (this.mas.length === 0){
+                        this.mas.push(el._id);
+                    } else if (this.mas.indexOf(el._id)<0){
+                        this.mas.push(el._id);
+                    } else {
+                        this.mas.splice(this.mas.indexOf(el.id), 1);
+                    }
+                    console.log();
+                    console.log(this.mas)
+                }}
+            />
+        });
         return (
             <div className="AddRoomPage">
                 <ConnectedHeader buttonBack buttonAdd={this.addRoomHandle} contentType='add-room' />

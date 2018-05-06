@@ -1,5 +1,3 @@
-import { compareMessages } from '../helpers/compareMessages';
-
 export default function rooms(state, action) {
     if (!state) {
         return {
@@ -16,7 +14,6 @@ export default function rooms(state, action) {
                 newRoom: action.room,
             };
         case 'ROOMS_FETCH':
-        console.log(state);
             return {
                 ...state,
                 items: [...state.items, ...action.items],

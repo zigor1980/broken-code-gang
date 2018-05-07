@@ -37,7 +37,7 @@ export class InfiniteRooms extends React.Component {
     }
 
     async nextPage() {
-        if (this.props.next ) {
+        if (this.props.next) {
             try {
                 this.setState({ loading: true });
                 await this.props.fetchNext();

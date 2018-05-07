@@ -1,59 +1,53 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Avatar from '../Avatar/Avatar';
 import './InstanceSummaryElement.css';
 
-export class InstanceSummaryElement extends Component {
+export function InstanceSummaryElement({ summary, handle }) {
+    const {
+        title, description, author, descModifiers, timestamp,
+    } = summary;
 
-    render() {
-        if (!this.props) {
-            return null;
-        }
+    let titleClasses = 'InstanceSummaryElement__title';
+    let descClasses = 'InstanceSummaryElement__desc';
 
-        const { summary } = this.props;
-        const {
-            title, description, author, descModifiers,timestamp
-        } = summary;
+    if (descModifiers && descModifiers === 'light') {
+        titleClasses += ' InstanceSummaryElement__title_light';
+        descClasses += ' InstanceSummaryElement__desc_light';
+    } else {
+        descClasses += ' InstanceSummaryElement__desc_dark';
+    }
 
-        let titleClasses = 'InstanceSummaryElement__title';
-        let descClasses = 'InstanceSummaryElement__desc';
+    const avatar = <Avatar caption={title} modifier="m" />;
 
-        if (descModifiers && descModifiers === 'light') {
-            titleClasses += ' InstanceSummaryElement__title_light';
-            descClasses += ' InstanceSummaryElement__desc_light';
-        } else {
-            descClasses += ' InstanceSummaryElement__desc_dark';
-        }
-
-        let avatar = <Avatar caption={title} modifier={'m'}/>
-
-        let descView = '';
-        if (author) {
-            descView = (<p className={descClasses}>
+    let descView = '';
+    if (author) {
+        descView = (
+            <p className={descClasses}>
                 <span className="InstanceSummaryElement__author">{`${author}`}</span>
                 {description}
             </p>);
-        } else {
-            descView = (<p className={descClasses}>
+    } else {
+        descView = (
+            <p className={descClasses}>
                 {description}
             </p>);
-        }
-
-        let timestampView='';
-        if(timestamp){
-            timestampView = <p className="InstanceSummaryElement__info_timestamp">{timestamp}</p>;
-        }
-
-        return (
-            <div className="InstanceSummaryElement" onClick={this.props.handle}>
-                {avatar}
-                <div className="InstanceSummaryElement__info">
-                    <div className="InstanceSummaryElement__info_header">
-                        <h3 className={titleClasses}>{title}</h3>
-                        {timestampView}
-                    </div>
-                    {descView}
-                </div>
-            </div>
-        );
     }
+
+    let timestampView = '';
+    if (timestamp) {
+        timestampView = <p className="InstanceSummaryElement__info_timestamp">{timestamp}</p>;
+    }
+
+    return (
+        <div className="InstanceSummaryElement" onClick={handle}>
+            {avatar}
+            <div className="InstanceSummaryElement__info">
+                <div className="InstanceSummaryElement__info_header">
+                    <h3 className={titleClasses}>{title}</h3>
+                    {timestampView}
+                </div>
+                {descView}
+            </div>
+        </div>
+    );
 }

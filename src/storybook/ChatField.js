@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ChatField } from '../components/ChatField/ChatField.js';
+import { ChatField } from '../components/ChatField/ChatField';
 
 storiesOf('ChatField', module)
     .add('User message', () => {

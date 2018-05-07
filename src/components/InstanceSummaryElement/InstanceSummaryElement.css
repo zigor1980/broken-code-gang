@@ -1,4 +1,5 @@
 .InstanceSummaryElement {
+    color: #fff;
     display: flex;
     align-items: center;
     box-sizing: border-box;
@@ -18,7 +19,7 @@
     text-align: left;
     width: 80%;
     margin-left: 10px;
-    border-bottom: 1px solid #ccc; 
+    border-bottom: 1px solid #333;
 }
 .InstanceSummaryElement__info_header{
     display: flex;
@@ -35,11 +36,10 @@
 
 .InstanceSummaryElement__title {
     font-weight: bold;
-    color: #46454C;
 }
 
 .InstanceSummaryElement__desc {
-    color: #3f413e;
+    font: bold;
 }
 
 .InstanceSummaryElement__title, .InstanceSummaryElement__desc {
@@ -63,7 +63,7 @@
     display: inline-block;
     border-radius: 5px;
     padding: 0 5px;
-    background: #ffbb00;
+    background: #cdb708;
     color:#333;
     margin-right: 5px;
 }

@@ -74,7 +74,7 @@ class Api {
      * @return {Promise<User>}
      * */
     async setCurrentUser(userId) {
-        return this._requestResponse(MESSAGES.SET_CURRENT_USER, { userId: userId });
+        return this._requestResponse(MESSAGES.SET_CURRENT_USER, { userId });
     }
 
     /**
@@ -87,15 +87,15 @@ class Api {
     }
 
     /**
-     * Return user by login and password*/
+     * Return user by login and password */
     async getUserByLogin(login, password) {
-        return this.getUsers({ email: login, password: password }).then(result => result.items[0]);
+        return this.getUsers({ email: login, password }).then(result => result.items[0]);
     }
 
     /**
-     * Add new user to database*/
+     * Add new user to database */
     async addUser(login, password, name) {
-        return this._requestResponse(MESSAGES.ADD_USER, { email: login, password: password, name: name });
+        return this._requestResponse(MESSAGES.ADD_USER, { email: login, password, name });
     }
 
     /**
@@ -243,8 +243,8 @@ class Api {
      *
      * @return {Promise<Room>}
      */
-    async removeUserFromRoom(userId,roomId) {
-        return this._requestResponse(MESSAGES.REMOVE_USER_FROM_ROOM, {userId, roomId });
+    async removeUserFromRoom(userId, roomId) {
+        return this._requestResponse(MESSAGES.REMOVE_USER_FROM_ROOM, { userId, roomId });
     }
 
     /**
@@ -289,7 +289,7 @@ class Api {
      * @return {Promise<Pagination<Message>>}
      */
     async getLastRoomMessages(roomId) {
-        return this.getMessages({ roomId ,limit:1});
+        return this.getMessages({ roomId, limit: 1 });
     }
 
     /**

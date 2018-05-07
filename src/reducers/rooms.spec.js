@@ -3,7 +3,7 @@ import rooms from './rooms';
 
 describe('Reducer::Rooms', () => {
     it('returns items (empty array), next (true), error(null) if state is undefined', () => {
-        // setup
+    // setup
         const state = null;
         const expectedNewState = {
             items: [],
@@ -18,7 +18,7 @@ describe('Reducer::Rooms', () => {
         expect(newState).to.deep.equal(expectedNewState);
     });
     it('on ROOM_ADD returns new state with added rooms', () => {
-        // setup
+    // setup
         const state =
             {
                 items: [{ id: '1' }, { id: '2' }, { id: '3' }],
@@ -29,7 +29,7 @@ describe('Reducer::Rooms', () => {
         const action = {
             type: 'ROOM_ADD',
             room: newRoom,
-            newRoom: newRoom
+            newRoom,
         };
         const expectedNewState =
              {
@@ -46,22 +46,22 @@ describe('Reducer::Rooms', () => {
         expect(newState).to.deep.equal(expectedNewState);
     });
     it('on ROOM_FETCH returns new state with existing rooms', () => {
-        // setup
+    // setup
         const state =
             {
                 items: [{ id: '1' }, { id: '2' }, { id: '3' }],
-                next: {lastid: '3'},
+                next: { lastid: '3' },
                 error: null,
             };
         const action = {
             type: 'ROOMS_FETCH',
             items: [{ id: '4' }, { id: '5' }, { id: '6' }],
-            next: {lastid: '6'},
+            next: { lastid: '6' },
         };
         const expectedNewState =
              {
                  items: [{ id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }, { id: '5' }, { id: '6' }],
-                 next: {lastid: '6'},
+                 next: { lastid: '6' },
                  error: null,
              };
         // execute
@@ -72,11 +72,11 @@ describe('Reducer::Rooms', () => {
         expect(newState).to.deep.equal(expectedNewState);
     });
     it('on ROOMS_RESET returns items (empty array), next (true), error(null)', () => {
-        // setup
+    // setup
         const state =
             {
                 items: [{ id: '1' }, { id: '2' }, { id: '3' }],
-                next: {lastid: '3'},
+                next: { lastid: '3' },
                 error: null,
             };
         const action = {

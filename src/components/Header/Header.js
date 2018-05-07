@@ -17,20 +17,20 @@ export default class Header extends Component {
             search: false,
         };
     }
+
     goBack() {
-        const payload = this.props.payload;
-        if (!payload || !payload.prevPage || payload.prevPage === 'authorization') {
-            return null;
+        const { payload } = this.props;
+        if (!(!payload || !payload.prevPage || payload.prevPage === 'authorization')) {
+            const { prevPage } = this.props.payload;
+            this.props.dispatch(routeNavigation({
+                page: prevPage,
+                payload: {
+                    ...this.props.payload,
+                    prevPage: this.props.payload.prevPrevPage ? this.props.payload.prevPrevPage : '',
+                    prevPrevPage: this.props.payload.prevPrevPrevPage ? this.props.payload.prevPrevPrevPage : '',
+                },
+            }));
         }
-        const prevPage = this.props.payload.prevPage;
-        this.props.dispatch(routeNavigation({
-            page: prevPage,
-            payload: {
-                ...this.props.payload,
-                prevPage: this.props.payload.prevPrevPage ? this.props.payload.prevPrevPage : '',
-                prevPrevPage: this.props.payload.prevPrevPrevPage ? this.props.payload.prevPrevPrevPage : '',
-            },
-        }));
     }
 
     startSearch() {
@@ -39,7 +39,7 @@ export default class Header extends Component {
         });
     }
 
-    openChatSettings(){
+    openChatSettings() {
         this.props.openChatSettings();
     }
 
@@ -67,16 +67,28 @@ export default class Header extends Component {
         } = this.props;
         const btnFillerStyle = { width: '30px', height: '30px' };
         const btnFiller = <div style={btnFillerStyle}>&nbsp;</div>;
-        const leftControl = buttonBack ? <Button type="back" active modifier="s" circle onClick={this.goBack.bind(this)} >''</Button> : btnFiller;
+        const leftControl = buttonBack ? (
+            <Button
+                type="back"
+                modifier="es"
+                circle
+                onClick={this.goBack.bind(this)}
+            />) : btnFiller;
         let rightControl = btnFiller;
         if (buttonSearch) {
-            rightControl = <Button type="search" active modifier="s" circle onClick={this.startSearch.bind(this)} />;
-        } else if (buttonSettings) {
-            rightControl = <Button type="settings" active modifier="s" circle onClick={this.openChatSettings.bind(this)}/>;
-        } else if (buttonAdd){
             rightControl = (
-                <button className='Button_Add' onClick={buttonAdd}>+</button>
-            )
+                <Button
+                    type="search"
+                    modifier="s"
+                    circle
+                    onClick={this.startSearch.bind(this)}
+                />);
+        } else if (buttonSettings) {
+            rightControl = <Button type="settings" modifier="s" circle onClick={this.openChatSettings.bind(this)} />;
+        } else if (buttonAdd) {
+            rightControl = (
+                <button className="Button_Add" onClick={buttonAdd} />
+            );
         }
         let contentTitle = '';
         let contentDesc = '';
@@ -116,11 +128,17 @@ export default class Header extends Component {
 
         let headerContent = '';
         if (this.state.search || this.props.searchIsOn) {
-            headerContent = (<div className="Header__search_wrapper">
-                <Button type="back" active modifier="s" circle onClick={this.cancelSearch.bind(this)} />
-                <input autoFocus type="text" className="Header__search_input" onChange={this.handleSearch.bind(this)} value={this.props.searchIsOn} />
-                <Button type="delete" active modifier="s" circle onClick={this.resetSearch.bind(this)} />
-                             </div>);
+            headerContent = (
+                <div className="Header__search_wrapper">
+                    <Button type="back" modifier="es" onClick={this.cancelSearch.bind(this)} />
+                    <input
+                        type="text"
+                        className="Header__search_input"
+                        onChange={this.handleSearch.bind(this)}
+                        value={this.props.searchIsOn}
+                    />
+                    <Button type="delete" active modifier="s" circle onClick={this.resetSearch.bind(this)} />
+                </div>);
         } else {
             headerContent = (
                 <HeaderCenterItems
@@ -131,7 +149,6 @@ export default class Header extends Component {
                 />
             );
         }
-
 
         return (
             <header className="Header">

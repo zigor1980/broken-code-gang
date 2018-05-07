@@ -105,7 +105,7 @@ async function joinRoom(db, { roomId, userId }) {
     }
 
     let collection = db.collection(TABLE),
-     [ room, user ] = await Promise.all([getRoom(db, roomId), getUser(db, userId)]);
+        [room, user] = await Promise.all([getRoom(db, roomId), getUser(db, userId)]);
 
 
     if (!room) {
@@ -145,7 +145,7 @@ async function dropRoom(db, roomId) {
     }
 
     const query = {
-        _id:ObjectId(roomId.toString()),
+        _id: ObjectId(roomId.toString()),
     };
 
     return await db.collection(TABLE).deleteOne(query);
@@ -195,5 +195,5 @@ module.exports = {
     getRoom,
     joinRoom,
     leaveRoom,
-    dropRoom
+    dropRoom,
 };

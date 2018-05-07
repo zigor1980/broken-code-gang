@@ -4,5 +4,5 @@ import { ConfirmActionDialog } from '../components/ConfirmActionDialog/ConfirmAc
 
 storiesOf('ConfirmActionDialog', module)
     .add('no modifiers', () => (
-      <ConfirmActionDialog />
+        <ConfirmActionDialog />
     ));

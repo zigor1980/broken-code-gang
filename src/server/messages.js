@@ -77,7 +77,7 @@ module.exports = {
     /**
      * Remove user from room
      */
-    DROP_ROOM:'DROP_ROOM',
+    DROP_ROOM: 'DROP_ROOM',
 
     /**
      * Join user to the room

@@ -5,9 +5,9 @@
     padding: 10px;
     position: relative;
     font-family: sans-serif;
-    background: #FFFFFF;
-    box-shadow: 0 13px 25px 0 rgba(0,0,0,0.12);
-    border-radius: 20px;
+    background: #333;
+    border-radius: 5px;
+    color: #fff;
 }
 
 .ChatQuote_left {
@@ -15,8 +15,15 @@
 }
 
 .ChatQuote_right {
+    font-size: 14px;
+    color: rgb(37, 35, 35);
+    line-height: 1.2;
     margin-right: 20px;
-    background-color: #F13564;
+    background-color: #cdb708;
+}
+
+.ChatQuote_right .ChatQuote__text{
+    font-weight: bold;
 }
 
 .ChatQuote__text {
@@ -35,22 +42,22 @@
 }
 
 .ChatQuote__timestamp {
-    margin: 0;
+    margin: 10px 0 0 0;
     margin-bottom: 5px;
-    font-size: 16px;
+    font-size: 12px;
     text-align: right;
 }
 
 .ChatQuote_right .ChatQuote__text, .ChatQuote_right .ChatQuote__user, .ChatQuote_right .ChatQuote__timestamp {
-    color: #fff;
+    color: #000;
 }
 
 .ChatQuote_left .ChatQuote__text, .ChatQuote_left .ChatQuote__user {
-    color: #46454C;
+    color: #fff;
 }
 
 .ChatQuote_left .ChatQuote__timestamp {
-    color: #F13564;
+    color: #ccc;
 }
 
 .ChatQuote__text__smile {

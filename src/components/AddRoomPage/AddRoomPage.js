@@ -23,19 +23,14 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
         };
         this.fetch = this.fetch.bind(this);
         this.addRoomHandle = this.addRoomHandle.bind(this);
-        this.addUser = this.addUser.bind(this);
+        this.enterRoom = this.enterRoom.bind(this);
         this.mas = [];
     }
 
-    addUser(id){
-
-    }
-
     componentDidMount() {
-        this.props.dispatch(
-            {
-                type: 'USERS_RESET',
-            });
+        this.props.dispatch({
+            type: 'USERS_RESET',
+        });
         this.fetch()
             .then(() => {
                 this.setState({ loading: false });
@@ -48,59 +43,58 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
             });
     }
 
-    addRoomHandle() {
-        const namePoom = document.getElementById('Room-name').value;
-        return this.props.dispatch(addRoom({ name: namePoom }, this.mas));
-    }
-
     componentWillReceiveProps(props) {
         if (props.newRoom && (!this.props.newRoom || props.newRoom._id !== this.props.newRoom._id)) {
             this.enterRoom(props.newRoom._id);
         }
     }
 
-    enterRoom = (roomId) => {
+    addRoomHandle() {
+        const namePoom = document.getElementById('Room-name').value;
+        return this.props.dispatch(addRoom({ name: namePoom }, this.mas));
+    }
+
+    enterRoom(roomId) {
         this.props.dispatch(routeNavigation({
             page: 'chat_page',
             payload: {
                 ...this.props.payload,
                 currentRoom: roomId,
-                prevPage: 'contacts_list'
+                prevPage: 'contacts_list',
             },
         }));
-    };
+    }
 
     fetch() {
         return this.props.dispatch(fetchUsers());
     }
 
     render() {
-        const listUses = this.props.items.map(el => {
-            const status = el.online ? 'online':'';
-            return <InstanceSummaryElement
-                key={el._id}
-                summary={{
-                    title: `${el.name}`,
-                    author: `${status}`,
-                }}
-                handle={(e) => {
-                    e.currentTarget.querySelector('.avatar')
-                    .classList.toggle('avatar_choice');
-                    if (this.mas.length === 0){
-                        this.mas.push(el._id);
-                    } else if (this.mas.indexOf(el._id)<0){
-                        this.mas.push(el._id);
-                    } else {
-                        this.mas.splice(this.mas.indexOf(el.id), 1);
-                    }
-                    console.log();
-                    console.log(this.mas)
-                }}
-            />
+        const listUses = this.props.items.map((el) => {
+            const status = el.online ? 'online' : '';
+            return (
+                <InstanceSummaryElement
+                    key={el._id}
+                    summary={{
+                        title: `${el.name}`,
+                        author: `${status}`,
+                    }}
+                    handle={(e) => {
+                        e.currentTarget.querySelector('.avatar')
+                            .classList.toggle('avatar_choice');
+                        if (this.mas.length === 0) {
+                            this.mas.push(el._id);
+                        } else if (this.mas.indexOf(el._id) < 0) {
+                            this.mas.push(el._id);
+                        } else {
+                            this.mas.splice(this.mas.indexOf(el.id), 1);
+                        }
+                    }}
+                />);
         });
         return (
             <div className="AddRoomPage">
-                <ConnectedHeader buttonBack buttonAdd={this.addRoomHandle} contentType='add-room' />
+                <ConnectedHeader buttonBack buttonAdd={this.addRoomHandle} contentType="add-room" />
                 <InfiniteRooms fetchNext={this.fetch} next={this.props.next}>
                     {this.state.loading && (
                         <div className="spinner">

@@ -1,6 +1,6 @@
 .Header {
     z-index: 9999;
-    height: 50px;
+    height: 60px;
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -14,15 +14,16 @@
 
 .Button_Add{
     border: none;
-    border: 1ps solid #fff;
     border-radius: 50%;
-    height: 30px;
-    width: 30px;
-    background: #ffbb00;
+    height: 40px;
+    width: 40px;
     color: #333;
     font-weight: bold;
     font-size: 25px;
     margin: 5px;
+    background: #cdb708 url('../../assets/icons/new.png') no-repeat;
+    background-size:60% 60%;
+    background-position: center;
 }
 
 .Header__content__TextField{
@@ -31,8 +32,8 @@
     padding: 0 5px;
     color: #fff;
     border: none;
-    border: 1px solid #ccc;
-    background: #333;
+    border:none;
+    background: #252323;
     box-sizing: border-box;
     width: 100%;
     height: 45px;
@@ -43,6 +44,10 @@
     flex-direction: row;
     align-items: center;
     flex-grow: 1;
+}
+
+.Header__content .avatar{
+    margin-left: 10px;
 }
 
 .Header__button {
@@ -56,8 +61,10 @@
 }
 
 .Header__content__item > * {
-    width: 65vw;
-    margin: 0;
+    text-align: center;
+    color: #b3b2b2;
+    width: 60vw;
+    margin: auto;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

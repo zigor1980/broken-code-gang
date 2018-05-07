@@ -4,7 +4,7 @@ import './Message.css';
 
 export default function Message(props) {
     return (
-        <div className='Message'>
+        <div className="Message">
             {props.text}
         </div>
     );

@@ -6,6 +6,7 @@ import './index.css';
 import App from './components/App/App';
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './reducers';
+import sendNotification from './helpers/createBrowserNotification';
 
 import api from './api';
 //
@@ -33,9 +34,15 @@ import api from './api';
 //     });
 //
 //     // On user is joined to room
-    // await api.onMessage((result) => {
-    //     console.log('New message: ', result);
-    // });
+    await api.onMessage((result) => {
+        const mes = result.message;
+        console.log(typeof mes);
+        sendNotification(result.userId, {
+            body: mes,
+            icon: 'icon.jpg',
+            dir: 'auto',
+        });
+    });
 //
 //     //
 //     // Actions
@@ -65,8 +72,8 @@ import api from './api';
 //     }
 //
     // Get list of all rooms
-    let rooms = await api.getCurrentUserRooms({limit:200});
-    console.log('All rooms', rooms);
+    // let rooms = await api.getCurrentUserRooms({limit:200});
+    // console.log('All rooms', rooms);
     // rooms = await api.getRooms(rooms.next);
     // console.log('All rooms', rooms);
 //     console.log('Get room info', await api.getRoom(rooms.items[0]._id));
@@ -77,14 +84,15 @@ import api from './api';
 //     // Try to join to first room in list
 //     console.log('Join some user to room', await api.userJoinRoom(users.items[0]._id, rooms.items[0]._id));
 //
-    // // Get current user list of rooms
-    // console.log('Current user rooms: ', await api.getCurrentUserRooms());
+    // Get current user list of rooms
+    // const rooms = await api.getCurrentUserRooms();
+    // console.log('Current user rooms: ', rooms);
 //
+    // Send message to room
+    // console.log('Send message', await api.sendMessage(rooms.items[0]._id, `Test message ${Date.now()}`));
+
 //     // Send message to room
-//     console.log('Send message', await api.sendMessage(rooms.items[0]._id, `Test message ${Date.now()}`));
-//
-//     // Send message to room
-//     console.log('Room messages', await api.getRoomMessages(rooms.items[0]._id));
+    // console.log('Room messages', await api.getRoomMessages(rooms.items[0]._id));
 //
 //     // Leave room
 //     console.log('Leave current user to room', await api.currentUserLeaveRoom(rooms.items[0]._id));

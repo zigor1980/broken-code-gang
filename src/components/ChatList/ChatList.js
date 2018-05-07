@@ -1,8 +1,8 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
 import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummaryElement';
 import './ChatList.css';
 import { InfiniteRooms } from '../InfiniteRooms/InfiniteRooms';
-import { connect } from 'react-redux';
 import { routeNavigation } from '../../actions/route';
 import api from '../../api';
 import { createDateStamp } from '../../helpers/createDateStamp';
@@ -17,13 +17,13 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
     async enterRoom(roomId) {
         const users = await api.getUsersOfRoom(roomId),
             usersName = {};
-        users.items.forEach(user => {
-            usersName[user._id]=user.name;
+        users.items.forEach((user) => {
+            usersName[user._id] = user.name;
         });
         this.props.dispatch(routeNavigation({
             page: 'chat_page',
             payload: {
-                usersName: usersName,
+                usersName,
                 currentRoom: roomId,
                 prevPage: 'chat_list',
             },
@@ -34,11 +34,11 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
         return (
             <InfiniteRooms fetchNext={fetchNext} next={next}>
                 {rooms.map((room) => {
-                    let roomName = replaceUserName(this.props.curUserInfo.name, room.name),
-                        date = new Date(),
-                        author='',
-                        description='',
-                        timestamp='';
+                    const roomName = replaceUserName(this.props.curUserInfo.name, room.name),
+                        date = new Date();
+                    let author = '',
+                        description = '',
+                        timestamp = '';
                     if (room && room.lastMessage && room.lastMessage.userName) {
                         date.setTime(room.lastMessage.created_at);
                         author = room.lastMessage.userName;
@@ -55,7 +55,7 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
                             description: `${description}`,
                             id: `${room._id}`,
                         }}
-                        onclick={this.enterRoom.bind(this)}
+                        handle={this.enterRoom.bind(this, room._id)}
                     />);
                 })}
             </InfiniteRooms>

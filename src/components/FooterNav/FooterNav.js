@@ -15,14 +15,14 @@ export const FooterNav = connect()(class FooterNav extends Component {
         this.changeNavHandler = this.changeNavHandler.bind(this);
     }
 
-    changeNavHandler(type, e) {
+    changeNavHandler(type) {
         this.setState({ active: type });
 
         let page = type;
 
-        if (page === 'chat') {
+        if (page === 'dialogs') {
             page = 'chat_list';
-        } else if (page === 'user') {
+        } else if (page === 'users') {
             page = 'contacts_list';
         }
 
@@ -39,9 +39,24 @@ export const FooterNav = connect()(class FooterNav extends Component {
     render() {
         return (
             <footer className="Footer Footer__nav">
-                <Button type="chat" onClick={this.changeNavHandler} active={this.state.active === 'chat'} className="Footer__nav_btn" />
-                <Button type="user" onClick={this.changeNavHandler} active={this.state.active === 'user'} className="Footer__nav_btn" />
-                <Button type="settings" onClick={this.changeNavHandler} active={this.state.active === 'settings'} className="Footer__nav_btn" />
+                <Button
+                    type="dialogs"
+                    onClick={this.changeNavHandler}
+                    active={this.state.active === 'dialogs'}
+                    className="Footer__nav_btn"
+                />
+                <Button
+                    type="users"
+                    onClick={this.changeNavHandler}
+                    active={this.state.active === 'user'}
+                    className="Footer__nav_btn"
+                />
+                <Button
+                    type="settings"
+                    onClick={this.changeNavHandler}
+                    active={this.state.active === 'settings'}
+                    className="Footer__nav_btn"
+                />
             </footer>
         );
     }

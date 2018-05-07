@@ -1,6 +1,7 @@
-export default function replaceUserName(name,title){
+export default function replaceUserName(name, title) {
+    let result = title;
     if (title.includes(name)) {
-        title = title.replace(name, '');
+        result = title.replace(name, '');
     }
-    return title;
+    return result;
 }

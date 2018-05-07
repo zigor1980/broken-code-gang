@@ -17,17 +17,16 @@ const { ObjectId } = require('mongodb');
  */
 
 async function pageableCollection(collection, {
-    lastId, order, limit = 10 , ...query
-} = {},selectModifier) {
+    lastId, order, limit = 10, ...query
+} = {}, selectModifier) {
     const count = await collection.find(query).count();
-    if(lastId && selectModifier){
+    if (lastId && selectModifier) {
         query._id = {
-            [selectModifier]: ObjectId(lastId.toString())
+            [selectModifier]: ObjectId(lastId.toString()),
         };
-    }
-    else if (lastId) {
+    } else if (lastId) {
         query._id = {
-            $gt: ObjectId(lastId.toString())
+            $gt: ObjectId(lastId.toString()),
         };
     }
 

@@ -33,7 +33,7 @@ async function saveSessionInfo(db, session) {
  * @returns {Promise}
  */
 async function deleteSessionInfo(db, sid) {
-    return db.collection(TABLE).deleteMany({ sid: sid }).then(result => result || false);
+    return db.collection(TABLE).deleteMany({ sid }).then(result => result || false);
 }
 
 

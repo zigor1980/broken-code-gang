@@ -1,14 +1,14 @@
 import { expect } from 'chai';
 import route from './route';
-import { routeNavigation } from '../actions/route'
+import { routeNavigation } from '../actions/route';
 
-describe('Reducer::Route', function() {
-    it('returns route (object), page ("authorization"), payload (empty object) if state is undefined', function() {
-        // setup
+describe('Reducer::Route', () => {
+    it('returns route (object), page ("authorization"), payload (empty object) if state is undefined', () => {
+    // setup
         const state = null;
         const expectedNewState = {
             page: null,
-            payload: {}
+            payload: {},
         };
 
         // execute
@@ -18,36 +18,36 @@ describe('Reducer::Route', function() {
         expect(newState).to.deep.equal(expectedNewState);
     });
 
-    it('on ROUTE_NAVIGATE returns new route with set page and payload', function() {
+    it('on ROUTE_NAVIGATE returns new route with set page and payload', () => {
     // setup
-    const state = {
-        page: 'authorization',
-        payload: {
-            FooterNav: 'active'
-        }
-    };
+        const state = {
+            page: 'authorization',
+            payload: {
+                FooterNav: 'active',
+            },
+        };
 
-    const routeMessage = { 
-        page: 'chat_list',
-        payload: {
-            _id: '123asd'
-        }
-    };
+        const routeMessage = {
+            page: 'chat_list',
+            payload: {
+                _id: '123asd',
+            },
+        };
 
-    const action = routeNavigation(routeMessage);
+        const action = routeNavigation(routeMessage);
 
-    const expectedNewState = { 
-        page: 'chat_list',
-        payload: {
-            FooterNav: 'active',
-            _id: '123asd'
-        }
-    };
-    // execute
+        const expectedNewState = {
+            page: 'chat_list',
+            payload: {
+                FooterNav: 'active',
+                _id: '123asd',
+            },
+        };
+        // execute
 
-    const newState = route(state, action);
+        const newState = route(state, action);
 
-    // verify
-    expect(newState).to.deep.equal(expectedNewState);
+        // verify
+        expect(newState).to.deep.equal(expectedNewState);
     });
 });

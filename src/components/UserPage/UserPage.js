@@ -15,7 +15,7 @@ const stateToProps = state => ({
 
 export class UserPage extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.exitHandle = this.exitHandle.bind(this);
     }

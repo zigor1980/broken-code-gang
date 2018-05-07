@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummaryElement';
 import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 import './UserList.css';
-import { connect } from 'react-redux';
 
 const stateToProps = state => ({
     users: state.users.items,
     fetchNext: state.route.payload.fetchNext,
-    next:state.users.next,
+    next: state.users.next,
 });
-
 
 
 export class UserList extends Component {

@@ -69,15 +69,17 @@ async function getMessages(db, filter) {
             filter[key] = ObjectId(filter[key].toString());
         }
     });
-    const selectModifier = filter['lastId']?'$lt':null;
+    const selectModifier = filter.lastId ? '$lt' : null;
 
-    return pageableCollection(db.collection(TABLE), {
-        ...filter,
-        order: {
-            created_at: -1,
+    return pageableCollection(
+        db.collection(TABLE), {
+            ...filter,
+            order: {
+                created_at: -1,
+            },
         },
-    },
-    selectModifier);
+        selectModifier,
+    );
 }
 
 module.exports = {

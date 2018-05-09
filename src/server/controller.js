@@ -2,7 +2,7 @@ const {
     findUserBySid, getUsers, addUser, setCurrentUser, logoutUser,
 } = require('./database/user');
 const {
-    joinRoom, leaveRoom, getRooms, getUserRooms, createRoom, getRoom, dropRoom,
+    joinRoom, leaveRoom, getRooms, getUserRooms, getUserPersonalRooms, createRoom, getRoom, dropRoom,
 } = require('./database/room');
 const { getMessages, sendMessage } = require('./database/messages');
 const TYPES = require('./messages');
@@ -183,6 +183,19 @@ module.exports = function (db, io) {
             const currentUser = await CurrentUser();
 
             return getUserRooms(db, currentUser._id, params);
+        });
+
+        // Return rooms with user
+        requestResponse(TYPES.ROOM_EXIST, async (params) => {
+            const currentUser = await CurrentUser();
+            const { id, filter } = params; 
+            const s = await getUserPersonalRooms(db, currentUser._id, id, filter);
+            const r = await getUserPersonalRooms(db, id, currentUser._id, filter);
+            if (r.items.length === 0){
+                return s;
+            } else {
+                return r; 
+            }
         });
 
         // Join current user to room

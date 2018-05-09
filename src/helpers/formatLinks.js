@@ -1,8 +1,8 @@
 // const regFindUrls = /((http|https)\:\/\/)?[a-zA-Zа-яА-я0-9\-\_\.]+\.[a-zA-Zа-яА-я]{2,3}(\/\S*)?/gmi;
-const regIsImg = /\.(gif|jpg|jpeg|tiff|png)$/gi;
-const isUrl = require('is-url');
+import isUrl from 'is-url';
 
-export default function createFormattedText(text) {
+export default function formatLinks(text) {
+    const regIsImg = /\.(gif|jpg|jpeg|tiff|png)/gi;
     if (isUrl(text)) {
         if (regIsImg.test(text)) {
             return {
@@ -15,8 +15,5 @@ export default function createFormattedText(text) {
             src: text,
         };
     }
-    return {
-        type: 'text',
-        text,
-    };
+    return null;
 }

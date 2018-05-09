@@ -169,6 +169,17 @@ class Api {
     }
 
     /**
+     * Return list of rooms for current user
+     *
+     * @param {{ limit: number }} [filter]
+     *
+     * @return {Promise<Pagination<Room>>}
+     */
+    async isRoomExist(id, filter) {
+        return this._requestResponse(MESSAGES.ROOM_EXIST, { id, filter });
+    }
+
+    /**
      * Join current user to the room
      *
      * @param {string} roomId

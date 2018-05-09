@@ -15,8 +15,5 @@ export default function formatSmiles(text) {
             src: smile[text],
         };
     }
-    return {
-        type: 'text',
-        text,
-    };
+    return null;
 }

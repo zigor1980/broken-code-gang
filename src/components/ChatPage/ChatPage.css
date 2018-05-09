@@ -27,6 +27,7 @@
 
 .ChatPage__empty {
     height: calc(100vh - 50px - 32px);
+    color: #b3b2b2;
     display: flex;
     flex-flow: column;
     align-items: center;

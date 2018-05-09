@@ -69,12 +69,10 @@ export function ChatQuote({ message, userId, name }) {
                     {`${token.src} `}
                 </a>);
 
-
         default:
             return <span key={id}>{`${token.text} `}</span>;
         }
     });
-
 
     return (
         <div className={`ChatQuote ${chatDirection}`}>

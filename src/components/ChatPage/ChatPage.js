@@ -56,7 +56,7 @@ export class ChatPage extends Component {
         const room = await api.getRoom(this.props.payload.currentRoom);
         const users = await api.getUsersOfRoom(room._id);
 
-        this.dispatch(routeNavigation({
+        this.props.dispatch(routeNavigation({
             page: 'chat_settings',
             payload: {
                 ...this.props.payload,

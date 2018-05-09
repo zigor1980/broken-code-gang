@@ -9,7 +9,7 @@ import { ConnectedChatPage } from '../ChatPage/ChatPage';
 import { ConnectedUserPage } from '../UserPage/UserPage';
 import { ConnectedContactsListPage } from '../ContactsListPage/ContactsListPage';
 import { GroupChatSettings } from '../GroupChatSettings/GroupChatSettings';
-import { ConnectedUserList } from '../UserList/UserList';
+import { UserList } from '../UserList/UserList';
 import { ConnectedAddUserToChatPage } from '../AddUserToChatPage/AddUserToChatPage';
 import { routeNavigation } from '../../actions/route';
 import api from '../../api';
@@ -33,7 +33,7 @@ const routeConfig = {
         view: ConnectedChatPage,
     },
     user_list: {
-        view: ConnectedUserList,
+        view: UserList,
     },
     settings: {
         view: ConnectedUserPage,

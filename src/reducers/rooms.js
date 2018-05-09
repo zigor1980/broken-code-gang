@@ -23,7 +23,7 @@ export default function rooms(state, action) {
         return {
             ...state,
             items: [],
-            next: undefined,
+            next: true,
         };
     case 'ROOMS_ERROR':
         return {

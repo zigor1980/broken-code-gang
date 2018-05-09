@@ -58,6 +58,21 @@ async function getUserRooms(db, userId, filter) {
 
 /**
  * @param {Db} db
+ * @param {string} userId
+ * @param {string} anotherUserId
+ * @param {{}} [filter]
+ *
+ * @return {Promise<Pagination<Room>>}
+ */
+async function getUserPersonalRooms(db, userId, anotherUserId, filter) {
+    return pageableCollection(db.collection(TABLE), {
+        ...filter,
+        users: [ObjectId(userId.toString()), ObjectId(anotherUserId.toString())].reverse()
+    });
+}
+
+/**
+ * @param {Db} db
  * @param {User} currentUser
  * @param {Room} room
  *
@@ -191,6 +206,7 @@ module.exports = {
     saveRoom,
     getRooms,
     getUserRooms,
+    getUserPersonalRooms,
     createRoom,
     getRoom,
     joinRoom,

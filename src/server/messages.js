@@ -85,6 +85,11 @@ module.exports = {
     USER_JOIN_ROOM: 'USER_JOIN_ROOM',
 
     /**
+     * Room with user exist
+     */
+    ROOM_EXIST: 'ROOM_EXIST',
+
+    /**
      * User joined to room
      */
     USER_JOINED: 'USER_JOINED',

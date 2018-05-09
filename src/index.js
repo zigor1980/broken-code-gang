@@ -38,15 +38,14 @@ import api from './api';
         const mes = result.message;
         sendNotification(result.userId, {
             body: mes,
-            icon: 'icon.jpg',
             dir: 'auto',
         });
     });
-//
-//     //
-//     // Actions
-//     //
-//
+    //
+    //     //
+    //     // Actions
+    //     //
+    //
     // Fetch current user
     const user = await api.getCurrentUser();
     console.log('Current user', user);
@@ -54,39 +53,39 @@ import api from './api';
     const pm = await api.isRoomExist('5ae48883cb9aa2000b70143b');
     console.log(pm);
 
-//
-//     // Fetch user information
-//     console.log('User information', await api.getUser(user._id));
-//
-//     // Get users
+    //
+    // // Fetch user information
+    //     console.log('User information', await api.getUser(user._id));
+    //
+    //     // Get users
     // const users = await api.getUsers({ limit: 100 });
     // console.log('List of all users', users);
-//
-//     // We have more users
-//     if (users.next) {
-//         console.log('More users', await api.getUsers(users.next));
-//     }
-//
-//     // Create room
-//     try {
-//         console.log('New room created', await api.createRoom({ name: 'Test' }));
-//     } catch (err) {
-//         console.log(err.message);
-//     }
-//
+    //
+    //     // We have more users
+    //     if (users.next) {
+    //         console.log('More users', await api.getUsers(users.next));
+    //     }
+    //
+    //     // Create room
+    //     try {
+    //         console.log('New room created', await api.createRoom({ name: 'Test' }));
+    //     } catch (err) {
+    //         console.log(err.message);
+    //     }
+    //
     // Get list of all rooms
     // let rooms = await api.getCurrentUserRooms({limit:200});
     // console.log('All rooms', rooms);
     // rooms = await api.getRooms(rooms.next);
     // console.log('All rooms', rooms);
-//     console.log('Get room info', await api.getRoom(rooms.items[0]._id));
-//
-//     // Try to join to first room in list
-//     console.log('Join current user to room', await api.currentUserJoinRoom(rooms.items[0]._id));
-//
-//     // Try to join to first room in list
-//     console.log('Join some user to room', await api.userJoinRoom(users.items[0]._id, rooms.items[0]._id));
-//
+    //     console.log('Get room info', await api.getRoom(rooms.items[0]._id));
+    //
+    //     // Try to join to first room in list
+    //     console.log('Join current user to room', await api.currentUserJoinRoom(rooms.items[0]._id));
+    //
+    //     // Try to join to first room in list
+    //     console.log('Join some user to room', await api.userJoinRoom(users.items[0]._id, rooms.items[0]._id));
+    //
     // Get current user list of rooms
     const rooms = await api.getCurrentUserRooms();
     console.log('Current user rooms: ', rooms);

@@ -67,7 +67,7 @@ async function getUserRooms(db, userId, filter) {
 async function getUserPersonalRooms(db, userId, anotherUserId, filter) {
     return pageableCollection(db.collection(TABLE), {
         ...filter,
-        users: [ObjectId(userId.toString()), ObjectId(anotherUserId.toString())].reverse()
+        users: [ObjectId(userId.toString()), ObjectId(anotherUserId.toString())]
     });
 }
 

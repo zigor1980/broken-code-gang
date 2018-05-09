@@ -15,11 +15,11 @@ export class UserList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            // eslint-disable-next-line
             searchTerm: '',
         };
     }
     render() {
-        console.log(this.props);
         const { users, fetchNext, next } = this.props;
         let userListContent = '';
         if (users && users.length) {

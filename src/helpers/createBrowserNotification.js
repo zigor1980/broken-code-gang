@@ -9,9 +9,6 @@ export default function sendNotification(title, options) {
     } else if (Notification.permission === 'granted') { // Проверим, есть ли права на отправку уведомлений
     // Если права есть, отправим уведомление
         notification = new Notification(title, options);
-
-        clickFunc();
-
         notification.onclick = clickFunc;
     } else if (Notification.permission !== 'denied') { // Если прав нет, пытаемся их получить
         Notification.requestPermission((permission) => {

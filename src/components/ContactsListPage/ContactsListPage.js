@@ -28,7 +28,6 @@ export class ContactsListPage extends Component {
             searchTerm: '',
         };
         this.fetch = this.fetch.bind(this);
-        this.handleClick = this.handleClick.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.resetSearch = this.resetSearch.bind(this);
     }
@@ -58,53 +57,12 @@ export class ContactsListPage extends Component {
                 prevPage: 'contacts_list',
             },
         }));
-    };
+    }
 
     async createRoom(contactId) {
         const UserName = await api.getUser(contactId);
         const curUserName = this.props.curUserInfo.name;
         this.props.dispatch(addRoom({ name: `${UserName.name} ${curUserName}` }, [contactId]));
-    };
-
-    handleClick(contactId) {
-        /*
-         * if !next all currentUserRooms has been fetched
-         */
-        let createRoom = this.createRoom;
-        let enterRoom = this.enterRoom;
-
-        function searchCommonRoom(currentUserRooms) {
-            const userRooms = currentUserRooms.items || currentUserRooms;
-            const commonRoom = userRooms.filter((room) => {
-                const { users } = room;
-                return (users.length === 2 && users.includes(contactId));
-            });
-            return commonRoom;
-        }
-
-        async function decideAsync(createRoom, enterRoom) {
-            let currentUserRooms = await api.getCurrentUserRooms();
-            let commonRoom = searchCommonRoom(currentUserRooms);
-            if (!commonRoom.length) {
-                createRoom(contactId);
-            } else if (commonRoom.length === 1) {
-                enterRoom(commonRoom[0]._id);
-            }
-
-        }
-
-        let currentUserRooms = [];
-        if (!this.props.next) {
-            currentUserRooms = this.props.currentUserRooms;
-            let commonRoom = searchCommonRoom(currentUserRooms);
-            if (!commonRoom.length) {
-                createRoom(contactId);
-            } else if (commonRoom.length === 1) {
-                enterRoom(commonRoom[0]._id);
-            }
-        } else {
-            decideAsync(createRoom, enterRoom);
-        }
     }
 
     handleSearch(event) {
@@ -125,15 +83,23 @@ export class ContactsListPage extends Component {
         let displayedContacts = [];
         const searchQuery = this.state.searchTerm;
         if (searchQuery && this.props.users) {
-            displayedContacts = this.props.users.filter((user) => {
-                return (user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase()));
-            })
+            displayedContacts = this.props.users.filter(user => (
+                user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase())
+            ));
         } else {
             displayedContacts = this.props.users;
         }
         return (
             <div className="ContactsListPage">
-                <Header buttonBack={false} buttonSearch searchIsOn={searchQuery} resetSearch={this.resetSearch} handleSearch={this.handleSearch}  buttonSettings={false} contentType="contacts" />
+                <Header
+                    buttonBack={false}
+                    buttonSearch
+                    searchIsOn={searchQuery}
+                    resetSearch={this.resetSearch}
+                    handleSearch={this.handleSearch}
+                    buttonSettings={false}
+                    contentType="contacts"
+                />
                 <ConnectedUserList
                     users={displayedContacts}
                     fetchNext={this.fetch}

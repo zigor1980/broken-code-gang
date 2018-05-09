@@ -1,11 +1,23 @@
 .Button {
     background-color: inherit;
     border: none;
-    padding: 0;
+    padding: 5px;
+    box-sizing: border-box;
+    border: 2px solid transparent;
+    border-radius: 5px;
+}
+
+.Button_active {
+    border-color: #cdb708;
 }
 
 .Button:focus {
     outline: none;
+}
+
+.Button__image_es {
+    height: 20px;
+    width: 20px;
 }
 
 .Button__image_s {

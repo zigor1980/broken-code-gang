@@ -23,7 +23,6 @@ const TABLE = 'users';
  */
 async function findUserBySid(db, sid) {
     const session = await getSessionInfo(db, sid);
-    console.log(session);
     return getUser(db, session.userId);
 }
 
@@ -34,7 +33,7 @@ async function findUserBySid(db, sid) {
  * @returns {Promise<User>}
  */
 async function getUser(db, userId) {
-    if (!userId){
+    if (!userId) {
         return null;
     }
     return db.collection(TABLE).findOne({ _id: ObjectId(userId.toString()) });
@@ -57,9 +56,9 @@ async function setCurrentUser(db, { userId, sid }) {
     }
 
     await deleteSessionInfo(db, sid);
-    let session = {
+    const session = {
         userId: ObjectId(userId),
-        sid: sid,
+        sid,
     };
     await saveSessionInfo(db, session);
     return await findUserBySid(db, sid);
@@ -110,9 +109,9 @@ async function addUser(db, { email, password, name }) {
     }
 
     const userEntity = {
-        email: email,
-        password: password,
-        name: name
+        email,
+        password,
+        name,
     };
     const result = await db.collection(TABLE).insertOne(userEntity);
     userEntity._id = result.insertedId;

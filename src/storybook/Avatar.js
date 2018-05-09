@@ -1,20 +1,23 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Avatar } from '../components/Avatar/Avatar';
-
+import Avatar from '../components/Avatar/Avatar';
 
 storiesOf('Avatar', module)
     .add('size S', () => (
-      <Avatar image={{
-            src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-            modifier: 'avatar-s',
-        }}
+        <Avatar
+            caption="igor zayac"
+            modifier="s"
         />
     ))
     .add('size M', () => (
-      <Avatar image={{
-            src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-            modifier: 'avatar-m',
-        }}
+        <Avatar
+            caption="igor zayac"
+            modifier="m"
+        />
+    ))
+    .add('size L', () => (
+        <Avatar
+            caption="igor zayac"
+            modifier="l"
         />
     ));

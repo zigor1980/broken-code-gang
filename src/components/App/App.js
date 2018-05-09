@@ -11,7 +11,8 @@ import { ConnectedContactsListPage } from '../ContactsListPage/ContactsListPage'
 import { GroupChatSettings } from '../GroupChatSettings/GroupChatSettings';
 import { ConnectedUserList } from '../UserList/UserList';
 import { ConnectedAddUserToChatPage } from '../AddUserToChatPage/AddUserToChatPage';
-import {routeNavigation} from '../../actions/route';
+import { routeNavigation } from '../../actions/route';
+import sendNotification from '../../helpers/createBrowserNotification';
 import api from '../../api';
 
 // TODO: create page for the settings
@@ -20,11 +21,11 @@ const routeConfig = {
     authorization: {
         view: AuthorizationPage,
     },
-    'chat_list': {
-        view: ChatListPage
+    chat_list: {
+        view: ChatListPage,
     },
-    'contacts_list': {
-        view: ConnectedContactsListPage
+    contacts_list: {
+        view: ConnectedContactsListPage,
     },
     add_room_page: {
         view: AddRoomPage,
@@ -32,18 +33,18 @@ const routeConfig = {
     chat_page: {
         view: ConnectedChatPage,
     },
-    'user_list':{
+    user_list: {
         view: ConnectedUserList,
     },
-    'settings': {
+    settings: {
         view: ConnectedUserPage,
     },
-    'chat_settings': {
+    chat_settings: {
         view: GroupChatSettings,
     },
-    'add_new_user_to_chat_page':{
+    add_new_user_to_chat_page: {
         view: ConnectedAddUserToChatPage,
-    }
+    },
 };
 
 const stateToProps = state => ({
@@ -51,53 +52,46 @@ const stateToProps = state => ({
 });
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-        this.loadApp = this.loadApp.bind(this);
-    }
-
-    componentWillMount(){
-        console.log(this.props);
-        this.loadApp()
-        .catch ((e)=>{
-            console.log(e);
-        })
-            
-        
+    componentDidMount() {
+        (async () => {
+            await api.onMessage((result) => {
+                const mes = result.message;
+                sendNotification(result.userId, {
+                    body: mes,
+                    dir: 'auto',
+                });
+            });
+        })();
+        api.getCurrentUser()
             .then((user) => {
-                console.log(user);
-               if (user){
-                this.props.dispatch(routeNavigation({
-                    page: 'chat_list',
-                    payload: {
-                        footerNav: {
-                            active: 'chat'
-                        }
-                    }
-                }));
-               }
-               else {
-                this.props.dispatch(routeNavigation({
-                    page: 'authorization',
-                    payload: {
-                    }
-                }));
-               }
+                if (user) {
+                    this.props.dispatch({
+                        type: 'USER_GET_INFO',
+                        curUserInfo: user,
+                    });
+                    this.props.dispatch(routeNavigation({
+                        page: 'chat_list',
+                        payload: {
+                            footerNav: {
+                                active: 'chat',
+                            },
+                        },
+                    }));
+                } else {
+                    this.props.dispatch(routeNavigation({
+                        page: 'authorization',
+                        payload: {
+                        },
+                    }));
+                }
             });
     }
-
-    loadApp(){
-        return api.getCurrentUser();
-    }
-
-
 
     render() {
         const Page = routeConfig[this.props.route.page] && routeConfig[this.props.route.page].view;
 
         if (!Page) {
-            return  (
+            return (
                 <div className="spinner">
                     <div className="rect1" />
                     <div className="rect2" />

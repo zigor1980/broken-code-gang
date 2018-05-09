@@ -23,10 +23,17 @@ import './Button.css';
  * true - кнопка в виде круга
  * false - квадратная кнопка
  * */
+function getIcon(type) {
+    const iconSrc = require(`../../assets/icons/${type}.png`);
+    return iconSrc || null;
+}
+
 export function Button(props) {
-    let { type, active, modifier } = props,
+    let { modifier } = props;
+    const { type, active } = props,
         btnClass = props.circle ? 'Button_circle' : '',
         iconSrc = getIcon(type, active);
+
     if (!props.modifier) { modifier = 's'; }
 
     let onClick;
@@ -34,14 +41,9 @@ export function Button(props) {
     if (typeof props.onClick === 'function') {
         onClick = e => props.onClick(props.type, e);
     }
-
-    return (<button onClick={onClick} className={`Button ${btnClass}`}>
-      <img className={`Button__image Button__image_${modifier}`} src={iconSrc} alt={type} />
-            </button>);
-}
-
-function getIcon(type, active) {
-    const btnStatus = active ? 'active' : 'inactive',
-        iconSrc = require(`../../assets/icons/${type}-${btnStatus}.png`);
-    return iconSrc || null;
+    const status = active ? 'active' : 'unactive';
+    return (
+        <button onClick={onClick} className={`Button ${btnClass} Button_${status}`}>
+            <img className={`Button__image Button__image_${modifier}`} src={iconSrc} alt={type} />
+        </button>);
 }

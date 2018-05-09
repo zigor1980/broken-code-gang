@@ -1,7 +1,7 @@
 import api from '../api';
 
 export default function addUserToChat(roomId, contactId) {
-    return async function (dispatch, getState) {
+    return async function (dispatch) {
         try {
             await api.userJoinRoom(contactId, roomId);
             const roomUsers = await api.getUsersOfRoom(roomId);
@@ -13,7 +13,7 @@ export default function addUserToChat(roomId, contactId) {
             dispatch({
                 type: 'USER_ADD_TO_CHAT_ERROR',
                 error,
-            })
+            });
         }
-    }
+    };
 }

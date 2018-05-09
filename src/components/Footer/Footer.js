@@ -4,7 +4,7 @@ import sendMessage from '../../actions/sendMessage';
 import './Footer.css';
 
 const stateToProps = state => ({
-    payload: state.route.payload
+    payload: state.route.payload,
 });
 
 
@@ -23,35 +23,29 @@ export class Footer extends Component {
         this.setState({ messageText: e.target.value });
     }
 
-    handleEmodgy(){
-
-    }
-
-    handleSubmit = () => {
+    handleSubmit() {
         const roomId = this.props.payload.currentRoom;
         const currentMessage = this.state.messageText;
         this.setState({
             messageText: '',
         });
         this.props.dispatch(sendMessage(roomId, currentMessage));
-    };
+    }
 
     render() {
         return (
-          <footer className="Footer Footer_TextField">
-              <textarea
+            <footer className="Footer Footer_TextField">
+                <textarea
                     className="Footer__TextArea"
                     onChange={this.handleChange}
                     rows="1"
                     value={this.state.messageText}
                     placeholder="Type message..."
-                >
-                </textarea>
-              <button
-                className='Footer__Button Footer__SubmitButton'
-                onClick={this.handleSubmit}
-              >
-              </button>
+                />
+                <button
+                    className="Footer__Button Footer__SubmitButton"
+                    onClick={this.handleSubmit}
+                />
             </footer>
         );
     }

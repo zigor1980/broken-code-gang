@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { ConnectedHeader } from '../Header/Header';
-import { Avatar } from '../Avatar/Avatar';
+import Avatar from '../Avatar/Avatar';
 import { FooterNav } from '../FooterNav/FooterNav';
 import { routeNavigation } from '../../actions/route';
 import api from '../../api';
@@ -15,7 +15,7 @@ const stateToProps = state => ({
 
 export class UserPage extends Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.exitHandle = this.exitHandle.bind(this);
     }

@@ -3,4 +3,16 @@ import { storiesOf } from '@storybook/react';
 import Header from '../components/Header/Header';
 
 storiesOf('Header', module)
-    .add('ChatHeader', () => <Header buttonExit buttonHeaderRight />);
+    .add('CaptionHeader', () =>
+        (<Header
+            contentType="caption"
+        />))
+    .add('ChatHeader', () =>
+        (<Header
+            buttonBack
+            buttonHeaderRight
+            contentTitle="Имя собеседника"
+            contentDesc="Доп. информация"
+            contentType="chat"
+        />))
+    .add('InputHeader', () => <Header buttonBack buttonAdd={() => {}} contentType="add-room" />);

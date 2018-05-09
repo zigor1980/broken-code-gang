@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { ConnectedHeader } from '../Header/Header';
 import { UserList } from '../UserList/UserList';
-import { connect } from 'react-redux';
 import fetchUsers from '../../actions/fetchUsers';
 import addUserToChat from '../../actions/addUserToChat';
 
@@ -17,9 +17,9 @@ export class AddUserToChatPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loading: true,
+            // loading: true,
             searchTerm: '',
-            displayedContacts: this.props.users
+            // displayedContacts: this.props.users,
         };
         this.fetch = this.fetch.bind(this);
         this.handleClick = this.handleClick.bind(this);
@@ -51,26 +51,31 @@ export class AddUserToChatPage extends Component {
 
     render() {
         let displayedContacts = [];
-        let searchQuery = this.state.searchTerm;
+        const searchQuery = this.state.searchTerm;
         if (searchQuery && this.props.users) {
-            displayedContacts = this.props.users.filter((user) => {
-                return (user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase()));
-            })
+            displayedContacts = this.props.users.filter(user => (
+                user.name && user.name.toLowerCase().includes(searchQuery.toLowerCase())));
         } else {
             displayedContacts = this.props.users;
         }
 
-        this.props.chatUsers.forEach(user => {
+        this.props.chatUsers.forEach((user) => {
             for (let i = 0; i < displayedContacts.length; i++) {
-                if (user._id === displayedContacts[i]._id)
-                    displayedContacts.splice(i, 1);
+                if (user._id === displayedContacts[i]._id) { displayedContacts.splice(i, 1); }
             }
         });
 
         return (
             <div className="AddUserToChatPage">
-                <ConnectedHeader buttonBack={true} buttonSearch searchIsOn={searchQuery} resetSearch={this.resetSearch}
-                                 handleSearch={this.handleSearch} buttonSettings={false} contentType="contacts"/>
+                <ConnectedHeader
+                    buttonBack
+                    buttonSearch
+                    searchIsOn={searchQuery}
+                    resetSearch={this.resetSearch}
+                    handleSearch={this.handleSearch}
+                    buttonSettings={false}
+                    contentType="contacts"
+                />
                 <UserList
                     users={displayedContacts}
                     fetchNext={this.fetch}

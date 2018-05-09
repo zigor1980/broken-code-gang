@@ -1,8 +1,6 @@
 export function compareMessages(a, b) {
-    a = a && a.lastMessage && a.lastMessage.created_at;
-    b = b && b.lastMessage && b.lastMessage.created_at;
-    if (a > b)
-        return -1;
-    else
-        return 1;
+    const first = a && a.lastMessage && a.lastMessage.created_at;
+    const second = b && b.lastMessage && b.lastMessage.created_at;
+    if (first > second) { return -1; }
+    return 1;
 }

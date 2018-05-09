@@ -1,11 +1,37 @@
 .avatar{
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 50%;
+    border: 3px solid #cdb708;
+    background: #333;
+    color: #cdb708;
+    font-weight: bold;
+    position: relative;
+}
+.avatar_choice:after{
+    content: "";
+    bottom: -5px;
+    right: -5px;
+    position: absolute;
+    display: block;
+    height: 20px;
+    width: 20px;
+    background: #cdb708;
     border-radius: 50%;
 }
-.avatar-s{
+.avatar_s{
     width: 36px;
     height: 36px;
 }
-.avatar-m{
-    width: 105px;
-    height: 105px;
+.avatar_m{
+    font-size: 24px;
+    width: 45px;
+    height: 45px;
+}
+.avatar_l{
+    font-size: 42px;
+    width: 70px;
+    height: 70px;
 }

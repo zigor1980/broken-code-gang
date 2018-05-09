@@ -1,75 +1,53 @@
-import React, { Component } from 'react';
-import { Avatar } from '../Avatar/Avatar';
+import React from 'react';
+import Avatar from '../Avatar/Avatar';
 import './InstanceSummaryElement.css';
 
-export class InstanceSummaryElement extends Component {
+export function InstanceSummaryElement({ summary, handle }) {
+    const {
+        title, description, author, descModifiers, timestamp,
+    } = summary;
 
-    handleClick = () => {
-        this.props.onclick(this.props.summary.id);
+    let titleClasses = 'InstanceSummaryElement__title';
+    let descClasses = 'InstanceSummaryElement__desc';
+
+    if (descModifiers && descModifiers === 'light') {
+        titleClasses += ' InstanceSummaryElement__title_light';
+        descClasses += ' InstanceSummaryElement__desc_light';
+    } else {
+        descClasses += ' InstanceSummaryElement__desc_dark';
     }
 
-    render() {
-        if (!this.props) {
-            return null;
-        }
+    const avatar = <Avatar caption={title} modifier="m" />;
 
-        const { summary } = this.props;
-        const {
-            title, description, author, descModifiers,timestamp
-        } = summary;
-
-        let titleClasses = 'InstanceSummaryElement__title';
-        let descClasses = 'InstanceSummaryElement__desc';
-
-        if (descModifiers && descModifiers === 'light') {
-            titleClasses += ' InstanceSummaryElement__title_light';
-            descClasses += ' InstanceSummaryElement__desc_light';
-        } else {
-            descClasses += ' InstanceSummaryElement__desc_dark';
-        }
-
-        let destrTitle = title.split(' ');
-        let avaTitle = '';
-        if (destrTitle.length === 1){
-            avaTitle = title.substring(0, 2);
-        } else if (destrTitle.length > 1){
-            avaTitle = `${destrTitle[0].substring(0, 1)}${destrTitle[1].substring(0, 1)}`;
-        }
-
-        let avatar = avaTitle ? <div className="InstanceSummaryElement__avatar_acronim_wrapper"><span className="InstanceSummaryElement__avatar_acronim">{avaTitle}</span></div> : <Avatar image={this.props.avatar} />
-
-        let descView = '';
-        if (author) {
-            descView = (<p className={descClasses}>
-                <span className="InstanceSummaryElement__author">{`${author}: `}</span>
+    let descView = '';
+    if (author) {
+        descView = (
+            <p className={descClasses}>
+                <span className="InstanceSummaryElement__author">{`${author}`}</span>
                 {description}
             </p>);
-        } else {
-            descView = (<p className={descClasses}>
+    } else {
+        descView = (
+            <p className={descClasses}>
                 {description}
             </p>);
-        }
+    }
 
-        let timestampView='';
-        if(timestamp){
-            timestampView = <p className="InstanceSummaryElement__info_timestamp">{timestamp}</p>;
-        }
+    let timestampView = '';
+    if (timestamp) {
+        timestampView = <p className="InstanceSummaryElement__info_timestamp">{timestamp}</p>;
+    }
 
-
-        return (
-            <div className="InstanceSummaryElement" onClick={this.handleClick}>
-                <div className="InstanceSummaryElement__avatar">
-                    {avatar}
+    return (
+        <div className="InstanceSummaryElement" onClick={handle}>
+            {avatar}
+            <div className="InstanceSummaryElement__info">
+                <div className="InstanceSummaryElement__info_header">
+                    <h3 className={titleClasses}>{title}</h3>
+                    {timestampView}
                 </div>
-                <div className="InstanceSummaryElement__info">
-                    <div className="InstanceSummaryElement__info_header">
-                        <h3 className={titleClasses}>{title}</h3>
-                        {timestampView}
-                    </div>
-                    {descView}
-                </div>
+                {descView}
             </div>
-        );
-    }
+        </div>
+    );
 }
-

@@ -10,8 +10,7 @@ export function createDateStamp(date) {
         };
         return date.toLocaleTimeString('en-EN', options);
     }
-    if (secDiff >= DAY && secDiff < DAY * 2)
-        return 'yesterday';
+    if (secDiff >= DAY && secDiff < DAY * 2) { return 'yesterday'; }
     if (secDiff >= DAY * 2 && date.getYear() === (new Date()).getYear()) {
         const options = {
             month: 'long',

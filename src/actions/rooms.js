@@ -7,7 +7,9 @@ export default function addRoom(name, user) {
             let room = null;
             room = await api.createRoom(name);
             room = await api.currentUserJoinRoom(room._id);
-            for (let current of user) {
+            // eslint-disable-next-line
+            for (const current of user) {
+                // eslint-disable-next-line
                 await api.userJoinRoom(current, room._id);
             }
             dispatch({
@@ -30,16 +32,20 @@ export default function addRoom(name, user) {
 export function updateLastMessage(message) {
     return async function (dispatch) {
         try {
-            message.userName = (await api.getUser(message.userId)).name;
+            const { name } = await api.getUser(message.userId);
+            const newMessage = {
+                ...message,
+                userName: name,
+            };
             dispatch({
                 type: 'ROOMS_UPDATE_LAST_MESSAGE',
-                newMessage: message
+                newMessage,
             });
-        }catch (error){
-            return {
+        } catch (error) {
+            dispatch({
                 type: 'ROOM_ERROR',
                 error,
-            }
+            });
         }
     };
 }

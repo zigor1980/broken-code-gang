@@ -2,10 +2,9 @@ import { expect } from 'chai';
 import messages from './messages';
 import * as ActionType from '../actions/messages';
 
-describe.only('Reducer::Messages', () => {
-
+describe('Reducer::Messages', () => {
     it('returns items (empty array), next (true), loading(true) if state is undefined', () => {
-        // setup
+    // setup
         const state = null;
         const expectedNewState = {
             items: [],
@@ -20,7 +19,7 @@ describe.only('Reducer::Messages', () => {
         expect(newState).to.deep.equal(expectedNewState);
     });
     it('on MESSAGE_ADD returns new state with added messages', () => {
-        // setup
+    // setup
         const state =
             {
                 items: [{ name: '1message' }, { name: '2message' }, { name: '3message' }],
@@ -45,7 +44,7 @@ describe.only('Reducer::Messages', () => {
         expect(newState).to.deep.equal(expectedNewState);
     });
     it('on MESSAGES_LOADING returns new state with loaded messages', () => {
-        // setup
+    // setup
         const state =
             {
                 items: [{ name: '3message' }, { name: '2message' }, { name: '1message' }],
@@ -55,7 +54,7 @@ describe.only('Reducer::Messages', () => {
             };
         const action = {
             type: 'MESSAGES_LOADING',
-            loading: true
+            loading: true,
         };
         const expectedNewState =
             {
@@ -73,7 +72,7 @@ describe.only('Reducer::Messages', () => {
         expect(newState).to.deep.equal(expectedNewState);
     });
     it('on MESSAGES_LOADED returns new state with loaded messages', () => {
-        // setup
+    // setup
         const state =
             {
                 items: [{ name: '3message' }, { name: '2message' }, { name: '1message' }],
@@ -88,7 +87,7 @@ describe.only('Reducer::Messages', () => {
         };
         const action = {
             type: 'MESSAGES_LOADED',
-            messages: newMessages
+            messages: newMessages,
         };
         const expectedNewState =
             {
@@ -98,8 +97,8 @@ describe.only('Reducer::Messages', () => {
                     { name: '4message' },
                     { name: '3message' },
                     { name: '2message' },
-                    { name: '1message' }
-                    ],
+                    { name: '1message' },
+                ],
                 next: null,
                 loading: true,
                 count: 6,
@@ -113,7 +112,7 @@ describe.only('Reducer::Messages', () => {
         expect(newState).to.deep.equal(expectedNewState);
     });
     it('on MESSAGES_RELOAD returns new state with empty array of messages', () => {
-        // setup
+    // setup
         const state =
             {
                 items: [{ name: '3message' }, { name: '2message' }, { name: '1message' }],
@@ -136,23 +135,23 @@ describe.only('Reducer::Messages', () => {
         expect(newState).to.deep.equal(expectedNewState);
     });
     it('on MESSAGE_LOAD_ERROR returns new state with error', () => {
-        // setup
+    // setup
         const state =
             {
                 items: [{ name: '3message' }, { name: '2message' }, { name: '1message' }],
                 next: true,
-                loading: true
+                loading: true,
             };
         const action = {
             type: 'MESSAGE_LOAD_ERROR',
-            error: 'Exterminate!'
+            error: 'Exterminate!',
         };
         const expectedNewState =
             {
                 items: [{ name: '3message' }, { name: '2message' }, { name: '1message' }],
                 next: true,
                 loading: true,
-                error: 'Exterminate!'
+                error: 'Exterminate!',
             };
 
         // execute
@@ -163,23 +162,23 @@ describe.only('Reducer::Messages', () => {
         expect(newState).to.deep.equal(expectedNewState);
     });
     it('on MESSAGE_SEND_ERROR returns new state with error', () => {
-        // setup
+    // setup
         const state =
             {
                 items: [{ name: '3message' }, { name: '2message' }, { name: '1message' }],
                 next: true,
-                loading: true
+                loading: true,
             };
         const action = {
             type: 'MESSAGE_SEND_ERROR',
-            error: 'Exterminate!'
+            error: 'Exterminate!',
         };
         const expectedNewState =
             {
                 items: [{ name: '3message' }, { name: '2message' }, { name: '1message' }],
                 next: true,
                 loading: true,
-                error: 'Exterminate!'
+                error: 'Exterminate!',
             };
 
         // execute
@@ -190,12 +189,12 @@ describe.only('Reducer::Messages', () => {
         expect(newState).to.deep.equal(expectedNewState);
     });
     it('on USER_SIGN_OUT returns new state with empty array of messages', () => {
-        // setup
+    // setup
         const state =
             {
                 items: [{ name: '3message' }, { name: '2message' }, { name: '1message' }],
                 next: false,
-                loading: false
+                loading: false,
             };
         const action = {
             type: 'USER_SIGN_OUT',
@@ -204,7 +203,7 @@ describe.only('Reducer::Messages', () => {
             {
                 items: [],
                 next: true,
-                loading: true
+                loading: true,
             };
 
         // execute

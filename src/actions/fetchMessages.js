@@ -4,22 +4,23 @@ export default function fetchMessages(roomId) {
     return async function (dispatch, getState) {
         dispatch({
             type: 'MESSAGES_LOADING',
-            loading: true
+            loading: true,
         });
 
         try {
-            let state = getState();
+            const state = getState();
             let messages;
-            if(state && state.messages && !state.messages.next)
+            if (state && state.messages && !state.messages.next) {
                 return;
-            else if (state && state.messages && state.messages.next && state.messages.next.lastId)
+            } else if (state && state.messages && state.messages.next && state.messages.next.lastId) {
                 messages = await api.getMessages(state.messages.next);
-            else
+            } else {
                 messages = await api.getRoomMessages(roomId);
+            }
             // await api.currentUserJoinChannel(roomId);
             dispatch({
                 type: 'MESSAGES_LOADED',
-                messages
+                messages,
             });
         } catch (error) {
             dispatch({

@@ -1,14 +1,13 @@
 import React from 'react';
 import './Avatar.css';
+import shortenName from '../../helpers/shortenName';
 
-export function Avatar(props) {
-    const imgSrc = props.image.src;
-    const imgModifier = props.image.modifier;
+export default function Avatar(props) {
+    const { caption, modifier } = props;
+    const shortName = shortenName(caption);
     return (
-        <img
-            className={`${imgModifier ? `avatar ${imgModifier}` : 'avatar'}`}
-            src={imgSrc}
-            alt=""
-        />
+        <div className={`avatar avatar_${modifier}`}>
+            <span>{shortName}</span>
+        </div>
     );
 }

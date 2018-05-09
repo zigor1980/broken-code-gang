@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { ConnectedHeader } from '../Header/Header';
 import { ConnectedFooter } from '../Footer/Footer';
 import { ChatField } from '../ChatField/ChatField';
-import { connect } from 'react-redux';
 import './ChatPage.css';
 import fetchMessages from '../../actions/fetchMessages';
 import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 import api from '../../api';
 import MemberCount from '../../helpers/MemberCount';
-import {routeNavigation} from  '../../actions/route';
+import { routeNavigation } from '../../actions/route';
+import replaceUserName from '../../helpers/replaceUserName';
 
 const stateToProps = state => ({
     messages: state.messages,
     payload: state.route.payload,
-    userId:state.user._id,
-    curUserInfo:state.user.curUserInfo
+    userId: state.user.curUserInfo._id,
+    curUserInfo: state.user.curUserInfo,
 });
 
 
@@ -27,36 +28,14 @@ export class ChatPage extends Component {
         this.fetchNext = this.props.dispatch.bind(this, fetchMessages(this.props.payload.currentRoom));
         this.lastMessage = null;
         this.props.dispatch({
-            type:'MESSAGES_RELOAD',
+            type: 'MESSAGES_RELOAD',
         });
-        this.dispatch=this.props.dispatch.bind(this);
+        this.getChatInfo = this.getChatInfo.bind(this);
         this.openChatSettings = this.openChatSettings.bind(this);
     }
 
-    componentWillMount = () => {
+    componentWillMount() {
         this.getChatInfo(this.props.payload.currentRoom);
-    };
-
-    getChatInfo = async (chatId) => {
-        let chatInfo = await api.getRoom(chatId);
-        this.setState({
-            chatInfo: chatInfo
-        });
-    };
-
-    async openChatSettings() {
-        const room = await api.getRoom(this.props.payload.currentRoom);
-        const users = await api.getUsersOfRoom(room._id);
-
-        this.dispatch(routeNavigation({
-            page: 'chat_settings',
-            payload: {
-                ...this.props.payload,
-                prevPrevPage:'chat_list',
-                prevPage: 'chat_page',
-                chatUsers:users.items,
-            }
-        }));
     }
 
     componentDidUpdate() {
@@ -65,22 +44,40 @@ export class ChatPage extends Component {
             document.documentElement.scrollTop = document.documentElement.scrollHeight;
         }
     }
-    
-    componentWillUnmount(){
-        // api.currentUserLeaveChannel(this.props.payload.currentRoom);
+
+    async getChatInfo(chatId) {
+        const chatInfo = await api.getRoom(chatId);
+        this.setState({
+            chatInfo,
+        });
+    }
+
+    async openChatSettings() {
+        const room = await api.getRoom(this.props.payload.currentRoom);
+        const users = await api.getUsersOfRoom(room._id);
+
+        this.props.dispatch(routeNavigation({
+            page: 'chat_settings',
+            payload: {
+                ...this.props.payload,
+                prevPrevPage: 'chat_list',
+                prevPage: 'chat_page',
+                chatUsers: users.items,
+            },
+        }));
     }
 
     render() {
         const messages = this.props.messages.items,
-            next = this.props.messages.next,
-            userId = this.props.userId,
-            usersName = this.props.payload.usersName;
+            { next } = this.props.messages,
+            { userId } = this.props,
+            { usersName } = this.props.payload;
 
         let chatPageContent = '';
         if (messages && messages.length) {
             chatPageContent = messages.map(message => (
                 <div key={message._id}>
-                    <ChatField message={message} userId={userId} name={usersName[message.userId]}/>
+                    <ChatField message={message} userId={userId} name={usersName[message.userId]} />
                 </div>));
         } else {
             chatPageContent = <div className="ChatPage__empty"><p>No messages here yet...</p></div>;
@@ -88,23 +85,28 @@ export class ChatPage extends Component {
 
         let contentTitle = '';
         let contentDesc = '';
-        let chatInfo = this.state.chatInfo;
+        const { chatInfo } = this.state;
         if (chatInfo) {
-            contentTitle = chatInfo.name;
-            if (contentTitle.split(' ').includes(this.props.curUserInfo.name)) {
-                contentTitle = contentTitle.replace(this.props.curUserInfo.name, '');
-            }
-            if (chatInfo.users.length === 1){
+            contentTitle = replaceUserName(this.props.curUserInfo.name, chatInfo.name);
+            if (chatInfo.users.length === 1) {
                 contentDesc = '';
             } else {
-                contentDesc = `${chatInfo.users.length} ${MemberCount(chatInfo.users.length)}`
+                contentDesc = `${chatInfo.users.length} ${MemberCount(chatInfo.users.length)}`;
             }
         }
 
         return (
             <div className="ChatPage">
                 <div className="ChatPage__Header">
-                    <ConnectedHeader contentTitle={contentTitle} openChatSettings={this.openChatSettings} contentDesc={contentDesc} buttonBack buttonSearch={false} buttonSettings={true} contentType="chat" />
+                    <ConnectedHeader
+                        contentTitle={contentTitle}
+                        openChatSettings={this.openChatSettings}
+                        contentDesc={contentDesc}
+                        buttonBack
+                        buttonSearch={false}
+                        buttonSettings
+                        contentType="chat"
+                    />
                 </div>
 
                 <InfiniteScroll fetchNext={this.fetchNext} scrollDirection="up" next={next}>

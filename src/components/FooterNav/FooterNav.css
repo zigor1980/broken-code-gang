@@ -1,5 +1,8 @@
 .Footer__nav {
-padding: 5px;
+    height: 60px;
+    padding: 5px;
+    background: #333333;
+    padding: 0 20px;
 }
 
 .Footer__nav_btn{

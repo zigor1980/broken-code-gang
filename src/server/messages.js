@@ -77,12 +77,17 @@ module.exports = {
     /**
      * Remove user from room
      */
-    DROP_ROOM:'DROP_ROOM',
+    DROP_ROOM: 'DROP_ROOM',
 
     /**
      * Join user to the room
      */
     USER_JOIN_ROOM: 'USER_JOIN_ROOM',
+
+    /**
+     * Room with user exist
+     */
+    ROOM_EXIST: 'ROOM_EXIST',
 
     /**
      * User joined to room

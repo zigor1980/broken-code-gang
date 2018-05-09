@@ -9,9 +9,10 @@ import { ConnectedChatPage } from '../ChatPage/ChatPage';
 import { ConnectedUserPage } from '../UserPage/UserPage';
 import { ConnectedContactsListPage } from '../ContactsListPage/ContactsListPage';
 import { GroupChatSettings } from '../GroupChatSettings/GroupChatSettings';
-import { UserList } from '../UserList/UserList';
+import { ConnectedUserList } from '../UserList/UserList';
 import { ConnectedAddUserToChatPage } from '../AddUserToChatPage/AddUserToChatPage';
 import { routeNavigation } from '../../actions/route';
+import sendNotification from '../../helpers/createBrowserNotification';
 import api from '../../api';
 
 // TODO: create page for the settings
@@ -33,7 +34,7 @@ const routeConfig = {
         view: ConnectedChatPage,
     },
     user_list: {
-        view: UserList,
+        view: ConnectedUserList,
     },
     settings: {
         view: ConnectedUserPage,
@@ -52,9 +53,16 @@ const stateToProps = state => ({
 
 class App extends Component {
     componentDidMount() {
+        (async () => {
+            await api.onMessage((result) => {
+                const mes = result.message;
+                sendNotification(result.userId, {
+                    body: mes,
+                    dir: 'auto',
+                });
+            });
+        })();
         api.getCurrentUser()
-            .catch(() => {
-            })
             .then((user) => {
                 if (user) {
                     this.props.dispatch({

@@ -8,6 +8,10 @@
     margin: 7px 0;
     font-family: sans-serif;
 }
+.InstanceSummaryElement:nth-last-child() >
+.InstanceSummaryElement__info {
+    border: none;
+}
 
 .InstanceSummaryElement_Capture {
     background: #ffbb00;

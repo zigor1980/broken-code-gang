@@ -1,9 +1,9 @@
 import api from '../api';
 
-export default function signInUser(login, password) {
+export default function signInUser(user) {
     return async function (dispatch) {
         try {
-            const user = await api.getUserByLogin(login, password);
+            console.log(user);
             await api.setCurrentUser(user._id);
             dispatch({
                 type: 'USER_SIGN_IN',

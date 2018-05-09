@@ -61,6 +61,11 @@
 }
 
 .ChatQuote__text__smile {
+    display: inline-block;
+    background: #333;
+    padding: 5px;
+    border-radius: 50%;
+    vertical-align: baseline;
     width: 20px;
     height: 20px;
 }

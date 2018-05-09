@@ -27,20 +27,24 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
         this.submitHandler = this.submitHandler.bind(this);
     }
 
-    componentDidMount() {
-        this.props.dispatch({
-            type: 'ROOMS_RESET',
-        });
-        this.fetch()
-            .then(() => {
-                this.setState({ loading: false });
-            })
-            .catch((error) => {
-                this.setState({
-                    loading: false,
-                    error,
+    componentWillMount() {
+        const { items } = this.props;
+        if (!(items && items.length)) {
+            this.fetch()
+                .then(() => {
+                    this.setState({ loading: false });
+                })
+                .catch((error) => {
+                    this.setState({
+                        loading: false,
+                        error,
+                    });
                 });
+        } else {
+            this.setState({
+                loading: false,
             });
+        }
     }
 
     componentWillUpdate() {

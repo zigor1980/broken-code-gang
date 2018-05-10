@@ -1,6 +1,7 @@
 .ChatQuote {
     min-width: 150px;
-    max-width: 700px;
+    max-width: 60vw;
+    box-sizing: border-box;
     text-align: left;
     padding: 10px;
     position: relative;
@@ -63,9 +64,9 @@
 .ChatQuote__text__smile {
     display: inline-block;
     background: #333;
-    padding: 5px;
+    padding: 2px;
     border-radius: 50%;
-    vertical-align: baseline;
+    vertical-align: middle;
     width: 20px;
     height: 20px;
 }

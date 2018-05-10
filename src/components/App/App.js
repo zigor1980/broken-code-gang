@@ -53,15 +53,6 @@ const stateToProps = state => ({
 
 class App extends Component {
     componentDidMount() {
-        (async () => {
-            await api.onMessage((result) => {
-                const mes = result.message;
-                sendNotification(result.userId, {
-                    body: mes,
-                    dir: 'auto',
-                });
-            });
-        })();
         api.getCurrentUser()
             .then((user) => {
                 if (user) {
@@ -77,6 +68,16 @@ class App extends Component {
                             },
                         },
                     }));
+                    (async () => {
+                        await api.onMessage((result) => {
+                            console.log('chfghfgh');
+                            const mes = result.message;
+                            sendNotification(result.userId, {
+                                body: mes,
+                                dir: 'auto',
+                            });
+                        });
+                    })();
                 } else {
                     this.props.dispatch(routeNavigation({
                         page: 'authorization',

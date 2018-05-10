@@ -4,12 +4,16 @@ import Avatar from '../Avatar/Avatar';
 import './ChatField.css';
 
 export function ChatField(props) {
-    const { message, name, userId } = props,
+    const {
+            avatar,
+            message,
+            name,
+            userId,
+        } = props,
         authorId = message.userId;
-
     let direction = 'ChatField_right',
-        avatar = '';
-
+        ava = '';
+    const title = avatar ? 'true' : '';
     if (authorId !== userId) {
         direction = 'ChatField_left';
         /*
@@ -17,12 +21,12 @@ export function ChatField(props) {
          // avatar = <Avatar image = {{src:userId.getImageSrc(),modifier:'avatar-s'}}>;
          */
         /* аватарка по умолчанию */
-        avatar = <Avatar caption={name} modifier="m" />;
+        ava = avatar ? <Avatar caption={name} modifier="m" /> : null;
     }
     return (
         <div className={direction}>
-            {avatar}
-            <ChatQuote message={message} userId={userId} name={name} />
+            {ava}
+            <ChatQuote title={title} message={message} userId={userId} name={name} />
         </div>
     );
 }

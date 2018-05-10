@@ -121,7 +121,7 @@ export const AuthorizationPage = connect()(class AuthorizationPage extends React
             const newUser = await api.addUser(login, password, name);
             this.enterChat(newUser);
         } catch (error) {
-            console.log(error);
+            this.setState({ message: error.message });
         }
     }
 

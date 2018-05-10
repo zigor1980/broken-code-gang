@@ -15,9 +15,8 @@ export default function sendNotification(title, options) {
             // Если права успешно получены, отправляем уведомление
             if (permission === 'granted') {
                 notification = new Notification(title, options);
-            } else {
-                alert('Вы запретили показывать уведомления'); // Юзер отклонил наш запрос на показ уведомлений
             }
+            // Юзер отклонил наш запрос на показ уведомлений
         });
     } else {
     // Пользователь ранее отклонил наш запрос на показ уведомлений

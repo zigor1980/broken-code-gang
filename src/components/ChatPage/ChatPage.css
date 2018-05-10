@@ -1,13 +1,7 @@
-.ChatPage {
-    display: grid;
-    grid-template-rows: 155px 1fr 80px;
-}
-
 .ChatPage__MessageField {
-    margin-top: 50px;
+    margin-top: 70px;
     margin-bottom: 70px;
     z-index: 1;
-    position: absolute;
     width: 100%;
 }
 

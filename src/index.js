@@ -6,9 +6,8 @@ import './index.css';
 import App from './components/App/App';
 import registerServiceWorker from './registerServiceWorker';
 import rootReducer from './reducers';
-import sendNotification from './helpers/createBrowserNotification';
 
-import api from './api';
+// import api from './api';
 //
 // Example of usage API
 //
@@ -34,24 +33,24 @@ import api from './api';
 //     });
 //
 //     // On user is joined to room
-    await api.onMessage((result) => {
-        const mes = result.message;
-        sendNotification(result.userId, {
-            body: mes,
-            dir: 'auto',
-        });
-    });
+    // await api.onMessage((result) => {
+    //     const mes = result.message;
+    //     sendNotification(result.userId, {
+    //         body: mes,
+    //         dir: 'auto',
+    //     });
+    // });
     //
     //     //
     //     // Actions
     //     //
     //
     // Fetch current user
-    const user = await api.getCurrentUser();
-    console.log('Current user', user);
+    // const user = await api.getCurrentUser();
+    // console.log('Current user', user);
 
-    const pm = await api.isRoomExist('5ae48883cb9aa2000b70143b');
-    console.log(pm);
+    // const pm = await api.isRoomExist('5ae48883cb9aa2000b70143b');
+    // console.log(pm);
 
     //
     // // Fetch user information
@@ -87,8 +86,8 @@ import api from './api';
     //     console.log('Join some user to room', await api.userJoinRoom(users.items[0]._id, rooms.items[0]._id));
     //
     // Get current user list of rooms
-    const rooms = await api.getCurrentUserRooms();
-    console.log('Current user rooms: ', rooms);
+    // const rooms = await api.getCurrentUserRooms();
+    // console.log('Current user rooms: ', rooms);
 //
     // Send message to room
     // console.log('Send message', await api.sendMessage(rooms.items[0]._id, `Test message ${Date.now()}`));

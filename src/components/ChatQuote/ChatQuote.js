@@ -4,19 +4,22 @@ import formatSmiles from '../../helpers/formatSmiles';
 import formatLinks from '../../helpers/formatLinks';
 import './ChatQuote.css';
 
-export function ChatQuote({ message, userId, name }) {
+export function ChatQuote({
+    title,
+    message,
+    userId,
+    name,
+}) {
     // eslint-disable-next-line
     const { message: text, userId: authorId, created_at } = message,
         date = new Date();
     let chatDirection = 'ChatQuote_right',
         user = '';
-
-
     date.setTime(created_at);
 
     if (userId !== authorId) {
         chatDirection = 'ChatQuote_left';
-        user = <p className="ChatQuote__user">{name}</p>;
+        user = title ? <p className="ChatQuote__user">{name}</p> : null;
     }
 
 

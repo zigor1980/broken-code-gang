@@ -6,7 +6,6 @@ import { ChatList } from '../ChatList/ChatList';
 import { FooterNav } from '../FooterNav/FooterNav';
 import fetchRooms from '../../actions/fetchRooms';
 import { routeNavigation } from '../../actions/route';
-import api from '../../api';
 
 const stateToProps = state => ({
     items: state.rooms.items,
@@ -29,10 +28,6 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     }
 
     componentWillMount() {
-        api.getCurrentUser()
-            .then((user) => {
-                console.log(user);
-            });
         const { items } = this.props;
         if (!(items && items.length)) {
             this.fetch()
@@ -77,7 +72,7 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     render() {
         return (
             <div className="ChatListPage">
-                <ConnectedHeader buttonAdd={this.submitHandler} contentType="chats" />
+                <ConnectedHeader buttonInfo buttonAdd={this.submitHandler} contentType="chats" />
                 {this.state.loading && (
                     <div className="spinner">
                         <div className="rect1" />

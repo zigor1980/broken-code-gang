@@ -53,14 +53,12 @@ export class UserList extends React.Component {
         } else {
             userListContent = <div className="UserList__empty"><p>No contacts here yet...</p></div>;
         }
-
         return (
             <InfiniteScroll fetchNext={fetchNext} scrollDirection="down" next={next}>
                 <div className="UserList">
                     {userListContent}
                 </div>
             </InfiniteScroll>
-
         );
     }
 }

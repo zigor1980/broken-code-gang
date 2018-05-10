@@ -4,6 +4,7 @@ import './Header.css';
 import { HeaderCenterItems } from '../HeaderCenterItems/HeaderCenterItems';
 import { Button } from '../Button/Button';
 import { routeNavigation } from '../../actions/route';
+import { ConnectedUserPage } from '../UserPage/UserPage';
 
 const stateToProps = state => ({
     payload: state.route.payload,
@@ -15,7 +16,9 @@ export default class Header extends Component {
         super(props);
         this.state = {
             search: false,
+            info: false,
         };
+        this.openInfo = this.openInfo.bind(this);
     }
 
     goBack() {
@@ -57,23 +60,41 @@ export default class Header extends Component {
         });
     }
 
+    openInfo() {
+        this.setState({
+            info: !this.state.info,
+        });
+    }
+
     render() {
         const {
             buttonBack,
             buttonSearch,
             buttonSettings,
             buttonAdd,
+            buttonInfo,
             contentType,
         } = this.props;
         const btnFillerStyle = { width: '30px', height: '30px' };
         const btnFiller = <div style={btnFillerStyle}>&nbsp;</div>;
-        const leftControl = buttonBack ? (
-            <Button
-                type="back"
-                modifier="es"
-                circle
-                onClick={this.goBack.bind(this)}
-            />) : btnFiller;
+        let leftControl = btnFiller;
+        if (buttonBack) {
+            leftControl = (
+                <Button
+                    type="back"
+                    modifier="es"
+                    circle
+                    onClick={this.goBack.bind(this)}
+                />);
+        } else if (buttonInfo) {
+            leftControl = (
+                <Button
+                    type="info"
+                    modifier="es"
+                    circle
+                    onClick={this.openInfo}
+                />);
+        }
         let rightControl = btnFiller;
         if (buttonSearch) {
             rightControl = (
@@ -152,6 +173,7 @@ export default class Header extends Component {
 
         return (
             <header className="Header">
+                {this.state.info && <ConnectedUserPage visible={this.openInfo} />}
                 {leftControl}
                 {headerContent}
                 {rightControl}

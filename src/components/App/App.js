@@ -52,6 +52,27 @@ const stateToProps = state => ({
 });
 
 class App extends Component {
+    componentWillMount() {
+        (async () => {
+            await api.onMessage(async (result) => {
+                const user = await api.getCurrentUser();
+                if (user) {
+                    console.log(result);
+                    const { roomId } = result;
+                    const room = await api.getRoom(roomId);
+                    const { users } = room;
+                    if (users.indexOf(user._id) >= 0) {
+                        // const mes = result.message;
+                        sendNotification(room.name, {
+                            body: result.message,
+                            dir: 'auto',
+                        });
+                    }
+                }
+            });
+        })();
+    }
+
     componentDidMount() {
         api.getCurrentUser()
             .then((user) => {
@@ -68,16 +89,6 @@ class App extends Component {
                             },
                         },
                     }));
-                    (async () => {
-                        await api.onMessage((result) => {
-                            console.log('chfghfgh');
-                            const mes = result.message;
-                            sendNotification(result.userId, {
-                                body: mes,
-                                dir: 'auto',
-                            });
-                        });
-                    })();
                 } else {
                     this.props.dispatch(routeNavigation({
                         page: 'authorization',
@@ -86,6 +97,9 @@ class App extends Component {
                     }));
                 }
             });
+    }
+    componentDidUpdate() {
+        console.log(this.props.route.page);
     }
 
     render() {

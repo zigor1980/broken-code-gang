@@ -172,7 +172,7 @@ module.exports = function (db, io) {
                 ...payload,
                 sid,
             };
-            return await setCurrentUser(db, payload);
+            return setCurrentUser(db, payload);
         });
 
         // Logout current user

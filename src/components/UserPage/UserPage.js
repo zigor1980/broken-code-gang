@@ -21,9 +21,10 @@ export class UserPage extends Component {
     }
 
     exitHandle() {
-        api.logoutCurrentUser().then(() => {
+        api.logoutCurrentUser().then(async () => {
+            console.log(await api.getCurrentUser());
             this.props.dispatch({ type: 'USER_SIGN_OUT' });
-
+            this.props.dispatch({ type: 'ROOMS_RESET' });
             this.props.dispatch(routeNavigation({ page: 'authorization' }));
         });
     }

@@ -45,12 +45,11 @@
 
 .AuthorizationPage__Select__button {
     max-width: 500px;
-    height: 7vh;
     font-size: 18px;
     background: #cdb708;
     box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.12);
     border-radius: 5px;
-    border: none;
+    border: 2px solid #cdb708;
     cursor: pointer;
     color: #000;
 }
@@ -90,6 +89,14 @@
     outline: none;
     border-color: #cdb708; 
 }
+.AuthorizationPage__Select__button:active,
+.AuthorizationPage__Select__button:focus,
+.AuthorizationPage__submit:active,
+.AuthorizationPage__submit:focus {
+    outline: none;
+    border-color: #ccc;
+
+}
 
 .AuthorizationPage__submit {
     max-width: 500px;
@@ -99,7 +106,7 @@
     background: #cdb708;
     box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.12);
     border-radius: 5px;
-    border: none;
+    border: 2px solid #cdb708;
     cursor: pointer;
     color: #000;
 }

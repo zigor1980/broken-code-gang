@@ -11,7 +11,6 @@ export default function rooms(state, action) {
         return {
             ...state,
             items: [...state.items, action.room],
-            newRoom: action.room,
         };
     case 'ROOMS_FETCH':
         return {

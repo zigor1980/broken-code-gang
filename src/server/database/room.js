@@ -92,6 +92,7 @@ async function createRoom(db, currentUser, room) {
 
         room.users = room.users || [];
         room.users.push(currentUser._id);
+        room.lastMessage = null;
 
         return insertOrUpdateEntity(collection, room);
     }

@@ -29,13 +29,11 @@ describe('Reducer::Rooms', () => {
         const action = {
             type: 'ROOM_ADD',
             room: newRoom,
-            newRoom,
         };
         const expectedNewState =
              {
                  items: [{ id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }],
                  next: null,
-                 newRoom: { id: '4' },
                  error: null,
              };
         // execute

@@ -4,11 +4,13 @@ import { InstanceSummaryElement } from '../InstanceSummaryElement/InstanceSummar
 import { InfiniteScroll } from '../InfiniteScroll/InfiniteScroll';
 import './UserList.css';
 import { routeNavigation } from '../../actions/route';
+import addRoom from '../../actions/rooms';
 import api from '../../api';
 
 const stateToProps = state => ({
     users: state.users.items,
     next: state.users.next,
+    curUserInfo: state.user.curUserInfo,
 });
 
 export class UserList extends React.Component {
@@ -34,20 +36,37 @@ export class UserList extends React.Component {
                     handle={async () => {
                         const room = await api.isRoomExist(contact._id);
                         const { items } = room;
+                        let usersArray;
+                        let newRoom = '';
                         if (items && items.length) {
                             const usersName = {};
+                            newRoom = items[0]._id;
                             items[0].users.forEach((user) => {
                                 usersName[user._id] = user.name;
                             });
-                            this.props.dispatch(routeNavigation({
-                                page: 'chat_page',
-                                payload: {
-                                    usersName,
-                                    currentRoom: items[0]._id,
-                                    prevPage: 'chat_list',
-                                },
-                            }));
+                            usersArray = usersName;
+                        } else {
+                            this.props.dispatch(addRoom({
+                                name: `${this.props.curUserInfo.name} ${contact.name}`,
+                                users: [contact._id],
+                            }))
+                                .then((result) => {
+                                    newRoom = result._id;
+                                    const usersName = {};
+                                    result.users.forEach((user) => {
+                                        usersName[user._id] = user.name;
+                                    });
+                                    usersArray = usersName;
+                                });
                         }
+                        this.props.dispatch(routeNavigation({
+                            page: 'chat_page',
+                            payload: {
+                                usersName: usersArray,
+                                currentRoom: newRoom,
+                                prevPage: 'chat_list',
+                            },
+                        }));
                     }}
                 />));
         } else {

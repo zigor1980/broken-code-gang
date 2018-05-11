@@ -73,7 +73,7 @@ import rootReducer from './reducers';
     //     }
     //
     // Get list of all rooms
-    // let rooms = await api.getCurrentUserRooms({limit:200});
+    // const rooms = await api.getCurrentUserRooms({ limit: 200 });
     // console.log('All rooms', rooms);
     // rooms = await api.getRooms(rooms.next);
     // console.log('All rooms', rooms);

@@ -160,9 +160,9 @@ module.exports = function (db, io) {
         // Get Users Of room
         requestResponse(TYPES.GET_USERS_OF_ROOM, async (roomId) => {
             const room = await getRoom(db, roomId);
-            return await getUsers(db, {
-                _id: { $in: room.users },
-                limit: 100,
+            console.log(room.users);
+            return getUsers(db, {
+                _id: { $in: [...room.users] },
             });
         });
 
@@ -189,13 +189,7 @@ module.exports = function (db, io) {
         requestResponse(TYPES.ROOM_EXIST, async (params) => {
             const currentUser = await CurrentUser();
             const { id, filter } = params; 
-            const s = await getUserPersonalRooms(db, currentUser._id, id, filter);
-            const r = await getUserPersonalRooms(db, id, currentUser._id, filter);
-            if (r.items.length === 0){
-                return s;
-            } else {
-                return r; 
-            }
+            return getUserPersonalRooms(db, currentUser._id, id, filter);
         });
 
         // Join current user to room

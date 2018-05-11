@@ -93,4 +93,29 @@ describe('Reducer::Rooms', () => {
         // verify
         expect(newState).to.deep.equal(expectedNewState);
     });
+    it('on ROOMS_REMOVE returns items without elem in arg', () => {
+        // setup
+        const state =
+            {
+                items: [{ _id: '1' }, { _id: '2' }, { _id: '3' }],
+                next: { lastid: '3' },
+                error: null,
+            };
+        const action = {
+            type: 'ROOMS_REMOVE',
+            roomId: '1',
+        };
+        const expectedNewState =
+                {
+                    items: [{ _id: '2' }, { _id: '3' }],
+                    next: { lastid: '3' },
+                    error: null,
+                };
+        // execute
+
+        const newState = rooms(state, action);
+
+        // verify
+        expect(newState).to.deep.equal(expectedNewState);
+    });
 });

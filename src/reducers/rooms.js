@@ -24,6 +24,11 @@ export default function rooms(state, action) {
             items: [],
             next: true,
         };
+    case 'ROOMS_REMOVE':
+        return {
+            ...state,
+            items: [...state.items].filter(elem => (elem._id !== action.roomId)),
+        };
     case 'ROOMS_ERROR':
         return {
             ...state,

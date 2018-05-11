@@ -66,7 +66,7 @@ export class InfiniteScroll extends React.Component {
         try {
             await this.props.fetchNext();
         } catch (err) {
-            console.error(err);
+            return;
         } finally {
             this.setState({ loading: false });
         }

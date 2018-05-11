@@ -23,10 +23,6 @@
     background-color: #cdb708;
 }
 
-.ChatQuote_right .ChatQuote__text{
-    font-weight: bold;
-}
-
 .ChatQuote__text {
     margin: 0;
     font: 16px 'Myriad Pro';

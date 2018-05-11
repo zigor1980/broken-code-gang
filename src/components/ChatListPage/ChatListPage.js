@@ -73,7 +73,7 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
         return (
             <div className="ChatListPage">
                 <ConnectedHeader buttonInfo buttonAdd={this.submitHandler} contentType="chats" />
-                {this.state.loading && (
+                {this.state.loading ? (
                     <div className="spinner">
                         <div className="rect1" />
                         <div className="rect2" />
@@ -81,6 +81,12 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
                         <div className="rect4" />
                         <div className="rect5" />
                     </div>
+                ) : (
+                    <ChatList
+                        rooms={this.props.items}
+                        fetchNext={this.fetch}
+                        next={this.props.next}
+                    />
                 )}
                 {this.state.error && (
                     <div>
@@ -88,11 +94,6 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
                         <p>{this.state.error.message}</p>
                     </div>
                 )}
-                <ChatList
-                    rooms={this.props.items}
-                    fetchNext={this.fetch}
-                    next={this.props.next}
-                />
                 <FooterNav active="dialogs" />
             </div>
         );

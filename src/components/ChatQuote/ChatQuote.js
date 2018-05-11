@@ -2,6 +2,9 @@ import React from 'react';
 import formatMessage from '../../helpers/formatMessage';
 import formatSmiles from '../../helpers/formatSmiles';
 import formatLinks from '../../helpers/formatLinks';
+import formatBold from '../../helpers/formatBold';
+import formatColor from '../../helpers/formatColor';
+import formatList from '../../helpers/formatList';
 import './ChatQuote.css';
 
 export function ChatQuote({
@@ -23,7 +26,7 @@ export function ChatQuote({
     }
 
 
-    const rules = [formatSmiles, formatLinks];
+    const rules = [formatSmiles, formatLinks, formatBold, formatColor, formatList];
     const editedMessageParts = formatMessage(text, rules);
     const partsQuan = editedMessageParts.length;
     const imagesUrls = [];
@@ -58,6 +61,21 @@ export function ChatQuote({
                 >
                     {`${token.src} `}
                 </a>);
+        case 'bold':
+            return (
+                <b key={id}>
+                    {`${token.bold} `}
+                </b>);
+        case 'color':
+            return (
+                <span key={id} style={{ color: `${token.color}` }}>{`${token.text} `}</span>
+            );
+        case 'list': {
+            const lists = token.items.map(list => <li key={token.items.indexOf(list)}>{`${list}`}</li>);
+            return (
+                <ul key={id} >{lists}</ul>
+            );
+        }
         case 'image':
             if (partsQuan === 1) {
                 return <img key={id} className="ChatQuote__text__img" src={token.src} alt="" />;
@@ -76,13 +94,12 @@ export function ChatQuote({
             return <span key={id}>{`${token.text} `}</span>;
         }
     });
-
     return (
         <div className={`ChatQuote ${chatDirection}`}>
             {user}
-            <p className="ChatQuote__text">
+            <div className="ChatQuote__text">
                 {content}
-            </p>
+            </div>
             <div className="ChatQuote__extra">{messageImages}</div>
             <p className="ChatQuote__timestamp">{date.toLocaleString()}</p>
         </div>

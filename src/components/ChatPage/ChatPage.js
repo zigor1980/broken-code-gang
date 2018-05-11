@@ -72,7 +72,6 @@ export class ChatPage extends Component {
             { next } = this.props.messages,
             { userId } = this.props,
             { usersName } = this.props.payload;
-
         let chatPageContent = '';
         let contentTitle = '';
         let contentDesc = '';

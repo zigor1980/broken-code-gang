@@ -13,6 +13,7 @@ import { ConnectedUserList } from '../UserList/UserList';
 import { ConnectedAddUserToChatPage } from '../AddUserToChatPage/AddUserToChatPage';
 import { routeNavigation } from '../../actions/route';
 import sendNotification from '../../helpers/createBrowserNotification';
+import * as messageHandle from '../../actions/messages';
 import api from '../../api';
 
 // TODO: create page for the settings
@@ -63,10 +64,23 @@ class App extends Component {
                     const { users } = room;
                     if (users.indexOf(user._id) >= 0) {
                         // const mes = result.message;
-                        sendNotification(room.name, {
-                            body: result.message,
-                            dir: 'auto',
-                        });
+                        let nott = false;
+                        switch (this.props.route.page) {
+                        case 'chat_page':
+                            if (this.props.route.payload.currentRoom === roomId) {
+                                this.props.dispatch(messageHandle.addMessage(result));
+                            }
+                            break;
+                        default:
+                            nott = true;
+                            break;
+                        }
+                        if (nott) {
+                            sendNotification(room.name, {
+                                body: result.message,
+                                dir: 'auto',
+                            });
+                        }
                     }
                 }
             });
@@ -107,12 +121,14 @@ class App extends Component {
 
         if (!Page) {
             return (
-                <div className="spinner">
-                    <div className="rect1" />
-                    <div className="rect2" />
-                    <div className="rect3" />
-                    <div className="rect4" />
-                    <div className="rect5" />
+                <div className="EmptyPage">
+                    <div className="spinner">
+                        <div className="rect1" />
+                        <div className="rect2" />
+                        <div className="rect3" />
+                        <div className="rect4" />
+                        <div className="rect5" />
+                    </div>
                 </div>
             );
         }

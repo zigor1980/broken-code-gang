@@ -49,6 +49,7 @@ const routeConfig = {
 };
 
 const stateToProps = state => ({
+    items: state.rooms.items,
     route: state.route,
 });
 
@@ -58,13 +59,16 @@ class App extends Component {
             await api.onMessage(async (result) => {
                 const user = await api.getCurrentUser();
                 if (user) {
-                    console.log(result);
                     const { roomId } = result;
                     const room = await api.getRoom(roomId);
                     const { users } = room;
                     if (users.indexOf(user._id) >= 0) {
-                        // const mes = result.message;
                         let nott = false;
+                        this.props.dispatch({
+                            type: 'ROOM_UPDATE',
+                            roomId,
+                            lastMessage: result,
+                        });
                         switch (this.props.route.page) {
                         case 'chat_page':
                             if (this.props.route.payload.currentRoom === roomId) {
@@ -111,9 +115,6 @@ class App extends Component {
                     }));
                 }
             });
-    }
-    componentDidUpdate() {
-        console.log(this.props.route.page);
     }
 
     render() {

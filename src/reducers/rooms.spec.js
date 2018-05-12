@@ -118,4 +118,30 @@ describe('Reducer::Rooms', () => {
         // verify
         expect(newState).to.deep.equal(expectedNewState);
     });
+    it('on ROOM_UPDATE returns items with new lastMMessage', () => {
+        // setup
+        const state =
+            {
+                items: [{ _id: '1', lastMessage: { message: 'old' } }, { _id: '2' }, { _id: '3' }],
+                next: { lastid: '3' },
+                error: null,
+            };
+        const action = {
+            type: 'ROOM_UPDATE',
+            roomId: '1',
+            lastMessage: { message: 'test' },
+        };
+        const expectedNewState =
+                {
+                    items: [{ _id: '1', lastMessage: { message: 'test' } }, { _id: '2' }, { _id: '3' }],
+                    next: { lastid: '3' },
+                    error: null,
+                };
+        // execute
+
+        const newState = rooms(state, action);
+
+        // verify
+        expect(newState).to.deep.equal(expectedNewState);
+    });
 });

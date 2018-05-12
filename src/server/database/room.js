@@ -70,14 +70,14 @@ async function getUserPersonalRooms(db, userId, anotherUserId, filter) {
         $or: [
             { 
                 users: [
-                    ObjectId(userId.toString()),
-                    ObjectId(anotherUserId.toString())
+                    userId,
+                    ObjectId(anotherUserId)
                 ]
             },
             { 
                 users: [
-                    ObjectId(anotherUserId.toString()),
-                    ObjectId(userId.toString())
+                    ObjectId(anotherUserId),
+                    userId,
                 ]
             } 
         ]      
@@ -102,8 +102,7 @@ async function createRoom(db, currentUser, room) {
     if (!existsRoom) {
     // If we clone room
         delete room._id;
-
-        room.users = room.users.map(elem => (ObjectId(elem.toString()))) || [];
+        room.users = room.users.map(elem => (ObjectId(elem))) || [];
         room.users.push(currentUser._id);
         room.lastMessage = null;
 

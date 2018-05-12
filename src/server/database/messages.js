@@ -22,7 +22,7 @@ const TABLE = 'messages';
  *
  * @return {Promise<Message>}
  */
-async function sendMessage(db, { userId, roomId, message }) {
+async function sendMessage(db, { userId, roomId, message, name }) {
     if (!userId) {
         throw new Error('userId required');
     }
@@ -49,6 +49,7 @@ async function sendMessage(db, { userId, roomId, message }) {
         userId: user._id,
         roomId: room._id,
         message,
+        name,
         created_at: Date.now(),
     };
 

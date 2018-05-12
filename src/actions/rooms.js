@@ -25,7 +25,7 @@ export default function addRoom(newRoom) {
     };
 }
 
-export function updateLastMessage(message) {
+export function updateLastMessage(roomId, message) {
     return async function (dispatch) {
         try {
             const { name } = await api.getUser(message.userId);

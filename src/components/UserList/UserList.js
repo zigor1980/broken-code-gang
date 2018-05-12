@@ -46,18 +46,16 @@ export class UserList extends React.Component {
                             });
                             usersArray = usersName;
                         } else {
-                            this.props.dispatch(addRoom({
+                            const result = await this.props.dispatch(addRoom({
                                 name: `${this.props.curUserInfo.name} ${contact.name}`,
                                 users: [contact._id],
-                            }))
-                                .then((result) => {
-                                    newRoom = result._id;
-                                    const usersName = {};
-                                    result.users.forEach((user) => {
-                                        usersName[user._id] = user.name;
-                                    });
-                                    usersArray = usersName;
-                                });
+                            }));
+                            newRoom = result._id;
+                            const usersName = {};
+                            result.users.forEach((user) => {
+                                usersName[user._id] = user.name;
+                            });
+                            usersArray = usersName;
                         }
                         this.props.dispatch(routeNavigation({
                             page: 'chat_page',

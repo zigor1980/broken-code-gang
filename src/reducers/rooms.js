@@ -18,6 +18,16 @@ export default function rooms(state, action) {
             items: [...state.items, ...action.items],
             next: action.next,
         };
+    case 'ROOM_UPDATE':
+        return {
+            ...state,
+            items: [...state.items].map((elem) => {
+                if (elem._id === action.roomId) {
+                    return { ...elem, lastMessage: action.lastMessage };
+                }
+                return elem;
+            }),
+        };
     case 'ROOMS_RESET':
         return {
             ...state,

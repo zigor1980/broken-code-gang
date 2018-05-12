@@ -175,8 +175,8 @@ class Api {
      *
      * @return {Promise<Pagination<Room>>}
      */
-    async isRoomExist(id, filter) {
-        return this._requestResponse(MESSAGES.ROOM_EXIST, { id, filter });
+    async isRoomExist(roomId,filter) {
+        return this._requestResponse(MESSAGES.ROOM_EXIST, { roomId,filter });
     }
 
     /**

@@ -70,6 +70,16 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     }
 
     render() {
+        const { items } = this.props;
+        if (items) {
+            items.sort((a, b) => {
+                if ((a.lastMessage) || (b.lastMessage) ||
+                (a.lastMessage.created_at === null) || (b.lastMessage.created_at === null)) {
+                    return null;
+                }
+                return a.lastMessage.created_at > b.lastMessage.created_at ? -1 : 1;
+            });
+        }
         return (
             <div className="ChatListPage">
                 <ConnectedHeader buttonInfo buttonAdd={this.submitHandler} contentType="chats" />
@@ -83,7 +93,7 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
                     </div>
                 ) : (
                     <ChatList
-                        rooms={this.props.items}
+                        rooms={items}
                         fetchNext={this.fetch}
                         next={this.props.next}
                     />

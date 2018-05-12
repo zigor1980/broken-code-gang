@@ -31,6 +31,13 @@ export const ChatList = connect(stateToProps)(class ChatList extends React.Compo
     }
     render() {
         const { rooms, fetchNext, next } = this.props;
+        rooms.sort((a, b) => {
+            if ((!a.lastMessage) || (!b.lastMessage) ||
+            (a.lastMessage.created_at === null) || (b.lastMessage.created_at === null)) {
+                return 0;
+            }
+            return a.lastMessage.created_at > b.lastMessage.created_at ? -1 : 1;
+        });
         return (
             <InfiniteRooms fetchNext={fetchNext} next={next}>
                 {rooms.map((room) => {

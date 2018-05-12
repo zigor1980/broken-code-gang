@@ -9,7 +9,17 @@ import { routeNavigation } from '../../actions/route';
 import fetchUsers from '../../actions/fetchUsers';
 
 function removeUserFromChat() {
-    this.dispatch(leaveRoom(this.payload.currentRoom));
+    this.dispatch(leaveRoom(this.payload.currentRoom))
+        .then(() => {
+            this.dispatch(routeNavigation({
+                page: 'chat_list',
+                payload: {
+                    footerNav: {
+                        active: 'chat',
+                    },
+                },
+            }));
+        });
 }
 
 function addNewUserToChat() {

@@ -99,15 +99,17 @@ export const AuthorizationPage = connect()(class AuthorizationPage extends React
     }
 
     enterChat(user) {
-        this.props.dispatch(signInUser(user));
-        this.props.dispatch(routeNavigation({
-            page: 'chat_list',
-            payload: {
-                footerNav: {
-                    active: 'chat',
-                },
-            },
-        }));
+        this.props.dispatch(signInUser(user))
+            .then(() => {
+                this.props.dispatch(routeNavigation({
+                    page: 'chat_list',
+                    payload: {
+                        footerNav: {
+                            active: 'chat',
+                        },
+                    },
+                }));
+            });
     }
 
     async singUp(login, password, name) {
@@ -121,7 +123,7 @@ export const AuthorizationPage = connect()(class AuthorizationPage extends React
             const newUser = await api.addUser(login, password, name);
             this.enterChat(newUser);
         } catch (error) {
-            console.log(error);
+            this.setState({ message: error.message });
         }
     }
 
@@ -162,6 +164,15 @@ export const AuthorizationPage = connect()(class AuthorizationPage extends React
                         className="AuthorizationPage__Input"
                         style={{ animationName: loginError ? 'input-error' : '' }}
                         onChange={this.fieldChangedHandler}
+                        onKeyDown={(e) => {
+                            if (e.keyCode === 13) {
+                                if (swapButton === 'Sign in') {
+                                    document.getElementById('name').focus();
+                                } else {
+                                    document.getElementById('password').focus();
+                                }
+                            }
+                        }}
                         onAnimationEnd={() => {
                             this.setState({
                                 inputs: updateInputField(
@@ -183,6 +194,11 @@ export const AuthorizationPage = connect()(class AuthorizationPage extends React
                         className="AuthorizationPage__Input"
                         style={{ animationName: nameError ? 'input-error' : '' }}
                         onChange={this.fieldChangedHandler}
+                        onKeyDown={(e) => {
+                            if (e.keyCode === 13) {
+                                document.getElementById('password').focus();
+                            }
+                        }}
                         onAnimationEnd={() => {
                             this.setState({
                                 inputs: updateInputField(
@@ -193,6 +209,7 @@ export const AuthorizationPage = connect()(class AuthorizationPage extends React
                                 ),
                             });
                         }}
+                        id="name"
                         type="text"
                         name="name"
                         placeholder="Name"
@@ -203,6 +220,11 @@ export const AuthorizationPage = connect()(class AuthorizationPage extends React
                         className="AuthorizationPage__Input"
                         style={{ animationName: passwordError ? 'input-error' : '' }}
                         onChange={this.fieldChangedHandler}
+                        onKeyDown={(e) => {
+                            if (e.keyCode === 13) {
+                                this.submitHandler();
+                            }
+                        }}
                         onAnimationEnd={() => {
                             this.setState({
                                 inputs: updateInputField(
@@ -214,6 +236,7 @@ export const AuthorizationPage = connect()(class AuthorizationPage extends React
                             });
                         }}
                         type="password"
+                        id="password"
                         name="password"
                         placeholder="Password"
                         required

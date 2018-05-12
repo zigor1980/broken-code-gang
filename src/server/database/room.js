@@ -67,7 +67,20 @@ async function getUserRooms(db, userId, filter) {
 async function getUserPersonalRooms(db, userId, anotherUserId, filter) {
     return pageableCollection(db.collection(TABLE), {
         ...filter,
-        users: [ObjectId(userId.toString()), ObjectId(anotherUserId.toString())]
+        $or: [
+            { 
+                users: [
+                    userId,
+                    ObjectId(anotherUserId)
+                ]
+            },
+            { 
+                users: [
+                    ObjectId(anotherUserId),
+                    userId,
+                ]
+            } 
+        ]      
     });
 }
 
@@ -89,9 +102,9 @@ async function createRoom(db, currentUser, room) {
     if (!existsRoom) {
     // If we clone room
         delete room._id;
-
-        room.users = room.users || [];
+        room.users = room.users.map(elem => (ObjectId(elem))) || [];
         room.users.push(currentUser._id);
+        room.lastMessage = null;
 
         return insertOrUpdateEntity(collection, room);
     }

@@ -24,12 +24,14 @@ export class Footer extends Component {
     }
 
     handleSubmit() {
-        const roomId = this.props.payload.currentRoom;
-        const currentMessage = this.state.messageText;
-        this.setState({
-            messageText: '',
-        });
-        this.props.dispatch(sendMessage(roomId, currentMessage));
+        if (!(this.state.messageText === '')) {
+            const roomId = this.props.payload.currentRoom;
+            const currentMessage = this.state.messageText;
+            this.setState({
+                messageText: '',
+            });
+            this.props.dispatch(sendMessage(roomId, currentMessage));
+        }
     }
 
     render() {
@@ -38,6 +40,12 @@ export class Footer extends Component {
                 <textarea
                     className="Footer__TextArea"
                     onChange={this.handleChange}
+                    onKeyDown={(e) => {
+                        if (e.keyCode === 13) {
+                            e.preventDefault();
+                            this.handleSubmit();
+                        }
+                    }}
                     rows="1"
                     value={this.state.messageText}
                     placeholder="Type message..."

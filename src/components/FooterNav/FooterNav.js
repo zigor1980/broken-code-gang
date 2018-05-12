@@ -51,12 +51,6 @@ export const FooterNav = connect()(class FooterNav extends Component {
                     active={this.state.active === 'user'}
                     className="Footer__nav_btn"
                 />
-                <Button
-                    type="settings"
-                    onClick={this.changeNavHandler}
-                    active={this.state.active === 'settings'}
-                    className="Footer__nav_btn"
-                />
             </footer>
         );
     }

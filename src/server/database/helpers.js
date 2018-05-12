@@ -35,7 +35,6 @@ async function pageableCollection(collection, {
     if (order) {
         queryBuilder = queryBuilder.sort(order);
     }
-
     if (typeof query._id === 'string') {
         query._id = ObjectId(query._id.toString());
     }
@@ -72,11 +71,9 @@ async function pageableCollection(collection, {
 async function insertOrUpdateEntity(collection, data) {
     if (data._id) {
         const result = await collection.findOneAndUpdate(
-            { _id: data._id },
+            { _id: ObjectId(data._id.toString()) },
             data,
         );
-
-        console.log(result);
     } else {
         const result = await collection.insertOne(data);
         data._id = result.insertedId;

@@ -2,7 +2,7 @@ const {
     findUserBySid, getUsers, addUser, setCurrentUser, logoutUser,
 } = require('./database/user');
 const {
-    joinRoom, leaveRoom, getRooms, getUserRooms, getUserPersonalRooms, createRoom, getRoom, dropRoom,
+    saveRoom, joinRoom, leaveRoom, getRooms, getUserRooms, getUserPersonalRooms, createRoom, getRoom, dropRoom,
 } = require('./database/room');
 const { getMessages, sendMessage } = require('./database/messages');
 const TYPES = require('./messages');
@@ -128,7 +128,6 @@ module.exports = function (db, io) {
          */
         function newMessage(message) {
             socket.to(`room:${message.roomId}`).broadcast.emit(TYPES.MESSAGE, message);
-            console.log('Emit MESSAGE');
         }
 
         // Load user information for next usage
@@ -160,9 +159,8 @@ module.exports = function (db, io) {
         // Get Users Of room
         requestResponse(TYPES.GET_USERS_OF_ROOM, async (roomId) => {
             const room = await getRoom(db, roomId);
-            return await getUsers(db, {
-                _id: { $in: room.users },
-                limit: 100,
+            return getUsers(db, {
+                _id: { $in: [...room.users] },
             });
         });
 
@@ -172,7 +170,7 @@ module.exports = function (db, io) {
                 ...payload,
                 sid,
             };
-            return await setCurrentUser(db, payload);
+            return setCurrentUser(db, payload);
         });
 
         // Logout current user
@@ -188,14 +186,9 @@ module.exports = function (db, io) {
         // Return rooms with user
         requestResponse(TYPES.ROOM_EXIST, async (params) => {
             const currentUser = await CurrentUser();
-            const { id, filter } = params; 
-            const s = await getUserPersonalRooms(db, currentUser._id, id, filter);
-            const r = await getUserPersonalRooms(db, id, currentUser._id, filter);
-            if (r.items.length === 0){
-                return s;
-            } else {
-                return r; 
-            }
+            console.log(params);
+            const { roomId, filter } = params; 
+            return getUserPersonalRooms(db, currentUser._id, roomId, filter);
         });
 
         // Join current user to room
@@ -253,12 +246,16 @@ module.exports = function (db, io) {
         // Send message
         requestResponse(TYPES.SEND_MESSAGE, async (payload) => {
             const currentUser = await CurrentUser();
-
+            const { roomId } = payload;
             const message = await sendMessage(db, {
                 ...payload,
                 userId: currentUser._id,
+                name: currentUser.name,
             });
 
+            const room = await getRoom(db, roomId);
+            room.lastMessage = message;
+            const newRoom = await saveRoom(db, room);
             newMessage(message);
             socket.broadcast.emit(TYPES.MESSAGE, message);
 

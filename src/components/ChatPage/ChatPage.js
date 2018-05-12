@@ -72,27 +72,32 @@ export class ChatPage extends Component {
             { next } = this.props.messages,
             { userId } = this.props,
             { usersName } = this.props.payload;
-
         let chatPageContent = '';
-        if (messages && messages.length) {
-            chatPageContent = messages.map(message => (
-                <div key={message._id}>
-                    <ChatField message={message} userId={userId} name={usersName[message.userId]} />
-                </div>));
-        } else {
-            chatPageContent = <div className="ChatPage__empty"><p>No messages here yet...</p></div>;
-        }
-
         let contentTitle = '';
         let contentDesc = '';
+        let isAvatar = '';
         const { chatInfo } = this.state;
         if (chatInfo) {
+            isAvatar = (chatInfo.users.length > 2) ? 'true' : '';
             contentTitle = replaceUserName(this.props.curUserInfo.name, chatInfo.name);
             if (chatInfo.users.length === 1) {
                 contentDesc = '';
             } else {
                 contentDesc = `${chatInfo.users.length} ${MemberCount(chatInfo.users.length)}`;
             }
+        }
+        if (messages && messages.length) {
+            chatPageContent = messages.map(message => (
+                <div key={message._id}>
+                    <ChatField
+                        avatar={isAvatar}
+                        message={message}
+                        userId={userId}
+                        name={usersName[message.userId]}
+                    />
+                </div>));
+        } else {
+            chatPageContent = <div className="ChatPage__empty"><p>No messages here yet...</p></div>;
         }
 
         return (

@@ -1,35 +1,59 @@
+@keyframes appear-info {
+    0% {
+        position: absolute;
+        left: -250px;
+    }
+    80% {
+        position: absolute;
+        left: 1%;
+    }
+    100% {
+        position: absolute;
+        left: 0;
+    }
+}
+
 .UserPage {
+    position: fixed;
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
     font-family: sans-serif;
+    background: rgba(0, 0, 0, .5);
+}
+
+.UserPage__Container{
+    background: #333;
+    animation-name: appear-info;
+    animation-duration: .7s;
+    width: 250px;
+    height: 100%;
 }
 
 .UserPage .Header {
     position: fixed;
 }
 
-.UserPage .Footer {
-    position: fixed;
-    bottom: 0;
-}
-
-
 .UserPage__UserInfo {
-    background-color: #F1B0C3;
+    background: #252323;
     display: flex;
     flex-flow: column;
-    align-items: center;
-    padding-top: 50px;
-    padding-bottom: 30px;
+    align-items: flex-start;
+    padding: 15px;
 }
 
-.UserPage__UserInfo .avatar {
-    margin-top: 1rem;
+.UserPage__UserInfo > * {
+    margin: 0;
+    margin-bottom: 10px;
 }
 
 .UserPage__UserName {
     color: #fff;
     text-align: start;
     font-weight: normal;
-    font-size: 2.5rem;
+    font-size: 1.5rem;
 }
 
 .UserPage__UserPhone{
@@ -39,8 +63,9 @@
 .UserPage__UserControls > * {
     width: 100%;
     padding-top: .75rem;
-    padding-bottom: .75rem; 
-    font-size: 1.45rem;
-    background-color: #fff;
+    padding-bottom: .75rem;
+    font-weight: bold;
+    font-size: 1rem;
+    background-color: #cdb708;
     border: none;
 }

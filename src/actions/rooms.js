@@ -1,21 +1,17 @@
 import api from '../api';
 
-export default function addRoom(name, user) {
+export default function addRoom(newRoom) {
+    // eslint-disable-next-line
     return async function (dispatch) {
         try {
             // Loading
             let room = null;
-            room = await api.createRoom(name);
-            room = await api.currentUserJoinRoom(room._id);
-            // eslint-disable-next-line
-            for (const current of user) {
-                // eslint-disable-next-line
-                await api.userJoinRoom(current, room._id);
-            }
+            room = await api.createRoom(newRoom);
             dispatch({
                 type: 'ROOM_ADD',
                 room,
             });
+            return room;
         } catch (error) {
             dispatch({
                 type: 'ROOM_ADD_ERROR',
@@ -29,7 +25,7 @@ export default function addRoom(name, user) {
     };
 }
 
-export function updateLastMessage(message) {
+export function updateLastMessage(roomId, message) {
     return async function (dispatch) {
         try {
             const { name } = await api.getUser(message.userId);

@@ -1,27 +1,31 @@
 @keyframes appear {
-    from {
+    0% {
         top: -95px;
     }
-
-    to {
-        top: 10%;
+    80% {
+        top: 13%;
+    }
+    100% {
+        top: 12%;
     }
 }
 
 .Message {
+    border: 3px solid #b3b2b2;
     display: flex;
     justify-content: center;
     align-items: center;
     position: absolute;
     height: 50px;
     width: 65%;
+    max-width: 500px;
     animation-name: appear;
-    animation-duration: 2s;
-    top: 10%;
-    background: #F13564;
+    animation-duration: .7s;
+    top: 12%;
+    background: #000;
     color: #fff;
     box-shadow: 0 13px 25px 0 rgba(0, 0, 0, 0.12);
-    border-radius: 100px;
+    border-radius: 5px;
     text-align: center;
     padding-bottom: 10px;
     padding-top: 10px;

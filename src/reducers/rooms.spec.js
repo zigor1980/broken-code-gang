@@ -29,13 +29,11 @@ describe('Reducer::Rooms', () => {
         const action = {
             type: 'ROOM_ADD',
             room: newRoom,
-            newRoom,
         };
         const expectedNewState =
              {
                  items: [{ id: '1' }, { id: '2' }, { id: '3' }, { id: '4' }],
                  next: null,
-                 newRoom: { id: '4' },
                  error: null,
              };
         // execute
@@ -88,6 +86,57 @@ describe('Reducer::Rooms', () => {
                  next: true,
                  error: null,
              };
+        // execute
+
+        const newState = rooms(state, action);
+
+        // verify
+        expect(newState).to.deep.equal(expectedNewState);
+    });
+    it('on ROOMS_REMOVE returns items without elem in arg', () => {
+        // setup
+        const state =
+            {
+                items: [{ _id: '1' }, { _id: '2' }, { _id: '3' }],
+                next: { lastid: '3' },
+                error: null,
+            };
+        const action = {
+            type: 'ROOMS_REMOVE',
+            roomId: '1',
+        };
+        const expectedNewState =
+                {
+                    items: [{ _id: '2' }, { _id: '3' }],
+                    next: { lastid: '3' },
+                    error: null,
+                };
+        // execute
+
+        const newState = rooms(state, action);
+
+        // verify
+        expect(newState).to.deep.equal(expectedNewState);
+    });
+    it('on ROOM_UPDATE returns items with new lastMMessage', () => {
+        // setup
+        const state =
+            {
+                items: [{ _id: '1', lastMessage: { message: 'old' } }, { _id: '2' }, { _id: '3' }],
+                next: { lastid: '3' },
+                error: null,
+            };
+        const action = {
+            type: 'ROOM_UPDATE',
+            roomId: '1',
+            lastMessage: { message: 'test' },
+        };
+        const expectedNewState =
+                {
+                    items: [{ _id: '1', lastMessage: { message: 'test' } }, { _id: '2' }, { _id: '3' }],
+                    next: { lastid: '3' },
+                    error: null,
+                };
         // execute
 
         const newState = rooms(state, action);

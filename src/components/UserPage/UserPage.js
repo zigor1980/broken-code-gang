@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ConnectedHeader } from '../Header/Header';
 import Avatar from '../Avatar/Avatar';
-import { FooterNav } from '../FooterNav/FooterNav';
 import { routeNavigation } from '../../actions/route';
+import { Button } from '../Button/Button';
 import api from '../../api';
 
 import './UserPage.css';
@@ -16,54 +15,59 @@ const stateToProps = state => ({
 export class UserPage extends Component {
     constructor(props) {
         super(props);
-
         this.exitHandle = this.exitHandle.bind(this);
     }
 
     exitHandle() {
-        api.logoutCurrentUser().then(() => {
+        this.props.dispatch(routeNavigation({ page: 'authorization' }));
+        api.logoutCurrentUser().then(async () => {
             this.props.dispatch({ type: 'USER_SIGN_OUT' });
-
-            this.props.dispatch(routeNavigation({ page: 'authorization' }));
+            this.props.dispatch({ type: 'ROOMS_RESET' });
         });
     }
-
     render() {
-        const userAvatar = {
-            src: 'https://avatars.mds.yandex.net/get-pdb/1008348/cab77028-8042-4d20-b343-a1498455e4c8/s1200',
-            modifier: 'avatar-m',
-        };
-
-        let name,
-            phone = '';
+        let nameUser,
+            phoneUser = '',
+            avatar,
+            mailUser = '';
         if (this.props.curUserInfo) {
-            ({ name, phone } = this.props.curUserInfo);
+            const { name, phone, email } = this.props.curUserInfo;
+            nameUser = name;
+            phoneUser = phone;
+            mailUser = email;
+            avatar = <Avatar caption={nameUser} modifier="l" />;
         }
 
         return (
-            <div className="UserPage">
-                <ConnectedHeader buttonBack={false} contentType="settings" />
-                <div className="UserPage__UserInfo">
-                    <Avatar image={userAvatar} />
-                    <h1 className="UserPage__UserName">
-                        {name}
-                    </h1>
-                    <h4 className="UserPage__UserPhone">
-                        {phone}
-                    </h4>
+            <div
+                className="UserPage"
+                onClick={this.props.visible}
+            >
+                <div className="UserPage__Container" onClick={e => (e.stopPropagation())} >
+                    <Button
+                        type="back"
+                        modifier="s"
+                        circle
+                        onClick={this.props.visible}
+                    />
+                    <div className="UserPage__UserInfo">
+                        {avatar}
+                        <h1 className="UserPage__UserName">
+                            {nameUser}
+                        </h1>
+                        <h4 className="UserPage__UserPhone">
+                            {phoneUser}
+                        </h4>
+                        <h4 className="UserPage__UserPhone">
+                            {mailUser}
+                        </h4>
+                    </div>
+                    <div className="UserPage__UserControls">
+                        <button key="Exit" onClick={this.exitHandle}>
+                            Log Out
+                        </button>
+                    </div>
                 </div>
-                <div className="UserPage__UserControls">
-                    <button key="StarChar">
-                        Начать чат
-                    </button>
-                    <button key="BlockUser">
-                        Заблокировать пользователя
-                    </button>
-                    <button key="Exit" onClick={this.exitHandle}>
-                        Выйти
-                    </button>
-                </div>
-                <FooterNav active={this.props.payload.footerNav.active} />
             </div>
         );
     }

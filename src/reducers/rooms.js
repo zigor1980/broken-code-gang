@@ -11,7 +11,6 @@ export default function rooms(state, action) {
         return {
             ...state,
             items: [...state.items, action.room],
-            newRoom: action.room,
         };
     case 'ROOMS_FETCH':
         return {
@@ -19,11 +18,26 @@ export default function rooms(state, action) {
             items: [...state.items, ...action.items],
             next: action.next,
         };
+    case 'ROOM_UPDATE':
+        return {
+            ...state,
+            items: [...state.items].map((elem) => {
+                if (elem._id === action.roomId) {
+                    return { ...elem, lastMessage: action.lastMessage };
+                }
+                return elem;
+            }),
+        };
     case 'ROOMS_RESET':
         return {
             ...state,
             items: [],
             next: true,
+        };
+    case 'ROOMS_REMOVE':
+        return {
+            ...state,
+            items: [...state.items].filter(elem => (elem._id !== action.roomId)),
         };
     case 'ROOMS_ERROR':
         return {

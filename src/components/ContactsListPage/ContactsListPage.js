@@ -92,7 +92,7 @@ export class ContactsListPage extends Component {
         return (
             <div className="ContactsListPage">
                 <Header
-                    buttonBack={false}
+                    buttonInfo
                     buttonSearch
                     searchIsOn={searchQuery}
                     resetSearch={this.resetSearch}

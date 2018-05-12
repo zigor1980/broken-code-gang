@@ -13,6 +13,7 @@ import { ConnectedUserList } from '../UserList/UserList';
 import { ConnectedAddUserToChatPage } from '../AddUserToChatPage/AddUserToChatPage';
 import { routeNavigation } from '../../actions/route';
 import sendNotification from '../../helpers/createBrowserNotification';
+import * as messageHandle from '../../actions/messages';
 import api from '../../api';
 
 // TODO: create page for the settings
@@ -48,20 +49,49 @@ const routeConfig = {
 };
 
 const stateToProps = state => ({
+    items: state.rooms.items,
     route: state.route,
 });
 
 class App extends Component {
-    componentDidMount() {
+    componentWillMount() {
         (async () => {
-            await api.onMessage((result) => {
-                const mes = result.message;
-                sendNotification(result.userId, {
-                    body: mes,
-                    dir: 'auto',
-                });
+            await api.onMessage(async (result) => {
+                const user = await api.getCurrentUser();
+                if (user) {
+                    const { roomId } = result;
+                    const room = await api.getRoom(roomId);
+                    const { users } = room;
+                    if (users.indexOf(user._id) >= 0) {
+                        let nott = false;
+                        this.props.dispatch({
+                            type: 'ROOM_UPDATE',
+                            roomId,
+                            lastMessage: result,
+                        });
+                        switch (this.props.route.page) {
+                        case 'chat_page':
+                            if (this.props.route.payload.currentRoom === roomId) {
+                                this.props.dispatch(messageHandle.addMessage(result));
+                            }
+                            break;
+                        default:
+                            nott = true;
+                            break;
+                        }
+                        if (nott) {
+                            sendNotification(room.name, {
+                                body: result.message,
+                                dir: 'auto',
+                            });
+                        }
+                    }
+                }
             });
         })();
+    }
+
+    componentDidMount() {
         api.getCurrentUser()
             .then((user) => {
                 if (user) {
@@ -92,12 +122,14 @@ class App extends Component {
 
         if (!Page) {
             return (
-                <div className="spinner">
-                    <div className="rect1" />
-                    <div className="rect2" />
-                    <div className="rect3" />
-                    <div className="rect4" />
-                    <div className="rect5" />
+                <div className="EmptyPage">
+                    <div className="spinner">
+                        <div className="rect1" />
+                        <div className="rect2" />
+                        <div className="rect3" />
+                        <div className="rect4" />
+                        <div className="rect5" />
+                    </div>
                 </div>
             );
         }

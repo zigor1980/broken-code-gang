@@ -12,7 +12,6 @@ const stateToProps = state => ({
     items: state.users.items,
     next: state.users.next,
     end: state.users.end,
-    newRoom: state.rooms.newRoom,
 });
 
 export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React.Component {
@@ -23,7 +22,6 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
         };
         this.fetch = this.fetch.bind(this);
         this.addRoomHandle = this.addRoomHandle.bind(this);
-        this.enterRoom = this.enterRoom.bind(this);
         this.mas = [];
     }
 
@@ -43,26 +41,19 @@ export const AddRoomPage = connect(stateToProps)(class AddRoomPage extends React
             });
     }
 
-    componentWillReceiveProps(props) {
-        if (props.newRoom && (!this.props.newRoom || props.newRoom._id !== this.props.newRoom._id)) {
-            this.enterRoom(props.newRoom._id);
-        }
-    }
-
     addRoomHandle() {
         const namePoom = document.getElementById('Room-name').value;
-        return this.props.dispatch(addRoom({ name: namePoom }, this.mas));
-    }
-
-    enterRoom(roomId) {
-        this.props.dispatch(routeNavigation({
-            page: 'chat_page',
-            payload: {
-                ...this.props.payload,
-                currentRoom: roomId,
-                prevPage: 'contacts_list',
-            },
-        }));
+        this.props.dispatch(addRoom({ name: namePoom, users: this.mas }))
+            .then((room) => {
+                this.props.dispatch(routeNavigation({
+                    page: 'chat_page',
+                    payload: {
+                        ...this.props.payload,
+                        currentRoom: room._id,
+                        prevPage: 'contacts_list',
+                    },
+                }));
+            });
     }
 
     fetch() {

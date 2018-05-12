@@ -78,7 +78,7 @@ export class ChatPage extends Component {
         let isAvatar = '';
         const { chatInfo } = this.state;
         if (chatInfo) {
-            isAvatar = (chatInfo.users.length > 2) ? 'true' : '';
+            isAvatar = chatInfo.users.length > 2 ? 'true' : '';
             contentTitle = replaceUserName(this.props.curUserInfo.name, chatInfo.name);
             if (chatInfo.users.length === 1) {
                 contentDesc = '';

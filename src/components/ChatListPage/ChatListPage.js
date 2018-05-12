@@ -70,14 +70,14 @@ export const ChatListPage = connect(stateToProps)(class ChatListPage extends Rea
     }
 
     render() {
-        const { items } = this.props;
+        let { items } = this.props;
         if (items) {
-            items.sort((a, b) => {
+            items = items.sort((a, b) => {
                 if ((a.lastMessage) || (b.lastMessage) ||
                 (a.lastMessage.created_at === null) || (b.lastMessage.created_at === null)) {
-                    return null;
+                    return 0;
                 }
-                return a.lastMessage.created_at > b.lastMessage.created_at ? -1 : 1;
+                return a.lastMessage.created_at > b.lastMessage.created_at ? 1 : -1;
             });
         }
         return (

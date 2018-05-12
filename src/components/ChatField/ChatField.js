@@ -21,7 +21,7 @@ export function ChatField(props) {
          // avatar = <Avatar image = {{src:userId.getImageSrc(),modifier:'avatar-s'}}>;
          */
         /* аватарка по умолчанию */
-        ava = avatar ? <Avatar caption={name} modifier="m" /> : null;
+        ava = avatar === 'true' ? <Avatar caption={name} modifier="m" /> : null;
     }
     return (
         <div className={direction}>
